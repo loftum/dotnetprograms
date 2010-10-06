@@ -1,3 +1,5 @@
+using System;
+
 namespace Deploy.Deployment
 {
     public class DeploymentStepStatus
@@ -8,11 +10,18 @@ namespace Deploy.Deployment
 
         public bool CanProceed { get; private set; }
         public int Status { get; private set; }
+        public Exception Exception { get; private set; }
 
         public DeploymentStepStatus(bool canProcess, int status)
+            : this(canProcess, status, null)
+        {
+        }
+
+        public DeploymentStepStatus(bool canProcess, int status, Exception exception)
         {
             CanProceed = canProcess;
             Status = status;
+            Exception = exception;
         }
 
         public override string ToString()

@@ -12,6 +12,7 @@ namespace Deploy.Deployment
         public Deployer(DeployParameters parameters)
         {
             _parameters = parameters;
+            _steps.Add(new BackupStep(_parameters));
             _steps.Add(new ClearDestinationFolderStep(_parameters));
             _steps.Add(new ExtractPackageStep(_parameters));
         }
@@ -25,6 +26,10 @@ namespace Deploy.Deployment
                 Console.WriteLine(status.ToString());
                 if (!status.CanProceed)
                 {
+                    if (status.Exception != null)
+                    {
+                        Console.WriteLine(status.Exception.ToString());
+                    }
                     break;
                 }
             }
