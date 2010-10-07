@@ -9,21 +9,23 @@ namespace Deploy.Lib.Deployment.Steps
         {
         }
 
-        public override DeploymentStepStatus Execute()
+        protected override DeploymentStepStatus DoExecute()
         {
             if (Directory.Exists(Parameters.DestinationFolder))
             {
-                CleanDestinationFolder();    
+                CleanDestinationFolder();
+                Status.Status = DeploymentStepStatus.Ok;
             }
             else
             {
                 Directory.CreateDirectory(Parameters.DestinationFolder);    
             }
-            return new DeploymentStepStatus(true, DeploymentStepStatus.Ok);
+            return Status;
         }
 
         private void CleanDestinationFolder()
         {
+            Status.AppendDetailsLine("Cleaning " + Parameters.DestinationFolder);
             var destinationFolder = new DirectoryInfo(Parameters.DestinationFolder);
             foreach(var subDirectory in destinationFolder.GetDirectories())
             {

@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
 namespace Deploy.Lib.Deployment
 {
+    [Serializable]
     public class DeployParameters
     {
         private const string PackagePathName = "package";
@@ -13,12 +15,16 @@ namespace Deploy.Lib.Deployment
         private const string WebConfigLocationName = "webconfigLocation";
         private const string DeployStatusLocationName = "statusLocation";
 
-        public string PackagePath { get; private set; }
-        public string DestinationFolder { get; private set; }
-        public string BackupFolder { get; private set; }
-        public string NewWebConfigPath { get; private set; }
-        public string WebConfigPath { get; private set; }
-        public string DeployStatusPath { get; private set; }
+        public string PackagePath { get; set; }
+        public string DestinationFolder { get; set; }
+        public string BackupFolder { get; set; }
+        public string NewWebConfigPath { get; set; }
+        public string WebConfigPath { get; set; }
+        public string DeployStatusPath { get; set; }
+
+        public DeployParameters()
+        {
+        }
 
         private DeployParameters(string packagePath, string destinationFolder, 
             string backupFolder, string configFilePath, string webConfigPath,

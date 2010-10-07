@@ -4,19 +4,17 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class ReplaceWebConfigStep : DeploymentStepBase
     {
-        private readonly DeploymentStepStatus _status;
         public ReplaceWebConfigStep(DeployParameters parameters)
             : base(parameters, "Replace web.config")
         {
-            _status = new DeploymentStepStatus();
         }
 
-        public override DeploymentStepStatus Execute()
+        protected override DeploymentStepStatus DoExecute()
         {
             File.Copy(Parameters.NewWebConfigPath, Parameters.WebConfigPath, true);
-            _status.AppendCommentLine("Copying " + Parameters.NewWebConfigPath + " to " + Parameters.WebConfigPath);
-            _status.Status = DeploymentStepStatus.Ok;
-            return _status;
+            Status.AppendDetailsLine("Copying " + Parameters.NewWebConfigPath + " to " + Parameters.WebConfigPath);
+            Status.Status = DeploymentStepStatus.Ok;
+            return Status;
         }
     }
 }

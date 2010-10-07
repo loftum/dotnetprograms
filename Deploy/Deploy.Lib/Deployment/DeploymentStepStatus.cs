@@ -10,33 +10,26 @@ namespace Deploy.Lib.Deployment
         public const int Warning = 1;
         public const int Fail = 2;
 
+        public string StepName { get; set; }
         public bool CanProceed { get; set; }
         public int Status { get; set; }
-        public string Exception { get; set; }
-        public string Comment { get; set; }
+        public string Error { get; set; }
+        public string Details { get; set; }
 
         public DeploymentStepStatus()
         {
             CanProceed = true;
         }
 
-        public DeploymentStepStatus(bool canProceed, int status, string comment = null, string exception = null)
+        public DeploymentStepStatus AppendDetails(string details)
         {
-            CanProceed = canProceed;
-            Status = status;
-            Comment = string.IsNullOrEmpty(comment) ? string.Empty : comment;
-            Exception = string.IsNullOrEmpty(exception) ? string.Empty : exception;
-        }
-
-        public DeploymentStepStatus AppendComment(string comment)
-        {
-            Comment = new StringBuilder(Comment).Append(comment).ToString();
+            Details = new StringBuilder(Details).Append(details).ToString();
             return this;
         }
 
-        public DeploymentStepStatus AppendCommentLine(string comment)
+        public DeploymentStepStatus AppendDetailsLine(string details)
         {
-            Comment = new StringBuilder(Comment).AppendLine(comment).ToString();
+            Details = new StringBuilder(Details).AppendLine(details).ToString();
             return this;
         }
 

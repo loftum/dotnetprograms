@@ -7,26 +7,24 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class BackupStep : DeploymentStepBase
     {
-        private readonly DeploymentStepStatus _status = new DeploymentStepStatus();
-
         public BackupStep(DeployParameters parameters)
             : base(parameters, "Backup")
         {
         }
 
-        public override DeploymentStepStatus Execute()
+        protected override DeploymentStepStatus DoExecute()
         {
             try
             {
                 BackupIfDestinationExists();
-                _status.Status = DeploymentStepStatus.Ok;
+                Status.Status = DeploymentStepStatus.Ok;
             }
             catch (Exception e)
             {
-                _status.Status = DeploymentStepStatus.Fail;
-                _status.Exception = e.ToString();
+                Status.Status = DeploymentStepStatus.Fail;
+                Status.Error = e.ToString();
             }
-            return _status;
+            return Status;
         }
 
         private void BackupIfDestinationExists()
@@ -43,14 +41,14 @@ namespace Deploy.Lib.Deployment.Steps
             if (!Directory.Exists(Parameters.BackupFolder))
             {
                 Directory.CreateDirectory(Parameters.BackupFolder);
-                _status.AppendCommentLine("Creating backup folder: " + Parameters.BackupFolder);
+                Status.AppendDetailsLine("Creating backup folder: " + Parameters.BackupFolder);
             }
         }
 
         private void Backup()
         {
             var backupFilePath = GenerateBackupFilePath();
-            _status.AppendCommentLine("Backup file: " + backupFilePath);
+            Status.AppendDetailsLine("Backup file: " + backupFilePath);
             using (var zipOutputStream = new ZipOutputStream(File.Create(backupFilePath)))
             {
                 ZipFolder(Parameters.DestinationFolder, zipOutputStream);

@@ -23,7 +23,7 @@ namespace Deploy.Lib.Deployment
 
         public void Deploy()
         {
-            var deploymentStatus = new DeploymentStatus();
+            var deploymentStatus = new DeploymentStatus{Parameters = _parameters};
             foreach (var deploymentStep in _steps)
             {
                 Console.Write("Running " + deploymentStep.Name + "...");
@@ -32,9 +32,9 @@ namespace Deploy.Lib.Deployment
                 Console.WriteLine(status.ToString());
                 if (!status.CanProceed)
                 {
-                    if (status.Exception != null)
+                    if (status.Error != null)
                     {
-                        Console.WriteLine(status.Exception);
+                        Console.WriteLine(status.Error);
                     }
                     break;
                 }
@@ -44,9 +44,10 @@ namespace Deploy.Lib.Deployment
 
         private void Save(DeploymentStatus status)
         {
-            Console.Write("Saving deployment status...");
+            var statusFilePath = GenerateStatusFilePath();
+            Console.Write("Saving deployment status to {0}...", statusFilePath);
             var serializer = new XmlSerializer(typeof (DeploymentStatus));
-            using (var stream = File.Create(GenerateStatusFilePath()))
+            using (var stream = File.Create(statusFilePath))
             {
                 serializer.Serialize(stream, status);
             }
@@ -62,7 +63,7 @@ namespace Deploy.Lib.Deployment
                 .Append(now.ToShortDateString().Replace(".", string.Empty))
                 .Append("_")
                 .Append(now.ToShortTimeString().Replace(":", string.Empty))
-                .Append("txt")
+                .Append(".xml")
                 .ToString();
         }
     }

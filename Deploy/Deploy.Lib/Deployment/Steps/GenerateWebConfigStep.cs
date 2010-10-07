@@ -14,12 +14,11 @@ namespace Deploy.Lib.Deployment.Steps
             _replacer = replacer;
         }
 
-        public override DeploymentStepStatus Execute()
+        protected override DeploymentStepStatus DoExecute()
         {
             var configValues = _reader.GetValues(Parameters.NewWebConfigPath);
             _replacer.ReplaceIn(Parameters.WebConfigPath);
-
-            return new DeploymentStepStatus(true, DeploymentStepStatus.Ok);
+            return Status;
         }
     }
 }
