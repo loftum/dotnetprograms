@@ -9,23 +9,27 @@ namespace Deploy.Lib.Deployment
         private const string PackagePathName = "package";
         private const string DestinationFolderName = "dest";
         private const string BackupFolderName = "backup";
-        private const string ConfigValuesFileName = "config";
-        private const string WebConfigFileName = "webconfig";
+        private const string NewWebConfigLocationName = "newWebConfig";
+        private const string WebConfigLocationName = "webconfigLocation";
+        private const string DeployStatusLocationName = "statusLocation";
 
         public string PackagePath { get; private set; }
         public string DestinationFolder { get; private set; }
         public string BackupFolder { get; private set; }
-        public string ConfigFilePath { get; private set; }
+        public string NewWebConfigPath { get; private set; }
         public string WebConfigPath { get; private set; }
+        public string DeployStatusPath { get; private set; }
 
         private DeployParameters(string packagePath, string destinationFolder, 
-            string backupFolder, string configFilePath, string webConfigPath)
+            string backupFolder, string configFilePath, string webConfigPath,
+            string deployStatusPath)
         {
             PackagePath = packagePath;
             DestinationFolder = destinationFolder;
             BackupFolder = backupFolder;
-            ConfigFilePath = configFilePath;
+            NewWebConfigPath = configFilePath;
             WebConfigPath = webConfigPath;
+            DeployStatusPath = deployStatusPath;
         }
 
         public static DeployParameters Parse(string[] args)
@@ -39,10 +43,11 @@ namespace Deploy.Lib.Deployment
                 arguments.ByNameOrIndex(PackagePathName, 0),
                 arguments.ByNameOrIndex(DestinationFolderName, 1),
                 arguments.ByNameOrIndex(BackupFolderName, 2),
-                arguments.ByNameOrIndex(ConfigValuesFileName, 3),
-                arguments.ByNameOrIndex(WebConfigFileName, 4));
+                arguments.ByNameOrIndex(NewWebConfigLocationName, 3),
+                arguments.ByNameOrIndex(WebConfigLocationName, 4),
+                arguments.ByNameOrIndex(DeployStatusLocationName, 5));
             VerifyExists(new FileInfo(parameters.PackagePath));
-            VerifyExists(new FileInfo(parameters.ConfigFilePath));
+            VerifyExists(new FileInfo(parameters.NewWebConfigPath));
             return parameters;
         }
 
@@ -60,8 +65,9 @@ namespace Deploy.Lib.Deployment
                 .Append(Parameter(PackagePathName, "<packagePath>")).Append(" ")
                 .Append(Parameter(DestinationFolderName, "<destinationFolder>")).Append(" ")
                 .Append(Parameter(BackupFolderName, "<backupFolder>")).Append(" ")
-                .Append(Parameter(ConfigValuesFileName, "<configFilePath>")).Append(" ")
-                .Append(Parameter(WebConfigFileName, "<webConfigPath>")).Append(" ")
+                .Append(Parameter(NewWebConfigLocationName, "<newWebconfigPath>")).Append(" ")
+                .Append(Parameter(WebConfigLocationName, "<webConfigPath>")).Append(" ")
+                .Append(Parameter(DeployStatusLocationName, "<deployStatusLocation>")).Append(" ")
                 .AppendLine().ToString();
         }
 

@@ -5,18 +5,22 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class ExtractPackageStep : DeploymentStepBase
     {
+        private readonly DeploymentStepStatus _status;
         public ExtractPackageStep(DeployParameters parameters)
             : base(parameters, "Exctract package")
         {
+            _status = new DeploymentStepStatus();
         }
 
         public override DeploymentStepStatus Execute()
         {
+            _status.AppendCommentLine("Extracting " + Parameters.PackagePath + " to " + Parameters.DestinationFolder);
             using (var fileStream = new FileStream(Parameters.PackagePath, FileMode.Open, FileAccess.Read))
             {
                 WriteAllEntriesFrom(fileStream);
             }
-            return new DeploymentStepStatus(true, DeploymentStepStatus.Ok);
+            _status.Status = DeploymentStepStatus.Ok;
+            return _status;
         }
 
         private void WriteAllEntriesFrom(Stream fileStream)
@@ -53,6 +57,7 @@ namespace Deploy.Lib.Deployment.Steps
             var directoryPath = Path.Combine(Parameters.DestinationFolder, Path.GetDirectoryName(entry.Name));
             if (!Directory.Exists(directoryPath))
             {
+                _status.AppendCommentLine("Creating directory " + directoryPath);
                 Directory.CreateDirectory(directoryPath);
             }
         }

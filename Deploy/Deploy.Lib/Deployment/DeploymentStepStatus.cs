@@ -1,27 +1,43 @@
 ﻿using System;
+using System.Text;
 
 namespace Deploy.Lib.Deployment
 {
+    [Serializable]
     public class DeploymentStepStatus
     {
         public const int Ok = 0;
         public const int Warning = 1;
         public const int Fail = 2;
 
-        public bool CanProceed { get; private set; }
-        public int Status { get; private set; }
-        public Exception Exception { get; private set; }
+        public bool CanProceed { get; set; }
+        public int Status { get; set; }
+        public string Exception { get; set; }
+        public string Comment { get; set; }
 
-        public DeploymentStepStatus(bool canProcess, int status)
-            : this(canProcess, status, null)
+        public DeploymentStepStatus()
         {
+            CanProceed = true;
         }
 
-        public DeploymentStepStatus(bool canProcess, int status, Exception exception)
+        public DeploymentStepStatus(bool canProceed, int status, string comment = null, string exception = null)
         {
-            CanProceed = canProcess;
+            CanProceed = canProceed;
             Status = status;
-            Exception = exception;
+            Comment = string.IsNullOrEmpty(comment) ? string.Empty : comment;
+            Exception = string.IsNullOrEmpty(exception) ? string.Empty : exception;
+        }
+
+        public DeploymentStepStatus AppendComment(string comment)
+        {
+            Comment = new StringBuilder(Comment).Append(comment).ToString();
+            return this;
+        }
+
+        public DeploymentStepStatus AppendCommentLine(string comment)
+        {
+            Comment = new StringBuilder(Comment).AppendLine(comment).ToString();
+            return this;
         }
 
         public override string ToString()

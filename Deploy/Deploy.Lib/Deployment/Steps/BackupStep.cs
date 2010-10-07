@@ -7,6 +7,8 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class BackupStep : DeploymentStepBase
     {
+        private readonly DeploymentStepStatus _status = new DeploymentStepStatus();
+
         public BackupStep(DeployParameters parameters)
             : base(parameters, "Backup")
         {
@@ -17,12 +19,14 @@ namespace Deploy.Lib.Deployment.Steps
             try
             {
                 BackupIfDestinationExists();
+                _status.Status = DeploymentStepStatus.Ok;
             }
             catch (Exception e)
             {
-                return new DeploymentStepStatus(false, DeploymentStepStatus.Fail, e);
+                _status.Status = DeploymentStepStatus.Fail;
+                _status.Exception = e.ToString();
             }
-            return new DeploymentStepStatus(true, DeploymentStepStatus.Ok);
+            return _status;
         }
 
         private void BackupIfDestinationExists()
@@ -39,13 +43,14 @@ namespace Deploy.Lib.Deployment.Steps
             if (!Directory.Exists(Parameters.BackupFolder))
             {
                 Directory.CreateDirectory(Parameters.BackupFolder);
+                _status.AppendCommentLine("Creating backup folder: " + Parameters.BackupFolder);
             }
         }
 
         private void Backup()
         {
             var backupFilePath = GenerateBackupFilePath();
-            Console.WriteLine("Backup to " + backupFilePath);
+            _status.AppendCommentLine("Backup file: " + backupFilePath);
             using (var zipOutputStream = new ZipOutputStream(File.Create(backupFilePath)))
             {
                 ZipFolder(Parameters.DestinationFolder, zipOutputStream);
@@ -93,8 +98,9 @@ namespace Deploy.Lib.Deployment.Steps
         {
             var now = DateTime.Now;
             var filename = new StringBuilder("backup_")
-                .Append(now.ToShortDateString())
-                .Append(now.ToShortTimeString())
+                .Append(now.ToShortDateString().Replace(".", string.Empty))
+                .Append("_")
+                .Append(now.ToShortTimeString().Replace(":", string.Empty))
                 .Append(".zip").ToString();
             return Path.Combine(Parameters.BackupFolder, filename);
         }

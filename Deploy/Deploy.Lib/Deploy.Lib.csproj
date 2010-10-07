@@ -47,6 +47,7 @@
     <Compile Include="ConfigGenerating\ConfigValuesReplacer.cs" />
     <Compile Include="Deployment\Arguments.cs" />
     <Compile Include="Deployment\Deployer.cs" />
+    <Compile Include="Deployment\DeploymentStatus.cs" />
     <Compile Include="Deployment\DeploymentStepStatus.cs" />
     <Compile Include="Deployment\DeployParameters.cs" />
     <Compile Include="Deployment\IDeploymentStep.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Deployment\Steps\DeploymentStepBase.cs" />
     <Compile Include="Deployment\Steps\ExtractPackageStep.cs" />
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
+    <Compile Include="Deployment\Steps\ReplaceWebConfigStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\FileReader.cs" />
     <Compile Include="Readers\FileWriter.cs" />
