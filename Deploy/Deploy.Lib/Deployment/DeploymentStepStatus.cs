@@ -12,11 +12,11 @@ namespace Deploy.Lib.Deployment
         public const int Fail = 2;
 
         public string StepName { get; set; }
+        public int Status { get; set; }
+        public string Details { get; set; }
+        public string Error { get; set; }
         [XmlIgnore]
         public bool CanProceed { get; set; }
-        public int Status { get; set; }
-        public string Error { get; set; }
-        public string Details { get; set; }
 
         public DeploymentStepStatus()
         {

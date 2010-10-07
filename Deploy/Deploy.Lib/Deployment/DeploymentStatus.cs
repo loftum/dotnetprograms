@@ -26,7 +26,7 @@ namespace Deploy.Lib.Deployment
 
         private void CalculateStatus()
         {
-            var status = StepStatuses.Aggregate(DeploymentStepStatus.Ok, (current, stepStatus) => current & stepStatus.Status);
+            var status = StepStatuses.Aggregate(DeploymentStepStatus.Ok, (current, stepStatus) => current | stepStatus.Status);
             switch (status)
             {
                 case DeploymentStepStatus.Ok:

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="ConfigGenerating\ConfigValuesReaderTest.cs" />
     <Compile Include="Deployment\ArgumentsTest.cs" />
+    <Compile Include="Deployment\DeploymentStatusTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
