@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Deploy.Lib.Deployment
 {
@@ -11,6 +12,7 @@ namespace Deploy.Lib.Deployment
         public const int Fail = 2;
 
         public string StepName { get; set; }
+        [XmlIgnore]
         public bool CanProceed { get; set; }
         public int Status { get; set; }
         public string Error { get; set; }
