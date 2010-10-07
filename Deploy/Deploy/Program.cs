@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using Deploy.Deployment;
+using Deploy.Lib.Deployment;
 
 namespace Deploy
 {
@@ -51,13 +51,7 @@ namespace Deploy
 
         private static void PrintUsage()
         {
-            Console.WriteLine(GetUsage());
-        }
-
-        private static string GetUsage()
-        {
-            return new StringBuilder(Process.GetCurrentProcess().ProcessName)
-                .Append(" <package path> <destination>").ToString();
+            Console.WriteLine(DeployParameters.GetUsage());
         }
     }
 }

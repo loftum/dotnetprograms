@@ -2,20 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A59C955C-4F33-44EA-A4AE-F1FBF8B1B1CF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{F4175BDF-9389-44C4-B2C6-36934C80538A}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Deploy</RootNamespace>
-    <AssemblyName>Deploy</AssemblyName>
+    <RootNamespace>Deploy.Lib</RootNamespace>
+    <AssemblyName>Deploy.Lib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -46,14 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ConfigGenerating\ConfigValuesReader.cs" />
+    <Compile Include="ConfigGenerating\ConfigValuesReplacer.cs" />
+    <Compile Include="Deployment\Arguments.cs" />
+    <Compile Include="Deployment\Deployer.cs" />
+    <Compile Include="Deployment\DeploymentStepStatus.cs" />
+    <Compile Include="Deployment\DeployParameters.cs" />
+    <Compile Include="Deployment\IDeploymentStep.cs" />
+    <Compile Include="Deployment\InvalidParametersException.cs" />
+    <Compile Include="Deployment\Steps\BackupStep.cs" />
+    <Compile Include="Deployment\Steps\ClearDestinationFolderStep.cs" />
+    <Compile Include="Deployment\Steps\DeploymentStepBase.cs" />
+    <Compile Include="Deployment\Steps\ExtractPackageStep.cs" />
+    <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Deploy.Lib\Deploy.Lib.csproj">
-      <Project>{F4175BDF-9389-44C4-B2C6-36934C80538A}</Project>
-      <Name>Deploy.Lib</Name>
-    </ProjectReference>
+    <Compile Include="Readers\FileReader.cs" />
+    <Compile Include="Readers\FileWriter.cs" />
+    <Compile Include="Readers\IFileWriter.cs" />
+    <Compile Include="Readers\IFileReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
