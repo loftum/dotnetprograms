@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Deploy.Lib.Deployment.Steps;
+using Deploy.Lib.FilenameGenerating;
 
 namespace Deploy.Lib.Deployment
 {
@@ -56,14 +57,9 @@ namespace Deploy.Lib.Deployment
 
         private string GenerateStatusFilePath()
         {
-            var now = DateTime.Now;
             return new StringBuilder(_parameters.DeployStatusPath)
                 .Append(Path.DirectorySeparatorChar)
-                .Append("deploystatus_")
-                .Append(now.ToShortDateString().Replace(".", string.Empty))
-                .Append("_")
-                .Append(now.ToShortTimeString().Replace(":", string.Empty))
-                .Append(".xml")
+                .Append(new FilenameGenerator().BaseDdMmYyyyHhMmSsExtension("deploystatus", "xml"))
                 .ToString();
         }
     }
