@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Deploy.Lib.Configuration;
-using Deploy.Lib.Profiles;
 
 namespace Deploy.Lib.Deployment
 {
@@ -43,10 +40,6 @@ namespace Deploy.Lib.Deployment
 
         public static DeployParameters Parse(string[] args)
         {
-            if (args.Length < 3)
-            {
-                return ParseFromProfile(args);
-            }
             if (args.Length < 5)
             {
                 throw new InvalidParametersException("missing arguments");
@@ -62,19 +55,6 @@ namespace Deploy.Lib.Deployment
             VerifyExists(new FileInfo(parameters.PackagePath));
             VerifyExists(new FileInfo(parameters.NewWebConfigPath));
             return parameters;
-        }
-
-        private static DeployParameters ParseFromProfile(string[] args)
-        {
-            try
-            {
-                var profile = new ProfileReader(DeploymentConfiguration.ProfileFolder).GetProfile(args[1]);
-            }
-            catch (Exception)
-            {
-                throw new InvalidParametersException("Could not parse " + args);
-                
-            }
         }
 
         private static void VerifyExists(FileSystemInfo info)

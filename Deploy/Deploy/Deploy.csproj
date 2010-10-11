@@ -50,6 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Deploy.Lib\Deploy.Lib.csproj">
       <Project>{F4175BDF-9389-44C4-B2C6-36934C80538A}</Project>
       <Name>Deploy.Lib</Name>

@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deploy.Lib", "Deploy.Lib\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deploy.Testing", "Deploy.Testing\Deploy.Testing.csproj", "{0FBC4627-4DB7-4DD3-9FF1-A4CCC955B9A2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Console apps", "1. Console apps", "{F4C1C783-1DFD-48D4-81ED-8E3CB710A459}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries", "1. Libraries", "{87A453F0-5696-4C7E-8B0F-4596E01BBE1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9. Tests", "9. Tests", "{8F2D6767-9CB1-4A8C-9C7E-E6B6B3E3841D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +56,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A59C955C-4F33-44EA-A4AE-F1FBF8B1B1CF} = {F4C1C783-1DFD-48D4-81ED-8E3CB710A459}
+		{F4175BDF-9389-44C4-B2C6-36934C80538A} = {87A453F0-5696-4C7E-8B0F-4596E01BBE1E}
+		{0FBC4627-4DB7-4DD3-9FF1-A4CCC955B9A2} = {8F2D6767-9CB1-4A8C-9C7E-E6B6B3E3841D}
 	EndGlobalSection
 EndGlobal

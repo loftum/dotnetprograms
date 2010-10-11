@@ -39,6 +39,7 @@
       <HintPath>..\..\..\..\..\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ConfigGenerating\ConfigValuesReader.cs" />
     <Compile Include="ConfigGenerating\ConfigValuesReplacer.cs" />
+    <Compile Include="Configuration\DeploymentConfiguration.cs" />
     <Compile Include="Deployment\Arguments.cs" />
     <Compile Include="Deployment\Deployer.cs" />
     <Compile Include="Deployment\DeploymentStatus.cs" />
@@ -63,11 +65,16 @@
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\ReplaceWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\StopSiteStep.cs" />
+    <Compile Include="FilenameGenerating\FilenameGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\FileReader.cs" />
     <Compile Include="Readers\FileWriter.cs" />
     <Compile Include="Readers\IFileWriter.cs" />
     <Compile Include="Readers\IFileReader.cs" />
+    <Compile Include="Serializing\ISerializer.cs" />
+    <Compile Include="Values\DateValue.cs" />
+    <Compile Include="Values\FilenameValue.cs" />
+    <Compile Include="Values\Value.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
