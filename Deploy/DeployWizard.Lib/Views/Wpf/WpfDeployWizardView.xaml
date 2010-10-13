@@ -1,0 +1,15 @@
+﻿<Window x:Class="DeployWizard.Lib.Views.Wpf.WpfDeployWizardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Deployer" Height="350" Width="525">
+    <Grid>
+        <Grid Name="MainContent">
+            
+        </Grid>
+        <Grid>
+            <Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="12,276,0,0" Name="PreviousButton" VerticalAlignment="Top" Width="75" Click="PreviousButton_Click" />
+            <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="323,276,0,0" Name="NextButton" VerticalAlignment="Top" Width="75" Click="NextButton_Click" />
+            <Button Content="Finish" Height="23" HorizontalAlignment="Left" Margin="416,276,0,0" Name="FinishButton" VerticalAlignment="Top" Width="75" Click="FinishButton_Click" />
+        </Grid>
+    </Grid>
+</Window>
