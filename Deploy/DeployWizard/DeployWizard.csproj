@@ -51,10 +51,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Deploy.Lib\Deploy.Lib.csproj">
+      <Project>{F4175BDF-9389-44C4-B2C6-36934C80538A}</Project>
+      <Name>Deploy.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DeployWizard.Lib\DeployWizard.Lib.csproj">
       <Project>{4B318E45-7959-48DF-85B7-A0C7571EBE45}</Project>
       <Name>DeployWizard.Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

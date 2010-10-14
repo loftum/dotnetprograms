@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using DeployWizard.Lib.Steps;
+using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Views.Wpf
 {
@@ -9,19 +11,10 @@ namespace DeployWizard.Lib.Views.Wpf
         public event EventHandler NextClicked;
         public event EventHandler FinishClicked;
         
-        public void SetPreviousEnabled(bool enabled)
+        public void ShowStep(IWizardStep<IStepView> step)
         {
-            PreviousButton.IsEnabled = enabled;
-        }
-
-        public void SetNextEnabled(bool enabled)
-        {
-            NextButton.IsEnabled = enabled;
-        }
-
-        public void SetFinishEnabled(bool enabled)
-        {
-            FinishButton.IsEnabled = enabled;
+            MainContent.Children.Clear();
+            MainContent.Children.Add((UIElement) step.View);
         }
 
         public WpfDeployWizardView()
@@ -29,6 +22,7 @@ namespace DeployWizard.Lib.Views.Wpf
             InitializeComponent();
         }
 
+        #region Events
         private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
             PreviousClicked(sender, e);
@@ -43,5 +37,23 @@ namespace DeployWizard.Lib.Views.Wpf
         {
             FinishClicked(sender, e);
         }
+        #endregion
+
+        #region Enable buttons
+        public void SetPreviousEnabled(bool enabled)
+        {
+            PreviousButton.IsEnabled = enabled;
+        }
+
+        public void SetNextEnabled(bool enabled)
+        {
+            NextButton.IsEnabled = enabled;
+        }
+
+        public void SetFinishEnabled(bool enabled)
+        {
+            FinishButton.IsEnabled = enabled;
+        }
+        #endregion
     }
 }

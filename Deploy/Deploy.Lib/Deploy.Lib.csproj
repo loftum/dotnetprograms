@@ -47,6 +47,10 @@
     <Compile Include="ConfigGenerating\ConfigValuesReader.cs" />
     <Compile Include="ConfigGenerating\ConfigValuesReplacer.cs" />
     <Compile Include="Configuration\DeploymentConfiguration.cs" />
+    <Compile Include="DeploymentProfiles\DeploymentProfile.cs" />
+    <Compile Include="DeploymentProfiles\DeploymentProfileException.cs" />
+    <Compile Include="DeploymentProfiles\IProfileManager.cs" />
+    <Compile Include="DeploymentProfiles\ProfileManager.cs" />
     <Compile Include="Deployment\Arguments.cs" />
     <Compile Include="Deployment\Deployer.cs" />
     <Compile Include="Deployment\DeploymentStatus.cs" />

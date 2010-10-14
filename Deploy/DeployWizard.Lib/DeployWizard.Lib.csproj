@@ -45,20 +45,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DeployWizardController.cs" />
-    <Compile Include="DeploymentProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\IWizardStep.cs" />
-    <Compile Include="Steps\StepView.cs" />
+    <Compile Include="Steps\SelectPathsStep.cs" />
+    <Compile Include="Steps\Views\ISelectPathsStepView.cs" />
+    <Compile Include="Steps\Views\ISelectProfileStepView.cs" />
+    <Compile Include="Steps\Views\IStepView.cs" />
+    <Compile Include="Steps\Views\Wpf\WpfSelectPathsStepView.xaml.cs">
+      <DependentUpon>WpfSelectPathsStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Steps\Views\Wpf\WpfSelectProfileStepView.xaml.cs">
+      <DependentUpon>WpfSelectProfileStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Steps\SelectProfileStep.cs" />
+    <Compile Include="Steps\WizardStepBase.cs" />
     <Compile Include="Views\IDeployWizardView.cs" />
     <Compile Include="Views\Wpf\WpfDeployWizardView.xaml.cs">
       <DependentUpon>WpfDeployWizardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WizardModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Steps\Views\Wpf\WpfSelectPathsStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Steps\Views\Wpf\WpfSelectProfileStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Wpf\WpfDeployWizardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Deploy.Lib\Deploy.Lib.csproj">
+      <Project>{F4175BDF-9389-44C4-B2C6-36934C80538A}</Project>
+      <Name>Deploy.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
