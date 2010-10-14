@@ -8,7 +8,7 @@
     <Grid>
         <TextBlock Height="22" HorizontalAlignment="Left" Margin="12,12,0,0" Name="SelectProfileBlock" Text="Select profile" VerticalAlignment="Top" Width="105" />
         <ComboBox Height="23" ItemsSource="{Binding Path=Profiles}"  HorizontalAlignment="Left" Margin="109,12,0,0" Name="ProfileCombobox" VerticalAlignment="Top" Width="179" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="109,74,0,0" Name="NewProfileName" VerticalAlignment="Top" Width="179" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="109,74,0,0" Name="NewProfileName" VerticalAlignment="Top" Width="179" Keyboard.KeyUp="NewProfileName_KeyUp" />
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,77,0,0" Name="CreateNewBlock" Text="Create new" VerticalAlignment="Top" Width="116" />
         <Button Content="Create" Height="23" HorizontalAlignment="Left" Margin="12,106,0,0" Name="CreateNewButton" VerticalAlignment="Top" Width="75" Click="CreateNewButton_Click" />
     </Grid>

@@ -9,10 +9,13 @@ namespace DeployWizard.Lib.Views
         event EventHandler PreviousClicked;
         event EventHandler NextClicked;
         event EventHandler FinishClicked;
+        event EventHandler SaveClicked;
 
         void SetPreviousEnabled(bool enabled);
         void SetNextEnabled(bool enabled);
         void SetFinishEnabled(bool enabled);
         void ShowStep(IWizardStep<IStepView> step);
+        void ShowError(Exception exception);
+        void SetTitle(string title);
     }
 }

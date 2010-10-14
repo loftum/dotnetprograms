@@ -6,5 +6,7 @@ namespace DeployWizard.Lib.Steps
     {
         WizardModel Model { get; }
         TView View { get; }
+        void Prepare();
+        void Validate();
     }
 }

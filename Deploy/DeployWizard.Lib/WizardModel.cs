@@ -1,9 +1,33 @@
-using Deploy.Lib.DeploymentProfiles;
+using Deploy.Lib.Deployment.Profiles;
 
 namespace DeployWizard.Lib
 {
     public class WizardModel
     {
-        public DeploymentProfile CurrentProfile { get; set; }
+        public event ProfileChangedEventHandler ProfileChanged;
+        private DeploymentProfile _deploymentProfile;
+        public string Package { get; set; }
+
+        public DeploymentProfile CurrentProfile
+        {
+            get { return _deploymentProfile; }
+            set 
+            { 
+                _deploymentProfile = value;
+                ProfileChanged(this, new ProfileChangedEventHandlerArgs(_deploymentProfile));
+            }
+        }
+    }
+
+    public delegate void ProfileChangedEventHandler(object sender, ProfileChangedEventHandlerArgs args);
+
+    public class ProfileChangedEventHandlerArgs
+    {
+        public DeploymentProfile Profile { get; private set; }
+
+        public ProfileChangedEventHandlerArgs(DeploymentProfile profile)
+        {
+            Profile = profile;
+        }
     }
 }

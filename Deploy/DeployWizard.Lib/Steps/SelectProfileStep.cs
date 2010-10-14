@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
-using Deploy.Lib.DeploymentProfiles;
+using Deploy.Lib.Deployment.ProfileManagement;
+using Deploy.Lib.Deployment.Profiles;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Steps
@@ -13,9 +15,7 @@ namespace DeployWizard.Lib.Steps
         {
             _profileManager = profileManager;
             view.NewProfile += CreateNewProfile;
-            var profiles = _profileManager.GetAll().Select(profile => profile.Name);
-            View.Profiles = profiles;
-            View.SelectedProfile = profiles.FirstOrDefault();
+            
         }
 
         private void CreateNewProfile(object sender, NewProfileEventHandlerArgs args)
@@ -28,6 +28,18 @@ namespace DeployWizard.Lib.Steps
             var profiles = _profileManager.GetAll().Select(profile => profile.Name);
             View.Profiles = profiles;
             View.SelectedProfile = args.ProfileName;
+        }
+
+        protected override void DoValidate()
+        {
+            Model.CurrentProfile = _profileManager.Get(View.SelectedProfile);
+        }
+
+        public override void Prepare()
+        {
+            var profiles = _profileManager.GetAll().Select(profile => profile.Name);
+            View.Profiles = profiles;
+            View.SelectedProfile = Model.CurrentProfile == null? profiles.FirstOrDefault() : Model.CurrentProfile.Name;
         }
     }
 }

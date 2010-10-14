@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using Deploy.Lib.DeploymentProfiles;
+using Deploy.Lib.Deployment.ProfileManagement;
+using Deploy.Lib.FileManagement;
 using DeployWizard.Lib;
 using DeployWizard.Lib.Controllers;
 using DeployWizard.Lib.Steps;
@@ -22,7 +23,7 @@ namespace DeployWizard
                 var view = new WpfDeployWizardView();
                 var model = new WizardModel();
                 var steps = GetSteps(model);
-                new DeployWizardController(model, view, steps);
+                new DeployWizardController(model, view, ProfileManager.Instance, steps);
                 new Application().Run(view);
             }
         }
@@ -31,7 +32,8 @@ namespace DeployWizard
         {
             var steps = new List<IWizardStep<IStepView>>();
             steps.Add(new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance));
-            steps.Add(new SelectPathsStep(model, new WpfSelectPathsStepView()));
+            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView()));
+            steps.Add(new SelectPackageStep(model, new WpfSelectPackageStepView(), new FileSystemManager()));
             return steps;
         }
 

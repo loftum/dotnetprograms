@@ -10,11 +10,22 @@ namespace DeployWizard.Lib.Views.Wpf
         public event EventHandler PreviousClicked;
         public event EventHandler NextClicked;
         public event EventHandler FinishClicked;
-        
+        public event EventHandler SaveClicked;
+
         public void ShowStep(IWizardStep<IStepView> step)
         {
             MainContent.Children.Clear();
             MainContent.Children.Add((UIElement) step.View);
+        }
+
+        public void ShowError(Exception exception)
+        {
+            Status.Text = exception.Message;
+        }
+
+        public void SetTitle(string title)
+        {
+            Title = title;
         }
 
         public WpfDeployWizardView()
@@ -31,6 +42,11 @@ namespace DeployWizard.Lib.Views.Wpf
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             NextClicked(sender, e);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveClicked(sender, e);
         }
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)

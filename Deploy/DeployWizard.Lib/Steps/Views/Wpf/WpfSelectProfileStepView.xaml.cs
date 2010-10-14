@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace DeployWizard.Lib.Steps.Views.Wpf
 {
@@ -37,6 +37,14 @@ namespace DeployWizard.Lib.Steps.Views.Wpf
         private void CreateNewButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             NewProfile.Invoke(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+        }
+
+        private void NewProfileName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                NewProfile.Invoke(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+            }
         }
     }
 }
