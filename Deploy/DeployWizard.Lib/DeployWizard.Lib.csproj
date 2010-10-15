@@ -56,48 +56,11 @@
     <Compile Include="Steps\Views\IStepView.cs" />
     <Compile Include="Steps\Views\ISetUpBackupStepView.cs" />
     <Compile Include="Steps\Views\ISetUpDeployStatusStepView.cs" />
-    <Compile Include="Steps\Views\Wpf\WpfSelectPackageStepView.xaml.cs">
-      <DependentUpon>WpfSelectPackageStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Steps\Views\Wpf\WpfSelectProfileStepView.xaml.cs">
-      <DependentUpon>WpfSelectProfileStepView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Steps\SelectProfileStep.cs" />
-    <Compile Include="Steps\Views\Wpf\WpfSetUpBackupStepView.xaml.cs">
-      <DependentUpon>WpfSetUpBackupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Steps\Views\Wpf\WpfSetUpDeployStatusStepView.xaml.cs">
-      <DependentUpon>WpfSetUpDeployStatusStepView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Steps\WizardStepBase.cs" />
     <Compile Include="Steps\WizardStepException.cs" />
     <Compile Include="Views\IDeployWizardView.cs" />
-    <Compile Include="Views\Wpf\WpfDeployWizardView.xaml.cs">
-      <DependentUpon>WpfDeployWizardView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WizardModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Steps\Views\Wpf\WpfSelectPackageStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Steps\Views\Wpf\WpfSelectProfileStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Steps\Views\Wpf\WpfSetUpBackupStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Steps\Views\Wpf\WpfSetUpDeployStatusStepView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Wpf\WpfDeployWizardView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Deploy.Lib\Deploy.Lib.csproj">
@@ -105,6 +68,7 @@
       <Name>Deploy.Lib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

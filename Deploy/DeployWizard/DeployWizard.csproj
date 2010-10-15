@@ -59,6 +59,10 @@
       <Project>{4B318E45-7959-48DF-85B7-A0C7571EBE45}</Project>
       <Name>DeployWizard.Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DeployWizard.Wpf\DeployWizard.Wpf.csproj">
+      <Project>{B48F9A37-5A49-4FF3-A04F-2AC9A5FA0596}</Project>
+      <Name>DeployWizard.Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

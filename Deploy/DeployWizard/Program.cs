@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using Deploy.Lib.Deployment.ProfileManagement;
 using Deploy.Lib.FileManagement;
@@ -7,8 +9,8 @@ using DeployWizard.Lib;
 using DeployWizard.Lib.Controllers;
 using DeployWizard.Lib.Steps;
 using DeployWizard.Lib.Steps.Views;
-using DeployWizard.Lib.Steps.Views.Wpf;
-using DeployWizard.Lib.Views.Wpf;
+using DeployWizard.Wpf.Steps.Views;
+using DeployWizard.Wpf.Views;
 
 
 namespace DeployWizard
@@ -18,6 +20,7 @@ namespace DeployWizard
         [STAThread]
         public static void Main(string[] args)
         {
+            PrintPlatformInfo();
             if (RunningWindows())
             {
                 var view = new WpfDeployWizardView();
@@ -26,6 +29,19 @@ namespace DeployWizard
                 new DeployWizardController(model, view, ProfileManager.Instance, steps);
                 new Application().Run(view);
             }
+        }
+
+        private static void PrintPlatformInfo()
+        {
+            Console.WriteLine(GetPlatformInfo());
+        }
+
+        private static string GetPlatformInfo()
+        {
+            return new StringBuilder()
+                .Append("OS version: ").AppendLine(Environment.OSVersion.ToString())
+                .Append("Runtime: ").AppendLine(Process.GetCurrentProcess().ProcessName)
+                .ToString();
         }
 
         private static IEnumerable<IWizardStep<IStepView>> GetSteps(WizardModel model)
