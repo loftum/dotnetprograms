@@ -1,4 +1,3 @@
-using System;
 using Deploy.Lib.FileManagement;
 using DeployWizard.Lib.Steps.Views;
 
@@ -15,9 +14,8 @@ namespace DeployWizard.Lib.Steps
 
         protected override void DoValidate()
         {
-            var packagePath = View.PackagePath;
+            var packagePath = Model.Package;
             ValidateFileExists(packagePath);
-            Model.Package = packagePath;
         }
 
         private void ValidateFileExists(string path)
@@ -30,7 +28,8 @@ namespace DeployWizard.Lib.Steps
 
         public override void Prepare()
         {
-            
+            View.Model = Model;
+            View.ValidateAll();
         }
     }
 }

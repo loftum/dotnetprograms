@@ -40,5 +40,10 @@ namespace DeployWizard.Lib.Steps.Views
             checkBox.SetBinding(ToggleButton.IsCheckedProperty, _binding);
             return this;
         }
+
+        public void ToTextBlock(TextBlock textBlock)
+        {
+            textBlock.SetBinding(TextBlock.TextProperty, _binding);
+        }
     }
 }

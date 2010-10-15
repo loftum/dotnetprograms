@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 
 namespace Deploy.Lib.FileManagement
 {
@@ -9,5 +10,7 @@ namespace Deploy.Lib.FileManagement
         IEnumerable<string> FileAndFolderNamesIn(string path, string searchPattern = null);
         IEnumerable<string> FilenamesIn(string path, string searchPattern = null);
         IEnumerable<string> FoldernamesIn(string path, string searchPattern = null);
+        DirectoryInfo CreateNewDirectory(string path);
+        FileInfo CreateNewFile(string path);
     }
 }

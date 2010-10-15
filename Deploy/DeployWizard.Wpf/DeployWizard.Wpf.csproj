@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\Views\WpfSetUpGenerateWebConfigStepView.xaml.cs">
+      <DependentUpon>WpfSetUpGenerateWebConfigStepView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Steps\Views\WpfSelectPackageStepView.xaml.cs">
       <DependentUpon>WpfSelectPackageStepView.xaml</DependentUpon>
     </Compile>
@@ -57,11 +60,18 @@
     <Compile Include="Steps\Views\WpfSetUpDeployStatusStepView.xaml.cs">
       <DependentUpon>WpfSetUpDeployStatusStepView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Steps\Views\WpfSummaryStepView.xaml.cs">
+      <DependentUpon>WpfSummaryStepView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WpfDeployWizardView.xaml.cs">
       <DependentUpon>WpfDeployWizardView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Steps\Views\WpfSetUpGenerateWebConfigStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Steps\Views\WpfSelectPackageStepView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,6 +87,10 @@
     <Page Include="Steps\Views\WpfSetUpDeployStatusStepView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Steps\Views\WpfSummaryStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WpfDeployWizardView.xaml">
       <Generator>MSBuild:Compile</Generator>

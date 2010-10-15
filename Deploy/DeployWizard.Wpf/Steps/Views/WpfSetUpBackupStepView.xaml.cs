@@ -1,12 +1,17 @@
-﻿using System;
+﻿using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
+using DeployWizard.Lib.Events.FileSystem;
 using DeployWizard.Lib.Steps.Views;
+using DeployWizard.Lib.Validation;
 
 namespace DeployWizard.Wpf.Steps.Views
 {
     public partial class WpfSetUpBackupStepView : ISetUpBackupStepView
     {
+        public event CreateDirectoryEvent CreateDirectory;
+
         private BackupSettings _settings;
+        private readonly IValidator<string> _validator = new DirectoryPathValidator();
 
         public BackupSettings Settings
         {
@@ -21,6 +26,12 @@ namespace DeployWizard.Wpf.Steps.Views
             }
         }
 
+        public WpfSetUpBackupStepView()
+        {
+            InitializeComponent();
+            ValidateAll();
+        }
+
         private void Bind()
         {
             Binder.Bind(_settings, "Folder")
@@ -30,14 +41,29 @@ namespace DeployWizard.Wpf.Steps.Views
                 .ToCheckBox(SkipBox);
         }
 
-        public WpfSetUpBackupStepView()
-        {
-            InitializeComponent();
-        }
-
         private void BackupFolderInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            
+            ValidateAll();
+        }
+
+        private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CreateDirectory(sender, new PathEventArgs(BackupFolderInput.Text));
+        }
+
+        public void ValidateAll()
+        {
+            var text = BackupFolderInput.Text;
+            if (_validator.IsValid(text))
+            {
+                BackupFolderInput.Background = Brushes.AliceBlue;
+                CreateButton.IsEnabled = false;
+            }
+            else
+            {
+                BackupFolderInput.Background = Brushes.IndianRed;
+                CreateButton.IsEnabled = true;
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
+using System;
 using Deploy.Lib.Deployment.Profiles;
 
 namespace DeployWizard.Lib
 {
+    [Serializable]
     public class WizardModel
     {
         public event ProfileChangedEventHandler ProfileChanged;

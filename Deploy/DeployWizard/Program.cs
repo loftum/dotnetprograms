@@ -9,6 +9,7 @@ using DeployWizard.Lib;
 using DeployWizard.Lib.Controllers;
 using DeployWizard.Lib.Steps;
 using DeployWizard.Lib.Steps.Views;
+using DeployWizard.Lib.SummaryFormatting;
 using DeployWizard.Wpf.Steps.Views;
 using DeployWizard.Wpf.Views;
 
@@ -51,7 +52,9 @@ namespace DeployWizard
             steps.Add(new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance));
             steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView(), fileSystemManager));
             steps.Add(new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager));
+            steps.Add(new SetUpGenerateWebConfigStep(model, new WpfSetUpGenerateWebConfigStepView(), fileSystemManager));
             steps.Add(new SelectPackageStep(model, new WpfSelectPackageStepView(), fileSystemManager));
+            steps.Add(new SummaryStep(model, new WpfSummaryStepView(), new SummaryFormatter()));
             return steps;
         }
 

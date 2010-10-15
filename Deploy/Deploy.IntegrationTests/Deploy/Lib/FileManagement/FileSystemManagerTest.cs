@@ -80,5 +80,21 @@ namespace Deploy.IntegrationTests.Deploy.Lib.FileManagement
             var files = _fileSystemManager.FilenamesIn(TestFolderPath);
             CollectionAsserter<string>.AssertThat(files).Contains(TestFileName).NotContains(TestSubFolderName);
         }
+
+        [Test]
+        public void ShouldCreateNewDirectory()
+        {
+            var newDirectoryPath = Path.Combine(TestFolderPath, "newFolder");
+            var directory = _fileSystemManager.CreateNewDirectory(newDirectoryPath);
+            Assert.That(directory.Exists);
+        }
+
+        [Test]
+        public void ShouldCreateNewFile()
+        {
+            var newFilePath = Path.Combine(TestFolderPath, "newFile.txt");
+            var file =_fileSystemManager.CreateNewFile(newFilePath);
+            Assert.That(file.Exists);
+        }
     }
 }

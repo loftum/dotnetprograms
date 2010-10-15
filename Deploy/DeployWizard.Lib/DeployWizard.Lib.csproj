@@ -45,23 +45,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoComplete\FileSystem\CompletionType.cs" />
-    <Compile Include="AutoComplete\FileSystem\FileSystemAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="Controllers\DeployWizardController.cs" />
+    <Compile Include="Events\FileSystem\PathEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\SetUpGenerateWebConfigStep.cs" />
     <Compile Include="Steps\IWizardStep.cs" />
     <Compile Include="Steps\SelectPackageStep.cs" />
     <Compile Include="Steps\SetUpBackupStep.cs" />
     <Compile Include="Steps\SetUpDeployStatusStep.cs" />
+    <Compile Include="Steps\SummaryStep.cs" />
     <Compile Include="Steps\Views\Binder.cs" />
+    <Compile Include="Steps\Views\IGenerateWebConfigStepView.cs" />
     <Compile Include="Steps\Views\ISelectPackageStepView.cs" />
     <Compile Include="Steps\Views\ISelectProfileStepView.cs" />
     <Compile Include="Steps\Views\IStepView.cs" />
     <Compile Include="Steps\Views\ISetUpBackupStepView.cs" />
     <Compile Include="Steps\Views\ISetUpDeployStatusStepView.cs" />
     <Compile Include="Steps\SelectProfileStep.cs" />
+    <Compile Include="Steps\Views\ISummaryStepView.cs" />
+    <Compile Include="Steps\Views\IWizardEvents.cs" />
     <Compile Include="Steps\WizardStepBase.cs" />
     <Compile Include="Steps\WizardStepException.cs" />
+    <Compile Include="SummaryFormatting\ISummaryFormatter.cs" />
+    <Compile Include="SummaryFormatting\SummaryFormatter.cs" />
+    <Compile Include="Validation\DirectoryPathValidator.cs" />
+    <Compile Include="Validation\FilePathValidator.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Views\IDeployWizardView.cs" />
     <Compile Include="WizardModel.cs" />
   </ItemGroup>

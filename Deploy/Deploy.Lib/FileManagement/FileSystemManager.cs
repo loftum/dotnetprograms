@@ -45,5 +45,18 @@ namespace Deploy.Lib.FileManagement
             }
             return directoryInfo.GetDirectories(searchPattern).Select(info => info.Name);
         }
+
+        public DirectoryInfo CreateNewDirectory(string path)
+        {
+            return Directory.CreateDirectory(path);
+        }
+
+        public FileInfo CreateNewFile(string path)
+        {
+            using (File.Create(path))
+            {
+            }
+            return new FileInfo(path);
+        }
     }
 }

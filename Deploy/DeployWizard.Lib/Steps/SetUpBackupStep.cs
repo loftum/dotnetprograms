@@ -1,5 +1,6 @@
 using Deploy.Lib.Deployment.Profiles;
 using Deploy.Lib.FileManagement;
+using DeployWizard.Lib.Events.FileSystem;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Steps
@@ -11,6 +12,13 @@ namespace DeployWizard.Lib.Steps
         public SetUpBackupStep(WizardModel model, ISetUpBackupStepView view, IFileSystemManager fileSystemManager) : base(model, view)
         {
             _fileSystemManager = fileSystemManager;
+            View.CreateDirectory += CreateNewDirectory;
+        }
+
+        private void CreateNewDirectory(object sender, PathEventArgs args)
+        {
+            _fileSystemManager.CreateNewDirectory(args.Path);
+            View.ValidateAll();
         }
 
         protected override void DoValidate()

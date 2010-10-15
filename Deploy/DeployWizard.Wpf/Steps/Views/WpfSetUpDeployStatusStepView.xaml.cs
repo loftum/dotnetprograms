@@ -1,11 +1,17 @@
-﻿using Deploy.Lib.Deployment.Profiles;
+﻿using System.Windows.Media;
+using Deploy.Lib.Deployment.Profiles;
+using DeployWizard.Lib.Events.FileSystem;
 using DeployWizard.Lib.Steps.Views;
+using DeployWizard.Lib.Validation;
 
 namespace DeployWizard.Wpf.Steps.Views
 {
     public partial class WpfSetUpDeployStatusStepView : ISetUpDeployStatusStepView
     {
+        public event CreateDirectoryEvent CreateDirectory;
+
         private DeployStatusSettings _settings;
+        private readonly IValidator<string> _validator = new DirectoryPathValidator();
 
         public DeployStatusSettings Settings
         {
@@ -17,6 +23,12 @@ namespace DeployWizard.Wpf.Steps.Views
             }
         }
 
+        public WpfSetUpDeployStatusStepView()
+        {
+            InitializeComponent();
+            ValidateAll();
+        }
+
         private void Bind()
         {
             Binder.Bind(_settings, "Folder")
@@ -26,9 +38,28 @@ namespace DeployWizard.Wpf.Steps.Views
                 .ToCheckBox(SkipBox);
         }
 
-        public WpfSetUpDeployStatusStepView()
+        public void ValidateAll()
         {
-            InitializeComponent();
+            if (_validator.IsValid(DeployStatusInput.Text))
+            {
+                DeployStatusInput.Background = Brushes.AliceBlue;
+                CreateDirectoryButton.IsEnabled = false;
+            }
+            else
+            {
+                DeployStatusInput.Background = Brushes.IndianRed;
+                CreateDirectoryButton.IsEnabled = true;
+            }
+        }
+
+        private void DeployStatusInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ValidateAll();
+        }
+
+        private void CreateDirectoryButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CreateDirectory(sender, new PathEventArgs(DeployStatusInput.Text));
         }
     }
 }

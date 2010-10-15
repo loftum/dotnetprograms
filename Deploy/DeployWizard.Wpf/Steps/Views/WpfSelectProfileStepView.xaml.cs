@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using DeployWizard.Lib.Steps.Views;
 
@@ -37,15 +38,26 @@ namespace DeployWizard.Wpf.Steps.Views
 
         private void CreateNewButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            NewProfile.Invoke(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+            InvokeNewProfile(sender);
         }
 
         private void NewProfileName_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                NewProfile.Invoke(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+                InvokeNewProfile(sender);
             }
+        }
+
+        private void InvokeNewProfile(object sender)
+        {
+            NewProfile(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+            NewProfileName.Text = string.Empty;
+        }
+
+        public void ValidateAll()
+        {
+            
         }
     }
 }

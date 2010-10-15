@@ -6,6 +6,5 @@ namespace Deploy.Lib.Deployment.Profiles
     public class WebConfigSettings : Settings
     {
         public string NewWebConfigPath { get; set; }
-        public string WebConfigPath { get; set; }
     }
 }
