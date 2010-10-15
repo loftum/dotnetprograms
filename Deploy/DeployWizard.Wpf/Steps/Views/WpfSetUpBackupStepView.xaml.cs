@@ -1,4 +1,5 @@
-﻿using Deploy.Lib.Deployment.Profiles;
+﻿using System;
+using Deploy.Lib.Deployment.Profiles;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Wpf.Steps.Views
@@ -32,6 +33,11 @@ namespace DeployWizard.Wpf.Steps.Views
         public WpfSetUpBackupStepView()
         {
             InitializeComponent();
+        }
+
+        private void BackupFolderInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            
         }
     }
 }
