@@ -30,10 +30,12 @@ namespace DeployWizard
 
         private static IEnumerable<IWizardStep<IStepView>> GetSteps(WizardModel model)
         {
+            var fileSystemManager = new FileSystemManager();
             var steps = new List<IWizardStep<IStepView>>();
             steps.Add(new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance));
-            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView()));
-            steps.Add(new SelectPackageStep(model, new WpfSelectPackageStepView(), new FileSystemManager()));
+            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView(), fileSystemManager));
+            steps.Add(new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager));
+            steps.Add(new SelectPackageStep(model, new WpfSelectPackageStepView(), fileSystemManager));
             return steps;
         }
 

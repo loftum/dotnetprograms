@@ -49,10 +49,13 @@
     <Compile Include="Steps\IWizardStep.cs" />
     <Compile Include="Steps\SelectPackageStep.cs" />
     <Compile Include="Steps\SetUpBackupStep.cs" />
+    <Compile Include="Steps\SetUpDeployStatusStep.cs" />
+    <Compile Include="Steps\Views\Binder.cs" />
     <Compile Include="Steps\Views\ISelectPackageStepView.cs" />
     <Compile Include="Steps\Views\ISelectProfileStepView.cs" />
     <Compile Include="Steps\Views\IStepView.cs" />
     <Compile Include="Steps\Views\ISetUpBackupStepView.cs" />
+    <Compile Include="Steps\Views\ISetUpDeployStatusStepView.cs" />
     <Compile Include="Steps\Views\Wpf\WpfSelectPackageStepView.xaml.cs">
       <DependentUpon>WpfSelectPackageStepView.xaml</DependentUpon>
     </Compile>
@@ -62,6 +65,9 @@
     <Compile Include="Steps\SelectProfileStep.cs" />
     <Compile Include="Steps\Views\Wpf\WpfSetUpBackupStepView.xaml.cs">
       <DependentUpon>WpfSetUpBackupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Steps\Views\Wpf\WpfSetUpDeployStatusStepView.xaml.cs">
+      <DependentUpon>WpfSetUpDeployStatusStepView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Steps\WizardStepBase.cs" />
     <Compile Include="Steps\WizardStepException.cs" />
@@ -81,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Steps\Views\Wpf\WpfSetUpBackupStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Steps\Views\Wpf\WpfSetUpDeployStatusStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

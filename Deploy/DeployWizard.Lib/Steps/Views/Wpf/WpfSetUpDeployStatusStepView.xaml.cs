@@ -2,16 +2,13 @@
 
 namespace DeployWizard.Lib.Steps.Views.Wpf
 {
-    public partial class WpfSetUpBackupStepView : ISetUpBackupStepView
+    public partial class WpfSetUpDeployStatusStepView : ISetUpDeployStatusStepView
     {
-        private BackupSettings _settings;
+        private DeployStatusSettings _settings;
 
-        public BackupSettings Settings
+        public DeployStatusSettings Settings
         {
-            get
-            {
-                return _settings;
-            }
+            get { return _settings; }
             set
             {
                 _settings = value;
@@ -23,12 +20,12 @@ namespace DeployWizard.Lib.Steps.Views.Wpf
         {
             Binder.Bind(_settings, "Folder")
                 .WithTargetNullValue(string.Empty)
-                .ToTextBox(BackupFolderInput);
+                .ToTextBox(DeployStatusInput);
             Binder.Bind(_settings, "Skip")
                 .ToCheckBox(SkipBox);
         }
 
-        public WpfSetUpBackupStepView()
+        public WpfSetUpDeployStatusStepView()
         {
             InitializeComponent();
         }
