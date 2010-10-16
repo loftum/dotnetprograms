@@ -34,10 +34,10 @@ namespace Deploy.Lib.Deployment.Steps
                 Status.Status = DeploymentStepStatus.Fail;
                 return Status;
             }
-            Status.AppendDetailsLine("Copying contents of " + rootDirectory + " to " + Parameters.DestinationFolder);
+            Status.AppendDetailsLine("Copying contents of " + rootDirectory.FullName + " to " + Parameters.DestinationFolder);
             _fileSystemManager.MoveContentsOf(rootDirectory).To(Parameters.DestinationFolder);
 
-            Status.AppendDetailsLine("Removing tempdir " + tempDirectory);
+            Status.AppendDetailsLine("Removing tempdir " + tempDirectory.FullName);
             _fileSystemManager.DeleteDirectory(tempDirectory);
 
             Status.Status = DeploymentStepStatus.Ok;
@@ -96,8 +96,7 @@ namespace Deploy.Lib.Deployment.Steps
             CreateDirectoryFor(tempDirectory, entry);
             var fullEntryPath = Path.Combine(tempDirectory.FullName, entry.Name);
             using (var fileOutStream = 
-                new FileStream(fullEntryPath, FileMode.CreateNew,
-                               FileAccess.Write))
+                new FileStream(fullEntryPath, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite))
             {
                 int size;
                 var buffer = new byte[4096];
