@@ -12,5 +12,8 @@ namespace Deploy.Lib.FileManagement
         IEnumerable<string> FoldernamesIn(string path, string searchPattern = null);
         DirectoryInfo CreateNewDirectory(string path);
         FileInfo CreateNewFile(string path);
+        DirectoryInfo CreateTempDirectory();
+        DirectoryMover MoveContentsOf(DirectoryInfo rootDirectory);
+        void DeleteDirectory(DirectoryInfo directory);
     }
 }

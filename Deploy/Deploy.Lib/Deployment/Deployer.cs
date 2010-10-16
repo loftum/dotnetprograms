@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Deploy.Lib.Deployment.Steps;
+using Deploy.Lib.FileManagement;
 using Deploy.Lib.FilenameGenerating;
 
 namespace Deploy.Lib.Deployment
@@ -15,14 +16,16 @@ namespace Deploy.Lib.Deployment
 
         public Deployer(DeployParameters parameters)
         {
+            var fileSystemManager = new FileSystemManager();
             _parameters = parameters;
             _steps.Add(new BackupStep(_parameters));
             _steps.Add(new ClearDestinationFolderStep(_parameters));
-            _steps.Add(new ExtractPackageStep(_parameters));
+            _steps.Add(new ExtractPackageStep(_parameters, fileSystemManager));
             _steps.Add(new ReplaceWebConfigStep(_parameters));
+            _steps.Add(new ResetFileAttributesStep(_parameters));
         }
 
-        public void Deploy()
+        public DeploymentStatus Deploy()
         {
             var deploymentStatus = new DeploymentStatus{Parameters = _parameters};
             foreach (var deploymentStep in _steps)
@@ -41,6 +44,7 @@ namespace Deploy.Lib.Deployment
                 }
             }
             Save(deploymentStatus);
+            return deploymentStatus;
         }
 
         private void Save(DeploymentStatus status)
@@ -57,7 +61,7 @@ namespace Deploy.Lib.Deployment
 
         private string GenerateStatusFilePath()
         {
-            return new StringBuilder(_parameters.DeployStatusPath)
+            return new StringBuilder(_parameters.Profile.DeployStatusSettings.Folder)
                 .Append(Path.DirectorySeparatorChar)
                 .Append(new FilenameGenerator().BaseDdMmYyyyHhMmSsExtension("deploystatus", "xml"))
                 .ToString();

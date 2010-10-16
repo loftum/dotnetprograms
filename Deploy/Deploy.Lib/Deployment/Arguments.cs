@@ -12,6 +12,11 @@ namespace Deploy.Lib.Deployment
             _args = args;
         }
 
+        public int Count
+        {
+            get { return _args.Count(); }
+        }
+
         public string ByNameOrIndex(string name, int index)
         {
             var byName = GetByName(name);

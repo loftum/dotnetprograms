@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,6 +58,22 @@ namespace Deploy.Lib.FileManagement
             {
             }
             return new FileInfo(path);
+        }
+
+        public DirectoryInfo CreateTempDirectory()
+        {
+            var tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            return CreateNewDirectory(tempPath);
+        }
+
+        public DirectoryMover MoveContentsOf(DirectoryInfo rootDirectory)
+        {
+            return DirectoryMover.MoveContentsOf(rootDirectory);
+        }
+
+        public void DeleteDirectory(DirectoryInfo directory)
+        {
+            directory.Delete(true);
         }
     }
 }

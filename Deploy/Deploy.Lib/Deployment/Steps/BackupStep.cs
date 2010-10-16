@@ -29,7 +29,7 @@ namespace Deploy.Lib.Deployment.Steps
 
         private void BackupIfDestinationExists()
         {
-            if (Directory.Exists(Parameters.DestinationFolder))
+            if (Directory.Exists(Parameters.Profile.DestinationSettings.Folder))
             {
                 CreateBackupFolderIfNotExists();
                 Backup();

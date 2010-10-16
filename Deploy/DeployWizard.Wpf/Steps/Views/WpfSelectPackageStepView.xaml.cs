@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media;
+using Deploy.Lib.Validation;
 using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps.Views;
-using DeployWizard.Lib.Validation;
 
 namespace DeployWizard.Wpf.Steps.Views
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Deploy.Lib.Deployment;
 using Deploy.Lib.Deployment.ProfileManagement;
 using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps;
@@ -53,7 +54,9 @@ namespace DeployWizard.Lib.Controllers
 
         private void Finish(object sender, EventArgs e)
         {   
-
+            var parameters = new DeployParameters(_model.Package, _model.CurrentProfile);
+            var deployer = new Deployer(parameters);
+            deployer.Deploy();
         }
 
         private void Next(object sender, EventArgs e)

@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace DeployWizard.Lib.Validation
+namespace Deploy.Lib.Validation
 {
     public class ValidationException : Exception
     {

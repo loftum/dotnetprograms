@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
+using Deploy.Lib.Deployment.ProfileManagement;
+using Deploy.Lib.Deployment.Profiles;
+using Deploy.Lib.Validation;
 
 namespace Deploy.Lib.Deployment
 {
@@ -12,69 +15,116 @@ namespace Deploy.Lib.Deployment
         private const string DestinationFolderName = "dest";
         private const string BackupFolderName = "backup";
         private const string NewWebConfigLocationName = "newWebConfig";
-        private const string WebConfigLocationName = "webconfigLocation";
         private const string DeployStatusLocationName = "statusLocation";
+        private const string DeploymentProfileName = "profile";
 
         public string PackagePath { get; set; }
-        public string DestinationFolder { get; set; }
-        public string BackupFolder { get; set; }
-        public string NewWebConfigPath { get; set; }
-        public string WebConfigPath { get; set; }
-        public string DeployStatusPath { get; set; }
+        public string DestinationFolder { get { return Profile.DestinationSettings.Folder; } }
+        public string BackupFolder { get { return Profile.BackupSettings.Folder; } }
+        public string NewWebConfigPath { get { return Profile.WebConfigSettings.NewWebConfigPath; } }
+        public string DeployStatusFolder { get { return Profile.DeployStatusSettings.Folder; } }
+
+        public DeploymentProfile Profile { get; set; }
 
         public DeployParameters()
         {
         }
 
-        private DeployParameters(string packagePath, string destinationFolder, 
-            string backupFolder, string configFilePath, string webConfigPath,
-            string deployStatusPath)
+        public DeployParameters(string packagePath, DeploymentProfile profile)
         {
             PackagePath = packagePath;
-            DestinationFolder = destinationFolder;
-            BackupFolder = backupFolder;
-            NewWebConfigPath = configFilePath;
-            WebConfigPath = webConfigPath;
-            DeployStatusPath = deployStatusPath;
+            Profile = profile;
+            ValidateAll();
         }
 
         public static DeployParameters Parse(string[] args)
         {
-            if (args.Length < 5)
+            var arguments = new Arguments(args);
+            if (args.Length < 2)
             {
                 throw new InvalidParametersException("missing arguments");
             }
-            var arguments = new Arguments(args);
             var parameters = new DeployParameters(
                 arguments.ByNameOrIndex(PackagePathName, 0),
-                arguments.ByNameOrIndex(DestinationFolderName, 1),
-                arguments.ByNameOrIndex(BackupFolderName, 2),
-                arguments.ByNameOrIndex(NewWebConfigLocationName, 3),
-                arguments.ByNameOrIndex(WebConfigLocationName, 4),
-                arguments.ByNameOrIndex(DeployStatusLocationName, 5));
-            VerifyExists(new FileInfo(parameters.PackagePath));
-            VerifyExists(new FileInfo(parameters.NewWebConfigPath));
+                GetProfile(arguments));
             return parameters;
         }
 
-        private static void VerifyExists(FileSystemInfo info)
+        private static DeploymentProfile GetProfile(Arguments arguments)
         {
-            if (!info.Exists)
+            if (arguments.Count == 2)
             {
-                throw new InvalidParametersException(info.FullName + " does not exist.");
+                return ProfileManager.Instance.Get(arguments.ByNameOrIndex(DeploymentProfileName, 1));
             }
+            return new DeploymentProfile
+                {
+                    Name = "Command line",
+                    DestinationSettings =
+                        new DestinationSettings {Folder = arguments.ByNameOrIndex(DestinationFolderName, 1)},
+                    BackupSettings = new BackupSettings {Folder = arguments.ByNameOrIndex(BackupFolderName, 2)},
+                    WebConfigSettings =
+                        new WebConfigSettings
+                            {NewWebConfigPath = arguments.ByNameOrIndex(NewWebConfigLocationName, 3)},
+                    DeployStatusSettings =
+                        new DeployStatusSettings {Folder = arguments.ByNameOrIndex(DeployStatusLocationName, 4)}
+                };
+        }
+
+        private void ValidateAll()
+        {
+            var validator = new PathValidator();
+            var messages = new List<string>();
+            messages.AddRange(Validate(validator.VerifyDirectoryExists, 
+                Profile.BackupSettings.Folder,
+                Profile.DeployStatusSettings.Folder,
+                Profile.DestinationSettings.Folder
+                ));
+            messages.AddRange(Validate(validator.VerifyFileExists,
+                PackagePath, 
+                Profile.WebConfigSettings.NewWebConfigPath));
+            
+            if (messages.Count > 0)
+            {
+                var builder = new StringBuilder();
+                foreach (var message in messages)
+                {
+                    builder.AppendLine(message);
+                }
+                throw new InvalidParametersException(builder.ToString());
+            }
+        }
+
+        private static IEnumerable<string> Validate(Action<string> action,  params string[] files)
+        {
+            var errorMessages = new List<string>();
+            foreach (var file in files)
+            {
+                try
+                {
+                    action(file);
+                }
+                catch (ValidationException e)
+                {
+                    errorMessages.Add(e.Message);
+                }
+            }
+            return errorMessages;
         }
 
         public static string GetUsage()
         {
-            return new StringBuilder(Process.GetCurrentProcess().ProcessName).Append(" ")
+            var processName = Process.GetCurrentProcess().ProcessName;
+            return new StringBuilder(processName).Append(" ")
                 .Append(Parameter(PackagePathName, "<packagePath>")).Append(" ")
                 .Append(Parameter(DestinationFolderName, "<destinationFolder>")).Append(" ")
                 .Append(Parameter(BackupFolderName, "<backupFolder>")).Append(" ")
                 .Append(Parameter(NewWebConfigLocationName, "<newWebconfigPath>")).Append(" ")
-                .Append(Parameter(WebConfigLocationName, "<webConfigPath>")).Append(" ")
                 .Append(Parameter(DeployStatusLocationName, "<deployStatusLocation>")).Append(" ")
-                .AppendLine().ToString();
+                .AppendLine().AppendLine()
+                .Append(processName)
+                .Append(Parameter(PackagePathName, "<packagePath>"))
+                .Append(Parameter(DeploymentProfileName, "<profilename>"))
+                .ToString();
         }
 
         private static string Parameter(string parameterName, string parameterValue)

@@ -70,6 +70,8 @@
     <Compile Include="Deployment\Steps\ExtractPackageStep.cs" />
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\ReplaceWebConfigStep.cs" />
+    <Compile Include="Deployment\Steps\ResetFileAttributesStep.cs" />
+    <Compile Include="FileManagement\DirectoryMover.cs" />
     <Compile Include="FileManagement\FileSystemManager.cs" />
     <Compile Include="FileManagement\IFileSystemManager.cs" />
     <Compile Include="FilenameGenerating\FilenameGenerator.cs" />
@@ -83,6 +85,11 @@
     <Compile Include="SummaryFormatting\ISummaryFormatter.cs" />
     <Compile Include="SummaryFormatting\Summary.cs" />
     <Compile Include="SummaryFormatting\SummaryFormatter.cs" />
+    <Compile Include="Validation\DirectoryPathValidator.cs" />
+    <Compile Include="Validation\FilePathValidator.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\PathValidator.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Values\DateValue.cs" />
     <Compile Include="Values\FilenameValue.cs" />
     <Compile Include="Values\Value.cs" />

@@ -71,10 +71,6 @@
     <Compile Include="Steps\Views\IWizardEvents.cs" />
     <Compile Include="Steps\WizardStepBase.cs" />
     <Compile Include="Steps\WizardStepException.cs" />
-    <Compile Include="Validation\DirectoryPathValidator.cs" />
-    <Compile Include="Validation\FilePathValidator.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Views\IDeployWizardView.cs" />
   </ItemGroup>
   <ItemGroup>

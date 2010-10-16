@@ -1,6 +1,6 @@
-using System.IO;
+﻿using System.IO;
 
-namespace DeployWizard.Lib.Validation
+namespace Deploy.Lib.Validation
 {
     public class DirectoryPathValidator : IValidator<string>
     {

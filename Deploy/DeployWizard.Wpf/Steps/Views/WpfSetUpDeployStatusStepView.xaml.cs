@@ -1,8 +1,8 @@
 ﻿using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
+using Deploy.Lib.Validation;
 using DeployWizard.Lib.Events.FileSystem;
 using DeployWizard.Lib.Steps.Views;
-using DeployWizard.Lib.Validation;
 
 namespace DeployWizard.Wpf.Steps.Views
 {

@@ -1,4 +1,5 @@
-﻿using Deploy.Lib.ConfigGenerating;
+﻿using System.IO;
+using Deploy.Lib.ConfigGenerating;
 
 namespace Deploy.Lib.Deployment.Steps
 {
@@ -6,6 +7,7 @@ namespace Deploy.Lib.Deployment.Steps
     {
         private readonly ConfigValuesReader _reader;
         private readonly ConfigValuesReplacer _replacer;
+        private const string WebConfigName = "web.config";
 
         public GenerateWebConfigStep(DeployParameters parameters, ConfigValuesReader reader, ConfigValuesReplacer replacer) 
             : base(parameters, "Generate web.config")
@@ -17,7 +19,7 @@ namespace Deploy.Lib.Deployment.Steps
         protected override DeploymentStepStatus DoExecute()
         {
             var configValues = _reader.GetValues(Parameters.NewWebConfigPath);
-            _replacer.ReplaceIn(Parameters.WebConfigPath);
+            _replacer.ReplaceIn(Path.Combine(Parameters.DestinationFolder, WebConfigName));
             return Status;
         }
     }

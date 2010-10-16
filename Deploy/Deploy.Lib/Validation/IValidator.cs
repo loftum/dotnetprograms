@@ -1,4 +1,4 @@
-namespace DeployWizard.Lib.Validation
+﻿namespace Deploy.Lib.Validation
 {
     public interface IValidator<in T>
     {

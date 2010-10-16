@@ -1,43 +1,102 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Deploy.Lib.FileManagement;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace Deploy.Lib.Deployment.Steps
 {
     public class ExtractPackageStep : DeploymentStepBase
     {
-        public ExtractPackageStep(DeployParameters parameters)
+        private readonly IFileSystemManager _fileSystemManager;
+        private const string WebConfigName = "web.config";
+
+        public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager)
             : base(parameters, "Exctract package")
         {
+            _fileSystemManager = fileSystemManager;
         }
 
         protected override DeploymentStepStatus DoExecute()
         {
-            Status.AppendDetailsLine("Extracting " + Parameters.PackagePath + " to " + Parameters.DestinationFolder);
+            var tempDirectory = _fileSystemManager.CreateTempDirectory();
+            Status.AppendDetailsLine("Created temp directory " + tempDirectory.FullName);
+            Status.AppendDetailsLine("Extracting " + Parameters.PackagePath + " to tempdir " + tempDirectory.FullName);
+            
             using (var fileStream = new FileStream(Parameters.PackagePath, FileMode.Open, FileAccess.Read))
             {
-                WriteAllEntriesFrom(fileStream);
+                WriteAllEntries(fileStream, tempDirectory);
             }
+            var rootDirectory = GetWebRootDirectory(tempDirectory);
+            if (rootDirectory == null)
+            {
+                Status.AppendDetailsLine("Could not find web root directory in " + tempDirectory.FullName);
+                Status.Status = DeploymentStepStatus.Fail;
+                return Status;
+            }
+            Status.AppendDetailsLine("Copying contents of " + rootDirectory + " to " + Parameters.DestinationFolder);
+            _fileSystemManager.MoveContentsOf(rootDirectory).To(Parameters.DestinationFolder);
+
+            Status.AppendDetailsLine("Removing tempdir " + tempDirectory);
+            _fileSystemManager.DeleteDirectory(tempDirectory);
+
             Status.Status = DeploymentStepStatus.Ok;
             return Status;
         }
 
-        private void WriteAllEntriesFrom(Stream fileStream)
+        private static DirectoryInfo GetWebRootDirectory(DirectoryInfo directory)
+        {
+            if (ContainsWebConfig(directory))
+            {
+                return directory;
+            }
+            foreach (var subDirectory in directory.GetDirectories())
+            {
+                if (ContainsWebConfig(subDirectory))
+                {
+                    return subDirectory;
+                }
+            }
+            foreach(var subDirectory in directory.GetDirectories())
+            {
+                var rootDirectory = GetWebRootDirectory(subDirectory);
+                if (rootDirectory != null)
+                {
+                    return rootDirectory;
+                }
+            }
+            return null;
+        }
+
+        private static bool ContainsWebConfig(DirectoryInfo tempDirectory)
+        {
+            return tempDirectory
+                .GetFiles()
+                .Any(file => file.Name.Equals(WebConfigName, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        private void WriteAllEntries(Stream fileStream, DirectoryInfo tempDirectory)
         {
             using(var zipInStream = new ZipInputStream(fileStream))
             {
                 ZipEntry entry;
                 while((entry = zipInStream.GetNextEntry()) != null)
                 {
-                    WriteEntry(zipInStream, entry);
+                    WriteEntry(zipInStream, entry, tempDirectory);
                 }
             }
         }
 
-        private void WriteEntry(Stream zipInStream, ZipEntry entry)
+        private void WriteEntry(Stream zipInStream, ZipEntry entry, DirectoryInfo tempDirectory)
         {
-            CreateDirectoryFor(entry);
+            if (!entry.IsFile)
+            {
+                return;
+            }
+            CreateDirectoryFor(tempDirectory, entry);
+            var fullEntryPath = Path.Combine(tempDirectory.FullName, entry.Name);
             using (var fileOutStream = 
-                new FileStream(Parameters.DestinationFolder + @"\" + entry.Name, FileMode.CreateNew,
+                new FileStream(fullEntryPath, FileMode.CreateNew,
                                FileAccess.Write))
             {
                 int size;
@@ -50,9 +109,9 @@ namespace Deploy.Lib.Deployment.Steps
             }
         }
 
-        private void CreateDirectoryFor(ZipEntry entry)
+        private void CreateDirectoryFor(FileSystemInfo tempDirectory, ZipEntry entry)
         {
-            var directoryPath = Path.Combine(Parameters.DestinationFolder, Path.GetDirectoryName(entry.Name));
+            var directoryPath = Path.Combine(tempDirectory.FullName, Path.GetDirectoryName(entry.Name));
             if (!Directory.Exists(directoryPath))
             {
                 Status.AppendDetailsLine("Creating directory " + directoryPath);
