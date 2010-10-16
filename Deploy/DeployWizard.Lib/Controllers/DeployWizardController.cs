@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Deploy.Lib.Deployment.ProfileManagement;
+using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps;
 using DeployWizard.Lib.Steps.Views;
 using DeployWizard.Lib.Views;
@@ -38,7 +39,7 @@ namespace DeployWizard.Lib.Controllers
             }
         }
 
-        private void ChangeTitle(object sender, ProfileChangedEventHandlerArgs args)
+        private void ChangeTitle(object sender, ProfileChangedEventArgs args)
         {
             _view.SetTitle("Deployer - " + args.Profile.Name);
         }

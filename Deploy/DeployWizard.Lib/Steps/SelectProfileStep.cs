@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Deploy.Lib.Deployment.ProfileManagement;
 using Deploy.Lib.Deployment.Profiles;
+using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Steps

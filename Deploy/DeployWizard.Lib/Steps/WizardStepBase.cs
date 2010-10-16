@@ -1,4 +1,5 @@
 using System;
+using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Steps

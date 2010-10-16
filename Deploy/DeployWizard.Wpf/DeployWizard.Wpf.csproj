@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\Views\WpfSetUpDestinationStepView.xaml.cs">
+      <DependentUpon>WpfSetUpDestinationStepView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Steps\Views\WpfSetUpGenerateWebConfigStepView.xaml.cs">
       <DependentUpon>WpfSetUpGenerateWebConfigStepView.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Steps\Views\WpfSetUpDestinationStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Steps\Views\WpfSetUpGenerateWebConfigStepView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

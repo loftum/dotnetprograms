@@ -61,6 +61,7 @@
     <Compile Include="Deployment\Profiles\DeploymentProfile.cs" />
     <Compile Include="Deployment\Profiles\DeploySettings.cs" />
     <Compile Include="Deployment\Profiles\DeployStatusSettings.cs" />
+    <Compile Include="Deployment\Profiles\DestinationSettings.cs" />
     <Compile Include="Deployment\Profiles\Settings.cs" />
     <Compile Include="Deployment\Profiles\WebConfigSettings.cs" />
     <Compile Include="Deployment\Steps\BackupStep.cs" />
@@ -79,6 +80,9 @@
     <Compile Include="Readers\IFileReader.cs" />
     <Compile Include="RegularExpressions\Regexifier.cs" />
     <Compile Include="Serializing\ISerializer.cs" />
+    <Compile Include="SummaryFormatting\ISummaryFormatter.cs" />
+    <Compile Include="SummaryFormatting\Summary.cs" />
+    <Compile Include="SummaryFormatting\SummaryFormatter.cs" />
     <Compile Include="Values\DateValue.cs" />
     <Compile Include="Values\FilenameValue.cs" />
     <Compile Include="Values\Value.cs" />

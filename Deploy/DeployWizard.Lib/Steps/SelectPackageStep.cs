@@ -1,4 +1,5 @@
 using Deploy.Lib.FileManagement;
+using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Lib.Steps

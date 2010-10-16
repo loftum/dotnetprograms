@@ -4,15 +4,14 @@ using Deploy.Lib.SummaryFormatting;
 namespace Deploy.Lib.Deployment.Profiles
 {
     [Serializable]
-    public class DeploySettings : Settings
+    public class DestinationSettings : Settings
     {
-        public string Folder { get; set; }
+        public String Folder { get; set; }
 
-        public DeploySettings() : base("Deploy settings")
+        public DestinationSettings() : base("Destination settings")
         {
         }
 
-        
         protected override Summary SetValuesIn(Summary summary)
         {
             return summary.WithValue("Folder", Folder);

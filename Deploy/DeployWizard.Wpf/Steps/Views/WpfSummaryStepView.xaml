@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Height="183" HorizontalAlignment="Left" Margin="32,41,0,0" Name="SummaryBlock" Text="" VerticalAlignment="Top" Width="242" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="Title" Text="Summary" TextAlignment="Center" VerticalAlignment="Top" Width="276" />
+             d:DesignHeight="300" d:DesignWidth="434">
+    <Grid Width="429">
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="Title" Text="Summary" TextAlignment="Center" VerticalAlignment="Top" Width="405" />
+        <ScrollViewer Margin="12,41,12,56" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <TextBlock  HorizontalAlignment="Left"  Name="SummaryBlock" Text="" VerticalAlignment="Top" Width="auto" FontFamily="Courier New" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

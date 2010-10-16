@@ -6,15 +6,13 @@ namespace DeployWizard.Wpf.Steps.Views
     {
         public string Summary
         {
-            get; set;
+            get { return SummaryBlock.Text; }
+            set { SummaryBlock.Text = value; }
         }
 
         public WpfSummaryStepView()
         {
             InitializeComponent();
-            Binder.Bind(this, "Summary")
-                .WithTargetNullValue(string.Empty)
-                .ToTextBlock(SummaryBlock);
         }
 
         public void ValidateAll()
