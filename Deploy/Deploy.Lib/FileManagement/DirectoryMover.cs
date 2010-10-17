@@ -31,7 +31,7 @@ namespace Deploy.Lib.FileManagement
             }
             if (_directoryIncluded)
             {
-                _directory.MoveTo(destinationPath);
+                _directory.MoveTo(Path.Combine(destinationPath, _directory.Name));
             }
             else
             {

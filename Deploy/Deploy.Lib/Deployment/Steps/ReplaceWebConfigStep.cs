@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Deploy.Lib.Logging;
 
 namespace Deploy.Lib.Deployment.Steps
 {
@@ -7,8 +8,8 @@ namespace Deploy.Lib.Deployment.Steps
         private const string WebConfigName = "web.config";
         private readonly string _webConfigPath;
 
-        public ReplaceWebConfigStep(DeployParameters parameters)
-            : base(parameters, "Replace web.config")
+        public ReplaceWebConfigStep(DeployParameters parameters, ILogger logger)
+            : base(parameters, "Replace web.config", logger)
         {
             _webConfigPath = Path.Combine(parameters.DestinationFolder, WebConfigName);
         }

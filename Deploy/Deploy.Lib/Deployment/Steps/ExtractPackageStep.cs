@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Deploy.Lib.FileManagement;
+using Deploy.Lib.Logging;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace Deploy.Lib.Deployment.Steps
@@ -11,8 +12,8 @@ namespace Deploy.Lib.Deployment.Steps
         private readonly IFileSystemManager _fileSystemManager;
         private const string WebConfigName = "web.config";
 
-        public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager)
-            : base(parameters, "Exctract package")
+        public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager, ILogger logger)
+            : base(parameters, "Exctract package", logger)
         {
             _fileSystemManager = fileSystemManager;
         }
@@ -35,7 +36,7 @@ namespace Deploy.Lib.Deployment.Steps
                 return Status;
             }
             Status.AppendDetailsLine("Copying contents of " + rootDirectory.FullName + " to " + Parameters.DestinationFolder);
-            _fileSystemManager.MoveContentsOf(rootDirectory).To(Parameters.DestinationFolder);
+            _fileSystemManager.CopyContentsOf(rootDirectory).To(Parameters.DestinationFolder);
 
             Status.AppendDetailsLine("Removing tempdir " + tempDirectory.FullName);
             _fileSystemManager.DeleteDirectory(tempDirectory);
@@ -87,7 +88,7 @@ namespace Deploy.Lib.Deployment.Steps
             }
         }
 
-        private void WriteEntry(Stream zipInStream, ZipEntry entry, DirectoryInfo tempDirectory)
+        private void WriteEntry(Stream zipInStream, ZipEntry entry, FileSystemInfo tempDirectory)
         {
             if (!entry.IsFile)
             {
@@ -96,7 +97,7 @@ namespace Deploy.Lib.Deployment.Steps
             CreateDirectoryFor(tempDirectory, entry);
             var fullEntryPath = Path.Combine(tempDirectory.FullName, entry.Name);
             using (var fileOutStream = 
-                new FileStream(fullEntryPath, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite))
+                new FileStream(fullEntryPath, FileMode.CreateNew, FileAccess.Write))
             {
                 int size;
                 var buffer = new byte[4096];

@@ -26,9 +26,15 @@ namespace DeployWizard
                 var view = new WpfDeployWizardView();
                 var model = new WizardModel();
                 var steps = GetSteps(model);
-                new DeployWizardController(model, view, ProfileManager.Instance, steps);
+                var finishStep = GetFinishStep(model);
+                new DeployWizardController(model, view, ProfileManager.Instance, steps, finishStep);
                 new Application().Run(view);
             }
+        }
+
+        private static IWizardStep<IStepView> GetFinishStep(WizardModel model)
+        {
+            return new FinishStep(model, new WpfFinishStepView());
         }
 
         private static void PrintPlatformInfo()

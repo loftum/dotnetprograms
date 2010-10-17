@@ -71,10 +71,17 @@
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\ReplaceWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\ResetFileAttributesStep.cs" />
+    <Compile Include="FileManagement\DirectoryCopier.cs" />
     <Compile Include="FileManagement\DirectoryMover.cs" />
     <Compile Include="FileManagement\FileSystemManager.cs" />
     <Compile Include="FileManagement\IFileSystemManager.cs" />
     <Compile Include="FilenameGenerating\FilenameGenerator.cs" />
+    <Compile Include="Logging\ConsoleAppender.cs" />
+    <Compile Include="Logging\IAppender.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogMessageEventArgs.cs" />
+    <Compile Include="Logging\ProgressEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\FileReader.cs" />
     <Compile Include="Readers\FileWriter.cs" />

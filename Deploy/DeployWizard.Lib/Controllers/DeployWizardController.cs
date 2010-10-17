@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Deploy.Lib.Deployment;
 using Deploy.Lib.Deployment.ProfileManagement;
 using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps;
@@ -17,19 +16,28 @@ namespace DeployWizard.Lib.Controllers
         private readonly WizardModel _model;
         private int _currentIndex;
         private readonly IProfileManager _profileManager;
+        private readonly IWizardStep<IStepView> _finishStep;
 
-        public DeployWizardController(WizardModel model, IDeployWizardView view, IProfileManager profileManager, IEnumerable<IWizardStep<IStepView>> steps)
+        public DeployWizardController(WizardModel model, IDeployWizardView view, IProfileManager profileManager,
+            IEnumerable<IWizardStep<IStepView>> steps, IWizardStep<IStepView> finishStep)
         {
             _model = model;
             model.ProfileChanged += ChangeTitle;
             _profileManager = profileManager;
             _view = view;
             _steps = steps;
+            _finishStep = finishStep;
             _view.PreviousClicked += Previous;
             _view.NextClicked += Next;
             _view.SaveClicked += SaveProfile;
             _view.FinishClicked += Finish;
+            _view.CloseClicked += Close;
             ShowCurrentStep();
+        }
+
+        private static void Close(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
 
         private void SaveProfile(object sender, EventArgs e)
@@ -53,10 +61,18 @@ namespace DeployWizard.Lib.Controllers
         }
 
         private void Finish(object sender, EventArgs e)
-        {   
-            var parameters = new DeployParameters(_model.Package, _model.CurrentProfile);
-            var deployer = new Deployer(parameters);
-            deployer.Deploy();
+        {
+            try
+            {
+                _finishStep.Prepare();
+                _view.ShowStep(_finishStep);
+                _finishStep.Validate();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex);
+            }
+            _view.PrepareToClose();
         }
 
         private void Next(object sender, EventArgs e)

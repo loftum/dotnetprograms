@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Deploy.Lib.ConfigGenerating;
+using Deploy.Lib.Logging;
 
 namespace Deploy.Lib.Deployment.Steps
 {
@@ -9,8 +10,9 @@ namespace Deploy.Lib.Deployment.Steps
         private readonly ConfigValuesReplacer _replacer;
         private const string WebConfigName = "web.config";
 
-        public GenerateWebConfigStep(DeployParameters parameters, ConfigValuesReader reader, ConfigValuesReplacer replacer) 
-            : base(parameters, "Generate web.config")
+        public GenerateWebConfigStep(DeployParameters parameters, ConfigValuesReader reader,
+            ConfigValuesReplacer replacer, ILogger logger)
+            : base(parameters, "Generate web.config", logger)
         {
             _reader = reader;
             _replacer = replacer;

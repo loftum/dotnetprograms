@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Deploy.Lib.Logging;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace Deploy.Lib.Deployment.Steps
 {
     public class BackupStep : DeploymentStepBase
     {
-        public BackupStep(DeployParameters parameters)
-            : base(parameters, "Backup")
+        public BackupStep(DeployParameters parameters, ILogger logger)
+            : base(parameters, "Backup", logger)
         {
         }
 

@@ -13,7 +13,8 @@ namespace Deploy.Lib.FileManagement
         DirectoryInfo CreateNewDirectory(string path);
         FileInfo CreateNewFile(string path);
         DirectoryInfo CreateTempDirectory();
-        DirectoryMover MoveContentsOf(DirectoryInfo rootDirectory);
+        DirectoryMover MoveContentsOf(DirectoryInfo directory);
+        DirectoryCopier CopyContentsOf(DirectoryInfo directory);
         void DeleteDirectory(DirectoryInfo directory);
     }
 }

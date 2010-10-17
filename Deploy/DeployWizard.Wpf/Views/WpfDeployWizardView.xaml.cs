@@ -11,6 +11,7 @@ namespace DeployWizard.Wpf.Views
         public event EventHandler PreviousClicked;
         public event EventHandler NextClicked;
         public event EventHandler FinishClicked;
+        public event EventHandler CloseClicked;
         public event EventHandler SaveClicked;
 
         public void ShowStep(IWizardStep<IStepView> step)
@@ -27,6 +28,11 @@ namespace DeployWizard.Wpf.Views
         public void SetTitle(string title)
         {
             Title = title;
+        }
+
+        public void PrepareToClose()
+        {
+            FinishButton.Content = "Close";
         }
 
         public WpfDeployWizardView()
@@ -52,7 +58,14 @@ namespace DeployWizard.Wpf.Views
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            FinishClicked(sender, e);
+            if (!FinishButton.Content.Equals("Close"))
+            {
+                FinishClicked(sender, e);
+            }
+            else
+            {
+                CloseClicked(sender, e);
+            }
         }
         #endregion
 

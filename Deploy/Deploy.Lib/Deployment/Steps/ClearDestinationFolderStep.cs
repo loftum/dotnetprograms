@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using Deploy.Lib.Logging;
 
 namespace Deploy.Lib.Deployment.Steps
 {
     public class ClearDestinationFolderStep : DeploymentStepBase
     {
-        public ClearDestinationFolderStep(DeployParameters parameters) 
-            : base(parameters, "Clear destination folder")
+        public ClearDestinationFolderStep(DeployParameters parameters, ILogger logger)
+            : base(parameters, "Clear destination folder", logger)
         {
         }
 

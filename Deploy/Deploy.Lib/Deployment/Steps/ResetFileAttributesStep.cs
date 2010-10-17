@@ -1,11 +1,12 @@
 using System.IO;
+using Deploy.Lib.Logging;
 
 namespace Deploy.Lib.Deployment.Steps
 {
     public class ResetFileAttributesStep : DeploymentStepBase
     {
-        public ResetFileAttributesStep(DeployParameters parameters) : 
-            base(parameters, "Reset file attributes")
+        public ResetFileAttributesStep(DeployParameters parameters, ILogger logger) : 
+            base(parameters, "Reset file attributes", logger)
         {
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Deploy.Lib.Logging;
 
 namespace Deploy.Lib.Deployment.Steps
 {
@@ -10,12 +11,13 @@ namespace Deploy.Lib.Deployment.Steps
         }
 
         protected readonly DeploymentStepStatus Status;
-
+        protected readonly ILogger Logger;
         protected DeployParameters Parameters;
 
-        protected DeploymentStepBase(DeployParameters parameters, string name)
+        protected DeploymentStepBase(DeployParameters parameters, string name, ILogger logger)
         {
             Parameters = parameters;
+            Logger = logger;
             Status = new DeploymentStepStatus {StepName = name};
             Name = name;
         }
