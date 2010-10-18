@@ -13,9 +13,10 @@
         </Grid>
         <Grid>
             <Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="12,276,0,0" Name="PreviousButton" VerticalAlignment="Top" Width="75" Click="PreviousButton_Click" />
-            <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="220,276,0,0" Name="NextButton" VerticalAlignment="Top" Width="75" Click="NextButton_Click" />
+            <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="93,276,0,0" Name="NextButton" VerticalAlignment="Top" Width="75" Click="NextButton_Click" />
             <Button Content="Finish" Height="23" HorizontalAlignment="Left" Margin="416,276,0,0" Name="FinishButton" VerticalAlignment="Top" Width="75" Click="FinishButton_Click" />
             <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="325,276,0,0" Name="SaveButton" VerticalAlignment="Top" Width="75" Click="SaveButton_Click" />
+            <Button Content="Fast forward" Height="23" HorizontalAlignment="Left" Margin="174,276,0,0" Name="FastForwardButton" VerticalAlignment="Top" Width="75" Click="FastForwardButton_Click" />
         </Grid>
     </Grid>
 </Window>

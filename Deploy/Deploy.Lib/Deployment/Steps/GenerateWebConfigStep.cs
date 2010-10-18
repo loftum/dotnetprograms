@@ -20,6 +20,11 @@ namespace Deploy.Lib.Deployment.Steps
 
         protected override DeploymentStepStatus DoExecute()
         {
+            if (Parameters.Profile.WebConfigSettings.Skip)
+            {
+                SetStatusSkipped();
+                return Status;
+            }
             var configValues = _reader.GetValues(Parameters.NewWebConfigPath);
             _replacer.ReplaceIn(Path.Combine(Parameters.DestinationFolder, WebConfigName));
             return Status;

@@ -1,3 +1,4 @@
+using System.Threading;
 using Deploy.Lib.Deployment;
 using Deploy.Lib.Logging;
 using DeployWizard.Lib.Models;
@@ -23,7 +24,14 @@ namespace DeployWizard.Lib.Steps
             var deployer = new Deployer(parameters);
             deployer.Logger.InfoMessageLogged += AppendMessage;
             deployer.Logger.ProgressChanged += ReportProgress;
-            deployer.Deploy();
+            StartDeploy(deployer);
+        }
+
+        private static Thread StartDeploy(Deployer deployer)
+        {
+            var thread = new Thread(() => deployer.Deploy());
+            thread.Start();
+            return thread;
         }
 
         private void ReportProgress(object sender, ProgressEventArgs args)

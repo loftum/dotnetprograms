@@ -13,6 +13,7 @@ namespace DeployWizard.Wpf.Views
         public event EventHandler FinishClicked;
         public event EventHandler CloseClicked;
         public event EventHandler SaveClicked;
+        public event EventHandler FastForwardClicked;
 
         public void ShowStep(IWizardStep<IStepView> step)
         {
@@ -22,7 +23,7 @@ namespace DeployWizard.Wpf.Views
 
         public void ShowError(Exception exception)
         {
-            Status.Text = exception.Message;
+            Status.Text = exception == null ? string.Empty : exception.Message;
         }
 
         public void SetTitle(string title)
@@ -56,6 +57,11 @@ namespace DeployWizard.Wpf.Views
             SaveClicked(sender, e);
         }
 
+        private void FastForwardButton_Click(object sender, RoutedEventArgs e)
+        {
+            FastForwardClicked(sender, e);
+        }
+
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             if (!FinishButton.Content.Equals("Close"))
@@ -78,6 +84,11 @@ namespace DeployWizard.Wpf.Views
         public void SetNextEnabled(bool enabled)
         {
             NextButton.IsEnabled = enabled;
+        }
+
+        public void SetFastForwardEnabled(bool enabled)
+        {
+            FastForwardButton.IsEnabled = enabled;
         }
 
         public void SetFinishEnabled(bool enabled)

@@ -29,9 +29,19 @@ namespace DeployWizard.Lib.Controllers
             _finishStep = finishStep;
             _view.PreviousClicked += Previous;
             _view.NextClicked += Next;
+            _view.FastForwardClicked += FastForward;
             _view.SaveClicked += SaveProfile;
             _view.FinishClicked += Finish;
             _view.CloseClicked += Close;
+            ShowCurrentStep();
+        }
+
+        private void FastForward(object sender, EventArgs e)
+        {
+            while(CurrentStep().IsValid())
+            {
+                _currentIndex++;
+            }
             ShowCurrentStep();
         }
 
@@ -53,17 +63,29 @@ namespace DeployWizard.Lib.Controllers
             _view.SetTitle("Deployer - " + args.Profile.Name);
         }
 
-        private void UpdateButtonEnabling()
+        private void UpdateButtonEnabling(IWizardStep<IStepView> currentStep)
         {
-            _view.SetPreviousEnabled(_currentIndex != 0);
-            _view.SetNextEnabled(_currentIndex < (_steps.Count() - 1));
-            _view.SetFinishEnabled(_currentIndex == (_steps.Count() - 1));
+            _view.SetPreviousEnabled(!IsFirstStep());
+            _view.SetNextEnabled(!IsLastStep());
+            _view.SetFinishEnabled(IsLastStep());
+            _view.SetFastForwardEnabled(!IsLastStep() && currentStep.IsValid());
+        }
+
+        private bool IsFirstStep()
+        {
+            return _currentIndex == 0;
+        }
+
+        private bool IsLastStep()
+        {
+            return _currentIndex == (_steps.Count() - 1);
         }
 
         private void Finish(object sender, EventArgs e)
         {
             try
             {
+                _profileManager.Save(_model.CurrentProfile);
                 _finishStep.Prepare();
                 _view.ShowStep(_finishStep);
                 _finishStep.Validate();
@@ -98,9 +120,10 @@ namespace DeployWizard.Lib.Controllers
 
         private void ShowCurrentStep()
         {
-            UpdateButtonEnabling();
             var currentStep = CurrentStep();
             currentStep.Prepare();
+            _view.ShowError(null);
+            UpdateButtonEnabling(currentStep);
             _view.ShowStep(currentStep);
         }
 

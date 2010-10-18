@@ -20,6 +20,11 @@ namespace Deploy.Lib.Deployment.Steps
 
         protected override DeploymentStepStatus DoExecute()
         {
+            if (Parameters.Profile.DestinationSettings.Skip)
+            {
+                SetStatusSkipped();
+                return Status;
+            }
             var tempDirectory = _fileSystemManager.CreateTempDirectory();
             Status.AppendDetailsLine("Created temp directory " + tempDirectory.FullName);
             Status.AppendDetailsLine("Extracting " + Parameters.PackagePath + " to tempdir " + tempDirectory.FullName);

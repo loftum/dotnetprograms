@@ -11,9 +11,11 @@ namespace DeployWizard.Lib.Views
         event EventHandler FinishClicked;
         event EventHandler CloseClicked;
         event EventHandler SaveClicked;
+        event EventHandler FastForwardClicked;
 
         void SetPreviousEnabled(bool enabled);
         void SetNextEnabled(bool enabled);
+        void SetFastForwardEnabled(bool enabled);
         void SetFinishEnabled(bool enabled);
         void ShowStep(IWizardStep<IStepView> step);
         void ShowError(Exception exception);

@@ -16,6 +16,11 @@ namespace Deploy.Lib.Deployment.Steps
 
         protected override DeploymentStepStatus DoExecute()
         {
+            if (Parameters.Profile.WebConfigSettings.Skip)
+            {
+                SetStatusSkipped();
+                return Status;
+            }
             File.Copy(Parameters.NewWebConfigPath, _webConfigPath, true);
             Status.AppendDetailsLine("Copying " + Parameters.NewWebConfigPath + " to " + _webConfigPath);
             Status.Status = DeploymentStepStatus.Ok;

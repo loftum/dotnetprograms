@@ -1,3 +1,4 @@
+using Deploy.Lib.Configuration;
 using Deploy.Lib.FileManagement;
 using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps.Views;
@@ -29,8 +30,17 @@ namespace DeployWizard.Lib.Steps
 
         public override void Prepare()
         {
+            SetDefaultPackagePathIfPackageNotSet();
             View.Model = Model;
             View.ValidateAll();
+        }
+
+        private void SetDefaultPackagePathIfPackageNotSet()
+        {
+            if (string.IsNullOrEmpty(Model.Package))
+            {
+                Model.Package = DeploymentConfiguration.DefaultPackageFolder;
+            }
         }
     }
 }

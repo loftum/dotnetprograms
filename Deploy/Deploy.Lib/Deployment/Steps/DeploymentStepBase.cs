@@ -37,6 +37,12 @@ namespace Deploy.Lib.Deployment.Steps
             }
         }
 
+        protected void SetStatusSkipped()
+        {
+            Status.Status = DeploymentStepStatus.Skipped;
+            Status.CanProceed = true;
+        }
+
         protected abstract DeploymentStepStatus DoExecute();
     }
 }

@@ -28,7 +28,21 @@ namespace DeployWizard.Lib.Steps
             }
         }
 
+        public bool IsValid()
+        {
+            try
+            {
+                Validate();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         protected abstract void DoValidate();
+
         public abstract void Prepare();
 
         protected WizardStepBase(WizardModel model, TView view)

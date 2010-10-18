@@ -10,6 +10,7 @@ namespace Deploy.Lib.Deployment
         public const int Ok = 0;
         public const int Warning = 1;
         public const int Fail = 2;
+        public const int Skipped = 4;
 
         public string StepName { get; set; }
         public int Status { get; set; }
@@ -45,6 +46,8 @@ namespace Deploy.Lib.Deployment
                     return "Warning";
                 case Fail:
                     return "Failed";
+                case Skipped:
+                    return "Skipped";
                 default:
                     return "Ok";
             }

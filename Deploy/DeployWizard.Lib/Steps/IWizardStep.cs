@@ -9,5 +9,6 @@ namespace DeployWizard.Lib.Steps
         TView View { get; }
         void Prepare();
         void Validate();
+        bool IsValid();
     }
 }

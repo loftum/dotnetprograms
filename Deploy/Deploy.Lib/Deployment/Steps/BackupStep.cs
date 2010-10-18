@@ -15,6 +15,11 @@ namespace Deploy.Lib.Deployment.Steps
 
         protected override DeploymentStepStatus DoExecute()
         {
+            if (Parameters.Profile.BackupSettings.Skip)
+            {
+                SetStatusSkipped();
+                return Status;
+            }
             try
             {
                 BackupIfDestinationExists();
