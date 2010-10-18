@@ -9,13 +9,19 @@ namespace Deploy.Lib.Logging
         
         public void Info(string name, string message)
         {
-            var toLog = new StringBuilder(name).Append(": ").Append(message).ToString();
-            InfoMessageLogged(this, new LogMessageEventArgs(toLog));
+            if (InfoMessageLogged != null)
+            {
+                var toLog = new StringBuilder(name).Append(": ").Append(message).ToString();
+                InfoMessageLogged(this, new LogMessageEventArgs(toLog));    
+            }
         }
 
         public void ReportProgress(int current, int total)
         {
-            ProgressChanged(this, new ProgressEventArgs(total, current));
+            if (ProgressChanged != null)
+            {
+                ProgressChanged(this, new ProgressEventArgs(total, current));    
+            }
         }
     }
 }
