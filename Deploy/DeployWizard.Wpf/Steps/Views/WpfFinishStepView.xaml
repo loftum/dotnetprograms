@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <TextBlock Height="23" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="Title" TextAlignment="Center" Text="Deploying" VerticalAlignment="Stretch" Width="Auto" MinWidth="100" />
-        <ScrollViewer Margin="10,10,10,10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MinHeight="150" MaxHeight="150">
-            <TextBlock Height="auto" HorizontalAlignment="Left" Margin="0,0,0,0" Name="LogBlock" Text="" VerticalAlignment="Top" />
+    <StackPanel Margin="10,10,10,10">
+        <TextBlock Height="23" HorizontalAlignment="Stretch" Name="Title" TextAlignment="Center" Text="Deploying" VerticalAlignment="Stretch" Width="Auto" MinWidth="100" />
+        <ScrollViewer  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Height="150" CanContentScroll="True" MaxHeight="150">
+            <TextBlock Height="Auto" HorizontalAlignment="Left" Margin="10,10,10,10" Name="LogBlock" Text="" VerticalAlignment="Top" />
         </ScrollViewer>
         <ProgressBar Height="10" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="ProgressBar" VerticalAlignment="Stretch" Width="Auto" FlowDirection="RightToLeft" MinWidth="100" />
     </StackPanel>

@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="434">
     <StackPanel>
         <TextBlock Height="23" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="Title" Text="Summary" TextAlignment="Center" VerticalAlignment="Stretch" Width="Auto" MinWidth="100" />
-        <ScrollViewer Margin="10,10,10,10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Margin="10,10,10,10" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" MaxHeight="150">
             <TextBlock  HorizontalAlignment="Left"  Name="SummaryBlock" Text="" VerticalAlignment="Top" Width="auto" FontFamily="Courier New" />
         </ScrollViewer>
     </StackPanel>

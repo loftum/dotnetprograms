@@ -9,13 +9,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Name="MainContent" Margin="0,0,0,0">
+        <Grid Name="MainContent" Width="503">
             
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Name="Bottom" Margin="0,0,0,0">
             <StackPanel>
-                <TextBlock Height="28" HorizontalAlignment="Stretch" Margin="5,0,0,5" Name="Status" Text="" VerticalAlignment="Stretch" Width="Auto" MinHeight="23" />
+                <TextBlock Height="28" HorizontalAlignment="Stretch" Margin="5,0,5,0" Name="Status" Text="" VerticalAlignment="Stretch" Width="498" MinHeight="23" />
                 <WrapPanel Height="Auto"  Margin="0,0,0,0">
                     <Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="PreviousButton" VerticalAlignment="Top" Width="Auto" Click="PreviousButton_Click" MinWidth="70" />
                     <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NextButton" VerticalAlignment="Top" Width="Auto" Click="NextButton_Click" MinWidth="70" />
