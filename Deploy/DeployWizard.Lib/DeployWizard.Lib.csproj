@@ -48,6 +48,7 @@
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="Controllers\DeployWizardController.cs" />
     <Compile Include="Events\FileSystem\PathEventArgs.cs" />
+    <Compile Include="Events\Profile\ProfileEventHandlerArgs.cs" />
     <Compile Include="Models\ProfileChangedEventArgs.cs" />
     <Compile Include="Models\WizardModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,12 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Height="22" HorizontalAlignment="Left" Margin="12,12,0,0" Name="SelectProfileBlock" Text="Select profile" VerticalAlignment="Top" Width="105" />
-        <ComboBox Height="23" ItemsSource="{Binding Path=Profiles}"  HorizontalAlignment="Left" Margin="109,12,0,0" Name="ProfileCombobox" VerticalAlignment="Top" Width="179" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="109,74,0,0" Name="NewProfileName" VerticalAlignment="Top" Width="179" Keyboard.KeyUp="NewProfileName_KeyUp" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,77,0,0" Name="CreateNewBlock" Text="Create new" VerticalAlignment="Top" Width="116" />
-        <Button Content="Create" Height="23" HorizontalAlignment="Left" Margin="12,106,0,0" Name="CreateNewButton" VerticalAlignment="Top" Width="75" Click="CreateNewButton_Click" />
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="412">
+    <StackPanel Width="411">
+        <TextBlock Margin="10,10,10,10" Name="Title" Text="Select profile" TextAlignment="Center"></TextBlock>
+        <WrapPanel>
+            <TextBlock Margin="10,10,10,10" Height="22" HorizontalAlignment="Left" Name="SelectProfileBlock" Text="Select profile" VerticalAlignment="Top" Width="Auto" />
+            <ComboBox Margin="10,10,10,10" Height="23" ItemsSource="{Binding Path=Profiles}"  HorizontalAlignment="Left"  Name="ProfileCombobox" VerticalAlignment="Top" Width="180" MinWidth="150" />
+            <Button Name="DeleteProfileButton" Content="Delete" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" MinWidth="50" Click="DeleteProfileButton_Click"></Button>
+        </WrapPanel>
+        <WrapPanel>
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="CreateNewBlock" Text="Create new" VerticalAlignment="Top" Width="Auto" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewProfileName" VerticalAlignment="Top" Width="179" Keyboard.KeyUp="NewProfileName_KeyUp" />
+            <Button Content="Create" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="CreateNewButton" VerticalAlignment="Top" Width="Auto" Click="CreateNewButton_Click" MinWidth="50" />
+        </WrapPanel>
+    </StackPanel>
 </UserControl>

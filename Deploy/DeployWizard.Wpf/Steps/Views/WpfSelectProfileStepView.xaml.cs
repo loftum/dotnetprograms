@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+using DeployWizard.Lib.Events.Profile;
 using DeployWizard.Lib.Steps.Views;
 
 namespace DeployWizard.Wpf.Steps.Views
@@ -8,6 +8,7 @@ namespace DeployWizard.Wpf.Steps.Views
     public partial class WpfSelectProfileStepView : ISelectProfileStepView
     {
         public event NewProfileEventHandler NewProfile;
+        public event DeleteProfileEventHandler DeleteProfile;
 
         private IEnumerable<string> _profiles = new string[0];
 
@@ -27,7 +28,7 @@ namespace DeployWizard.Wpf.Steps.Views
 
         public string SelectedProfile
         {
-            get { return ProfileCombobox.SelectedValue.ToString(); }
+            get { return ProfileCombobox.SelectedValue == null ? string.Empty : ProfileCombobox.SelectedValue.ToString(); }
             set { ProfileCombobox.SelectedItem = value; }
         }
 
@@ -51,13 +52,18 @@ namespace DeployWizard.Wpf.Steps.Views
 
         private void InvokeNewProfile(object sender)
         {
-            NewProfile(sender, new NewProfileEventHandlerArgs(NewProfileName.Text));
+            NewProfile(sender, new ProfileEventHandlerArgs(NewProfileName.Text));
             NewProfileName.Text = string.Empty;
         }
 
         public void ValidateAll()
         {
             
+        }
+
+        private void DeleteProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DeleteProfile(sender, new ProfileEventHandlerArgs(SelectedProfile));
         }
     }
 }

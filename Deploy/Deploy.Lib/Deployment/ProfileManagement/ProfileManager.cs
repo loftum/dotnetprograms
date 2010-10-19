@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 using Deploy.Lib.Configuration;
 using Deploy.Lib.Deployment.Profiles;
+using Deploy.Lib.FileManagement;
 
 namespace Deploy.Lib.Deployment.ProfileManagement
 {
@@ -11,10 +13,16 @@ namespace Deploy.Lib.Deployment.ProfileManagement
     {
         private static ProfileManager _instance;
         private readonly IDictionary<string, DeploymentProfile> _profiles = new Dictionary<string, DeploymentProfile>();
+        private IFileSystemManager _fileSystemManager;
 
         public static ProfileManager Instance
         {
-            get { return _instance ?? (_instance = new ProfileManager()); }
+            get { return _instance ?? (
+                _instance = new ProfileManager
+                        {
+                            _fileSystemManager = new FileSystemManager()
+                        }); 
+            }
         }
 
         private ProfileManager()
@@ -83,16 +91,38 @@ namespace Deploy.Lib.Deployment.ProfileManagement
 
         public DeploymentProfile Get(string profileName)
         {
+            VerifyProfileExists(profileName);
+            return _profiles[profileName];
+        }
+
+        public void Delete(string profileName)
+        {
+            VerifyProfileExists(profileName);
+            _profiles.Remove(profileName);
+            _fileSystemManager.DeleteFile(FullPathFor(profileName));
+        }
+
+        private static string FullPathFor(string profileName)
+        {
+            return
+                new StringBuilder()
+                .Append(Path.Combine(DeploymentConfiguration.ProfileFolder, profileName))
+                .Append(".xml")
+                .ToString();
+        }
+
+        private void VerifyProfileExists(string profileName)
+        {
             if (string.IsNullOrEmpty(profileName) || !Has(profileName))
             {
                 throw new DeploymentProfileException(profileName + " does not exist");
             }
-            return _profiles[profileName];
         }
 
         public bool Has(string profileName)
         {
             return _profiles.ContainsKey(profileName);
+
         }
 
         public void VerifyNoProfileWithSameName(DeploymentProfile deploymentProfile)

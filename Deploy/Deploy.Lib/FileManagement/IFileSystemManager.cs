@@ -16,5 +16,7 @@ namespace Deploy.Lib.FileManagement
         DirectoryMover MoveContentsOf(DirectoryInfo directory);
         DirectoryCopier CopyContentsOf(DirectoryInfo directory);
         void DeleteDirectory(DirectoryInfo directory);
+        void DeleteFile(string filePath);
+        void DeleteFile(FileInfo fileInfo);
     }
 }

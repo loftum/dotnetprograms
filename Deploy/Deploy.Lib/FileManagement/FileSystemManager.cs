@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -78,6 +79,19 @@ namespace Deploy.Lib.FileManagement
         public void DeleteDirectory(DirectoryInfo directory)
         {
             directory.Delete(true);
+        }
+
+        public void DeleteFile(string filePath)
+        {
+            DeleteFile(new FileInfo(filePath));
+        }
+
+        public void DeleteFile(FileInfo fileInfo)
+        {
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
+            }
         }
     }
 }

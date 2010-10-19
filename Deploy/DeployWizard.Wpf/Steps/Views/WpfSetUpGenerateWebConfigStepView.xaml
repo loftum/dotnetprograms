@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,64,0,0" Name="NewWebConfigPathBlock" Text="New web.config path" VerticalAlignment="Top" Width="127" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="137,61,0,0" Name="NewWebConfigInput" VerticalAlignment="Top" Width="136" TextChanged="NewWebConfigInput_TextChanged" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="Title" Text="Generate web.config" VerticalAlignment="Top" Width="276" />
-        <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="12,124,0,0" Name="SkipBox" VerticalAlignment="Top" />
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="367">
+    <StackPanel>
+        <TextBlock Height="23" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="Title" Text="Generate web.config" VerticalAlignment="Stretch" Width="Auto" TextAlignment="Center" MinWidth="100" />
+        <WrapPanel>
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigPathBlock" Text="New web.config path" VerticalAlignment="Top" Width="127" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigInput" VerticalAlignment="Top" Width="Auto" TextChanged="NewWebConfigInput_TextChanged" MinWidth="150" />
+        </WrapPanel>
+        <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="10,10,10,10" Name="SkipBox" VerticalAlignment="Top" />
+    </StackPanel>
 </UserControl>

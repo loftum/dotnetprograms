@@ -9,5 +9,6 @@ namespace Deploy.Lib.Deployment.ProfileManagement
         void Add(DeploymentProfile deploymentProfile);
         void Save(DeploymentProfile deploymentProfile);
         DeploymentProfile Get(string profileName);
+        void Delete(string profileName);
     }
 }
