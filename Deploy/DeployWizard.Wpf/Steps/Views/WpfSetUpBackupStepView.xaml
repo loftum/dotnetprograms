@@ -12,6 +12,9 @@
             <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="BackupFolderInput" VerticalAlignment="Top" Width="Auto" TextChanged="BackupFolderInput_TextChanged" MinWidth="120" />
             <Button Content="Create" Height="23" HorizontalAlignment="Right" Margin="10,10,10,10" Name="CreateButton" VerticalAlignment="Top" Width="Auto" Click="CreateButton_Click" MinWidth="70" />
         </WrapPanel>
+        <WrapPanel>
+            <ComboBox Name="FolderComboBox"></ComboBox>
+        </WrapPanel>
         
         <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="10,10,10,10" Name="SkipBox" VerticalAlignment="Top" />
         

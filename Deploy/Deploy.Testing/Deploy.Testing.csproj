@@ -62,6 +62,7 @@
     <Compile Include="ConfigGenerating\ConfigValuesReaderTest.cs" />
     <Compile Include="Deployment\ArgumentsTest.cs" />
     <Compile Include="Deployment\DeploymentStatusTest.cs" />
+    <Compile Include="DeployWizard\Lib\AutoComplete\FilesystemAutoCompleteProviderTest.cs" />
     <Compile Include="Deploy\Lib\RegularExpressions\RegexifierTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,9 +76,7 @@
       <Name>DeployWizard.Lib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DeployWizard\Lib\AutoComplete\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

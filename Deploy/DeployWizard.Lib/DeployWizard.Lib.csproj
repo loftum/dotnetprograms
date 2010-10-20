@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoComplete\FileSystem\CompletionType.cs" />
+    <Compile Include="AutoComplete\FileSystem\FileSystemAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="Controllers\DeployWizardController.cs" />
     <Compile Include="Events\FileSystem\PathEventArgs.cs" />

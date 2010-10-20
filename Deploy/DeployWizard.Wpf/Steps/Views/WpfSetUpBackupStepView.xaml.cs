@@ -1,6 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Linq;
+using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
 using Deploy.Lib.Validation;
+using DeployWizard.Lib.AutoComplete;
 using DeployWizard.Lib.Events.FileSystem;
 using DeployWizard.Lib.Steps.Views;
 
@@ -12,6 +15,7 @@ namespace DeployWizard.Wpf.Steps.Views
 
         private BackupSettings _settings;
         private readonly IValidator<string> _validator = new DirectoryPathValidator();
+        private IAutoCompleteProvider _autoCompleteProvider;
 
         public BackupSettings Settings
         {
@@ -26,9 +30,10 @@ namespace DeployWizard.Wpf.Steps.Views
             }
         }
 
-        public WpfSetUpBackupStepView()
+        public WpfSetUpBackupStepView(IAutoCompleteProvider autoCompleteProvider)
         {
             InitializeComponent();
+            _autoCompleteProvider = autoCompleteProvider;
             ValidateAll();
         }
 
@@ -44,6 +49,12 @@ namespace DeployWizard.Wpf.Steps.Views
         private void BackupFolderInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             ValidateAll();
+            UpdateComboBox();
+        }
+
+        private void UpdateComboBox()
+        {
+            var suggestions = _autoCompleteProvider.GetSuggestionsFor(BackupFolderInput.Text);
         }
 
         private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using Deploy.Lib.Deployment.ProfileManagement;
 using Deploy.Lib.FileManagement;
+using DeployWizard.Lib.AutoComplete.FileSystem;
 using DeployWizard.Lib.Controllers;
 using DeployWizard.Lib.Models;
 using DeployWizard.Lib.Steps;
@@ -53,9 +54,10 @@ namespace DeployWizard
         private static IEnumerable<IWizardStep<IStepView>> GetSteps(WizardModel model)
         {
             var fileSystemManager = new FileSystemManager();
+            var folderAutoCompleteProvider = new FileSystemAutoCompleteProvider(fileSystemManager, CompletionType.FoldersOnly);
             var steps = new List<IWizardStep<IStepView>>();
             steps.Add(new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance));
-            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView(), fileSystemManager));
+            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView(folderAutoCompleteProvider), fileSystemManager));
             steps.Add(new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager));
             steps.Add(new SetUpGenerateWebConfigStep(model, new WpfSetUpGenerateWebConfigStepView(), fileSystemManager));
             steps.Add(new SetUpDestinationStep(model, new WpfSetUpDestinationStepView(), fileSystemManager));
