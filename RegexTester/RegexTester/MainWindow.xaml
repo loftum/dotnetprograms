@@ -13,7 +13,7 @@
         <StackPanel Grid.Row="0">
             <Label Content="Input" HorizontalAlignment="Left" Name="InputTitle" />
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MinWidth="100" MinHeight="100">
-                <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="Input" Text="" AcceptsTab="True" AcceptsReturn="True" />
+                <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="Input" AcceptsTab="True" AcceptsReturn="True" />
             </ScrollViewer>
         </StackPanel>
         <WrapPanel Grid.Row="1">
@@ -28,6 +28,7 @@
         </StackPanel>
         <StackPanel Grid.Row="3">
             <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="Status" Text="" AcceptsTab="True" AcceptsReturn="True" IsEnabled="False" />
+            <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="LineAndCol" Text="" IsEnabled="False" />
         </StackPanel>
     </Grid>
 </Window>

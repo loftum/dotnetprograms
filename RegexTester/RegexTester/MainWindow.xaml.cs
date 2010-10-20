@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Documents;
+using System.Windows.Media;
 using RegexTester.RegexOperations;
 
 namespace RegexTester
@@ -38,7 +39,9 @@ namespace RegexTester
             var pattern = Pattern.Text;
             if (_regexValidator.IsValid(pattern))
             {
-                Matches.Text = _matcher.Match(pattern, Input.Text).ToString();
+                //var input = new TextRange(Input.Document.ContentStart, Input.Document.ContentEnd).Text;
+                var input = Input.Text;
+                Matches.Text = _matcher.Match(pattern, input).ToString();
             }
             else
             {

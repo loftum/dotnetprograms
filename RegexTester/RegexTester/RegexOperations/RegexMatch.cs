@@ -5,13 +5,14 @@ namespace RegexTester.RegexOperations
     public class RegexMatch
     {
         public string Value { get; private set; }
-        public int Index { get; private set; }
+        public int StartPosition { get; private set; }
         public int Length { get; private set; }
+        public int EndPosition { get { return StartPosition + Length; } }
 
-        public RegexMatch(string value, int index, int length)
+        public RegexMatch(string value, int startPosition, int length)
         {
             Value = value;
-            Index = index;
+            StartPosition = startPosition;
             Length = length;
         }
 
@@ -19,7 +20,7 @@ namespace RegexTester.RegexOperations
         {
             return new StringBuilder()
                 .Append(Value).Append(" ")
-                .Append(Index).Append(" ")
+                .Append(StartPosition).Append(" ")
                 .Append(Length)
                 .ToString();
         }
