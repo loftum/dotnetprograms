@@ -45,5 +45,11 @@ namespace DeployWizard.Lib.Steps.Views
         {
             textBlock.SetBinding(TextBlock.TextProperty, _binding);
         }
+
+        public void ToComboBox(ComboBox comboBox)
+        {
+            comboBox.ItemsSource = new[] {_binding};
+            //comboBox.SetBinding(ComboBox.ItemsSourceProperty, _binding);
+        }
     }
 }

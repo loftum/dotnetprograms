@@ -61,6 +61,7 @@
     <Compile Include="RegexOperations\RegexMatch.cs" />
     <Compile Include="RegexOperations\RegexMatcher.cs" />
     <Compile Include="RegexOperations\RegexMatches.cs" />
+    <Compile Include="RegexOperations\RegexModel.cs" />
     <Compile Include="RegexOperations\RegexValidator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

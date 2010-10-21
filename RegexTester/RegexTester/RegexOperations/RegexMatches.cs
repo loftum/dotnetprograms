@@ -5,7 +5,7 @@ namespace RegexTester.RegexOperations
 {
     public class RegexMatches
     {
-        public IEnumerable<RegexMatch> Matches { get; private set; }
+        public IEnumerable<RegexMatch> Matches { get; set; }
 
         public RegexMatches(IEnumerable<RegexMatch> matches)
         {

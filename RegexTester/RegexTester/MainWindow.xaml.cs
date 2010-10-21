@@ -1,4 +1,7 @@
-﻿using System.Windows.Documents;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Media;
 using RegexTester.RegexOperations;
 
@@ -6,6 +9,8 @@ namespace RegexTester
 {
     public partial class MainWindow
     {
+        public RegexModel Model{ get; set;}
+
         private readonly IRegexValidator _regexValidator;
         private readonly IRegexMatcher _matcher;
 
@@ -14,6 +19,7 @@ namespace RegexTester
             InitializeComponent();
             _regexValidator = new RegexValidator();
             _matcher = new RegexMatcher();
+            Model = new RegexModel();
         }
 
         private void Pattern_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -39,9 +45,9 @@ namespace RegexTester
             var pattern = Pattern.Text;
             if (_regexValidator.IsValid(pattern))
             {
-                //var input = new TextRange(Input.Document.ContentStart, Input.Document.ContentEnd).Text;
                 var input = Input.Text;
-                Matches.Text = _matcher.Match(pattern, input).ToString();
+                var matches = _matcher.Match(pattern, input);
+                Matches.Text = matches.ToString();
             }
             else
             {

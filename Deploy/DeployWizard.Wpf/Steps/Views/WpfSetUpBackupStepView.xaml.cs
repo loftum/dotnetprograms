@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Windows.Data;
 using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
 using Deploy.Lib.Validation;
@@ -13,9 +14,13 @@ namespace DeployWizard.Wpf.Steps.Views
     {
         public event CreateDirectoryEvent CreateDirectory;
 
+        private readonly List<string> _suggestions;
+        public CollectionView SuggestionView{ get; private set;}
+
         private BackupSettings _settings;
         private readonly IValidator<string> _validator = new DirectoryPathValidator();
-        private IAutoCompleteProvider _autoCompleteProvider;
+        private readonly IAutoCompleteProvider _autoCompleteProvider;
+
 
         public BackupSettings Settings
         {
@@ -32,6 +37,8 @@ namespace DeployWizard.Wpf.Steps.Views
 
         public WpfSetUpBackupStepView(IAutoCompleteProvider autoCompleteProvider)
         {
+            _suggestions = new List<string>();
+            SuggestionView = new CollectionView(_suggestions);
             InitializeComponent();
             _autoCompleteProvider = autoCompleteProvider;
             ValidateAll();
@@ -54,7 +61,9 @@ namespace DeployWizard.Wpf.Steps.Views
 
         private void UpdateComboBox()
         {
-            var suggestions = _autoCompleteProvider.GetSuggestionsFor(BackupFolderInput.Text);
+            Console.WriteLine("Updating combobox");
+            _suggestions.Clear();
+            _suggestions.AddRange(_autoCompleteProvider.GetSuggestionsFor(BackupFolderInput.Text));
         }
 
         private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)

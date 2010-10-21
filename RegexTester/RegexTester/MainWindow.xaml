@@ -4,9 +4,9 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
@@ -18,12 +18,12 @@
         </StackPanel>
         <WrapPanel Grid.Row="1">
             <Label Content="Pattern:" HorizontalAlignment="Left" Name="PatternTitle" />
-            <TextBox FontFamily="Courier New" FontSize="12" Name="Pattern" Text="" AcceptsTab="True" Width="Auto" MinWidth="300" TextChanged="Pattern_TextChanged" />
+            <TextBox FontFamily="Courier New" FontSize="12" Name="Pattern" AcceptsTab="True" Width="Auto" MinWidth="300" TextChanged="Pattern_TextChanged" />
             <Button Content="Match" Name="MatchButton" MinWidth="70" HorizontalAlignment="Right" Click="MatchButton_Click" />
         </WrapPanel>
         <StackPanel Grid.Row="2">
             <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MinWidth="100" MinHeight="100">
-                <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="Matches" Text="" AcceptsTab="True" AcceptsReturn="True" />
+                <TextBox FontFamily="Courier New" FontSize="12" HorizontalAlignment="Stretch" Name="Matches" AcceptsTab="True" AcceptsReturn="True" />
             </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Row="3">

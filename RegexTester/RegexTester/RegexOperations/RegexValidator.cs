@@ -5,6 +5,8 @@ namespace RegexTester.RegexOperations
 {
     public class RegexValidator : IRegexValidator
     {
+
+
         public void Validate(string patternCandidate)
         {
             try

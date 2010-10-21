@@ -13,7 +13,7 @@
             <Button Content="Create" Height="23" HorizontalAlignment="Right" Margin="10,10,10,10" Name="CreateButton" VerticalAlignment="Top" Width="Auto" Click="CreateButton_Click" MinWidth="70" />
         </WrapPanel>
         <WrapPanel>
-            <ComboBox Name="FolderComboBox"></ComboBox>
+            <ComboBox ItemsSource="{Binding Path=SuggestionView}" SelectedValue="x" Name="FolderComboBox" MinWidth="200" IsEditable="True" />
         </WrapPanel>
         
         <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="10,10,10,10" Name="SkipBox" VerticalAlignment="Top" />
