@@ -64,9 +64,17 @@ namespace DeployWizard.Lib.AutoComplete.FileSystem
             return input.Substring(input.LastIndexOf(Path.DirectorySeparatorChar) + 1) + "*";
         }
 
-        private static string GetNearestDirectory(string input)
+        private string GetNearestDirectory(string input)
         {
-            return input.Substring(0, input.LastIndexOf(Path.DirectorySeparatorChar));
+            if (input.Contains(Path.DirectorySeparatorChar.ToString()))
+            {
+                var candidate = input.Substring(0, input.LastIndexOf(Path.DirectorySeparatorChar));
+                if (_fileSystemManager.DirectoryExists(candidate))
+                {
+                    return candidate;    
+                }
+            }
+            return string.Empty;
         }
     }
 }

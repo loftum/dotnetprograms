@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Data;
 using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
 using Deploy.Lib.Validation;
@@ -13,9 +12,7 @@ namespace DeployWizard.Wpf.Steps.Views
     public partial class WpfSetUpBackupStepView : ISetUpBackupStepView
     {
         public event CreateDirectoryEvent CreateDirectory;
-
-        private readonly List<string> _suggestions;
-        public CollectionView SuggestionView{ get; private set;}
+        private readonly AutoCompleteSuggestions _suggestions;
 
         private BackupSettings _settings;
         private readonly IValidator<string> _validator = new DirectoryPathValidator();
@@ -37,8 +34,8 @@ namespace DeployWizard.Wpf.Steps.Views
 
         public WpfSetUpBackupStepView(IAutoCompleteProvider autoCompleteProvider)
         {
-            _suggestions = new List<string>();
-            SuggestionView = new CollectionView(_suggestions);
+            _suggestions = new AutoCompleteSuggestions();
+            DataContext = _suggestions;
             InitializeComponent();
             _autoCompleteProvider = autoCompleteProvider;
             ValidateAll();
@@ -56,14 +53,22 @@ namespace DeployWizard.Wpf.Steps.Views
         private void BackupFolderInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             ValidateAll();
-            UpdateComboBox();
+            UpdateSuggestions(BackupFolderInput.Text);
         }
 
-        private void UpdateComboBox()
+        private void UpdateSuggestions(string input)
         {
-            Console.WriteLine("Updating combobox");
-            _suggestions.Clear();
-            _suggestions.AddRange(_autoCompleteProvider.GetSuggestionsFor(BackupFolderInput.Text));
+            _suggestions.Suggestions = _autoCompleteProvider.GetSuggestionsFor(input);
+            PrintSuggestions();
+        }
+
+        private void PrintSuggestions()
+        {
+            Console.WriteLine("New suggestions:");
+            foreach (var suggestion in _suggestions.Suggestions)
+            {
+                Console.WriteLine(suggestion);
+            }
         }
 
         private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -84,6 +89,12 @@ namespace DeployWizard.Wpf.Steps.Views
                 BackupFolderInput.Background = Brushes.IndianRed;
                 CreateButton.IsEnabled = true;
             }
+        }
+
+        private void FolderComboBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            ValidateAll();
+            UpdateSuggestions(FolderComboBox.Text);
         }
     }
 }
