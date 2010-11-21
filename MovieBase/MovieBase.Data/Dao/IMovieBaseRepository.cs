@@ -1,0 +1,10 @@
+using MovieBase.Domain;
+
+namespace MovieBase.Data.Dao
+{
+    public interface IMovieBaseRepository
+    {
+        T Save<T>(T item) where T : DomainObject;
+        T Get<T>(long id) where T : DomainObject;
+    }
+}

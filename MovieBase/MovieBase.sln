@@ -3,18 +3,116 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBase", "MovieBase\MovieBase.csproj", "{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. BuildAssets", "0. BuildAssets", "{F1E393B9-1ABC-4010-B581-F0F1E1BB49D7}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\fluentnhibernate-1.1\Antlr3.Runtime.dll = BuildAssets\fluentnhibernate-1.1\Antlr3.Runtime.dll
+		BuildAssets\fluentnhibernate-1.1\Castle.Core.dll = BuildAssets\fluentnhibernate-1.1\Castle.Core.dll
+		BuildAssets\fluentnhibernate-1.1\Castle.Core.xml = BuildAssets\fluentnhibernate-1.1\Castle.Core.xml
+		BuildAssets\fluentnhibernate-1.1\Castle.DynamicProxy2.dll = BuildAssets\fluentnhibernate-1.1\Castle.DynamicProxy2.dll
+		BuildAssets\fluentnhibernate-1.1\Castle.DynamicProxy2.xml = BuildAssets\fluentnhibernate-1.1\Castle.DynamicProxy2.xml
+		BuildAssets\fluentnhibernate-1.1\FluentNHibernate.dll = BuildAssets\fluentnhibernate-1.1\FluentNHibernate.dll
+		BuildAssets\fluentnhibernate-1.1\FluentNHibernate.pdb = BuildAssets\fluentnhibernate-1.1\FluentNHibernate.pdb
+		BuildAssets\fluentnhibernate-1.1\FluentNHibernate.XML = BuildAssets\fluentnhibernate-1.1\FluentNHibernate.XML
+		BuildAssets\fluentnhibernate-1.1\Iesi.Collections.dll = BuildAssets\fluentnhibernate-1.1\Iesi.Collections.dll
+		BuildAssets\fluentnhibernate-1.1\Iesi.Collections.xml = BuildAssets\fluentnhibernate-1.1\Iesi.Collections.xml
+		BuildAssets\log4net.dll = BuildAssets\log4net.dll
+		BuildAssets\fluentnhibernate-1.1\log4net.dll = BuildAssets\fluentnhibernate-1.1\log4net.dll
+		BuildAssets\fluentnhibernate-1.1\log4net.xml = BuildAssets\fluentnhibernate-1.1\log4net.xml
+		BuildAssets\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.dll = BuildAssets\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.dll
+		BuildAssets\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.xml = BuildAssets\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.xml
+		BuildAssets\fluentnhibernate-1.1\NHibernate.dll = BuildAssets\fluentnhibernate-1.1\NHibernate.dll
+		BuildAssets\fluentnhibernate-1.1\NHibernate.xml = BuildAssets\fluentnhibernate-1.1\NHibernate.xml
+		BuildAssets\Ninject.dll = BuildAssets\Ninject.dll
+		BuildAssets\nunit.core.dll = BuildAssets\nunit.core.dll
+		BuildAssets\nunit.core.interfaces.dll = BuildAssets\nunit.core.interfaces.dll
+		BuildAssets\nunit.framework.dll = BuildAssets\nunit.framework.dll
+		BuildAssets\Rhino.Mocks.dll = BuildAssets\Rhino.Mocks.dll
+		BuildAssets\System.Data.SQLite.DLL = BuildAssets\System.Data.SQLite.DLL
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBase.Domain", "MovieBase.Domain\MovieBase.Domain.csproj", "{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBase.Data", "MovieBase.Data\MovieBase.Data.csproj", "{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBase.UnitTesting", "MovieBase.UnitTesting\MovieBase.UnitTesting.csproj", "{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBase.IntegrationTesting", "MovieBase.IntegrationTesting\MovieBase.IntegrationTesting.csproj", "{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Console ApplicationsNewFolder1", "1. Console ApplicationsNewFolder1", "{AE4A27F0-C10E-4F73-BA17-57215D924561}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Libraries", "2. Libraries", "{D16A2523-1717-4C06-BACE-6B0D9B6CEF4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9. Testing", "9. Testing", "{27856ECA-23C1-4555-B5D3-1870E4A50199}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Debug|x86.ActiveCfg = Debug|x86
 		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Debug|x86.Build.0 = Debug|x86
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Release|Any CPU.ActiveCfg = Release|x86
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Release|x86.ActiveCfg = Release|x86
 		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5}.Release|x86.Build.0 = Release|x86
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}.Release|x86.ActiveCfg = Release|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CCEBE52-404A-439C-BF8B-0B8CBDF942B5} = {AE4A27F0-C10E-4F73-BA17-57215D924561}
+		{31D51701-EC06-4F25-B4D4-95AE1B2FE5A1} = {D16A2523-1717-4C06-BACE-6B0D9B6CEF4B}
+		{D38830D6-D9D7-47F6-B8A2-203DDAE48B55} = {D16A2523-1717-4C06-BACE-6B0D9B6CEF4B}
+		{BD5BF4C2-359B-4BD2-B9B3-FDC84DDADC0C} = {27856ECA-23C1-4555-B5D3-1870E4A50199}
+		{3217DCF4-DE52-4FCE-99E7-30EF4CC39BFC} = {27856ECA-23C1-4555-B5D3-1870E4A50199}
 	EndGlobalSection
 EndGlobal
