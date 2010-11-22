@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D38830D6-D9D7-47F6-B8A2-203DDAE48B55}</ProjectGuid>
+    <ProjectGuid>{84F40BD1-B463-42E1-9420-3F29190D4F2A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieBase.Domain</RootNamespace>
-    <AssemblyName>MovieBase.Domain</AssemblyName>
+    <RootNamespace>MovieBase.Common</RootNamespace>
+    <AssemblyName>MovieBase.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,14 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\Build.cs" />
-    <Compile Include="Builders\BuilderBase.cs" />
-    <Compile Include="Builders\CategoryBuilder.cs" />
-    <Compile Include="Builders\MovieBuilder.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="DomainObject.cs" />
-    <Compile Include="Movie.cs" />
+    <Compile Include="Configuration\ConnectionString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Comparison\StringValue.cs" />
+    <Compile Include="Comparison\Value.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

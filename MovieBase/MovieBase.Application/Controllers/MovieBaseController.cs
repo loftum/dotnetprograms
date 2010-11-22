@@ -1,11 +1,11 @@
-using System.Linq;
-using MovieBase.Comparison.TextComparison;
+﻿using System.Linq;
+using MovieBase.AppLib.Events;
+using MovieBase.AppLib.Views;
+using MovieBase.Common.Comparison;
 using MovieBase.Data.Dao;
 using MovieBase.Domain;
-using MovieBase.Events;
-using MovieBase.Views;
 
-namespace MovieBase.Controllers
+namespace MovieBase.AppLib.Controllers
 {
     public class MovieBaseController : IMovieBaseController
     {
@@ -26,7 +26,7 @@ namespace MovieBase.Controllers
                 return;
             }
             var movies = _repository.GetAll<Movie>().Where(movie => StringValue.Of(movie.Title).Like(args.SearchText));
-
+            _view.Show(movies);
         }
     }
 }

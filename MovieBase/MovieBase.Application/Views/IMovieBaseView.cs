@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MovieBase.AppLib.Events;
 using MovieBase.Domain;
-using MovieBase.Events;
 
-namespace MovieBase.Views
+namespace MovieBase.AppLib.Views
 {
     public interface IMovieBaseView
     {

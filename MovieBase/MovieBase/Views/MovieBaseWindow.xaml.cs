@@ -1,31 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using MovieBase.AppLib.Events;
+using MovieBase.AppLib.Views;
 using MovieBase.Domain;
-using MovieBase.Events;
 
 namespace MovieBase.Views
 {
     public partial class MovieBaseWindow : IMovieBaseView
     {
+        public IEnumerable<Movie> Movies { get; private set; }
+
         public event SearchEventHandler Search;
 
         public MovieBaseWindow()
         {
             InitializeComponent();
+            Movies = new Movie[0];
+            MovieGrid.ItemsSource = Movies;
         }
 
         public void Show(IEnumerable<Movie> movies)
         {
-            MovieGrid.Items.Clear();
-            foreach (var movie in movies)
-            {
-                MovieGrid.Items.Add(movie);
-            }
+            Movies = movies;
+            MovieGrid.ItemsSource = Movies;
         }
 
-// ReSharper disable InconsistentNaming
         private void SearchButton_Click(object sender, RoutedEventArgs e)
-// ReSharper restore InconsistentNaming
         {
             if (Search != null)
             {

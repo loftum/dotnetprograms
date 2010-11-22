@@ -1,4 +1,4 @@
-﻿namespace MovieBase.Events
+﻿namespace MovieBase.AppLib.Events
 {
     public class SearchEventArgs
     {

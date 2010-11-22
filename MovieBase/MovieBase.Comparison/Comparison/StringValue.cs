@@ -1,4 +1,4 @@
-namespace MovieBase.Comparison.TextComparison
+namespace MovieBase.Common.Comparison
 {
     public class StringValue : Value<string>
     {

@@ -1,4 +1,4 @@
-namespace MovieBase.Controllers
+﻿namespace MovieBase.AppLib.Controllers
 {
     public interface IMovieBaseController
     {
