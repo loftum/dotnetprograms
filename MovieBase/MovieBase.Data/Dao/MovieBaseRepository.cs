@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MovieBase.Domain;
 using NHibernate;
 
@@ -39,6 +40,11 @@ namespace MovieBase.Data.Dao
         public T Get<T>(long id) where T : DomainObject
         {
             return _session.Get<T>(id);
+        }
+
+        public IList<T> GetAll<T>() where T : DomainObject
+        {
+            return _session.CreateCriteria(typeof (T)).List<T>();
         }
     }
 }

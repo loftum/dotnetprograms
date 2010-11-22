@@ -54,6 +54,17 @@ namespace MovieBase.IntegrationTesting.Data
             Assert.That(gottenMovie.Categories.Count, Is.EqualTo(1));
         }
 
+        [Test]
+        public void ShouldGetAll()
+        {
+            for(var ii=0; ii<5; ii++)
+            {
+                _repository.Save(Build.Movie().WithTitle("Title" + ii).Item);
+            }
+            var movies = _repository.GetAll<Movie>();
+            Assert.That(movies.Count, Is.EqualTo(5));
+        }
+
         private static ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
