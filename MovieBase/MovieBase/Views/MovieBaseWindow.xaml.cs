@@ -2,27 +2,31 @@
 using System.Windows;
 using MovieBase.AppLib.Events;
 using MovieBase.AppLib.Views;
+using MovieBase.Common.Emptiness;
 using MovieBase.Domain;
 
 namespace MovieBase.Views
 {
     public partial class MovieBaseWindow : IMovieBaseView
     {
-        public IEnumerable<Movie> Movies { get; private set; }
+        public IList<Movie> Movies { get; private set; }
 
         public event SearchEventHandler Search;
 
         public MovieBaseWindow()
         {
             InitializeComponent();
-            Movies = new Movie[0];
+            Movies = Empty.List<Movie>();
             MovieGrid.ItemsSource = Movies;
         }
 
         public void Show(IEnumerable<Movie> movies)
         {
-            Movies = movies;
-            MovieGrid.ItemsSource = Movies;
+            Movies.Clear();
+            foreach (var movie in movies)
+            {
+                Movies.Add(movie);
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
