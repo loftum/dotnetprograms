@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using MovieBase.AppLib.Events;
 using MovieBase.AppLib.Views;
-using MovieBase.Common.Emptiness;
 using MovieBase.Domain;
 
 namespace MovieBase.Views
 {
     public partial class MovieBaseWindow : IMovieBaseView
     {
-        public IList<Movie> Movies { get; private set; }
+        public ObservableCollection<Movie> Movies { get; private set; }
 
         public event SearchEventHandler Search;
 
         public MovieBaseWindow()
         {
             InitializeComponent();
-            Movies = Empty.List<Movie>();
+            Movies = new ObservableCollection<Movie>();
             MovieGrid.ItemsSource = Movies;
         }
 
