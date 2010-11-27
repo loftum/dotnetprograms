@@ -6,6 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using MovieBase.Data.Dao;
 using MovieBase.Data.Mappings;
+using MovieBase.Data.Services;
 using NHibernate;
 
 namespace Read
@@ -18,13 +19,12 @@ namespace Read
 
             try
             {
-                var movies = new MovieFileReader(args[0]).ReadAll();
+                Console.Write("Connecting to MovieBase...");
                 var repo = new MovieBaseRepository(CreateSessionFactory());
-                foreach (var movie in movies)
-                {
-                    repo.Save(movie);
-                    Console.WriteLine("Saved " + movie.Title);
-                }
+                Console.WriteLine("OK");
+                var service = new MovieBaseService(repo);
+                Console.WriteLine("Starting import from " + args[0]);
+                new MovieFileImporter(args[0], service).ImportAll();
             }
             catch(MovieReaderException e)
             {

@@ -46,6 +46,7 @@
     <Compile Include="Controllers\IMovieBaseController.cs" />
     <Compile Include="Controllers\MovieBaseController.cs" />
     <Compile Include="Events\SearchEventArgs.cs" />
+    <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMovieBaseView.cs" />
   </ItemGroup>

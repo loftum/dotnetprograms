@@ -1,31 +1,24 @@
-﻿using System.Linq;
-using MovieBase.AppLib.Events;
+﻿using MovieBase.AppLib.Events;
 using MovieBase.AppLib.Views;
-using MovieBase.Common.Comparison;
-using MovieBase.Data.Dao;
-using MovieBase.Domain;
+using MovieBase.Data.Services;
 
 namespace MovieBase.AppLib.Controllers
 {
     public class MovieBaseController : IMovieBaseController
     {
         private readonly IMovieBaseView _view;
-        private readonly IMovieBaseRepository _repository;
+        private readonly IMovieBaseService _movieBaseService;
 
-        public MovieBaseController(IMovieBaseRepository repository, IMovieBaseView view)
+        public MovieBaseController(IMovieBaseService movieBaseService, IMovieBaseView view)
         {
             _view = view;
             _view.Search += Search;
-            _repository = repository;
+            _movieBaseService = movieBaseService;
         }
 
         private void Search(object sender, SearchEventArgs args)
         {
-            if (string.IsNullOrWhiteSpace(args.SearchText))
-            {
-                return;
-            }
-            var movies = _repository.GetAll<Movie>().Where(movie => StringValue.Of(movie.Title).Like(args.SearchText));
+            var movies = _movieBaseService.SearchMovies(args.SearchText);
             _view.Show(movies);
         }
     }

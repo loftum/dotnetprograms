@@ -6,7 +6,7 @@
              d:DesignHeight="410" d:DesignWidth="638" SizeToContent="WidthAndHeight">
     <Grid>
         <Label Content="MovieBase" Height="28" HorizontalAlignment="Center" Margin="12,12,0,0" Name="TitleLabel" VerticalAlignment="Top" Width="592" HorizontalContentAlignment="Center" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,46,0,0" Name="SearchBox" VerticalAlignment="Top" Width="469" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,46,0,0" Name="SearchBox" VerticalAlignment="Top" Width="469" KeyUp="SearchBox_KeyUp" />
         <Button Content="Search" Height="23" HorizontalAlignment="Right" Margin="0,45,12,0" Name="SearchButton" VerticalAlignment="Top" Width="89" Click="SearchButton_Click" />
         <DataGrid AutoGenerateColumns="True" Height="284" HorizontalAlignment="Left" Margin="12,75,0,0" Name="MovieGrid" VerticalAlignment="Top" Width="592">
         </DataGrid>

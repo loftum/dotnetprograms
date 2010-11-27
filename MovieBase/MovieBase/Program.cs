@@ -6,6 +6,7 @@ using MovieBase.AppLib.Controllers;
 using MovieBase.AppLib.Views;
 using MovieBase.Data.Dao;
 using MovieBase.Data.Mappings;
+using MovieBase.Data.Services;
 using NHibernate;
 using MovieBaseWindow = MovieBase.Views.MovieBaseWindow;
 
@@ -17,13 +18,18 @@ namespace MovieBase
         public static void Main(string[] args)
         {
             var view = CreateView();
-            var controller = CreateController(view);
+            CreateController(view);
             new Application().Run(view);
         }
 
         private static IMovieBaseController CreateController(IMovieBaseView view)
         {
-            return new MovieBaseController(CreateRepository(), view);
+            return new MovieBaseController(CreateService(), view);
+        }
+
+        private static IMovieBaseService CreateService()
+        {
+            return new MovieBaseService(CreateRepository());
         }
 
         private static IMovieBaseRepository CreateRepository()

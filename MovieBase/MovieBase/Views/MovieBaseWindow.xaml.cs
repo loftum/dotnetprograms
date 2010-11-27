@@ -29,12 +29,22 @@ namespace MovieBase.Views
             }
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private void InvokeSearch(object sender)
         {
             if (Search != null)
             {
                 Search.Invoke(sender, new SearchEventArgs(SearchBox.Text));
             }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            InvokeSearch(sender);
+        }
+
+        private void SearchBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            InvokeSearch(sender);
         }
     }
 }
