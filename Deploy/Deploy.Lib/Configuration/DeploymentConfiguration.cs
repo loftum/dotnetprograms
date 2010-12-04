@@ -4,21 +4,23 @@ namespace Deploy.Lib.Configuration
 {
     public class DeploymentConfiguration
     {
-        private const string ProfileFolderSetting = "profileFolder";
-        private const string DefaultPackageFolderSetting = "defaultPackageFolder";
-        
         public static string ProfileFolder
         {
-            get { return ConfigurationManager.AppSettings[ProfileFolderSetting]; }
+            get { return GetAppSetting("profileFolder"); }
         }
 
         public static string DefaultPackageFolder
         {
             get
             {
-                var defaultPackage = ConfigurationManager.AppSettings[DefaultPackageFolderSetting];
+                var defaultPackage = GetAppSetting("defaultPackageFolder");
                 return string.IsNullOrEmpty(defaultPackage) ? string.Empty : defaultPackage;
             }
+        }
+
+        private static string GetAppSetting(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
         }
     }
 }

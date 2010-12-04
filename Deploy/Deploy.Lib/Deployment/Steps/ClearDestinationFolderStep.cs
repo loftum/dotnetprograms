@@ -28,11 +28,16 @@ namespace Deploy.Lib.Deployment.Steps
         {
             Status.AppendDetailsLine("Cleaning " + Parameters.DestinationFolder);
             var destinationFolder = new DirectoryInfo(Parameters.DestinationFolder);
-            foreach(var subDirectory in destinationFolder.GetDirectories())
+            CleanRecursive(destinationFolder);
+        }
+
+        private static void CleanRecursive(DirectoryInfo directory)
+        {
+            foreach (var subDirectory in directory.GetDirectories())
             {
-                subDirectory.Delete(true);
+                CleanRecursive(subDirectory);
             }
-            foreach (var file in destinationFolder.GetFiles())
+            foreach (var file in directory.GetFiles())
             {
                 file.Delete();
             }

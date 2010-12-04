@@ -10,7 +10,7 @@ namespace Deploy.Lib.Deployment.Steps
     public class ExtractPackageStep : DeploymentStepBase
     {
         private readonly IFileSystemManager _fileSystemManager;
-        private const string WebConfigName = "web.config";
+        private const string GlobalAsaxName = "global.asax";
 
         public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager, ILogger logger)
             : base(parameters, "Exctract package", logger)
@@ -52,13 +52,13 @@ namespace Deploy.Lib.Deployment.Steps
 
         private static DirectoryInfo GetWebRootDirectory(DirectoryInfo directory)
         {
-            if (ContainsWebConfig(directory))
+            if (IsWebRootDirectory(directory))
             {
                 return directory;
             }
             foreach (var subDirectory in directory.GetDirectories())
             {
-                if (ContainsWebConfig(subDirectory))
+                if (IsWebRootDirectory(subDirectory))
                 {
                     return subDirectory;
                 }
@@ -74,11 +74,11 @@ namespace Deploy.Lib.Deployment.Steps
             return null;
         }
 
-        private static bool ContainsWebConfig(DirectoryInfo tempDirectory)
+        private static bool IsWebRootDirectory(DirectoryInfo tempDirectory)
         {
             return tempDirectory
                 .GetFiles()
-                .Any(file => file.Name.Equals(WebConfigName, StringComparison.InvariantCultureIgnoreCase));
+                .Any(file => file.Name.Equals(GlobalAsaxName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private void WriteAllEntries(Stream fileStream, DirectoryInfo tempDirectory)

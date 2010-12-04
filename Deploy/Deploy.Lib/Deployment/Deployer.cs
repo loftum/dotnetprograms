@@ -32,7 +32,7 @@ namespace Deploy.Lib.Deployment
 
         public DeploymentStatus Deploy()
         {
-            int numberOfStepsCompleted = 0;
+            var numberOfStepsCompleted = 0;
             Logger.ReportProgress(numberOfStepsCompleted, _steps.Count);
             var deploymentStatus = new DeploymentStatus{Parameters = _parameters};
             foreach (var deploymentStep in _steps)

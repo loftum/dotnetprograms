@@ -11,6 +11,7 @@ namespace Deploy.Lib.Deployment.Profiles
         public DeployStatusSettings DeployStatusSettings { get; set; }
         public DestinationSettings DestinationSettings { get; set; }
         public WebConfigSettings WebConfigSettings { get; set; }
+        public MigrateDatabaseSettings MigrateDatabaseSettings { get; set; }
 
         public Summary GetSummary(ISummaryFormatter formatter)
         {
