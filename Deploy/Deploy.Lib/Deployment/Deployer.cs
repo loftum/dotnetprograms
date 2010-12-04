@@ -11,11 +11,11 @@ namespace Deploy.Lib.Deployment
 {
     public class Deployer
     {
+        private const string Name = "Deployer";
         private readonly DeployParameters _parameters;
         private readonly IList<IDeploymentStep> _steps = new List<IDeploymentStep>();
         public ILogger Logger { get; private set; }
         private readonly IAppender _consoleAppender = new ConsoleAppender();
-        private const string Name = "Deployer";
 
         public Deployer(DeployParameters parameters)
         {

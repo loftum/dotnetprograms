@@ -67,6 +67,9 @@
     <Compile Include="Steps\Views\WpfSetUpDeployStatusStepView.xaml.cs">
       <DependentUpon>WpfSetUpDeployStatusStepView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Steps\Views\WpfSetUpMigrationStepView.xaml.cs">
+      <DependentUpon>WpfSetUpMigrationStepView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Steps\Views\WpfSummaryStepView.xaml.cs">
       <DependentUpon>WpfSummaryStepView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
     <Page Include="Steps\Views\WpfSetUpDeployStatusStepView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Steps\Views\WpfSetUpMigrationStepView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Steps\Views\WpfSummaryStepView.xaml">
       <SubType>Designer</SubType>

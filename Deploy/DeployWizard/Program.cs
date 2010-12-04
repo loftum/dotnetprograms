@@ -47,7 +47,7 @@ namespace DeployWizard
         {
             return new StringBuilder()
                 .Append("OS version: ").AppendLine(Environment.OSVersion.ToString())
-                .Append("Runtime: ").AppendLine(Process.GetCurrentProcess().ProcessName)
+                .Append("Process: ").AppendLine(Process.GetCurrentProcess().ProcessName)
                 .ToString();
         }
 

@@ -34,6 +34,15 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\Lib\3rdParty\SharpZipLib_0860_Bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Migrator">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator.Framework">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator.Providers">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -62,6 +71,7 @@
     <Compile Include="Deployment\Profiles\DeploySettings.cs" />
     <Compile Include="Deployment\Profiles\DeployStatusSettings.cs" />
     <Compile Include="Deployment\Profiles\DestinationSettings.cs" />
+    <Compile Include="Deployment\Profiles\MigrateDatabaseSettings.cs" />
     <Compile Include="Deployment\Profiles\Settings.cs" />
     <Compile Include="Deployment\Profiles\WebConfigSettings.cs" />
     <Compile Include="Deployment\Steps\BackupStep.cs" />
@@ -69,6 +79,7 @@
     <Compile Include="Deployment\Steps\DeploymentStepBase.cs" />
     <Compile Include="Deployment\Steps\ExtractPackageStep.cs" />
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />
+    <Compile Include="Deployment\Steps\MigrateDatabaseStep.cs" />
     <Compile Include="Deployment\Steps\ReplaceWebConfigStep.cs" />
     <Compile Include="Deployment\Steps\ResetFileAttributesStep.cs" />
     <Compile Include="FileManagement\DirectoryCopier.cs" />

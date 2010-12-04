@@ -67,6 +67,7 @@
     <Compile Include="Steps\Views\ISelectPackageStepView.cs" />
     <Compile Include="Steps\Views\ISelectProfileStepView.cs" />
     <Compile Include="Steps\Views\ISetUpDestinationStepView.cs" />
+    <Compile Include="Steps\Views\ISetUpMigrationStepView.cs" />
     <Compile Include="Steps\Views\IStepView.cs" />
     <Compile Include="Steps\Views\ISetUpBackupStepView.cs" />
     <Compile Include="Steps\Views\ISetUpDeployStatusStepView.cs" />
