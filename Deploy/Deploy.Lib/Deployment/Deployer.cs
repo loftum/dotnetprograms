@@ -26,6 +26,7 @@ namespace Deploy.Lib.Deployment
             _steps.Add(new BackupStep(_parameters, Logger));
             _steps.Add(new ClearDestinationFolderStep(_parameters, Logger));
             _steps.Add(new ExtractPackageStep(_parameters, fileSystemManager, Logger));
+            _steps.Add(new MigrateDatabaseStep(_parameters, Logger));
             _steps.Add(new ReplaceWebConfigStep(_parameters, Logger));
             _steps.Add(new ResetFileAttributesStep(_parameters, Logger));
         }

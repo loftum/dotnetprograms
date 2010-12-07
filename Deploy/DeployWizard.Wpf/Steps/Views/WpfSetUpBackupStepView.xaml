@@ -3,19 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="370">
+             d:DesignHeight="300" d:DesignWidth="550">
     <StackPanel>
         <TextBlock Height="23" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="Title" Text="Backup" TextAlignment="Center" VerticalAlignment="Stretch" Width="Auto" />
         <WrapPanel>
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="BackupFolderLabel" Text="Backup folder" VerticalAlignment="Top" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="BackupFolderInput" VerticalAlignment="Top" Width="Auto" TextChanged="BackupFolderInput_TextChanged" MinWidth="120" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="BackupFolderInput" VerticalAlignment="Top" Width="335" TextChanged="BackupFolderInput_TextChanged" MinWidth="120" />
             <Button Content="Create" Height="23" HorizontalAlignment="Right" Margin="10,10,10,10" Name="CreateButton" VerticalAlignment="Top" Width="Auto" Click="CreateButton_Click" MinWidth="70" />
-        </WrapPanel>
-        
-        <WrapPanel>
-            
-            <ComboBox ItemsSource="{Binding Path=Suggestions}" KeyUp="FolderComboBox_KeyUp"
-                      Name="FolderComboBox" MinWidth="200" IsEditable="True" DataContext="{Binding}" />
         </WrapPanel>
         
         <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="10,10,10,10" Name="SkipBox" VerticalAlignment="Top" />

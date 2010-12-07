@@ -7,15 +7,15 @@
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Name="MainContent" Width="503">
+        <Grid Name="MainContent">
             
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="0" Name="Bottom" Margin="0,0,0,0">
-            <StackPanel>
-                <TextBlock Height="28" HorizontalAlignment="Stretch" Margin="5,0,5,0" Name="Status" Text="" VerticalAlignment="Stretch" Width="498" MinHeight="23" />
+        <Grid Grid.Row="1" Name="Bottom">
+            <StackPanel >
+                <TextBlock Height="50" HorizontalAlignment="Stretch" Margin="5,0,5,0" Name="Status" Text="" VerticalAlignment="Stretch" MinHeight="30"/>
                 <WrapPanel Height="Auto"  Margin="0,0,0,0">
                     <Button Content="Previous" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="PreviousButton" VerticalAlignment="Top" Width="Auto" Click="PreviousButton_Click" MinWidth="70" />
                     <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NextButton" VerticalAlignment="Top" Width="Auto" Click="NextButton_Click" MinWidth="70" />

@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="367">
+             d:DesignHeight="300" d:DesignWidth="550">
     <StackPanel>
         <TextBlock Height="23" HorizontalAlignment="Stretch" Margin="10,10,10,10" Name="Title" Text="Generate web.config" VerticalAlignment="Stretch" Width="Auto" TextAlignment="Center" MinWidth="100" />
         <WrapPanel>
-            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigPathBlock" Text="New web.config path" VerticalAlignment="Top" Width="127" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigInput" VerticalAlignment="Top" Width="Auto" TextChanged="NewWebConfigInput_TextChanged" MinWidth="150" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigPathBlock" Text="web.config path" VerticalAlignment="Top" Width="106" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewWebConfigInput" VerticalAlignment="Top" Width="375" TextChanged="NewWebConfigInput_TextChanged" MinWidth="150" />
         </WrapPanel>
         <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="10,10,10,10" Name="SkipBox" VerticalAlignment="Top" />
     </StackPanel>

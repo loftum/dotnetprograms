@@ -4,17 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="412">
-    <StackPanel Width="411">
+             d:DesignHeight="300" d:DesignWidth="550">
+    <StackPanel>
         <TextBlock Margin="10,10,10,10" Name="Title" Text="Select profile" TextAlignment="Center"></TextBlock>
         <WrapPanel>
             <TextBlock Margin="10,10,10,10" Height="22" HorizontalAlignment="Left" Name="SelectProfileBlock" Text="Select profile" VerticalAlignment="Top" Width="Auto" />
-            <ComboBox Margin="10,10,10,10" Height="23" ItemsSource="{Binding Path=Profiles}"  HorizontalAlignment="Left"  Name="ProfileCombobox" VerticalAlignment="Top" Width="180" MinWidth="150" />
+            <ComboBox Margin="10,10,10,10" Height="23" ItemsSource="{Binding Path=Profiles}"  HorizontalAlignment="Left"  Name="ProfileCombobox" VerticalAlignment="Top" Width="336" MinWidth="150" />
             <Button Name="DeleteProfileButton" Content="Delete" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" MinWidth="50" Click="DeleteProfileButton_Click"></Button>
         </WrapPanel>
         <WrapPanel>
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="CreateNewBlock" Text="Create new" VerticalAlignment="Top" Width="Auto" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewProfileName" VerticalAlignment="Top" Width="179" Keyboard.KeyUp="NewProfileName_KeyUp" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="NewProfileName" VerticalAlignment="Top" Width="346" Keyboard.KeyUp="NewProfileName_KeyUp" />
             <Button Content="Create" Height="23" HorizontalAlignment="Left" Margin="10,10,10,10" Name="CreateNewButton" VerticalAlignment="Top" Width="Auto" Click="CreateNewButton_Click" MinWidth="50" />
         </WrapPanel>
     </StackPanel>

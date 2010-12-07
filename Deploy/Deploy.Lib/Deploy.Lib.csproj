@@ -56,6 +56,9 @@
     <Compile Include="ConfigGenerating\ConfigValuesReader.cs" />
     <Compile Include="ConfigGenerating\ConfigValuesReplacer.cs" />
     <Compile Include="Configuration\DeploymentConfiguration.cs" />
+    <Compile Include="Databases\CouldNotConnectException.cs" />
+    <Compile Include="Databases\DatabaseConnectionTester.cs" />
+    <Compile Include="Databases\IDatabaseConnectionTester.cs" />
     <Compile Include="Deployment\Arguments.cs" />
     <Compile Include="Deployment\Deployer.cs" />
     <Compile Include="Deployment\DeploymentStatus.cs" />

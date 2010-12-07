@@ -48,6 +48,7 @@
     <Compile Include="AutoComplete\FileSystem\FileSystemAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="Controllers\DeployWizardController.cs" />
+    <Compile Include="Events\Connections\ConnectionEventArgs.cs" />
     <Compile Include="Events\FileSystem\PathEventArgs.cs" />
     <Compile Include="Events\Profile\ProfileEventHandlerArgs.cs" />
     <Compile Include="Models\ProfileChangedEventArgs.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Steps\SelectPackageStep.cs" />
     <Compile Include="Steps\SetUpBackupStep.cs" />
     <Compile Include="Steps\SetUpDeployStatusStep.cs" />
+    <Compile Include="Steps\SetUpMigrationStep.cs" />
     <Compile Include="Steps\SummaryStep.cs" />
     <Compile Include="Steps\Views\Binder.cs" />
     <Compile Include="Steps\Views\IFinishStepView.cs" />

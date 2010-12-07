@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+using Deploy.Lib.Databases;
 using Deploy.Lib.Deployment.ProfileManagement;
 using Deploy.Lib.FileManagement;
 using DeployWizard.Lib.AutoComplete.FileSystem;
@@ -55,6 +56,7 @@ namespace DeployWizard
         {
             var fileSystemManager = new FileSystemManager();
             var folderAutoCompleteProvider = new FileSystemAutoCompleteProvider(fileSystemManager, CompletionType.FoldersOnly);
+            var databaseTypes = new[] {"sqlserver", "mysql", "sqlite", "oracle"};
             var steps = new List<IWizardStep<IStepView>>
                 {
                     new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance),
@@ -63,6 +65,7 @@ namespace DeployWizard
                     new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager),
                     new SetUpGenerateWebConfigStep(model, new WpfSetUpGenerateWebConfigStepView(),fileSystemManager),
                     new SetUpDestinationStep(model, new WpfSetUpDestinationStepView(), fileSystemManager),
+                    new SetUpMigrationStep(new DatabaseConnectionTester(), model,new WpfSetUpMigrationStepView(databaseTypes)),
                     new SummaryStep(model, new WpfSummaryStepView())
                 };
             return steps;

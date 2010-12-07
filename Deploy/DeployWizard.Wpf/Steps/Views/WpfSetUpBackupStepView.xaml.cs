@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Media;
 using Deploy.Lib.Deployment.Profiles;
 using Deploy.Lib.Validation;
@@ -89,12 +88,6 @@ namespace DeployWizard.Wpf.Steps.Views
                 BackupFolderInput.Background = Brushes.IndianRed;
                 CreateButton.IsEnabled = true;
             }
-        }
-
-        private void FolderComboBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            ValidateAll();
-            UpdateSuggestions(FolderComboBox.Text);
         }
     }
 }
