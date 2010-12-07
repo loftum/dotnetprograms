@@ -55,14 +55,16 @@ namespace DeployWizard
         {
             var fileSystemManager = new FileSystemManager();
             var folderAutoCompleteProvider = new FileSystemAutoCompleteProvider(fileSystemManager, CompletionType.FoldersOnly);
-            var steps = new List<IWizardStep<IStepView>>();
-            steps.Add(new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance));
-            steps.Add(new SetUpBackupStep(model, new WpfSetUpBackupStepView(folderAutoCompleteProvider), fileSystemManager));
-            steps.Add(new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager));
-            steps.Add(new SetUpGenerateWebConfigStep(model, new WpfSetUpGenerateWebConfigStepView(), fileSystemManager));
-            steps.Add(new SetUpDestinationStep(model, new WpfSetUpDestinationStepView(), fileSystemManager));
-            steps.Add(new SelectPackageStep(model, new WpfSelectPackageStepView(), fileSystemManager));
-            steps.Add(new SummaryStep(model, new WpfSummaryStepView()));
+            var steps = new List<IWizardStep<IStepView>>
+                {
+                    new SelectProfileStep(model, new WpfSelectProfileStepView(), ProfileManager.Instance),
+                    new SelectPackageStep(model, new WpfSelectPackageStepView(), fileSystemManager),
+                    new SetUpBackupStep(model, new WpfSetUpBackupStepView(folderAutoCompleteProvider),fileSystemManager),
+                    new SetUpDeployStatusStep(model, new WpfSetUpDeployStatusStepView(), fileSystemManager),
+                    new SetUpGenerateWebConfigStep(model, new WpfSetUpGenerateWebConfigStepView(),fileSystemManager),
+                    new SetUpDestinationStep(model, new WpfSetUpDestinationStepView(), fileSystemManager),
+                    new SummaryStep(model, new WpfSummaryStepView())
+                };
             return steps;
         }
 

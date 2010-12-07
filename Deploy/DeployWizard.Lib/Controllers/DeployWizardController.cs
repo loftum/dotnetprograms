@@ -22,7 +22,7 @@ namespace DeployWizard.Lib.Controllers
             IEnumerable<IWizardStep<IStepView>> steps, IWizardStep<IStepView> finishStep)
         {
             _model = model;
-            model.ProfileChanged += ChangeTitle;
+            _model.ProfileChanged += ChangeTitle;
             _profileManager = profileManager;
             _view = view;
             _steps = steps;

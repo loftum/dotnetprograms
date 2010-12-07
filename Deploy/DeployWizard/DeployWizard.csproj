@@ -11,7 +11,8 @@
     <RootNamespace>DeployWizard</RootNamespace>
     <AssemblyName>DeployWizard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -33,7 +34,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DeployWizard.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Migrator">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator.Framework">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator.Providers">
+      <HintPath>..\..\Lib\3rdParty\migratordotnet-0.8.0\lib\Migrator.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
