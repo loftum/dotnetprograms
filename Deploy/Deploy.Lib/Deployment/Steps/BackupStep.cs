@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Deploy.Lib.DateAndTime;
 using Deploy.Lib.Logging;
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -8,9 +9,12 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class BackupStep : DeploymentStepBase
     {
-        public BackupStep(DeployParameters parameters, ILogger logger)
+        private IDateProvider _dateProvider;
+
+        public BackupStep(IDateProvider dateProvider, DeployParameters parameters, ILogger logger)
             : base(parameters, "Backup", logger)
         {
+            _dateProvider = dateProvider;
         }
 
         protected override DeploymentStepStatus DoExecute()
@@ -100,12 +104,11 @@ namespace Deploy.Lib.Deployment.Steps
 
         private string GenerateBackupFilePath()
         {
-            var now = DateTime.Now;
+            var now = _dateProvider.Now();
             var filename = new StringBuilder("backup_")
-                .Append(now.ToShortDateString().Replace(".", string.Empty))
-                .Append("_")
-                .Append(now.ToShortTimeString().Replace(":", string.Empty))
-                .Append(".zip").ToString();
+                .Append(now.ToString("yyyyMMdd_HHmmss"))
+                .Append(".zip")
+                .ToString();
             return Path.Combine(Parameters.BackupFolder, filename);
         }
     }

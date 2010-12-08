@@ -13,8 +13,9 @@
         <TextBox Height="23" HorizontalAlignment="Left" Margin="122,75,0,0" Name="AssemblyNameBox" VerticalAlignment="Top" Width="402" />
         <Label Content="Connection string" Height="28" HorizontalAlignment="Left" Margin="12,104,0,0" Name="ConnectionStringLabel" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="122,104,0,0" Name="ConnectionStringBox" VerticalAlignment="Top" Width="402" />
-        <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="12,208,0,0" Name="SkipBox" VerticalAlignment="Top" />
+        <CheckBox Content="Skip" Height="16" HorizontalAlignment="Left" Margin="12,242,0,0" Name="SkipBox" VerticalAlignment="Top" />
         <Button Content="Test connection" Height="23" HorizontalAlignment="Left" Margin="434,133,0,0" Name="TestConnectionButton" VerticalAlignment="Top" Click="TestConnectionButton_Click" />
-        <TextBlock Height="41" HorizontalAlignment="Left" Name="ConnectionStatusBlock" Text="" VerticalAlignment="Top" Width="512" Margin="12,162,0,0" TextWrapping="WrapWithOverflow" />
+        <TextBlock Height="41" HorizontalAlignment="Left" Name="ConnectionStatusBlock" Text="" VerticalAlignment="Top" Width="512" Margin="12,196,0,0" TextWrapping="WrapWithOverflow" />
+        <Label Content="DB-user must be admin" Height="28" HorizontalAlignment="Left" Margin="122,132,0,0" Name="UserMustBeAdminLabel" VerticalAlignment="Top" Width="306" HorizontalContentAlignment="Right" Foreground="Gray" />
     </Grid>
 </UserControl>

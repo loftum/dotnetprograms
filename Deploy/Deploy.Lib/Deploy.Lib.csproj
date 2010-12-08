@@ -59,6 +59,8 @@
     <Compile Include="Databases\CouldNotConnectException.cs" />
     <Compile Include="Databases\DatabaseConnectionTester.cs" />
     <Compile Include="Databases\IDatabaseConnectionTester.cs" />
+    <Compile Include="DateAndTime\DateProvider.cs" />
+    <Compile Include="DateAndTime\IDateProvider.cs" />
     <Compile Include="Deployment\Arguments.cs" />
     <Compile Include="Deployment\Deployer.cs" />
     <Compile Include="Deployment\DeploymentStatus.cs" />

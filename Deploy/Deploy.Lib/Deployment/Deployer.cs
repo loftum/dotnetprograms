@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using Deploy.Lib.DateAndTime;
 using Deploy.Lib.Deployment.Steps;
 using Deploy.Lib.FileManagement;
 using Deploy.Lib.FilenameGenerating;
@@ -23,7 +24,7 @@ namespace Deploy.Lib.Deployment
             Logger.InfoMessageLogged += _consoleAppender.Append;
             var fileSystemManager = new FileSystemManager();
             _parameters = parameters;
-            _steps.Add(new BackupStep(_parameters, Logger));
+            _steps.Add(new BackupStep(new DateProvider(), _parameters, Logger));
             _steps.Add(new ClearDestinationFolderStep(_parameters, Logger));
             _steps.Add(new ExtractPackageStep(_parameters, fileSystemManager, Logger));
             _steps.Add(new MigrateDatabaseStep(_parameters, Logger));
