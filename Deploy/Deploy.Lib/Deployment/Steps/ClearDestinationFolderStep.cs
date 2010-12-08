@@ -5,7 +5,7 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class ClearDestinationFolderStep : DeploymentStepBase
     {
-        public ClearDestinationFolderStep(DeployParameters parameters, ILogger logger)
+        public ClearDestinationFolderStep(DeployParameters parameters, IDeployLogger logger)
             : base(parameters, "Clear destination folder", logger)
         {
         }

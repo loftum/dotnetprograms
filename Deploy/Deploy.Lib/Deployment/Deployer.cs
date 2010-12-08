@@ -15,12 +15,12 @@ namespace Deploy.Lib.Deployment
         private const string Name = "Deployer";
         private readonly DeployParameters _parameters;
         private readonly IList<IDeploymentStep> _steps = new List<IDeploymentStep>();
-        public ILogger Logger { get; private set; }
+        public IDeployLogger Logger { get; private set; }
         private readonly IAppender _consoleAppender = new ConsoleAppender();
 
         public Deployer(DeployParameters parameters)
         {
-            Logger = new Logger();
+            Logger = new DeployLogger();
             Logger.InfoMessageLogged += _consoleAppender.Append;
             var fileSystemManager = new FileSystemManager();
             _parameters = parameters;

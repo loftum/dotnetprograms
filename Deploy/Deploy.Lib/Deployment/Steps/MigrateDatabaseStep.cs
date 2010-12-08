@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Deploy.Lib.Logging;
 
@@ -6,7 +8,7 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class MigrateDatabaseStep : DeploymentStepBase
     {
-        public MigrateDatabaseStep(DeployParameters parameters, ILogger logger) : base(parameters, "Migrate database", logger)
+        public MigrateDatabaseStep(DeployParameters parameters, IDeployLogger logger) : base(parameters, "Migrate database", logger)
         {
         }
 
@@ -39,10 +41,23 @@ namespace Deploy.Lib.Deployment.Steps
             var databaseType = Parameters.Profile.MigrateDatabaseSettings.DatabaseType;
             var connectionString = Parameters.Profile.MigrateDatabaseSettings.ConnectionString;
             var migrationAssembly = Assembly.LoadFrom(Parameters.Profile.MigrateDatabaseSettings.MigrationAssemblyPath);
-            var migrator = new Migrator.Migrator(databaseType, connectionString, migrationAssembly);
+            var migratorLogger = new Migrator.Framework.Loggers.Logger(true, new MigratorToDeployStatusAdapter(Status));
+            var migrator = new Migrator.Migrator(databaseType, connectionString, migrationAssembly,true, migratorLogger);
             migrator.MigrateToLastVersion();
-            Status.AppendDetailsLine("Migration successful.");
+            Status.AppendDetailsLine("Migration successful. ");
+            AppendMigrationInfo(migrator.AppliedMigrations);
             Status.Status = DeploymentStepStatus.Ok;
+        }
+
+        private void AppendMigrationInfo(ICollection<long> appliedMigrations)
+        {
+            if (appliedMigrations == null || appliedMigrations.Count < 1)
+            {
+                Status.AppendDetailsLine("No migrations to run.");
+                return;
+            }
+            var lastAppliedMigration = appliedMigrations.Last();
+            Status.AppendDetailsLine("Last applied migration version: " + lastAppliedMigration);
         }
 
         private void HandleException(Exception e)

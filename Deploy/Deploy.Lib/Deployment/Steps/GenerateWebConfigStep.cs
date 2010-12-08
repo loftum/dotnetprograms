@@ -11,7 +11,7 @@ namespace Deploy.Lib.Deployment.Steps
         private const string WebConfigName = "web.config";
 
         public GenerateWebConfigStep(DeployParameters parameters, ConfigValuesReader reader,
-            ConfigValuesReplacer replacer, ILogger logger)
+            ConfigValuesReplacer replacer, IDeployLogger logger)
             : base(parameters, "Generate web.config", logger)
         {
             _reader = reader;

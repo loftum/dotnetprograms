@@ -11,10 +11,10 @@ namespace Deploy.Lib.Deployment.Steps
         }
 
         protected readonly DeploymentStepStatus Status;
-        protected readonly ILogger Logger;
+        protected readonly IDeployLogger Logger;
         protected DeployParameters Parameters;
 
-        protected DeploymentStepBase(DeployParameters parameters, string name, ILogger logger)
+        protected DeploymentStepBase(DeployParameters parameters, string name, IDeployLogger logger)
         {
             Parameters = parameters;
             Logger = logger;

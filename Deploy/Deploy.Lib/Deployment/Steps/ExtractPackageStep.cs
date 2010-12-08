@@ -12,7 +12,7 @@ namespace Deploy.Lib.Deployment.Steps
         private readonly IFileSystemManager _fileSystemManager;
         private const string GlobalAsaxName = "global.asax";
 
-        public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager, ILogger logger)
+        public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager, IDeployLogger logger)
             : base(parameters, "Exctract package", logger)
         {
             _fileSystemManager = fileSystemManager;

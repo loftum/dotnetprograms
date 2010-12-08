@@ -11,7 +11,7 @@ namespace Deploy.Lib.Deployment.Steps
     {
         private IDateProvider _dateProvider;
 
-        public BackupStep(IDateProvider dateProvider, DeployParameters parameters, ILogger logger)
+        public BackupStep(IDateProvider dateProvider, DeployParameters parameters, IDeployLogger logger)
             : base(parameters, "Backup", logger)
         {
             _dateProvider = dateProvider;

@@ -1,6 +1,6 @@
 namespace Deploy.Lib.Logging
 {
-    public interface ILogger
+    public interface IDeployLogger
     {
         event LogMessageEventHandler InfoMessageLogged;
         event ProgressEventHandler ProgressChanged;

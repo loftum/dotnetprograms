@@ -5,7 +5,7 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class ResetFileAttributesStep : DeploymentStepBase
     {
-        public ResetFileAttributesStep(DeployParameters parameters, ILogger logger) : 
+        public ResetFileAttributesStep(DeployParameters parameters, IDeployLogger logger) : 
             base(parameters, "Reset file attributes", logger)
         {
         }

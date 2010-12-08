@@ -94,9 +94,10 @@
     <Compile Include="FilenameGenerating\FilenameGenerator.cs" />
     <Compile Include="Logging\ConsoleAppender.cs" />
     <Compile Include="Logging\IAppender.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\IDeployLogger.cs" />
+    <Compile Include="Logging\DeployLogger.cs" />
     <Compile Include="Logging\LogMessageEventArgs.cs" />
+    <Compile Include="Logging\MigratorToDeployStatusAdapter.cs" />
     <Compile Include="Logging\ProgressEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\FileReader.cs" />
