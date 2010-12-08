@@ -44,13 +44,13 @@ namespace Deploy.Lib.Deployment.Steps
             var migratorLogger = new Migrator.Framework.Loggers.Logger(true, new MigratorToDeployStatusAdapter(Status));
             var migrator = new Migrator.Migrator(databaseType, connectionString, migrationAssembly,true, migratorLogger);
             migrator.MigrateToLastVersion();
-            Status.AppendDetailsLine("Migration successful. ");
             AppendMigrationInfo(migrator.AppliedMigrations);
             Status.Status = DeploymentStepStatus.Ok;
         }
 
         private void AppendMigrationInfo(ICollection<long> appliedMigrations)
         {
+            Status.AppendDetailsLine("Migration successful. ");
             if (appliedMigrations == null || appliedMigrations.Count < 1)
             {
                 Status.AppendDetailsLine("No migrations to run.");
