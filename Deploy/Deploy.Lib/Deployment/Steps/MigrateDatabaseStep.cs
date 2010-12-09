@@ -10,7 +10,7 @@ namespace Deploy.Lib.Deployment.Steps
 {
     public class MigrateDatabaseStep : DeploymentStepBase
     {
-        private IFileSystemManager _fileSystemManager;
+        private readonly IFileSystemManager _fileSystemManager;
         public MigrateDatabaseStep(DeployParameters parameters, IFileSystemManager fileSystemManager, IDeployLogger logger)
             : base(parameters, "Migrate database", logger)
         {
@@ -54,21 +54,16 @@ namespace Deploy.Lib.Deployment.Steps
                 return;
             }
 
-            var migrationAssembly = LoadMigrationAssembly(migrationFile);
+            var migrationAssembly = Assembly.LoadFrom(migrationFile.FullName);
+            
             var migratorLogger = new Migrator.Framework.Loggers.Logger(true, new MigratorToDeployStatusAdapter(Status));
-            
-            
             var migrator = new Migrator.Migrator(databaseType, connectionString, migrationAssembly,true, migratorLogger);
             migrator.MigrateToLastVersion();
+            
             AppendMigrationInfo(migrator.AppliedMigrations);
             
 
             Status.Status = DeploymentStepStatus.Ok;
-        }
-
-        private Assembly LoadMigrationAssembly(FileInfo migrationFile)
-        {
-            return Assembly.LoadFrom(migrationFile.FullName);
         }
 
         private FileInfo GetMigrationFile()
