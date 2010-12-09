@@ -80,7 +80,9 @@
     <Compile Include="Deployment\Profiles\Settings.cs" />
     <Compile Include="Deployment\Profiles\WebConfigSettings.cs" />
     <Compile Include="Deployment\Steps\BackupStep.cs" />
+    <Compile Include="Deployment\Steps\CleanUpStep.cs" />
     <Compile Include="Deployment\Steps\ClearDestinationFolderStep.cs" />
+    <Compile Include="Deployment\Steps\DeployFilesStep.cs" />
     <Compile Include="Deployment\Steps\DeploymentStepBase.cs" />
     <Compile Include="Deployment\Steps\ExtractPackageStep.cs" />
     <Compile Include="Deployment\Steps\GenerateWebConfigStep.cs" />

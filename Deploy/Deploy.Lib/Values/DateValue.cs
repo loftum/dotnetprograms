@@ -18,6 +18,15 @@ namespace Deploy.Lib.Values
                 .ToString();
         }
 
+        public string YyyyMmDd()
+        {
+            return new StringBuilder()
+                .Append(LeftPad(TheValue.Year, '0', 4))
+                .Append(LeftPad(TheValue.Month, '0', 2))
+                .Append(LeftPad(TheValue.Day, '0', 2))
+                .ToString();
+        }
+
         public string HhMmSs()
         {
             return new StringBuilder()

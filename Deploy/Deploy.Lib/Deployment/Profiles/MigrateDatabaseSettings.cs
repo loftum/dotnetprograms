@@ -5,7 +5,7 @@ namespace Deploy.Lib.Deployment.Profiles
     public class MigrateDatabaseSettings : Settings
     {
         public string ConnectionString { get; set; }
-        public string MigrationAssemblyPath { get; set; }
+        public string MigrationAssemblyName { get; set; }
         public string DatabaseType { get; set; }
 
         public MigrateDatabaseSettings() : base("Migrate database")

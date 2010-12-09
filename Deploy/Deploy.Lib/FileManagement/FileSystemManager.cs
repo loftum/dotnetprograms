@@ -59,6 +59,31 @@ namespace Deploy.Lib.FileManagement
             return new FileInfo(path);
         }
 
+        public FileInfo SearchForFile(string filename, string rootDir)
+        {
+            return SearchForFile(filename, new DirectoryInfo(rootDir));
+        }
+
+        private static FileInfo SearchForFile(string filename, DirectoryInfo directory)
+        {
+            foreach (var file in directory.GetFiles())
+            {
+                if (file.Name.Equals(filename))
+                {
+                    return file;
+                }
+            }
+            foreach (var subDir in directory.GetDirectories())
+            {
+                var file = SearchForFile(filename, subDir);
+                if (file != null)
+                {
+                    return file;
+                }
+            }
+            return null;
+        }
+
         public DirectoryInfo CreateTempDirectory()
         {
             var tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
