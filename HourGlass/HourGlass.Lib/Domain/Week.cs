@@ -7,9 +7,9 @@ namespace HourGlass.Lib.Domain
 {
     public class Week : DomainObject
     {
-        public virtual int Year { get; set; }
         public virtual DateTime StartDate { get; set; }
-        public virtual int Number { get { return StartDate.DayOfYear/7; } }
+        public virtual int Year { get { return StartDate.Year; } }
+        public virtual int Number { get { return StartDate.DayOfYear/7 + 1; } }
 
         public virtual IList<HourUsage> Usages { get; set; }
 
@@ -42,7 +42,8 @@ namespace HourGlass.Lib.Domain
             return new StringBuilder()
                 .Append(Year)
                 .Append(" - ")
-                .Append(Number).ToString();
+                .Append(Number)
+                .Append(" (").Append(Sum).Append(")").ToString();
         }
     }
 }

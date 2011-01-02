@@ -7,7 +7,7 @@ namespace HourGlass.Modules
     {
         public override void Load()
         {
-            Bind<IHourGlassViewModel>().To<HourGlassViewModel>().InSingletonScope();
+            Bind<IWeeksViewModel>().To<WeeksViewModel>().InSingletonScope();
         }
     }
 }

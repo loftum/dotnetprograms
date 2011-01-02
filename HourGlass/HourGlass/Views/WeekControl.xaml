@@ -21,7 +21,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0">Start date</Label>
-                <DatePickerTextBox Name="DatePicker" Grid.Column="1"></DatePickerTextBox>
+                <DatePicker Name="DatePicker"  Grid.Column="1"  SelectedDate="{Binding Path=StartDate}" FirstDayOfWeek="Monday" />
             </Grid>
             <Button Grid.Row="3" Name="AddUsageButton" Content="Add Code" Command="{Binding AddUsageCommand}" />
         </Grid>
@@ -30,6 +30,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="24" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="24" />
             </Grid.RowDefinitions>
             <Grid Name="DayTitlesGrid" Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -55,6 +56,28 @@
             </Grid>
             <Grid Grid.Row="1" Name="HourUsageGrid">
                 
+            </Grid>
+            <Grid Name="UsageSumGrid" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" IsReadOnly="True" Text="Sum" />
+                <TextBox Name="MondaySumBox" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=Monday,Mode=OneWay}" />
+                <TextBox Name="TuesdaySumBox" Grid.Column="2" IsReadOnly="True" Text="{Binding Path=Tuesday,Mode=OneWay}" />
+                <TextBox Name="WednesdaySumBox" Grid.Column="3" IsReadOnly="True" Text="{Binding Path=Wednesday,Mode=OneWay}" />
+                <TextBox Name="ThursdaySumBox" Grid.Column="4" IsReadOnly="True" Text="{Binding Path=Thursday,Mode=OneWay}" />
+                <TextBox Name="FridaySumBox" Grid.Column="5" IsReadOnly="True" Text="{Binding Path=Friday,Mode=OneWay}" />
+                <TextBox Name="SaturdaySumBox" Grid.Column="6" IsReadOnly="True" Text="{Binding Path=Saturday,Mode=OneWay}" />
+                <TextBox Name="SundaySumBox" Grid.Column="7" IsReadOnly="True" Text="{Binding Path=Sunday,Mode=OneWay}" />
+                <TextBox Name="SumSumBox" Grid.Column="8" IsReadOnly="True" Text="{Binding Path=Sum,Mode=OneWay}" FontWeight="Bold" />
             </Grid>
         </Grid>
         

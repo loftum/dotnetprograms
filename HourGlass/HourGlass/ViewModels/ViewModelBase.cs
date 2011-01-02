@@ -6,6 +6,14 @@ namespace HourGlass.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void OnPropertiesChanged(params string[] propertyNames)
+        {
+            foreach (var propertyName in propertyNames)
+            {
+                OnPropertyChanged(propertyName);
+            }
+        }
+
         protected void OnPropertyChanged(string propertyName)
         {
             ValidatePropertyName(propertyName);

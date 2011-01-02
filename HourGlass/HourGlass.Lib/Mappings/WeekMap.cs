@@ -7,8 +7,7 @@ namespace HourGlass.Lib.Mappings
         public WeekMap()
         {
             HasMany(x => x.Usages).Cascade.AllDeleteOrphan();
-            Map(x => x.Year);
-            Map(x => x.Number);
+            Map(x => x.StartDate);
         }
     }
 }

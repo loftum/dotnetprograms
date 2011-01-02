@@ -7,6 +7,7 @@ namespace HourGlass.Lib.Data
     {
         T Get<T>(long id) where T : DomainObject;
         T Save<T>(T item) where T : DomainObject;
+        T Delete<T>(T item) where T : DomainObject;
         IEnumerable<T> GetAll<T>() where T : DomainObject;
     }
 }

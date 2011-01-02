@@ -121,8 +121,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Modules\HourGlassModule.cs" />
-    <Compile Include="ViewModels\HourGlassViewModel.cs" />
-    <Compile Include="ViewModels\IHourGlassViewModel.cs" />
+    <Compile Include="ViewModels\WeeksViewModel.cs" />
+    <Compile Include="ViewModels\IWeeksViewModel.cs" />
     <Compile Include="ViewModels\UsageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelException.cs" />

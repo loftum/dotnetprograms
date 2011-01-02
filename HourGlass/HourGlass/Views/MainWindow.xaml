@@ -4,7 +4,9 @@
     <DockPanel LastChildFill="True">
         <DockPanel LastChildFill="True" DockPanel.Dock="Left">
             <Button Name="AddWeekButton" Command="{Binding Path=AddWeekCommand}"
-                    MinWidth="120" Height="24" DockPanel.Dock="Bottom">Add</Button>
+                    MinWidth="120" Height="24" DockPanel.Dock="Bottom" Content="Add" />
+            <Button Name="RemoveWeekButton" Command="{Binding Path=RemoveWeekCommand}"
+                    MinWidth="120" Height="24" DockPanel.Dock="Bottom" Content="Remove" />
             <ListBox Name="WeekListBox" MinWidth="120"
                 ItemsSource="{Binding Path=Weeks}"
                 SelectedItem="{Binding Path=CurrentWeek, Mode=OneWayToSource}" />

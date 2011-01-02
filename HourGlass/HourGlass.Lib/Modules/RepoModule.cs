@@ -1,5 +1,6 @@
 using HourGlass.Lib.Data;
 using HourGlass.Lib.DateAndTime;
+using HourGlass.Lib.Services;
 using NHibernate;
 using Ninject.Modules;
 
@@ -14,6 +15,7 @@ namespace HourGlass.Lib.Modules
                 .ToMethod(context =>
                     SessionFactoryProvider.SqliteSessionFactory("HourGlass.db")).InSingletonScope();
             Bind<IHourGlassRepo>().To<HourGlassRepo>().InSingletonScope();
+            
         }
     }
 }

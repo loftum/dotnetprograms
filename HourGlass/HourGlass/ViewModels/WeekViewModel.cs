@@ -1,8 +1,9 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HourGlass.Commands;
-using HourGlass.Lib.Data;
 using HourGlass.Lib.Domain;
+using HourGlass.Lib.Services;
 
 namespace HourGlass.ViewModels
 {
@@ -12,109 +13,112 @@ namespace HourGlass.ViewModels
         public ICommand AddUsageCommand { get; private set; }
         public ObservableCollection<UsageViewModel> Usages { get; set; }
 
-        private readonly Week _week;
-        private readonly IHourGlassRepo _repo;
+        public Week Week{ get; private set;}
+        private readonly IWeekService _weekService;
+        private readonly IHourCodeService _hourCodeService;
 
-
-        public ObservableCollection<HourCode> AvailableHourCodes { get; private set; }
-
-
-        public WeekViewModel(IHourGlassRepo repo, Week week)
+        public WeekViewModel(IWeekService weekService, IHourCodeService hourCodeService, Week week)
         {
-            _repo = repo;
-            _week = week;
-            AvailableHourCodes = new ObservableCollection<HourCode>();
-            foreach (var hourCode in _repo.GetAll<HourCode>())
-            {
-                AvailableHourCodes.Add(hourCode);
-            }
+            _weekService = weekService;
+            Week = week;
+            _hourCodeService = hourCodeService;
 
             Usages = new ObservableCollection<UsageViewModel>();
-            foreach (var hourUsage in _week.Usages)
+            foreach (var hourUsage in Week.Usages)
             {
-                Usages.Add(new UsageViewModel(this, hourUsage));
+                Usages.Add(new UsageViewModel(_hourCodeService, this, hourUsage));
             }
             SaveWeekCommand = new DelegateCommand(SaveWeek);
             AddUsageCommand = new DelegateCommand(AddUsage);
         }
 
-        public void AddHourCode(object parameter)
-        {
-            var codeAndName = parameter.ToString();
-            var split = codeAndName.Split(new[] {':'});
-            var hourCode = new HourCode
-            {
-                Code = split[0].Trim(),
-                Name = split.Length > 1 ? split[1].Trim() : string.Empty
-            };
-            _repo.Save(hourCode);
-        }
-
         private void AddUsage(object parameter)
         {
             var usage = new HourUsage();
-            _week.AddUsage(usage);
-            Usages.Add(new UsageViewModel(this, usage));
+            Week.AddUsage(usage);
+            Usages.Add(new UsageViewModel(_hourCodeService, this, usage));
         }
 
         private void SaveWeek(object parameter)
         {
-            _repo.Save(_week);
+            _weekService.Save(Week);
+        }
+        
+        public void NumbersChanged()
+        {
+            OnPropertiesChanged("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Sum");
+        }
+
+        public DateTime StartDate
+        {
+            get { return Week.StartDate; }
+            set
+            {
+                var day = value;
+                while (day.DayOfWeek != DayOfWeek.Monday)
+                {
+                    day = day.AddDays(-1);
+                }
+                Week.StartDate = day;
+                OnPropertyChanged("StartDate");
+                OnPropertyChanged("Year");
+                OnPropertyChanged("Number");
+            }
         }
 
         public int Year
         {
-            get { return _week.Year; }
+            get { return Week.Year; }
         }
 
         public int Number
         {
-            get { return _week.Number; }
+            get { return Week.Number; }
         }
 
         public double Monday
         {
-            get { return _week.Monday; }
+            get { return Week.Monday; }
         }
 
         public double Tuesday
         {
-            get { return _week.Tuesday; }
+            get { return Week.Tuesday; }
         }
 
         public double Wednesday
         {
-            get { return _week.Wednesday; }
+            get { return Week.Wednesday; }
         }
 
         public double Thursday
         {
-            get { return _week.Thursday; }
+            get { return Week.Thursday; }
         }
 
         public double Friday
         {
-            get { return _week.Friday; }
+            get { return Week.Friday; }
         }
 
         public double Saturday
         {
-            get { return _week.Saturday; }
+            get { return Week.Saturday; }
         }
 
         public double Sunday
         {
-            get { return _week.Sunday; }
+            get { return Week.Sunday; }
         }
 
         public double Sum
         {
-            get { return _week.Sum; }
+            get { return Week.Sum; }
         }
 
         public override string ToString()
         {
-            return _week.ToString();
+            return Week.ToString();
         }
     }
 }

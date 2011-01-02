@@ -7,6 +7,7 @@
              d:DesignHeight="24" d:DesignWidth="700">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="60" />
@@ -16,21 +17,20 @@
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
-        <ComboBox ItemsSource="{Binding Path=AvailableHourCodes}"
+        <Button Grid.Column="0" Name="RemoveButton" Content="X" Command="{Binding Path=RemoveCommand}" />
+        <ComboBox Grid.Column="1" 
+                  ItemsSource="{Binding Path=AvailableHourCodes}"
                   SelectedItem="{Binding Path=HourCode}"
-                  Name="HourCodeBox" Grid.Column="0" IsEditable="True"
+                  Name="HourCodeBox"  IsEditable="True"
                   KeyUp="HourCodeBox_KeyUp" />
-        <TextBox Grid.Column="1" Name="MondayBox" Text="{Binding Path=Monday}" />
-        <TextBox Grid.Column="2" Name="TuesdayBox" Text="{Binding Path=Tuesday}" />
-        <TextBox Grid.Column="3" Name="WednesdayBox" Text="{Binding Path=Wednesday}" />
-        <TextBox Grid.Column="4" Name="ThursdayBox" Text="{Binding Path=Thursday}" />
-        <TextBox Grid.Column="5" Name="FridayBox" Text="{Binding Path=Friday}" />
-        <TextBox Grid.Column="6" Name="SaturdayBox" Text="{Binding Path=Saturday}" Background="#FFFFE6E6" />
-        <TextBox Grid.Column="7" Name="SundayBox" Text="{Binding Path=Sunday}" Background="#FFFFE6E6" />
-        <TextBox Grid.Column="8" Name="SumBox" IsReadOnly="True" Text="{Binding Path=Sum, Mode=OneWay}" FontWeight="Bold" />
-        <Button Grid.Column="9" Name="RemoveButton" Content="X" Command="{Binding Path=RemoveCommand}" />
-
+        <TextBox Grid.Column="2" Name="MondayBox" Text="{Binding Path=Monday}" />
+        <TextBox Grid.Column="3" Name="TuesdayBox" Text="{Binding Path=Tuesday}" />
+        <TextBox Grid.Column="4" Name="WednesdayBox" Text="{Binding Path=Wednesday}" />
+        <TextBox Grid.Column="5" Name="ThursdayBox" Text="{Binding Path=Thursday}" />
+        <TextBox Grid.Column="6" Name="FridayBox" Text="{Binding Path=Friday}" />
+        <TextBox Grid.Column="7" Name="SaturdayBox" Text="{Binding Path=Saturday}" Background="#FFFFE6E6" />
+        <TextBox Grid.Column="8" Name="SundayBox" Text="{Binding Path=Sunday}" Background="#FFFFE6E6" />
+        <TextBox Grid.Column="9" Name="SumBox" IsReadOnly="True" Text="{Binding Path=Sum, Mode=OneWay}" FontWeight="Bold" />
     </Grid>
 </UserControl>

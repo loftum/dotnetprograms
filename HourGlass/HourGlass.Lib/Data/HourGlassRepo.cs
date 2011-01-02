@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HourGlass.Lib.Domain;
 using NHibernate;
@@ -25,6 +26,16 @@ namespace HourGlass.Lib.Data
             using (var transaction = _session.BeginTransaction())
             {
                 _session.SaveOrUpdate(item);
+                transaction.Commit();
+            }
+            return item;
+        }
+
+        public T Delete<T>(T item) where T : DomainObject
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Delete(item);
                 transaction.Commit();
             }
             return item;

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace HourGlass.ViewModels
 {
-    public interface IHourGlassViewModel
+    public interface IWeeksViewModel
     {
         ICommand AddWeekCommand { get; }
         ObservableCollection<WeekViewModel> Weeks { get; }

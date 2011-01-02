@@ -10,8 +10,8 @@ namespace HourGlass.Views
         public MainWindow()
         {
             InitializeComponent();
-            var kernel = new StandardKernel(new RepoModule(), new HourGlassModule());
-            DataContext = kernel.Get<IHourGlassViewModel>();
+            var kernel = new StandardKernel(new RepoModule(), new ServiceModule(), new HourGlassModule());
+            DataContext = kernel.Get<IWeeksViewModel>();
         }
     }
 }

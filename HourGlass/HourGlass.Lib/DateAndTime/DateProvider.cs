@@ -16,8 +16,8 @@ namespace HourGlass.Lib.DateAndTime
 
         public DateTime GetCurrentWeekStartDate()
         {
-            var day = DateTime.Now;
-            while (day.DayOfWeek > DayOfWeek.Monday)
+            var day = DateTime.Today;
+            while (day.DayOfWeek != DayOfWeek.Monday)
             {
                 day = day.AddDays(-1);
             }

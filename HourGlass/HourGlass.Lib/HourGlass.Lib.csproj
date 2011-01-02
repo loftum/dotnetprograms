@@ -111,14 +111,21 @@
     <Compile Include="Domain\HourCode.cs" />
     <Compile Include="Domain\HourUsage.cs" />
     <Compile Include="Domain\Week.cs" />
+    <Compile Include="Exceptions\ExceptionType.cs" />
+    <Compile Include="Exceptions\HourGlassUserException.cs" />
     <Compile Include="Mappings\DomainObjectMap.cs" />
     <Compile Include="Mappings\HourCodeMap.cs" />
     <Compile Include="Mappings\HourUsageMap.cs" />
     <Compile Include="Mappings\WeekMap.cs" />
     <Compile Include="Models\HourGlassModel.cs" />
     <Compile Include="Modules\RepoModule.cs" />
+    <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IHourGlassService.cs" />
+    <Compile Include="Services\HourCodeService.cs" />
+    <Compile Include="Services\IHourCodeService.cs" />
+    <Compile Include="Services\IWeekService.cs" />
+    <Compile Include="Services\WeekService.cs" />
+    <Compile Include="Utilities\EnumOperations.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
