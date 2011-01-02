@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,8 @@ namespace HourGlass.Lib.Domain
     public class Week : DomainObject
     {
         public virtual int Year { get; set; }
-        public virtual int Number { get; set; }
+        public virtual DateTime StartDate { get; set; }
+        public virtual int Number { get { return StartDate.DayOfYear/7; } }
 
         public virtual IList<HourUsage> Usages { get; set; }
 

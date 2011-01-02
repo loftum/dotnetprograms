@@ -11,10 +11,19 @@
                 <RowDefinition Height="24" />
                 <RowDefinition Height="24" />
                 <RowDefinition Height="24" />
+                <RowDefinition Height="24" />
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="Week info" />
             <TextBox Grid.Row="1" IsReadOnly="True"  Name="WeekNameBox" Text="{Binding Path=Number, Mode=OneWay}" />
-            <Button Grid.Row="2" Name="AddUsageButton" Content="Add Code" Command="{Binding AddUsageCommand}" />
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0">Start date</Label>
+                <DatePickerTextBox Name="DatePicker" Grid.Column="1"></DatePickerTextBox>
+            </Grid>
+            <Button Grid.Row="3" Name="AddUsageButton" Content="Add Code" Command="{Binding AddUsageCommand}" />
         </Grid>
         <Button Name="SaveButton" Content="Save" DockPanel.Dock="Bottom" Command="{Binding Path=SaveWeekCommand}" />
         <Grid Name="WeekGrid">
@@ -42,7 +51,7 @@
                 <Label Grid.Column="5" Content="Fri" />
                 <Label Grid.Column="6" Content="Sat" />
                 <Label Grid.Column="7" Content="Sun" />
-                <Label Grid.Column="8" Content="Sum" />
+                <Label Grid.Column="8" Content="Sum" FontWeight="Bold"/>
             </Grid>
             <Grid Grid.Row="1" Name="HourUsageGrid">
                 

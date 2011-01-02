@@ -13,5 +13,15 @@ namespace HourGlass.Lib.DateAndTime
         {
             return DateTime.Now.DayOfYear / 7 + 1;
         }
+
+        public DateTime GetCurrentWeekStartDate()
+        {
+            var day = DateTime.Now;
+            while (day.DayOfWeek > DayOfWeek.Monday)
+            {
+                day = day.AddDays(-1);
+            }
+            return day;
+        }
     }
 }

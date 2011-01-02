@@ -27,9 +27,9 @@
         <TextBox Grid.Column="3" Name="WednesdayBox" Text="{Binding Path=Wednesday}" />
         <TextBox Grid.Column="4" Name="ThursdayBox" Text="{Binding Path=Thursday}" />
         <TextBox Grid.Column="5" Name="FridayBox" Text="{Binding Path=Friday}" />
-        <TextBox Grid.Column="6" Name="SaturdayBox" Text="{Binding Path=Saturday}" />
-        <TextBox Grid.Column="7" Name="SundayBox" Text="{Binding Path=Sunday}" />
-        <TextBox Grid.Column="8" Name="SumBox" IsReadOnly="True" Text="{Binding Path=Sum, Mode=OneWay}" />
+        <TextBox Grid.Column="6" Name="SaturdayBox" Text="{Binding Path=Saturday}" Background="#FFFFE6E6" />
+        <TextBox Grid.Column="7" Name="SundayBox" Text="{Binding Path=Sunday}" Background="#FFFFE6E6" />
+        <TextBox Grid.Column="8" Name="SumBox" IsReadOnly="True" Text="{Binding Path=Sum, Mode=OneWay}" FontWeight="Bold" />
         <Button Grid.Column="9" Name="RemoveButton" Content="X" Command="{Binding Path=RemoveCommand}" />
 
     </Grid>

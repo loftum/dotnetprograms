@@ -42,10 +42,11 @@ namespace HourGlass.ViewModels
         private void AddWeek(object parameter)
         {
             var week = new Week
-            {
-                Year = _dateProvider.GetCurrentYear(),
-                Number = _dateProvider.GetCurrentWeekNumber()
-            };
+                {
+                    Year = _dateProvider.GetCurrentYear(),
+                    StartDate = _dateProvider.GetCurrentWeekStartDate()
+                };
+            
             var viewModel = new WeekViewModel(_repo, week);
             Weeks.Add(viewModel);
             CurrentWeek = viewModel;
