@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Deploy.Lib.FileManagement;
 using Deploy.Lib.Logging;
 using ICSharpCode.SharpZipLib.Zip;
@@ -10,7 +9,6 @@ namespace Deploy.Lib.Deployment.Steps
     public class ExtractPackageStep : DeploymentStepBase
     {
         private readonly IFileSystemManager _fileSystemManager;
-        private const string GlobalAsaxName = "global.asax";
 
         public ExtractPackageStep(DeployParameters parameters, IFileSystemManager fileSystemManager, IDeployLogger logger)
             : base(parameters, "Exctract package", logger)
@@ -25,71 +23,43 @@ namespace Deploy.Lib.Deployment.Steps
                 SetStatusSkipped();
                 return Status;
             }
-            var tempDirectory = _fileSystemManager.CreateTempDirectory();
-            Status.AppendDetailsLine("Created temp directory " + tempDirectory.FullName);
-            Status.AppendDetailsLine("Extracting " + Parameters.PackagePath + " to tempdir " + tempDirectory.FullName);
-            
-            using (var fileStream = new FileStream(Parameters.PackagePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                WriteAllEntries(fileStream, tempDirectory);
+                var tempDirectory = CreateTempDirectory();
+                WriteAllEntriesTo(tempDirectory);
+                Status.Status = DeploymentStepStatus.Ok;
             }
-            var rootDirectory = GetWebRootDirectory(tempDirectory);
-            if (rootDirectory == null)
+            catch (Exception e)
             {
-                Status.AppendDetailsLine("Could not find web root directory in " + tempDirectory.FullName);
+                Status.AppendDetailsLine("Extract package failed");
+                Status.AppendDetailsLine(e.ToString());
                 Status.Status = DeploymentStepStatus.Fail;
-                return Status;
+                Status.CanProceed = false;
             }
-            Status.AppendDetailsLine("Copying contents of " + rootDirectory.FullName + " to " + Parameters.DestinationFolder);
-            _fileSystemManager.CopyContentsOf(rootDirectory).To(Parameters.DestinationFolder);
-
-            Status.AppendDetailsLine("Removing tempdir " + tempDirectory.FullName);
-            _fileSystemManager.DeleteDirectory(tempDirectory);
-
-            Status.Status = DeploymentStepStatus.Ok;
             return Status;
         }
 
-        private static DirectoryInfo GetWebRootDirectory(DirectoryInfo directory)
+        private DirectoryInfo CreateTempDirectory()
         {
-            if (IsWebRootDirectory(directory))
-            {
-                return directory;
-            }
-            foreach (var subDirectory in directory.GetDirectories())
-            {
-                if (IsWebRootDirectory(subDirectory))
-                {
-                    return subDirectory;
-                }
-            }
-            foreach(var subDirectory in directory.GetDirectories())
-            {
-                var rootDirectory = GetWebRootDirectory(subDirectory);
-                if (rootDirectory != null)
-                {
-                    return rootDirectory;
-                }
-            }
-            return null;
+            var tempDirectory = _fileSystemManager.CreateTempDirectory();
+            Parameters.TempDirectoryPath = tempDirectory.FullName;
+            Status.AppendDetailsLine("Created temp directory " + tempDirectory.FullName);
+            return tempDirectory;
         }
 
-        private static bool IsWebRootDirectory(DirectoryInfo tempDirectory)
+        private void WriteAllEntriesTo(DirectoryInfo tempDirectory)
         {
-            return tempDirectory
-                .GetFiles()
-                .Any(file => file.Name.Equals(GlobalAsaxName, StringComparison.InvariantCultureIgnoreCase));
-        }
-
-        private void WriteAllEntries(Stream fileStream, DirectoryInfo tempDirectory)
-        {
-            using(var zipInStream = new ZipInputStream(fileStream))
+            Status.AppendDetailsLine("Extracting " + Parameters.PackagePath + " to tempdir " + tempDirectory.FullName);
+            using (var fileStream = new FileStream(Parameters.PackagePath, FileMode.Open, FileAccess.Read))
             {
-                ZipEntry entry;
-                while((entry = zipInStream.GetNextEntry()) != null)
+                using (var zipInStream = new ZipInputStream(fileStream))
                 {
-                    WriteEntry(zipInStream, entry, tempDirectory);
-                }
+                    ZipEntry entry;
+                    while ((entry = zipInStream.GetNextEntry()) != null)
+                    {
+                        WriteEntry(zipInStream, entry, tempDirectory);
+                    }
+                }    
             }
         }
 

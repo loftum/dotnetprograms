@@ -20,16 +20,23 @@ namespace Deploy.Lib.Deployment
 
         public Deployer(DeployParameters parameters)
         {
+            _parameters = parameters;
             Logger = new DeployLogger();
             Logger.InfoMessageLogged += _consoleAppender.Append;
+            AddSteps();
+        }
+
+        private void AddSteps()
+        {
             var fileSystemManager = new FileSystemManager();
-            _parameters = parameters;
+            _steps.Add(new ExtractPackageStep(_parameters, fileSystemManager, Logger));
             _steps.Add(new BackupStep(new DateProvider(), _parameters, Logger));
             _steps.Add(new ClearDestinationFolderStep(_parameters, Logger));
-            _steps.Add(new ExtractPackageStep(_parameters, fileSystemManager, Logger));
-            _steps.Add(new MigrateDatabaseStep(_parameters, Logger));
+            _steps.Add(new DeployFilesStep(fileSystemManager, _parameters, Logger));
+            _steps.Add(new MigrateDatabaseStep(_parameters, fileSystemManager, Logger));
             _steps.Add(new ReplaceWebConfigStep(_parameters, Logger));
             _steps.Add(new ResetFileAttributesStep(_parameters, Logger));
+            _steps.Add(new CleanUpStep(fileSystemManager, _parameters, Logger));
         }
 
         public DeploymentStatus Deploy()
@@ -74,7 +81,7 @@ namespace Deploy.Lib.Deployment
         {
             return new StringBuilder(_parameters.Profile.DeployStatusSettings.Folder)
                 .Append(Path.DirectorySeparatorChar)
-                .Append(new FilenameGenerator().BaseDdMmYyyyHhMmSsExtension("deploystatus", "xml"))
+                .Append(new FilenameGenerator().BaseYyyyMmDdHhMmSsExtension("deploystatus", "xml"))
                 .ToString();
         }
     }

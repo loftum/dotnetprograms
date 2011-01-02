@@ -46,7 +46,7 @@ namespace DeployWizard.Lib.Steps
             var settings = Model.CurrentProfile.MigrateDatabaseSettings;
             if (!Model.CurrentProfile.MigrateDatabaseSettings.Skip)
             {
-                if (string.IsNullOrWhiteSpace(settings.MigrationAssemblyPath))
+                if (string.IsNullOrWhiteSpace(settings.MigrationAssemblyName))
                 {
                     throw new WizardStepException("Migration assembly must be set.");
                 }

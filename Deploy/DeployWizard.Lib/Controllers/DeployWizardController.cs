@@ -38,7 +38,7 @@ namespace DeployWizard.Lib.Controllers
 
         private void FastForward(object sender, EventArgs e)
         {
-            while(CurrentStep().IsValid())
+            while(CurrentStep().IsValid() && !IsLastStep())
             {
                 _currentIndex++;
             }

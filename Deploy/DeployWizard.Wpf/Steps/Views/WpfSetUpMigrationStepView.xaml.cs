@@ -25,7 +25,7 @@ namespace DeployWizard.Wpf.Steps.Views
             Binder.Bind(_settings, "ConnectionString")
                 .WithTargetNullValue(string.Empty)
                 .ToTextBox(ConnectionStringBox);
-            Binder.Bind(_settings, "MigrationAssemblyPath")
+            Binder.Bind(_settings, "MigrationAssemblyName")
                 .WithTargetNullValue(string.Empty)
                 .ToTextBox(AssemblyNameBox);
             Binder.Bind(_settings, "Skip")

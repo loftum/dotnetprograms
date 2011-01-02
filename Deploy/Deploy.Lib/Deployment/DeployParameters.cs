@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using Deploy.Lib.Deployment.ProfileManagement;
 using Deploy.Lib.Deployment.Profiles;
@@ -18,6 +19,7 @@ namespace Deploy.Lib.Deployment
         private const string DeployStatusLocationName = "statusLocation";
         private const string DeploymentProfileName = "profile";
 
+        public string TempDirectoryPath { get; set; }
         public string PackagePath { get; set; }
         public string DestinationFolder { get { return Profile.DestinationSettings.Folder; } }
         public string BackupFolder { get { return Profile.BackupSettings.Folder; } }
