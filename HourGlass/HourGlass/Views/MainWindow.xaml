@@ -1,0 +1,15 @@
+﻿<Window x:Class="HourGlass.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:HourGlass.Views" Title="Hour Glass" Height="600" Width="800">
+    <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Left">
+            <Button Name="AddWeekButton" Command="{Binding Path=AddWeekCommand}"
+                    MinWidth="120" Height="24" DockPanel.Dock="Bottom">Add</Button>
+            <ListBox Name="WeekListBox" MinWidth="120"
+                ItemsSource="{Binding Path=Weeks}"
+                SelectedItem="{Binding Path=CurrentWeek, Mode=OneWayToSource}" />
+        </DockPanel>
+        
+        <Views:WeekControl x:Name="WeekControl" DataContext="{Binding Path=CurrentWeek, Mode=TwoWay}" />
+    </DockPanel>
+</Window>
