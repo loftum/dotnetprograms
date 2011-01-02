@@ -11,7 +11,7 @@ namespace HourGlass.Views
         {
             InitializeComponent();
             var kernel = new StandardKernel(new RepoModule(), new ServiceModule(), new HourGlassModule());
-            DataContext = kernel.Get<IWeeksViewModel>();
+            DataContext = kernel.Get<IHourGlassViewModel>();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HourGlass.Views
         {
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
-                var viewModel = (UsageViewModel) DataContext;
+                var viewModel = (HourUsageViewModel) DataContext;
                 if (viewModel == null)
                 {
                     return;

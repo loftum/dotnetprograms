@@ -11,7 +11,7 @@ namespace HourGlass.ViewModels
     {
         public ICommand SaveWeekCommand { get; private set; }
         public ICommand AddUsageCommand { get; private set; }
-        public ObservableCollection<UsageViewModel> Usages { get; set; }
+        public ObservableCollection<HourUsageViewModel> Usages { get; set; }
 
         public Week Week{ get; private set;}
         private readonly IWeekService _weekService;
@@ -23,10 +23,10 @@ namespace HourGlass.ViewModels
             Week = week;
             _hourCodeService = hourCodeService;
 
-            Usages = new ObservableCollection<UsageViewModel>();
+            Usages = new ObservableCollection<HourUsageViewModel>();
             foreach (var hourUsage in Week.Usages)
             {
-                Usages.Add(new UsageViewModel(_hourCodeService, this, hourUsage));
+                Usages.Add(new HourUsageViewModel(_hourCodeService, this, hourUsage));
             }
             SaveWeekCommand = new DelegateCommand(SaveWeek);
             AddUsageCommand = new DelegateCommand(AddUsage);
@@ -36,7 +36,7 @@ namespace HourGlass.ViewModels
         {
             var usage = new HourUsage();
             Week.AddUsage(usage);
-            Usages.Add(new UsageViewModel(_hourCodeService, this, usage));
+            Usages.Add(new HourUsageViewModel(_hourCodeService, this, usage));
         }
 
         private void SaveWeek(object parameter)

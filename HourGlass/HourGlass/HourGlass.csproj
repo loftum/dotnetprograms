@@ -121,12 +121,20 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Modules\HourGlassModule.cs" />
+    <Compile Include="ViewModels\HourCodeViewModel.cs" />
+    <Compile Include="ViewModels\HourGlassViewModel.cs" />
+    <Compile Include="ViewModels\HourCodesViewModel.cs" />
+    <Compile Include="ViewModels\IHourGlassViewModel.cs" />
+    <Compile Include="ViewModels\IHourCodesViewModel.cs" />
     <Compile Include="ViewModels\WeeksViewModel.cs" />
     <Compile Include="ViewModels\IWeeksViewModel.cs" />
-    <Compile Include="ViewModels\UsageViewModel.cs" />
+    <Compile Include="ViewModels\HourUsageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelException.cs" />
     <Compile Include="ViewModels\WeekViewModel.cs" />
+    <Compile Include="Views\HourCodesControl.xaml.cs">
+      <DependentUpon>HourCodesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HourUsageControl.xaml.cs">
       <DependentUpon>HourUsageControl.xaml</DependentUpon>
     </Compile>
@@ -143,6 +151,13 @@
     <Compile Include="Views\WeekControl2.xaml.cs">
       <DependentUpon>WeekControl2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WeeksControl.xaml.cs">
+      <DependentUpon>WeeksControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\HourCodesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HourUsageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +171,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WeekControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WeeksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

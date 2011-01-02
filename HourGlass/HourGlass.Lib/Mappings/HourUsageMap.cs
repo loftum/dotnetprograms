@@ -14,7 +14,7 @@ namespace HourGlass.Lib.Mappings
             Map(x => x.Friday);
             Map(x => x.Saturday);
             Map(x => x.Sunday);
-            
+            References(x => x.HourCode).Cascade.All();
         }
     }
 }

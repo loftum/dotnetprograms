@@ -40,6 +40,16 @@ namespace HourGlass.Lib.Services
             return hourCode;
         }
 
+        public HourCode Save(HourCode hourCode)
+        {
+            return _repo.Save(hourCode);
+        }
+
+        public HourCode Remove(HourCode hourCode)
+        {
+            return _repo.Delete(hourCode);
+        }
+
         private HourCode FindDuplicateOf(HourCode hourCode)
         {
             return HourCodes
