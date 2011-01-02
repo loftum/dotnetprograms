@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="HourGlass.Views.HourUsageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="24" d:DesignWidth="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <ComboBox ItemsSource="{Binding Path=AvailableHourCodes}"
+                  SelectedItem="{Binding Path=HourCode}"
+                  Name="HourCodeBox" Grid.Column="0" IsEditable="True"
+                  KeyUp="HourCodeBox_KeyUp" />
+        <TextBox Grid.Column="1" Name="MondayBox" Text="{Binding Path=Monday}" />
+        <TextBox Grid.Column="2" Name="TuesdayBox" Text="{Binding Path=Tuesday}" />
+        <TextBox Grid.Column="3" Name="WednesdayBox" Text="{Binding Path=Wednesday}" />
+        <TextBox Grid.Column="4" Name="ThursdayBox" Text="{Binding Path=Thursday}" />
+        <TextBox Grid.Column="5" Name="FridayBox" Text="{Binding Path=Friday}" />
+        <TextBox Grid.Column="6" Name="SaturdayBox" Text="{Binding Path=Saturday}" />
+        <TextBox Grid.Column="7" Name="SundayBox" Text="{Binding Path=Sunday}" />
+        <TextBox Grid.Column="8" Name="SumBox" IsReadOnly="True" Text="{Binding Path=Sum, Mode=OneWay}" />
+        <Button Grid.Column="9" Name="RemoveButton" Content="X" Command="{Binding Path=RemoveCommand}" />
+
+    </Grid>
+</UserControl>
