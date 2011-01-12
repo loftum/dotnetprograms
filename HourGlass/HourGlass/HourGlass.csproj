@@ -212,6 +212,13 @@
       <Name>HourGlass.Lib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\autobots.ico" />
+    <Resource Include="Icons\decept.ico" />
+    <Resource Include="Icons\maximals.ico" />
+    <Resource Include="Icons\megatron.ico" />
+    <Resource Include="Icons\optimus.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
