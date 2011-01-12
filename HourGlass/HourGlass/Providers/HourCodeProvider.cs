@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using HourGlass.Lib.Services;
 using HourGlass.ViewModels;
 
@@ -14,13 +13,7 @@ namespace HourGlass.Providers
         public HourCodeProvider(IHourCodeService hourCodeService)
         {
             _hourCodeService = hourCodeService;
-            _hourCodeService.HourCodes.CollectionChanged += HandleCollectionChanged;
             AvailableHourCodes = new ObservableCollection<HourCodeViewModel>();
-            RefreshHourCodes();
-        }
-
-        private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             RefreshHourCodes();
         }
 
@@ -36,11 +29,14 @@ namespace HourGlass.Providers
         public HourCodeViewModel Add(string code, string name)
         {
             var hourCode = _hourCodeService.AddHourCode(code, name);
-            return new HourCodeViewModel(this, hourCode);
+            var model = new HourCodeViewModel(this, hourCode);
+            AvailableHourCodes.Add(model);
+            return model;
         }
 
         public void Remove(HourCodeViewModel model)
         {
+            AvailableHourCodes.Remove(model);
             _hourCodeService.Remove(model.HourCode);
         }
 

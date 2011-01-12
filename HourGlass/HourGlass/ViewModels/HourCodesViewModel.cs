@@ -41,12 +41,13 @@ namespace HourGlass.ViewModels
 
         private void AddCode(object obj)
         {
-            _hourCodeProvider.Add("000", "NewCode");
+            CurrentCode = _hourCodeProvider.Add("000", "NewCode");
         }
 
         private void SaveCurrentCode(object obj)
         {
             _hourCodeProvider.Save(CurrentCode);
+            OnPropertyChanged("HourCodes");
         }
 
         private void RemoveCurrentCode(object obj)
