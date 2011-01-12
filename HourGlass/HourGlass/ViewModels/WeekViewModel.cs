@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Domain;
@@ -70,6 +71,7 @@ namespace HourGlass.ViewModels
                 OnPropertyChanged("StartDate");
                 OnPropertyChanged("Year");
                 OnPropertyChanged("Number");
+                OnPropertiesChanged("MondayName", "TuesdayName", "WednesdayName", "ThursdayName", "FridayName", "SaturdayName", "SundayName");
             }
         }
 
@@ -81,6 +83,71 @@ namespace HourGlass.ViewModels
         public int Number
         {
             get { return Week.Number; }
+        }
+
+        public string MondayName
+        {
+            get
+            {
+                return DayName("Mon", 0);
+            }
+        }
+
+        public string TuesdayName
+        {
+            get
+            {
+                return DayName("Tue", 1);
+            }
+        }
+
+        public string WednesdayName
+        {
+            get
+            {
+                return DayName("Wed", 2);
+            }
+        }
+
+        public string ThursdayName
+        {
+            get
+            {
+                return DayName("Thu", 3);
+            }
+        }
+
+        public string FridayName
+        {
+            get
+            {
+                return DayName("Fri", 4);
+            }
+        }
+
+        public string SaturdayName
+        {
+            get
+            {
+                return DayName("Sat", 5);
+            }
+        }
+
+        public string SundayName
+        {
+            get
+            {
+                return DayName("Sun", 6);
+            }
+        }
+
+        private string DayName(string day, int dayNumber)
+        {
+            var date = StartDate.AddDays(dayNumber);
+            return new StringBuilder()
+                .AppendLine(day)
+                .Append(date.Day).Append(".").Append(date.Month)
+                .ToString();
         }
 
         public double Monday

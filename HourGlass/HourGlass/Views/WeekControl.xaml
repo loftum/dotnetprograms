@@ -28,7 +28,7 @@
         <Button Name="SaveButton" Content="Save" DockPanel.Dock="Bottom" Command="{Binding Path=SaveWeekCommand}" />
         <Grid Name="WeekGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24" />
+                <RowDefinition Height="45" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="24" />
             </Grid.RowDefinitions>
@@ -45,13 +45,13 @@
                     <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Hour Code" />
-                <Label Grid.Column="1" Content="Mon" />
-                <Label Grid.Column="2" Content="Tue" />
-                <Label Grid.Column="3" Content="Wed" />
-                <Label Grid.Column="4" Content="Thur" />
-                <Label Grid.Column="5" Content="Fri" />
-                <Label Grid.Column="6" Content="Sat" />
-                <Label Grid.Column="7" Content="Sun" />
+                <Label Grid.Column="1" Content="{Binding Path=MondayName, Mode=OneWay}" />
+                <Label Grid.Column="2" Content="{Binding Path=TuesdayName, Mode=OneWay}" />
+                <Label Grid.Column="3" Content="{Binding Path=WednesdayName, Mode=OneWay}" />
+                <Label Grid.Column="4" Content="{Binding Path=ThursdayName, Mode=OneWay}" />
+                <Label Grid.Column="5" Content="{Binding Path=FridayName, Mode=OneWay}" />
+                <Label Grid.Column="6" Content="{Binding Path=SaturdayName, Mode=OneWay}" />
+                <Label Grid.Column="7" Content="{Binding Path=SundayName, Mode=OneWay}" />
                 <Label Grid.Column="8" Content="Sum" FontWeight="Bold"/>
             </Grid>
             <Grid Grid.Row="1" Name="HourUsageGrid">
