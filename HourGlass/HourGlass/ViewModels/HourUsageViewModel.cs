@@ -5,6 +5,7 @@ using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Domain;
 using HourGlass.Lib.Services;
+using HourGlass.Providers;
 
 namespace HourGlass.ViewModels
 {
@@ -15,7 +16,7 @@ namespace HourGlass.ViewModels
 
         public HourUsage Usage { get; private set; }
 
-        private readonly IHourCodeService _hourCodeService;
+        private readonly IHourCodeProvider _hourCodeProvider;
         private readonly WeekViewModel _weekViewModel;
         
         private HourCodeViewModel _hourCode;
@@ -30,33 +31,16 @@ namespace HourGlass.ViewModels
             }
         }
 
-        public ObservableCollection<HourCodeViewModel> AvailableHourCodes { get; private set;}
+        public ObservableCollection<HourCodeViewModel> AvailableHourCodes { get { return _hourCodeProvider.AvailableHourCodes; } }
 
-        public HourUsageViewModel(IHourCodeService hourCodeService, WeekViewModel weekViewModel, HourUsage usage)
+        public HourUsageViewModel(IHourCodeProvider hourCodeProvider, WeekViewModel weekViewModel, HourUsage usage)
         {
-            _hourCodeService = hourCodeService;
+            _hourCodeProvider = hourCodeProvider;
             Usage = usage;
             _weekViewModel = weekViewModel;
-            AvailableHourCodes = new ObservableCollection<HourCodeViewModel>();
-            RefreshHourCodes();
-            AvailableHourCodes.CollectionChanged += HandleHourCodesChanged;
             RemoveCommand = new DelegateCommand(Remove);
             AddHourCodeCommand = new DelegateCommand(AddHourCode);
-            HourCode = new HourCodeViewModel(_hourCodeService, usage.HourCode);
-        }
-
-        private void HandleHourCodesChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RefreshHourCodes();
-        }
-
-        private void RefreshHourCodes()
-        {
-            AvailableHourCodes.Clear();
-            foreach (var hourCode in _hourCodeService.HourCodes)
-            {
-                AvailableHourCodes.Add(new HourCodeViewModel(_hourCodeService, hourCode));
-            }
+            HourCode = new HourCodeViewModel(_hourCodeProvider, usage.HourCode);
         }
 
         private void AddHourCode(object parameter)
@@ -69,8 +53,7 @@ namespace HourGlass.ViewModels
             }
             var code = split[0];
             var name = split[1];
-            var hourCode = _hourCodeService.AddHourCode(code, name);
-            HourCode = new HourCodeViewModel(_hourCodeService, hourCode);
+            HourCode = _hourCodeProvider.Add(code, name);
         }
 
         private void Remove(object parameter)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Services;
+using HourGlass.Providers;
 
 namespace HourGlass.ViewModels
 {
@@ -23,19 +24,19 @@ namespace HourGlass.ViewModels
             }
         }
 
-        private readonly IHourCodeService _hourCodeService;
+        private readonly IHourCodeProvider _hourCodeProvider;
         private readonly IWeekService _weekService;
 
-        public WeeksViewModel(IWeekService weekService, IHourCodeService hourCodeService)
+        public WeeksViewModel(IWeekService weekService, IHourCodeProvider hourCodeProvider)
         {
             _weekService = weekService;
-            _hourCodeService = hourCodeService;
+            _hourCodeProvider = hourCodeProvider;
             AddWeekCommand = new DelegateCommand(AddWeek);
             RemoveWeekCommand = new DelegateCommand(RemoveWeek);
             Weeks = new ObservableCollection<WeekViewModel>();
             foreach(var week in _weekService.GetRecentWeeks())
             {
-                Weeks.Add(new WeekViewModel(_weekService, _hourCodeService, week));
+                Weeks.Add(new WeekViewModel(_weekService, _hourCodeProvider, week));
             }
             CurrentWeek = Weeks.FirstOrDefault();
         }
@@ -55,7 +56,7 @@ namespace HourGlass.ViewModels
         private void AddWeek(object parameter)
         {
             var week = _weekService.NewWeek(GetMaxStartDate());
-            var viewModel = new WeekViewModel(_weekService, _hourCodeService, week);
+            var viewModel = new WeekViewModel(_weekService, _hourCodeProvider, week);
             Weeks.Add(viewModel);
             CurrentWeek = viewModel;
         }

@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Domain;
-using HourGlass.Lib.Services;
+using HourGlass.Providers;
 
 namespace HourGlass.ViewModels
 {
@@ -9,12 +9,12 @@ namespace HourGlass.ViewModels
     {
         public ICommand SaveCommand { get; private set; }
         public HourCode HourCode{get; private set;}
-        private readonly IHourCodeService _hourCodeService;
+        private readonly IHourCodeProvider _hourCodeProvider;
 
-        public HourCodeViewModel(IHourCodeService hourCodeService, HourCode hourCode)
+        public HourCodeViewModel(IHourCodeProvider hourCodeProvider, HourCode hourCode)
         {
             HourCode = hourCode;
-            _hourCodeService = hourCodeService;
+            _hourCodeProvider = hourCodeProvider;
             SaveCommand = new DelegateCommand(Save);
         }
 
@@ -22,7 +22,7 @@ namespace HourGlass.ViewModels
         {
             if (HourCode != null)
             {
-                _hourCodeService.Save(HourCode);    
+                _hourCodeProvider.Save(this);
             }
         }
 

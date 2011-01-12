@@ -47,6 +47,7 @@ namespace HourGlass.Lib.Services
 
         public HourCode Remove(HourCode hourCode)
         {
+            HourCodes.Remove(hourCode);
             return _repo.Delete(hourCode);
         }
 

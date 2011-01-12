@@ -121,6 +121,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Modules\HourGlassModule.cs" />
+    <Compile Include="Providers\HourCodeProvider.cs" />
+    <Compile Include="Providers\IHourCodeProvider.cs" />
     <Compile Include="ViewModels\HourCodeViewModel.cs" />
     <Compile Include="ViewModels\HourGlassViewModel.cs" />
     <Compile Include="ViewModels\HourCodesViewModel.cs" />

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Domain;
 using HourGlass.Lib.Services;
+using HourGlass.Providers;
 
 namespace HourGlass.ViewModels
 {
@@ -15,18 +16,18 @@ namespace HourGlass.ViewModels
 
         public Week Week{ get; private set;}
         private readonly IWeekService _weekService;
-        private readonly IHourCodeService _hourCodeService;
+        private readonly IHourCodeProvider _hourCodeProvider;
 
-        public WeekViewModel(IWeekService weekService, IHourCodeService hourCodeService, Week week)
+        public WeekViewModel(IWeekService weekService, IHourCodeProvider hourCodeProvider, Week week)
         {
             _weekService = weekService;
             Week = week;
-            _hourCodeService = hourCodeService;
+            _hourCodeProvider = hourCodeProvider;
 
             Usages = new ObservableCollection<HourUsageViewModel>();
             foreach (var hourUsage in Week.Usages)
             {
-                Usages.Add(new HourUsageViewModel(_hourCodeService, this, hourUsage));
+                Usages.Add(new HourUsageViewModel(_hourCodeProvider, this, hourUsage));
             }
             SaveWeekCommand = new DelegateCommand(SaveWeek);
             AddUsageCommand = new DelegateCommand(AddUsage);
@@ -36,7 +37,7 @@ namespace HourGlass.ViewModels
         {
             var usage = new HourUsage();
             Week.AddUsage(usage);
-            Usages.Add(new HourUsageViewModel(_hourCodeService, this, usage));
+            Usages.Add(new HourUsageViewModel(_hourCodeProvider, this, usage));
         }
 
         public void Remove(HourUsageViewModel hourUsageViewModel)

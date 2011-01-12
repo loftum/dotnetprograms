@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using HourGlass.Commands;
-using HourGlass.Lib.Services;
+using HourGlass.Providers;
 
 namespace HourGlass.ViewModels
 {
@@ -12,7 +12,7 @@ namespace HourGlass.ViewModels
         public ICommand SaveCurrentCodeCommand { get; private set; }
         public ICommand RemoveCurrentCodeCommand { get; private set; }
 
-        public ObservableCollection<HourCodeViewModel> HourCodes { get; private set; }
+        public ObservableCollection<HourCodeViewModel> HourCodes { get { return _hourCodeProvider.AvailableHourCodes; } }
         private HourCodeViewModel _currentCode;
         public HourCodeViewModel CurrentCode
         {
@@ -27,35 +27,18 @@ namespace HourGlass.ViewModels
             }
         }
 
-        private readonly IHourCodeService _hourCodeService;
+        private readonly IHourCodeProvider _hourCodeProvider;
 
-        public HourCodesViewModel(IHourCodeService hourCodeService)
+        public HourCodesViewModel(IHourCodeProvider hourCodeProvider)
         {
-            _hourCodeService = hourCodeService;
-            HourCodes = new ObservableCollection<HourCodeViewModel>();
-            RefreshHourCodes();
-            _hourCodeService.HourCodes.CollectionChanged += HandleHourCodesChanged;
+            _hourCodeProvider = hourCodeProvider;
             SaveCurrentCodeCommand = new DelegateCommand(SaveCurrentCode);
             RemoveCurrentCodeCommand = new DelegateCommand(RemoveCurrentCode);
         }
 
-        private void HandleHourCodesChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RefreshHourCodes();
-        }
-
-        private void RefreshHourCodes()
-        {
-            HourCodes.Clear();
-            foreach (var hourCode in _hourCodeService.HourCodes)
-            {
-                HourCodes.Add(new HourCodeViewModel(_hourCodeService, hourCode));
-            }
-        }
-
         private void SaveCurrentCode(object obj)
         {
-            _hourCodeService.Save(CurrentCode.HourCode);
+            _hourCodeProvider.Save(CurrentCode);
         }
 
         private void RemoveCurrentCode(object obj)
@@ -66,9 +49,8 @@ namespace HourGlass.ViewModels
             }
 
             var currentCode = CurrentCode;
-            HourCodes.Remove(currentCode);
+            _hourCodeProvider.Remove(currentCode);
             CurrentCode = HourCodes.FirstOrDefault();
-            _hourCodeService.Remove(currentCode.HourCode);
         }
     }
 }
