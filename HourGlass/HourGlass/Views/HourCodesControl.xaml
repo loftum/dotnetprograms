@@ -6,8 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <DockPanel>
-        <ListBox DockPanel.Dock="Left" MinWidth="120" 
-                 ItemsSource="{Binding Path=HourCodes, Mode=OneWay}" SelectedItem="{Binding Path=CurrentCode, Mode=OneWayToSource}" />
+        <DockPanel>
+            <Button DockPanel.Dock="Bottom" Content="Add" Command="{Binding Path=AddCodeCommand}" />
+            <ListBox DockPanel.Dock="Left" MinWidth="120" 
+                 ItemsSource="{Binding Path=HourCodes, Mode=OneWay}"
+                 SelectedItem="{Binding Path=CurrentCode, Mode=OneWayToSource}" />
+        </DockPanel>
         <DockPanel>
             <Grid>
                 <Grid.RowDefinitions>

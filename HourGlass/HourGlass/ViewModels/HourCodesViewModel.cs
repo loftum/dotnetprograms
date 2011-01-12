@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HourGlass.ViewModels
     {
         public ICommand SaveCurrentCodeCommand { get; private set; }
         public ICommand RemoveCurrentCodeCommand { get; private set; }
+        public ICommand AddCodeCommand { get; private set; }
 
         public ObservableCollection<HourCodeViewModel> HourCodes { get { return _hourCodeProvider.AvailableHourCodes; } }
         private HourCodeViewModel _currentCode;
@@ -34,6 +36,12 @@ namespace HourGlass.ViewModels
             _hourCodeProvider = hourCodeProvider;
             SaveCurrentCodeCommand = new DelegateCommand(SaveCurrentCode);
             RemoveCurrentCodeCommand = new DelegateCommand(RemoveCurrentCode);
+            AddCodeCommand = new DelegateCommand(AddCode);
+        }
+
+        private void AddCode(object obj)
+        {
+            _hourCodeProvider.Add("000", "NewCode");
         }
 
         private void SaveCurrentCode(object obj)

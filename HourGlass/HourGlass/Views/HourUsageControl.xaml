@@ -22,6 +22,7 @@
         <ComboBox Grid.Column="1" 
                   ItemsSource="{Binding Path=AvailableHourCodes, Mode=OneWay}"
                   SelectedItem="{Binding Path=HourCode, Mode=TwoWay}"
+                  Text="{Binding Path=HourCode, Mode=OneWay}"
                   Name="HourCodeBox"  IsEditable="True"
                   KeyUp="HourCodeBox_KeyUp" />
         <TextBox Grid.Column="2" Name="MondayBox" Text="{Binding Path=Monday}" />
