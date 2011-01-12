@@ -33,8 +33,20 @@ namespace HourGlass.Lib.Domain
 
         public virtual void AddUsage(HourUsage usage)
         {
-            usage.Week = this;
-            Usages.Add(usage);
+            if (!Usages.Contains(usage))
+            {
+                usage.Week = this;
+                Usages.Add(usage);
+            }
+        }
+
+        public virtual void RemoveUsage(HourUsage usage)
+        {
+            if (!Usages.Contains(usage))
+            {
+                Usages.Remove(usage);
+                usage.Week = null;
+            }
         }
 
         public override string ToString()

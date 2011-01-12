@@ -7,5 +7,7 @@ namespace HourGlass.Lib.DateAndTime
         int GetCurrentYear();
         int GetCurrentWeekNumber();
         DateTime GetCurrentWeekStartDate();
+        DateTime Now();
+        DateTime Today();
     }
 }

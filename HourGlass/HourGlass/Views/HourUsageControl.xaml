@@ -20,8 +20,8 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Name="RemoveButton" Content="X" Command="{Binding Path=RemoveCommand}" />
         <ComboBox Grid.Column="1" 
-                  ItemsSource="{Binding Path=AvailableHourCodes}"
-                  SelectedItem="{Binding Path=HourCode}"
+                  ItemsSource="{Binding Path=AvailableHourCodes, Mode=OneWay}"
+                  SelectedItem="{Binding Path=HourCode, Mode=TwoWay}"
                   Name="HourCodeBox"  IsEditable="True"
                   KeyUp="HourCodeBox_KeyUp" />
         <TextBox Grid.Column="2" Name="MondayBox" Text="{Binding Path=Monday}" />

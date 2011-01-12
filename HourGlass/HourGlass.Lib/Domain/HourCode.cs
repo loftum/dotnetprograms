@@ -22,5 +22,21 @@ namespace HourGlass.Lib.Domain
             return new StringBuilder()
                 .Append(Code).Append(": ").Append(Name).ToString();
         }
+
+        public virtual void AddUsage(HourUsage hourUsage)
+        {
+            if (hourUsage != null)
+            {
+                Usages.Add(hourUsage);
+            }
+        }
+
+        public virtual void RemoveUsage(HourUsage hourUsage)
+        {
+            if (hourUsage != null)
+            {
+                Usages.Remove(hourUsage);
+            }
+        }
     }
 }

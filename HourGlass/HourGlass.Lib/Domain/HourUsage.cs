@@ -17,5 +17,18 @@ namespace HourGlass.Lib.Domain
         {
             get { return Monday + Tuesday + Wednesday + Thursday + Friday + Saturday + Sunday; }
         }
+
+        public virtual void SetHourCode(HourCode hourCode)
+        {
+            if (HourCode != null)
+            {
+                HourCode.RemoveUsage(this);
+            }
+            HourCode = hourCode;
+            if (hourCode != null)
+            {
+                hourCode.AddUsage(this);
+            }
+        }
     }
 }

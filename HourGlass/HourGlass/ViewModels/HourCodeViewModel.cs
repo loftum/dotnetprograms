@@ -20,7 +20,10 @@ namespace HourGlass.ViewModels
 
         private void Save(object obj)
         {
-            _hourCodeService.Save(HourCode);
+            if (HourCode != null)
+            {
+                _hourCodeService.Save(HourCode);    
+            }
         }
 
         public bool CanDelete
@@ -64,7 +67,9 @@ namespace HourGlass.ViewModels
 
         public override string ToString()
         {
-            return HourCode.ToString();
+            return HourCode == null ?
+                string.Empty :
+                HourCode.ToString();
         }
     }
 }

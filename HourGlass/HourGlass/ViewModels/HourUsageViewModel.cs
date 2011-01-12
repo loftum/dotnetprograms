@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Input;
 using HourGlass.Commands;
 using HourGlass.Lib.Domain;
@@ -12,23 +13,36 @@ namespace HourGlass.ViewModels
         public ICommand RemoveCommand { get; private set; }
         public ICommand AddHourCodeCommand { get; private set; }
 
+        public HourUsage Usage { get; private set; }
+
         private readonly IHourCodeService _hourCodeService;
-        private readonly HourUsage _usage;
         private readonly WeekViewModel _weekViewModel;
+        
         private HourCodeViewModel _hourCode;
+        public HourCodeViewModel HourCode
+        {
+            get { return _hourCode; }
+            set
+            {
+                _hourCode = value;
+                Usage.SetHourCode(_hourCode == null ? null : _hourCode.HourCode);
+                OnPropertyChanged("HourCode");
+            }
+        }
 
         public ObservableCollection<HourCodeViewModel> AvailableHourCodes { get; private set;}
 
         public HourUsageViewModel(IHourCodeService hourCodeService, WeekViewModel weekViewModel, HourUsage usage)
         {
             _hourCodeService = hourCodeService;
-            _usage = usage;
+            Usage = usage;
             _weekViewModel = weekViewModel;
             AvailableHourCodes = new ObservableCollection<HourCodeViewModel>();
             RefreshHourCodes();
             AvailableHourCodes.CollectionChanged += HandleHourCodesChanged;
             RemoveCommand = new DelegateCommand(Remove);
             AddHourCodeCommand = new DelegateCommand(AddHourCode);
+            HourCode = new HourCodeViewModel(_hourCodeService, usage.HourCode);
         }
 
         private void HandleHourCodesChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -56,34 +70,21 @@ namespace HourGlass.ViewModels
             var code = split[0];
             var name = split[1];
             var hourCode = _hourCodeService.AddHourCode(code, name);
-            _usage.HourCode = hourCode;
-
+            HourCode = new HourCodeViewModel(_hourCodeService, hourCode);
         }
 
         private void Remove(object parameter)
         {
-            _weekViewModel.Usages.Remove(this);
-        }
-
-
-        public HourCodeViewModel HourCode
-        {
-            get { return _hourCode; }
-            set 
-            {
-                _hourCode = value;
-                _usage.HourCode = _hourCode == null ? null : _hourCode.HourCode;
-                HourCode.HourCode.Usages.Add(_usage);
-                OnPropertyChanged("HourCode");
-            }
+            Usage.SetHourCode(null);
+            _weekViewModel.Remove(this);
         }
 
         public double Monday
         {
-            get { return _usage.Monday; }
+            get { return Usage.Monday; }
             set
             {
-                _usage.Monday = value;
+                Usage.Monday = value;
                 OnPropertyChanged("Monday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -92,10 +93,10 @@ namespace HourGlass.ViewModels
 
         public double Tuesday
         {
-            get { return _usage.Tuesday; }
+            get { return Usage.Tuesday; }
             set
             {
-                _usage.Tuesday = value;
+                Usage.Tuesday = value;
                 OnPropertyChanged("Tuesday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -104,10 +105,10 @@ namespace HourGlass.ViewModels
 
         public double Wednesday
         {
-            get { return _usage.Wednesday; }
+            get { return Usage.Wednesday; }
             set
             {
-                _usage.Wednesday = value;
+                Usage.Wednesday = value;
                 OnPropertyChanged("Wednesday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -116,10 +117,10 @@ namespace HourGlass.ViewModels
 
         public double Thursday
         {
-            get { return _usage.Thursday; }
+            get { return Usage.Thursday; }
             set
             {
-                _usage.Thursday = value;
+                Usage.Thursday = value;
                 OnPropertyChanged("Thursday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -128,10 +129,10 @@ namespace HourGlass.ViewModels
 
         public double Friday
         {
-            get { return _usage.Friday; }
+            get { return Usage.Friday; }
             set
             {
-                _usage.Friday = value;
+                Usage.Friday = value;
                 OnPropertyChanged("Friday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -140,10 +141,10 @@ namespace HourGlass.ViewModels
 
         public double Saturday
         {
-            get { return _usage.Saturday; }
+            get { return Usage.Saturday; }
             set
             {
-                _usage.Saturday = value;
+                Usage.Saturday = value;
                 OnPropertyChanged("Saturday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -152,10 +153,10 @@ namespace HourGlass.ViewModels
 
         public double Sunday
         {
-            get { return _usage.Sunday; }
+            get { return Usage.Sunday; }
             set
             {
-                _usage.Sunday = value;
+                Usage.Sunday = value;
                 OnPropertyChanged("Sunday");
                 OnPropertyChanged("Sum");
                 _weekViewModel.NumbersChanged();
@@ -164,7 +165,7 @@ namespace HourGlass.ViewModels
 
         public double Sum
         {
-            get { return _usage.Sum; }
+            get { return Usage.Sum; }
         }
     }
 }

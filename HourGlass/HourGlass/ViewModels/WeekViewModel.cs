@@ -39,6 +39,12 @@ namespace HourGlass.ViewModels
             Usages.Add(new HourUsageViewModel(_hourCodeService, this, usage));
         }
 
+        public void Remove(HourUsageViewModel hourUsageViewModel)
+        {
+            Week.RemoveUsage(hourUsageViewModel.Usage);
+            Usages.Remove(hourUsageViewModel);
+        }
+
         private void SaveWeek(object parameter)
         {
             _weekService.Save(Week);

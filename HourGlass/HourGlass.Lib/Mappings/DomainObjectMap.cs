@@ -9,6 +9,8 @@ namespace HourGlass.Lib.Mappings
         protected DomainObjectMap()
         {
             Id(x => x.Id);
+            Map(x => x.CreatedDate);
+            Map(x => x.UpdatedDate);
         }
     }
 }

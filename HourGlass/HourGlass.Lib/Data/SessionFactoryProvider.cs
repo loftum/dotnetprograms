@@ -10,17 +10,16 @@ namespace HourGlass.Lib.Data
 {
     public class SessionFactoryProvider
     {
-        public static ISessionFactory SqliteSessionFactory(string filename)
+        public static ISessionFactory SqliteSessionFactory(string filename, bool exposeConfiguration = false)
         {
             var configuration = Fluently.Configure()
                 .Database(SQLiteConfiguration.Standard.UsingFile(filename))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Week>());
             
-            if (!File.Exists(filename))
+            if (!File.Exists(filename) || exposeConfiguration)
             {
                 configuration.ExposeConfiguration(BuildSchema);
             }
-            //configuration.ExposeConfiguration(BuildSchema);
 
             return configuration.BuildSessionFactory();
         }
