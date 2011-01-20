@@ -42,7 +42,7 @@ namespace HourGlass.Lib.Domain
 
         public virtual void RemoveUsage(HourUsage usage)
         {
-            if (!Usages.Contains(usage))
+            if (Usages.Contains(usage))
             {
                 Usages.Remove(usage);
                 usage.Week = null;

@@ -45,6 +45,7 @@ namespace HourGlass.ViewModels
         {
             Week.RemoveUsage(hourUsageViewModel.Usage);
             Usages.Remove(hourUsageViewModel);
+            NumbersChanged();
         }
 
         private void SaveWeek(object parameter)
@@ -54,7 +55,7 @@ namespace HourGlass.ViewModels
         
         public void NumbersChanged()
         {
-            OnPropertiesChanged("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Sum");
+            OnPropertiesChanged("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Sum", "Name");
         }
 
         public DateTime StartDate
@@ -68,9 +69,7 @@ namespace HourGlass.ViewModels
                     day = day.AddDays(-1);
                 }
                 Week.StartDate = day;
-                OnPropertyChanged("StartDate");
-                OnPropertyChanged("Year");
-                OnPropertyChanged("Number");
+                OnPropertiesChanged("StartDate", "Year", "Number", "Name");
                 OnPropertiesChanged("MondayName", "TuesdayName", "WednesdayName", "ThursdayName", "FridayName", "SaturdayName", "SundayName");
             }
         }
@@ -190,9 +189,21 @@ namespace HourGlass.ViewModels
             get { return Week.Sum; }
         }
 
+        public string Name
+        {
+            get
+            {
+                return new StringBuilder()
+                .Append(Year)
+                .Append(" - ")
+                .Append(Number)
+                .Append(" (").Append(Sum).Append(")").ToString();
+            }
+        }
+
         public override string ToString()
         {
-            return Week.ToString();
+            return Name;
         }
     }
 }

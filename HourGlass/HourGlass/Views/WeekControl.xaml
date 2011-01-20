@@ -13,8 +13,16 @@
                 <RowDefinition Height="24" />
                 <RowDefinition Height="24" />
             </Grid.RowDefinitions>
+            
             <Label Grid.Row="0" Content="Week info" />
-            <TextBox Grid.Row="1" IsReadOnly="True"  Name="WeekNameBox" Text="{Binding Path=Number, Mode=OneWay}" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Week number" />
+                <Label Grid.Column="1" Content="{Binding Path=Number, Mode=OneWay}" />
+            </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

@@ -12,7 +12,13 @@
                     MinWidth="120" Height="24" DockPanel.Dock="Bottom" Content="Remove" />
             <ListBox Name="WeekListBox" MinWidth="120"
                 ItemsSource="{Binding Path=Weeks}"
-                SelectedItem="{Binding Path=CurrentWeek, Mode=OneWayToSource}" />
+                SelectedItem="{Binding Path=CurrentWeek, Mode=OneWayToSource}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
 
         <Views:WeekControl x:Name="WeekControl" DataContext="{Binding Path=CurrentWeek, Mode=TwoWay}" />

@@ -150,9 +150,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\WeekControl2.xaml.cs">
-      <DependentUpon>WeekControl2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\WeeksControl.xaml.cs">
       <DependentUpon>WeeksControl.xaml</DependentUpon>
     </Compile>
@@ -171,10 +168,6 @@
     <Page Include="Views\WeekControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\WeekControl2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WeeksControl.xaml">
       <SubType>Designer</SubType>
