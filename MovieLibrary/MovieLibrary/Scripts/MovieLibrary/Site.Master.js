@@ -1,0 +1,13 @@
+$(document).ready(function () {
+
+    $.ajaxSetup({ cache: false });
+
+});
+
+var ML = {
+
+    Library: {
+        Grid: {}
+    }
+
+};
