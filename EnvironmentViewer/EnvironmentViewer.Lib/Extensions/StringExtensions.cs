@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace EnvironmentViewer.Lib.Extensions
@@ -9,7 +10,7 @@ namespace EnvironmentViewer.Lib.Extensions
             return string.IsNullOrEmpty(value);
         }
 
-        public static bool IsNullOrWhitespace(this string value)
+        public static bool IsNullOrWhiteSpace(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
         }
@@ -17,6 +18,11 @@ namespace EnvironmentViewer.Lib.Extensions
         public static bool Matches(this string value, string pattern)
         {
             return Regex.IsMatch(value, pattern);
+        }
+
+        public static bool EqualsOneOf(this string value, params string[] otherValues)
+        {
+            return otherValues.Any(value.Equals);
         }
     }
 }

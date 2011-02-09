@@ -1,38 +1,52 @@
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using EnvironmentViewer.Commands;
+using EnvironmentViewer.Lib.Domain;
 using EnvironmentViewer.Lib.Extensions;
-using Environment = EnvironmentViewer.Lib.Domain.Environment;
+using EnvironmentViewer.Lib.Services;
 
 namespace EnvironmentViewer.ViewModels
 {
     public class EnvironmentViewModel : ViewModelBase
     {
+        private readonly IEnvironmentService _environmentService;
+        private EnvironmentState _state = new EnvironmentState();
+
         public ICommand AddEnvironmentCommand { get; private set; }
         public ICommand RemoveEnvironmentCommand { get; private set; }
+        public ICommand UpdateStatusCommand { get; private set; }
 
         public ObservableCollection<string> AvailableDatabaseTypes { get; private set; }
         private readonly EnvironmentsViewModel _environmentsViewModel;
-        public Environment Environment { get; private set; }
+        public EnvironmentData EnvironmentData { get; private set; }
 
-        public EnvironmentViewModel(EnvironmentsViewModel environmentsViewModel)
-            : this (environmentsViewModel, new Environment{Name="Name", Host = "Host"})
+        public EnvironmentViewModel(EnvironmentsViewModel environmentsViewModel, IEnvironmentService environmentService)
+            : this (environmentsViewModel, environmentService, new EnvironmentData{Name="Name", Host = "Host"})
         {
         }
 
-        public EnvironmentViewModel(EnvironmentsViewModel environmentsViewModel, Environment environment)
+        public EnvironmentViewModel(EnvironmentsViewModel environmentsViewModel,
+            IEnvironmentService environmentService,
+            EnvironmentData environmentData)
         {
-            Environment = environment;
+            _environmentsViewModel = environmentsViewModel;
+            _environmentService = environmentService;
+            EnvironmentData = environmentData;
             AddEnvironmentCommand = new DelegateCommand(AddEnvironment);
             RemoveEnvironmentCommand = new DelegateCommand(RemoveEnvironment);
-            _environmentsViewModel = environmentsViewModel;
+            UpdateStatusCommand = new DelegateCommand(UpdateStatus);
             AvailableDatabaseTypes = _environmentsViewModel.AvailableDatabaseTypes;
+            UpdateStatus(null);
+        }
+
+        private void UpdateStatus(object obj)
+        {
+            _state = _environmentService.GetStateOf(EnvironmentData);
+            OnPropertiesChanged("ApplicationVersion", "ApplicationStatus", "DatabaseVersion", "DatabaseStatus");
         }
 
         private void AddEnvironment(object obj)
         {
-            MessageBox.Show("Add environment");
             _environmentsViewModel.AddEnvironment(obj);
         }
 
@@ -43,49 +57,50 @@ namespace EnvironmentViewer.ViewModels
 
         public string Name
         {
-            get { return Environment.Name; }
-            set { Environment.Name = value; OnPropertyChanged("Name"); }
+            get { return EnvironmentData.Name; }
+            set { EnvironmentData.Name = value; OnPropertyChanged("Name"); }
         }
 
         public string Host
         {
-            get { return Environment.Host; }
-            set { Environment.Host = value; OnPropertyChanged("Host"); }
+            get { return EnvironmentData.Host; }
+            set { EnvironmentData.Host = value; OnPropertyChanged("Host"); }
         }
 
-        public string Version
+        public string Url
         {
-            get { return "1"; }
+            get { return EnvironmentData.Url; }
+            set { EnvironmentData.Url = value; OnPropertyChanged("Url"); }
         }
 
         public string DatabaseType
         {
-            get { return Environment.DatabaseType; }
-            set { Environment.DatabaseType = value; OnPropertiesChanged("DatabaseType", "IntegratedSecurityEnabled"); }
+            get { return EnvironmentData.DatabaseType; }
+            set { EnvironmentData.DatabaseType = value; OnPropertiesChanged("DatabaseType", "IntegratedSecurityEnabled"); }
         }
 
         public string DatabaseHost
         {
-            get { return Environment.DatabaseHost; }
-            set { Environment.DatabaseHost = value; OnPropertyChanged("DatabaseHost"); }
+            get { return EnvironmentData.DatabaseHost; }
+            set { EnvironmentData.DatabaseHost = value; OnPropertyChanged("DatabaseHost"); }
         }
 
         public string DatabaseName
         {
-            get { return Environment.DatabaseName; }
-            set { Environment.DatabaseName = value; OnPropertyChanged("DatabaseName"); }
+            get { return EnvironmentData.DatabaseName; }
+            set { EnvironmentData.DatabaseName = value; OnPropertyChanged("DatabaseName"); }
         }
 
         public string DatabaseUsername
         {
-            get { return Environment.DatabaseUsername; }
-            set { Environment.DatabaseUsername = value; OnPropertyChanged("DatabaseUsername"); }
+            get { return EnvironmentData.DatabaseUsername; }
+            set { EnvironmentData.DatabaseUsername = value; OnPropertyChanged("DatabaseUsername"); }
         }
 
         public string DatabasePassword
         {
             get { return "*********"; }
-            set { Environment.DatabasePassword = value; OnPropertyChanged("DatabasePassword"); }
+            set { EnvironmentData.DatabasePassword = value; OnPropertyChanged("DatabasePassword"); }
         }
 
         public bool IntegratedSecurityEnabled
@@ -93,9 +108,24 @@ namespace EnvironmentViewer.ViewModels
             get { return !DatabaseType.IsNullOrEmpty() && DatabaseType.Equals("sqlserver"); }
         }
 
+        public string ApplicationVersion
+        {
+            get { return _state.ApplicationVersion; }
+        }
+
+        public string ApplicationStatus
+        {
+            get { return _state.ApplicationStatus; }
+        }
+
         public string DatabaseVersion
         {
-            get { return "2"; }
+            get { return _state.DatabaseVersion; }
+        }
+
+        public string DatabaseStatus
+        {
+            get { return _state.DatabaseStatus; }
         }
 
         public override string ToString()

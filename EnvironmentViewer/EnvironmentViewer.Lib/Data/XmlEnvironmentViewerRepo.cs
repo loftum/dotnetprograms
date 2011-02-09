@@ -2,24 +2,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Environment = EnvironmentViewer.Lib.Domain.Environment;
+using EnvironmentViewer.Lib.Domain;
 
 namespace EnvironmentViewer.Lib.Data
 {
-    public class XmlEnvironmentRepo : IEnvironmentRepo
+    public class XmlEnvironmentViewerRepo : IEnvironmentViewerRepo
     {
         private readonly string _filePath;
 
-        public XmlEnvironmentRepo(string filePath)
+        public XmlEnvironmentViewerRepo(string filePath)
         {
             _filePath = filePath;
         }
 
-        public IEnumerable<Environment> GetAll()
+        public IEnumerable<EnvironmentData> GetAll()
         {
             if (!File.Exists(_filePath))
             {
-                return new Environment[0];
+                return new EnvironmentData[0];
             }
             using (var stream = File.OpenRead(_filePath))
             {
@@ -29,7 +29,7 @@ namespace EnvironmentViewer.Lib.Data
             }
         }
 
-        public void SaveAll(IEnumerable<Environment> environments)
+        public void SaveAll(IEnumerable<EnvironmentData> environments)
         {
             var container = new EnvironmentContainer{Environments = environments.ToList()};
             var serializer = new XmlSerializer(typeof (EnvironmentContainer));

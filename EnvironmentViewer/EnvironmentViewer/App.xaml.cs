@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
+using EnvironmentViewer.Lib.Modules;
+using EnvironmentViewer.Lib.Services;
 using EnvironmentViewer.ViewModels;
+using Ninject;
 
 namespace EnvironmentViewer
 {
@@ -8,7 +11,9 @@ namespace EnvironmentViewer
     {
         protected override void OnActivated(EventArgs e)
         {
-            MainWindow.DataContext = new EnvironmentsViewModel();
+            var kernel = new StandardKernel(new RepoModule(), new ServiceModule());
+            var environmentService = kernel.Get<IEnvironmentService>();
+            MainWindow.DataContext = new EnvironmentsViewModel(environmentService);
         }
     }
 }

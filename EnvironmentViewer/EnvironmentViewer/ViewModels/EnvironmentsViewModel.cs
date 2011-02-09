@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using EnvironmentViewer.Commands;
 using EnvironmentViewer.Lib.Data;
+using EnvironmentViewer.Lib.Services;
 
 namespace EnvironmentViewer.ViewModels
 {
@@ -21,13 +22,15 @@ namespace EnvironmentViewer.ViewModels
             set { _currentEnvironment = value; OnPropertyChanged("CurrentEnvironment"); }
         }
 
-        private readonly IEnvironmentRepo _repo;
+        private readonly IEnvironmentService _environmentService;
+        private readonly IEnvironmentViewerRepo _repo;
 
-        public EnvironmentsViewModel()
+        public EnvironmentsViewModel(IEnvironmentService environmentService)
         {
+            _environmentService = environmentService;
             Environments = new ObservableCollection<EnvironmentViewModel>();
             AvailableDatabaseTypes = new ObservableCollection<string>(new []{"sqlserver", "mysql", "sqlite"});
-            _repo = new XmlEnvironmentRepo("environments.xml");
+            _repo = new XmlEnvironmentViewerRepo("environments.xml");
             LoadEnvironments();
             AddEnvironmentCommand = new DelegateCommand(AddEnvironment);
             SaveAllEnvironmentsCommand = new DelegateCommand(SaveAllEnvironments);
@@ -35,7 +38,7 @@ namespace EnvironmentViewer.ViewModels
 
         private void SaveAllEnvironments(object obj)
         {
-            var environments = Environments.Select(env => env.Environment);
+            var environments = Environments.Select(env => env.EnvironmentData);
             _repo.SaveAll(environments);
         }
 
@@ -44,13 +47,13 @@ namespace EnvironmentViewer.ViewModels
             var environments = _repo.GetAll();
             foreach (var environment in environments)
             {
-                Environments.Add(new EnvironmentViewModel(this, environment));
+                Environments.Add(new EnvironmentViewModel(this, _environmentService, environment));
             }
         }
 
         public void AddEnvironment(object obj)
         {
-            Environments.Add(new EnvironmentViewModel(this));
+            Environments.Add(new EnvironmentViewModel(this, _environmentService));
         }
 
         public void RemoveEnvironment(EnvironmentViewModel environmentViewModel)

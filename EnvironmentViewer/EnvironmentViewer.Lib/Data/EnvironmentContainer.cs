@@ -5,6 +5,6 @@ namespace EnvironmentViewer.Lib.Data
 {
     public class EnvironmentContainer
     {
-        public List<Environment> Environments { get; set; }
+        public List<EnvironmentData> Environments { get; set; }
     }
 }
