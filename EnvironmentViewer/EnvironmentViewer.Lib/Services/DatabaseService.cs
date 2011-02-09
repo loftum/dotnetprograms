@@ -1,3 +1,4 @@
+using System;
 using EnvironmentViewer.Lib.Data;
 using EnvironmentViewer.Lib.Domain;
 using EnvironmentViewer.Lib.SessionFactories;
@@ -26,11 +27,20 @@ namespace EnvironmentViewer.Lib.Services
                 IntegratedSecurity = environmentData.IntegratedSecurity
             };
 
+            state.Status = _provider.TestConnection(credentials);
+
             if (credentials.IsValid)
             {
-                using (var repo = _provider.GetVersionRepo(credentials))
+                try
                 {
-                    state.Version = repo.GetVersion().ToString();
+                    using (var repo = _provider.GetVersionRepo(credentials))
+                    {
+                        state.Version = repo.GetVersion().ToString();
+                    }
+                }
+                catch (Exception e)
+                {
+                    state.Status = "No SchemaInfo";
                 }
             }
             else

@@ -5,5 +5,6 @@ namespace EnvironmentViewer.Lib.Data
     public interface IVersionRepoProvider
     {
         IVersionRepo GetVersionRepo(DatabaseCredentials credentials);
+        string TestConnection(DatabaseCredentials credentials);
     }
 }

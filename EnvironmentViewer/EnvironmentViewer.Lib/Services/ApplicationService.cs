@@ -24,14 +24,9 @@ namespace EnvironmentViewer.Lib.Services
                 catch(WebException e)
                 {
                     var response = (HttpWebResponse) e.Response;
-                    if (response != null)
-                    {
-                        state.Status = response.StatusCode.ToString("D");
-                    }
-                    else
-                    {
-                        state.Status = e.Message;
-                    }
+                    state.Status = response != null ?
+                        response.StatusCode.ToString("D") :
+                        e.Message;
                 }
                 catch (Exception e)
                 {

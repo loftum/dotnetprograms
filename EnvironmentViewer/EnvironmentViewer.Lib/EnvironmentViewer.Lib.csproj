@@ -49,6 +49,9 @@
     <Reference Include="log4net">
       <HintPath>..\BuildAssets\fluentnhibernate-1.1\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="mysql.data">
+      <HintPath>..\BuildAssets\mysql\mysql.data.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\BuildAssets\fluentnhibernate-1.1\NHibernate.dll</HintPath>
     </Reference>

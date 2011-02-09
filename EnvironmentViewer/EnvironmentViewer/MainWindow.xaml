@@ -1,6 +1,6 @@
 ﻿<Window x:Class="EnvironmentViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:EnvironmentViewer.Views" Title="Environment Viewer" Height="600" Width="800">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:EnvironmentViewer.Views" Title="Environment Viewer" Height="600" Width="800" Icon="/EnvironmentViewer;component/Icons/recycled.png">
     <DockPanel>
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
