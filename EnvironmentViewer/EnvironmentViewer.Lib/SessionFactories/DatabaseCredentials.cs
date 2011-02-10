@@ -35,7 +35,8 @@ namespace EnvironmentViewer.Lib.SessionFactories
         {
             var builder = new StringBuilder()
                 .Append("Data Source=").Append(Host).Append(";")
-                .Append("Initial Catalog=").Append(Database).Append(";");
+                .Append("Initial Catalog=").Append(Database).Append(";")
+                .Append("MultipleActiveResultSets=True;");
             if (IntegratedSecurity)
             {
                 builder.Append("Integrated Security=True;");

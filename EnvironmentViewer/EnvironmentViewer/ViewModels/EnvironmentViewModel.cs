@@ -103,6 +103,12 @@ namespace EnvironmentViewer.ViewModels
             set { EnvironmentData.DatabasePassword = value; OnPropertyChanged("DatabasePassword"); }
         }
 
+        public bool IntegratedSecurity
+        {
+            get { return EnvironmentData.IntegratedSecurity; }
+            set { EnvironmentData.IntegratedSecurity = value; OnPropertiesChanged("IntegratedSecurity"); }
+        }
+
         public bool IntegratedSecurityEnabled
         {
             get { return !DatabaseType.IsNullOrEmpty() && DatabaseType.Equals("sqlserver"); }

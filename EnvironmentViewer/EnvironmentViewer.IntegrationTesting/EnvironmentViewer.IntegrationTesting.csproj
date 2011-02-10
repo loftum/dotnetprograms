@@ -58,6 +58,10 @@
     <Reference Include="NHibernate.ByteCode.Castle">
       <HintPath>..\BuildAssets\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BuildAssets\Ninject-2.0.0.0-release-net-3.5\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core">
       <HintPath>..\BuildAssets\NUnit-2.5.7.10213\nunit.core.dll</HintPath>
     </Reference>

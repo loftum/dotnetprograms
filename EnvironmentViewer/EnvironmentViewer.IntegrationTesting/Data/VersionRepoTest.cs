@@ -1,8 +1,7 @@
 using EnvironmentViewer.Lib.Data;
-using EnvironmentViewer.Lib.Mappings;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
+using EnvironmentViewer.Lib.Modules;
+using EnvironmentViewer.Lib.SessionFactories;
+using Ninject;
 using NUnit.Framework;
 
 namespace EnvironmentViewer.IntegrationTesting.Data
@@ -10,22 +9,23 @@ namespace EnvironmentViewer.IntegrationTesting.Data
     [TestFixture]
     public class VersionRepoTest
     {
-        private VersionRepo _repo;
+        private IVersionRepo _repo;
+        private IKernel _kernel;
+        private IVersionRepoProvider _provider;
 
         [SetUp]
         public void Setup()
         {
-            var factory = CreateSessionFactory();
-            _repo = new VersionRepo(factory);
-        }
-
-        private static ISessionFactory CreateSessionFactory()
-        {
-            return Fluently.Configure()
-                .Database(MySQLConfiguration.Standard
-                    .ConnectionString("Server=localhost;Database=HasVersion;Uid=jule;Pwd=nissen;"))
-                .Mappings(m => m.FluentMappings.Add<SchemaInfoMap>())
-                .BuildSessionFactory();
+            _kernel = new StandardKernel(new RepoModule());
+            _provider = _kernel.Get<IVersionRepoProvider>();
+            var credentials = new DatabaseCredentials
+                                  {
+                                      Database = "ETF",
+                                      DatabaseType = "sqlserver",
+                                      Host = "(local)",
+                                      IntegratedSecurity = true
+                                  };
+            _repo = _provider.GetVersionRepo(credentials);
         }
 
         [Test]

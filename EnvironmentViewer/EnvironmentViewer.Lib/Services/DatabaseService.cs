@@ -40,7 +40,7 @@ namespace EnvironmentViewer.Lib.Services
                 }
                 catch (Exception e)
                 {
-                    state.Status = "No SchemaInfo";
+                    state.Version = "No SchemaInfo";
                 }
             }
             else
