@@ -1,6 +1,6 @@
 ﻿<Window x:Class="HourGlass.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        Icon="..\Icons\maximals.ico"
+        Icon="..\Icons\hourglass3.ico"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:HourGlass.Views" Title="Hour Glass" Height="600" Width="800">
     <DockPanel LastChildFill="True">
         <TabControl>

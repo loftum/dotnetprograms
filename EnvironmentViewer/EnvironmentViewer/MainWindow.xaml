@@ -1,6 +1,6 @@
 ﻿<Window x:Class="EnvironmentViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:EnvironmentViewer.Views" Title="Environment Viewer" Height="600" Width="800" Icon="/EnvironmentViewer;component/Icons/recycled.png">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:EnvironmentViewer.Views" Title="Environment Viewer" Height="600" Width="800" Icon="/EnvironmentViewer;component/Icons/symbol_refresh.ico">
     <DockPanel>
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -10,7 +10,7 @@
             <Button Grid.Column="0" Content="+" Command="{Binding Path=AddEnvironmentCommand}" />
             <Button Grid.Column="1" Content="Save" Command="{Binding Path=SaveAllEnvironmentsCommand}" />
         </Grid>
-        <Expander DockPanel.Dock="Bottom">
+        <Expander Header="Properties" DockPanel.Dock="Bottom">
             <Views:EnvironmentView DataContext="{Binding Path=CurrentEnvironment, Mode=OneWay}"/>
         </Expander>
         <DataGrid Name="EnvironmentGrid" 
@@ -25,7 +25,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Environment" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Environment" Binding="{Binding Path=Name}" ToolTipService.ToolTip="Kølle" />
                 <DataGridTextColumn Header="Host" Binding="{Binding Path=Host}" />
                 <DataGridTextColumn Header="AppVersion" Binding="{Binding Path=ApplicationVersion, Mode=OneWay}" />
                 <DataGridTextColumn Header="AppStatus" Binding="{Binding Path=ApplicationStatus, Mode=OneWay}" />
