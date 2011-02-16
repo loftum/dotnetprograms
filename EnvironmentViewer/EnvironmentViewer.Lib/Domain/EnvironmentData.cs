@@ -15,7 +15,8 @@ namespace EnvironmentViewer.Lib.Domain
         public virtual bool IntegratedSecurity { get; set; }
         public virtual bool HasValidUrl
         {
-            get { return !Url.IsNullOrWhiteSpace() && Url.StartsWith("http://"); }
+            get { return !Url.IsNullOrWhiteSpace() &&
+                Url.StartsWithOneOf("http://", "https://", "ftp://", "file://"); }
         }
     }
 }
