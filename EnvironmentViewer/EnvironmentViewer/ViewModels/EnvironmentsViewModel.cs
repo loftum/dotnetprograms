@@ -29,7 +29,7 @@ namespace EnvironmentViewer.ViewModels
         {
             _environmentService = environmentService;
             Environments = new ObservableCollection<EnvironmentViewModel>();
-            AvailableDatabaseTypes = new ObservableCollection<string>(new []{"sqlserver", "mysql", "sqlite"});
+            AvailableDatabaseTypes = new ObservableCollection<string>(new []{"none", "sqlserver", "mysql", "sqlite"});
             _repo = new XmlEnvironmentViewerRepo("environments.xml");
             LoadEnvironments();
             AddEnvironmentCommand = new DelegateCommand(AddEnvironment);

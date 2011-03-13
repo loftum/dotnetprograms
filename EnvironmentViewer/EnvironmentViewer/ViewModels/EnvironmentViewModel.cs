@@ -21,7 +21,7 @@ namespace EnvironmentViewer.ViewModels
         public EnvironmentData EnvironmentData { get; private set; }
 
         public EnvironmentViewModel(EnvironmentsViewModel environmentsViewModel, IEnvironmentService environmentService)
-            : this (environmentsViewModel, environmentService, new EnvironmentData{Name="Name", Host = "Host"})
+            : this (environmentsViewModel, environmentService, new EnvironmentData{ Name="Name", Host = "Host" })
         {
         }
 

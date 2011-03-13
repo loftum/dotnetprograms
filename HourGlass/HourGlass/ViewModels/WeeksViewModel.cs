@@ -57,7 +57,7 @@ namespace HourGlass.ViewModels
         {
             var week = _weekService.NewWeek(GetMaxStartDate());
             var viewModel = new WeekViewModel(_weekService, _hourCodeProvider, week);
-            Weeks.Add(viewModel);
+            Weeks.Insert(0,viewModel);
             CurrentWeek = viewModel;
         }
 

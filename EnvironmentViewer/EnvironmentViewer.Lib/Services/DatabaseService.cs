@@ -17,6 +17,13 @@ namespace EnvironmentViewer.Lib.Services
         public DatabaseState GetDatabaseState(EnvironmentData environmentData)
         {
             var state = new DatabaseState();
+            if (environmentData.DatabaseType == null || environmentData.DatabaseType.Equals("none"))
+            {
+                state.Status = "N/A";
+                state.Version = "N/A";
+                return state;
+            }
+            
             var credentials = new DatabaseCredentials
             {
                 DatabaseType = environmentData.DatabaseType,

@@ -24,5 +24,10 @@ namespace EnvironmentViewer.Lib.Extensions
         {
             return otherValues.Any(value.Equals);
         }
+
+        public static bool StartsWithOneOf(this string value, params string[] otherValues)
+        {
+            return otherValues.Any(value.StartsWith);
+        }
     }
 }

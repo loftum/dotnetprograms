@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using EnvironmentViewer.Lib.Domain;
+using EnvironmentViewer.Lib.Extensions;
 
 namespace EnvironmentViewer.Lib.Services
 {
@@ -9,6 +10,12 @@ namespace EnvironmentViewer.Lib.Services
         public ApplicationState GetApplicationState(EnvironmentData environmentData)
         {
             var state = new ApplicationState();
+            if (environmentData.Url.IsNullOrEmpty())
+            {
+                state.Status = "N/A";
+                state.Version = "N/A";
+                return state;
+            }
 
             if (environmentData.HasValidUrl)
             {
@@ -32,6 +39,10 @@ namespace EnvironmentViewer.Lib.Services
                 {
                     state.Status = e.GetType().Name + ": " +  e.Message;
                 }
+            }
+            else
+            {
+                state.Status = "Invalid url";
             }
             return state;
         }
