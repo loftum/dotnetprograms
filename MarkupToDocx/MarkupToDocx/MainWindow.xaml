@@ -1,0 +1,28 @@
+﻿<Window x:Class="MarkupToDocx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Markup To DocX" Height="600" Width="800">
+    <DockPanel>
+        <Expander DockPanel.Dock="Bottom" ExpandDirection="Down" IsExpanded="{Binding Path=NewStatusText, Mode=OneWay}">
+            <TextBox AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
+                     FontFamily="Courier New" FontSize="12"
+                     IsReadOnly="true" />
+        </Expander>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0">
+                <WrapPanel DockPanel.Dock="Top">
+                    <Button DockPanel.Dock="Top" Content="Open in word" Command="{Binding Path=OpenInWordCommand}" />
+                </WrapPanel>
+                <TextBox AcceptsReturn="True" AcceptsTab="True"
+                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     FontFamily="Courier New" FontSize="12" 
+                     Text="{Binding Path=MarkupText, Mode=OneWayToSource}"/>
+            </DockPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupToDocx", "MarkupToDocx\MarkupToDocx.csproj", "{D604B939-C4D6-4642-B8C3-DAE67AC385C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. BuildAssets", "0. BuildAssets", "{CC88891A-CC1E-4BA6-BF2F-BFD8BFCA0A16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Applications", "1. Applications", "{9D438D1E-28B5-48D0-96C3-2F60134A01CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Libraries", "2. Libraries", "{1C2083FC-C466-49E4-AD82-8F7F9A458D9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9. Testing", "9. Testing", "{B98D5015-B05C-450A-8806-D6C9C5518DF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupToDocx.Lib", "MarkupToDocx.Lib\MarkupToDocx.Lib.csproj", "{59649C13-55ED-4DF6-A127-9EF4A9424925}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocX", "DocX", "{BBC80B42-8E99-479C-AB28-736E276DAFCF}"
+	ProjectSection(SolutionItems) = preProject
+		MarkupToDocx\BuildAssets\DocX\DocX.dll = MarkupToDocx\BuildAssets\DocX\DocX.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nunit", "nunit", "{4C2B8AA0-5C75-491F-BF4F-FC2B58C99F4E}"
+	ProjectSection(SolutionItems) = preProject
+		MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.core.dll = MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.core.dll
+		MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.core.interfaces.dll = MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.core.interfaces.dll
+		MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.fixtures.dll = MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.fixtures.dll
+		MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.framework.dll = MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.framework.dll
+		MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.util.dll = MarkupToDocx\BuildAssets\NUnit-2.5.7.10213\nunit.util.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rhino.mocs", "rhino.mocs", "{EFF7C660-CD8D-4858-8F7C-2274BE83A798}"
+	ProjectSection(SolutionItems) = preProject
+		MarkupToDocx\BuildAssets\Rhino.Mocks-3.6\Rhino.Mocks.dll = MarkupToDocx\BuildAssets\Rhino.Mocks-3.6\Rhino.Mocks.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ninject", "ninject", "{94599653-C274-47C9-A503-4C9B98E67171}"
+	ProjectSection(SolutionItems) = preProject
+		MarkupToDocx\BuildAssets\Ninject-2.0.0.0-release-net-3.5\Ninject.dll = MarkupToDocx\BuildAssets\Ninject-2.0.0.0-release-net-3.5\Ninject.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Debug|x86.ActiveCfg = Debug|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Debug|x86.Build.0 = Debug|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Release|Any CPU.ActiveCfg = Release|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Release|x86.ActiveCfg = Release|x86
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4}.Release|x86.Build.0 = Release|x86
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{59649C13-55ED-4DF6-A127-9EF4A9424925}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBC80B42-8E99-479C-AB28-736E276DAFCF} = {CC88891A-CC1E-4BA6-BF2F-BFD8BFCA0A16}
+		{4C2B8AA0-5C75-491F-BF4F-FC2B58C99F4E} = {CC88891A-CC1E-4BA6-BF2F-BFD8BFCA0A16}
+		{EFF7C660-CD8D-4858-8F7C-2274BE83A798} = {CC88891A-CC1E-4BA6-BF2F-BFD8BFCA0A16}
+		{94599653-C274-47C9-A503-4C9B98E67171} = {CC88891A-CC1E-4BA6-BF2F-BFD8BFCA0A16}
+		{D604B939-C4D6-4642-B8C3-DAE67AC385C4} = {9D438D1E-28B5-48D0-96C3-2F60134A01CC}
+		{59649C13-55ED-4DF6-A127-9EF4A9424925} = {1C2083FC-C466-49E4-AD82-8F7F9A458D9C}
+	EndGlobalSection
+EndGlobal
