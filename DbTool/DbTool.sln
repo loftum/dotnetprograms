@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. BuildAssets", "0. BuildAssets", "{6DE944F4-AA71-4274-802D-5ADB231ADB39}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\Newtonsoft\Newtonsoft.Json.dll = BuildAssets\Newtonsoft\Newtonsoft.Json.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrator", "Migrator", "{46DBE12C-58F5-4474-B51B-FF80C3D96167}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\Migrator\Migrator.dll = BuildAssets\Migrator\Migrator.dll
+		BuildAssets\Migrator\Migrator.Framework.dll = BuildAssets\Migrator\Migrator.Framework.dll
+		BuildAssets\Migrator\Migrator.Providers.dll = BuildAssets\Migrator\Migrator.Providers.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Debug|x86.ActiveCfg = Debug|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Debug|x86.Build.0 = Debug|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.ActiveCfg = Release|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46DBE12C-58F5-4474-B51B-FF80C3D96167} = {6DE944F4-AA71-4274-802D-5ADB231ADB39}
+	EndGlobalSection
+EndGlobal
