@@ -1,0 +1,141 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary", "StuffLibrary\StuffLibrary.csproj", "{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. BuildAssets", "00. BuildAssets", "{5026F9C1-7833-487D-8F80-BED3810A9A34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.  WebApplications", "01.  WebApplications", "{1A828689-CFA2-42E4-BC42-6935C294382F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Libraries", "02. Libraries", "{784A5986-421C-4384-B47F-3BDAD3F19EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.Lib", "StuffLibrary.Lib\StuffLibrary.Lib.csproj", "{6CB37615-A1C9-4668-8752-7AAEC94D106F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09. Testing", "09. Testing", "{7AF2DFB4-119A-4333-B6E3-8B4DD2551844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.UnitTesting", "StuffLibrary.UnitTesting\StuffLibrary.UnitTesting.csproj", "{705223D7-ABAB-41E2-97E0-8A3829047B42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ninject", "Ninject", "{8B5313C9-77FB-4614-B9D8-7D53B57BCE86}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\Ninject\Ninject.dll = BuildAssets\Ninject\Ninject.dll
+		BuildAssets\Ninject\Ninject.Web.Mvc.dll = BuildAssets\Ninject\Ninject.Web.Mvc.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NUnit", "NUnit", "{DD2EA5A9-9F00-473A-9233-17E80A69A82A}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\NUnit\nunit.core.dll = BuildAssets\NUnit\nunit.core.dll
+		BuildAssets\NUnit\nunit.core.interfaces.dll = BuildAssets\NUnit\nunit.core.interfaces.dll
+		BuildAssets\NUnit\nunit.fixtures.dll = BuildAssets\NUnit\nunit.fixtures.dll
+		BuildAssets\NUnit\nunit.framework.dll = BuildAssets\NUnit\nunit.framework.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FluentNHibernate", "FluentNHibernate", "{8A14CF65-261D-4F9E-B7F5-6226A09581BD}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\FluentNHibernate\Antlr3.Runtime.dll = BuildAssets\FluentNHibernate\Antlr3.Runtime.dll
+		BuildAssets\FluentNHibernate\Castle.Core.dll = BuildAssets\FluentNHibernate\Castle.Core.dll
+		BuildAssets\FluentNHibernate\FluentNHibernate.dll = BuildAssets\FluentNHibernate\FluentNHibernate.dll
+		BuildAssets\FluentNHibernate\Iesi.Collections.dll = BuildAssets\FluentNHibernate\Iesi.Collections.dll
+		BuildAssets\FluentNHibernate\NHibernate.ByteCode.Castle.dll = BuildAssets\FluentNHibernate\NHibernate.ByteCode.Castle.dll
+		BuildAssets\FluentNHibernate\NHibernate.dll = BuildAssets\FluentNHibernate\NHibernate.dll
+		BuildAssets\FluentNHibernate\Remotion.Data.Linq.dll = BuildAssets\FluentNHibernate\Remotion.Data.Linq.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08. Migrations", "08. Migrations", "{61CDD3C1-B1C8-4742-BCB9-F6F6F190D946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.Migrations", "StuffLibrary.Migrations\StuffLibrary.Migrations.csproj", "{E9677D32-6C80-43E4-B9AE-373926A6B2F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Moq", "Moq", "{405B387A-E645-44BC-9DB8-2F64839F4B7E}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\Moq\Moq.dll = BuildAssets\Moq\Moq.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FluentMigrator", "FluentMigrator", "{4B42C50F-C7A7-4737-9C80-E7490AFF1270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.Common", "StuffLibrary.Common\StuffLibrary.Common.csproj", "{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.Domain", "StuffLibrary.Domain\StuffLibrary.Domain.csproj", "{58D0C953-B7CC-48E0-8731-ADD07BEA7058}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.Repository", "StuffLibrary.Repository\StuffLibrary.Repository.csproj", "{937D34B6-2104-4AD6-9237-AC775F8B57E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuffLibrary.IntegrationTesting", "StuffLibrary.IntegrationTesting\StuffLibrary.IntegrationTesting.csproj", "{4BEECC6F-EA08-4140-A70A-66FCC19B915C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log4net", "log4net", "{AE3BA9C4-2C90-48F6-85B8-5AA351A11066}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\log4net\log4net.dll = BuildAssets\log4net\log4net.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elmah", "elmah", "{1A8B496B-C19A-439B-BC72-690E3CBF9BCC}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\elmah\Elmah.dll = BuildAssets\elmah\Elmah.dll
+		BuildAssets\elmah\Mono.Security.dll = BuildAssets\elmah\Mono.Security.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x64", "x64", "{DCF36C57-EF53-4B4F-B877-A9350250E28E}"
+	ProjectSection(SolutionItems) = preProject
+		BuildAssets\FluentMigrator\x64\FluentMigrator.dll = BuildAssets\FluentMigrator\x64\FluentMigrator.dll
+		BuildAssets\FluentMigrator\x64\FluentMigrator.pdb = BuildAssets\FluentMigrator\x64\FluentMigrator.pdb
+		BuildAssets\FluentMigrator\x64\FluentMigrator.Runner.dll = BuildAssets\FluentMigrator\x64\FluentMigrator.Runner.dll
+		BuildAssets\FluentMigrator\x64\FluentMigrator.Runner.pdb = BuildAssets\FluentMigrator\x64\FluentMigrator.Runner.pdb
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB37615-A1C9-4668-8752-7AAEC94D106F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB37615-A1C9-4668-8752-7AAEC94D106F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB37615-A1C9-4668-8752-7AAEC94D106F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB37615-A1C9-4668-8752-7AAEC94D106F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705223D7-ABAB-41E2-97E0-8A3829047B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705223D7-ABAB-41E2-97E0-8A3829047B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705223D7-ABAB-41E2-97E0-8A3829047B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705223D7-ABAB-41E2-97E0-8A3829047B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9677D32-6C80-43E4-B9AE-373926A6B2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9677D32-6C80-43E4-B9AE-373926A6B2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9677D32-6C80-43E4-B9AE-373926A6B2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9677D32-6C80-43E4-B9AE-373926A6B2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D0C953-B7CC-48E0-8731-ADD07BEA7058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D0C953-B7CC-48E0-8731-ADD07BEA7058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D0C953-B7CC-48E0-8731-ADD07BEA7058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D0C953-B7CC-48E0-8731-ADD07BEA7058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937D34B6-2104-4AD6-9237-AC775F8B57E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937D34B6-2104-4AD6-9237-AC775F8B57E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937D34B6-2104-4AD6-9237-AC775F8B57E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937D34B6-2104-4AD6-9237-AC775F8B57E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEECC6F-EA08-4140-A70A-66FCC19B915C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEECC6F-EA08-4140-A70A-66FCC19B915C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEECC6F-EA08-4140-A70A-66FCC19B915C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEECC6F-EA08-4140-A70A-66FCC19B915C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B5313C9-77FB-4614-B9D8-7D53B57BCE86} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{DD2EA5A9-9F00-473A-9233-17E80A69A82A} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{8A14CF65-261D-4F9E-B7F5-6226A09581BD} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{405B387A-E645-44BC-9DB8-2F64839F4B7E} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{4B42C50F-C7A7-4737-9C80-E7490AFF1270} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{AE3BA9C4-2C90-48F6-85B8-5AA351A11066} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{1A8B496B-C19A-439B-BC72-690E3CBF9BCC} = {5026F9C1-7833-487D-8F80-BED3810A9A34}
+		{FCCBD072-4319-442E-B7B6-CFC7712DC2B9} = {1A828689-CFA2-42E4-BC42-6935C294382F}
+		{6CB37615-A1C9-4668-8752-7AAEC94D106F} = {784A5986-421C-4384-B47F-3BDAD3F19EF2}
+		{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C} = {784A5986-421C-4384-B47F-3BDAD3F19EF2}
+		{58D0C953-B7CC-48E0-8731-ADD07BEA7058} = {784A5986-421C-4384-B47F-3BDAD3F19EF2}
+		{937D34B6-2104-4AD6-9237-AC775F8B57E0} = {784A5986-421C-4384-B47F-3BDAD3F19EF2}
+		{705223D7-ABAB-41E2-97E0-8A3829047B42} = {7AF2DFB4-119A-4333-B6E3-8B4DD2551844}
+		{4BEECC6F-EA08-4140-A70A-66FCC19B915C} = {7AF2DFB4-119A-4333-B6E3-8B4DD2551844}
+		{E9677D32-6C80-43E4-B9AE-373926A6B2F9} = {61CDD3C1-B1C8-4742-BCB9-F6F6F190D946}
+		{DCF36C57-EF53-4B4F-B877-A9350250E28E} = {4B42C50F-C7A7-4737-9C80-E7490AFF1270}
+	EndGlobalSection
+EndGlobal

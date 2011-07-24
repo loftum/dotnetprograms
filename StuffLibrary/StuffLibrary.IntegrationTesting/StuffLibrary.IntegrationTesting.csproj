@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4BEECC6F-EA08-4140-A70A-66FCC19B915C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StuffLibrary.IntegrationTesting</RootNamespace>
+    <AssemblyName>StuffLibrary.IntegrationTesting</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\BuildAssets\FluentNHibernate\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\BuildAssets\FluentNHibernate\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BuildAssets\FluentNHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BuildAssets\FluentNHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\BuildAssets\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\BuildAssets\FluentNHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL" />
+    <Reference Include="nunit.core">
+      <HintPath>..\BuildAssets\NUnit\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\BuildAssets\NUnit\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.fixtures">
+      <HintPath>..\BuildAssets\NUnit\nunit.fixtures.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\BuildAssets\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\BuildAssets\FluentNHibernate\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MigrationTest.cs" />
+    <Compile Include="NinjectModules\CommonSingletonModule.cs" />
+    <Compile Include="NinjectModules\ConfigSingletonModule.cs" />
+    <Compile Include="NinjectModules\RepoSingletonModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\StuffLibraryRepoTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StuffLibrary.Common\StuffLibrary.Common.csproj">
+      <Project>{FD4D2B38-BFBC-4AE4-AFEC-F6A270C2BC1C}</Project>
+      <Name>StuffLibrary.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.Domain\StuffLibrary.Domain.csproj">
+      <Project>{58D0C953-B7CC-48E0-8731-ADD07BEA7058}</Project>
+      <Name>StuffLibrary.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.Migrations\StuffLibrary.Migrations.csproj">
+      <Project>{E9677D32-6C80-43E4-B9AE-373926A6B2F9}</Project>
+      <Name>StuffLibrary.Migrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.Repository\StuffLibrary.Repository.csproj">
+      <Project>{937D34B6-2104-4AD6-9237-AC775F8B57E0}</Project>
+      <Name>StuffLibrary.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.UnitTesting\StuffLibrary.UnitTesting.csproj">
+      <Project>{705223D7-ABAB-41E2-97E0-8A3829047B42}</Project>
+      <Name>StuffLibrary.UnitTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary\StuffLibrary.csproj">
+      <Project>{FCCBD072-4319-442E-B7B6-CFC7712DC2B9}</Project>
+      <Name>StuffLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
