@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="DomainObject.cs" />
     <Compile Include="ExtensionMethods\DomainObjectExtensions.cs" />
     <Compile Include="Movie.cs" />

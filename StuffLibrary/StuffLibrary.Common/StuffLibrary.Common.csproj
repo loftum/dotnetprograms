@@ -55,6 +55,7 @@
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
+    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="Logging\IStuffLibraryLogger.cs" />
     <Compile Include="Logging\StuffLibraryLogger.cs" />
     <Compile Include="Operations\EnumOperations.cs" />

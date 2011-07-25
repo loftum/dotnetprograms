@@ -56,6 +56,13 @@ h2
 {
     padding: 0 0 10px 0;
 }
+
+h2 a, h2 a:visited, h2 a:hover, h2 a:active
+{
+    color: deepskyblue;
+    text-decoration: none;
+}
+
 h3
 {
     font-size: 1.2em;

@@ -26,7 +26,9 @@ namespace StuffLibrary.Migrations.ExtensionMethods
         public static ICreateTableColumnOptionOrWithColumnSyntax WithTimeStamps(this ICreateTableWithColumnSyntax tableWithColumnSyntax)
         {
             return tableWithColumnSyntax
+                .WithColumn("CreatedBy").AsString().Nullable()
                 .WithColumn("CreatedAt").AsDateTime().NotNullable()
+                .WithColumn("ModifiedBy").AsString().Nullable()
                 .WithColumn("ModifiedAt").AsDateTime().NotNullable();
         }
     }

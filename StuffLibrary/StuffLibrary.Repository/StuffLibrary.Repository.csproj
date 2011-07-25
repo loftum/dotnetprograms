@@ -67,6 +67,7 @@
     <Compile Include="Configuration\IRepositoryConfiguration.cs" />
     <Compile Include="Configuration\RepositoryConfiguration.cs" />
     <Compile Include="IStuffLibraryRepo.cs" />
+    <Compile Include="Mappings\CategoryMap.cs" />
     <Compile Include="Mappings\DomainObjectMap.cs" />
     <Compile Include="Mappings\MovieMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

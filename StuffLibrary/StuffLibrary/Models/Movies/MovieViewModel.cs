@@ -12,6 +12,11 @@ namespace StuffLibrary.Models.Movies
             get { return Movie.IsNew() ? GenerateTitle("Register Movie") : GenerateTitle("View Movie"); }
         }
 
+        public string MovieTitle
+        {
+            get { return Movie.IsNew() ? "New" : Movie.Title; }
+        }
+
         public MovieViewModel() : this(new Movie())
         {
         }

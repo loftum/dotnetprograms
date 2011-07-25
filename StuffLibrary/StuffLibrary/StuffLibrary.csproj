@@ -67,21 +67,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\TransferToGridAttribute.cs" />
+    <Compile Include="Controllers\GuiElementsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\StuffLibraryControllerBase.cs" />
+    <Compile Include="Extensions\ViewDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlTools\Builders\HtmlButton.cs" />
+    <Compile Include="HtmlTools\Builders\HtmlDiv.cs" />
+    <Compile Include="HtmlTools\Builders\HtmlDivElement.cs" />
     <Compile Include="HtmlTools\Builders\HtmlElement.cs" />
     <Compile Include="HtmlTools\Builders\HtmlElementBuilder.cs" />
     <Compile Include="HtmlTools\Builders\HtmlInput.cs" />
     <Compile Include="HtmlTools\Builders\HtmlInputElement.cs" />
     <Compile Include="HtmlTools\Builders\HtmlSubmit.cs" />
+    <Compile Include="HtmlTools\Dropdowns\SelectableList.cs" />
     <Compile Include="HtmlTools\HtmlHelperExtensions.cs" />
     <Compile Include="Models\Grids\GridViewModel.cs" />
     <Compile Include="Models\Grids\IGridRowViewModel.cs" />
     <Compile Include="Models\Grids\JqGridRow.cs" />
+    <Compile Include="Models\GuiElements\GuiElementsViewModel.cs" />
+    <Compile Include="Models\Messages\FlashMessage.cs" />
+    <Compile Include="Models\Messages\MessageType.cs" />
     <Compile Include="Models\Movies\MovieGridRowViewModel.cs" />
     <Compile Include="Models\Movies\MovieIndexViewModel.cs" />
     <Compile Include="Models\Movies\MovieViewModel.cs" />
@@ -114,8 +123,11 @@
     <Content Include="Scripts\common\jquery-1.6.2.min.js" />
     <Content Include="Scripts\common\jquery-ui-1.8.14.smoothness.min.js" />
     <Content Include="Scripts\common\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\StuffLibrary\Site.Master.js" />
+    <Content Include="Scripts\StuffLibrary\stufflibrary.common.js" />
+    <Content Include="Views\GuiElements\Index.aspx" />
     <Content Include="Views\Movie\Index.aspx" />
-    <Content Include="Views\Movie\View.aspx" />
+    <Content Include="Views\Movie\Edit.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

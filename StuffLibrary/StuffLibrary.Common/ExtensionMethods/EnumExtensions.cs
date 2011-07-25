@@ -26,6 +26,5 @@ namespace StuffLibrary.Common.ExtensionMethods
         {
             return int.Parse(value.ToString("D"));
         }
-    
     }
 }

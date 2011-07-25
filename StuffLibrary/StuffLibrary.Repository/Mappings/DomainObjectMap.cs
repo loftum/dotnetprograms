@@ -9,7 +9,9 @@ namespace StuffLibrary.Repository.Mappings
          {
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
              Id(x => x.Id);
+             Map(x => x.CreatedBy);
              Map(x => x.CreatedAt);
+             Map(x => x.ModifiedBy);
              Map(x => x.ModifiedAt);
              // ReSharper restore DoNotCallOverridableMethodsInConstructor
          } 

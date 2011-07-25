@@ -32,10 +32,10 @@ namespace StuffLibrary.Controllers
         public ActionResult RegisterNew()
         {
             var model = new MovieViewModel();
-            return View("View", model);
+            return View("Edit", model);
         }
 
-        public ActionResult View(long id)
+        public ActionResult Edit(long id)
         {
             var movie = _movieLogic.GetMovie(id);
             var model = new MovieViewModel(movie);
@@ -46,13 +46,13 @@ namespace StuffLibrary.Controllers
         {
             try
             {
-                var id = _movieLogic.Save(model.Movie);
-                return RedirectToAction("View", new {id});
+                _movieLogic.Save(model.Movie);
+                return RedirectToAction("Index");
             }
             catch (UserException ex)
             {
                 AddFlashMessageFor(ex);
-                return View("View", model);
+                return View("Edit", model);
             }
         }
     }

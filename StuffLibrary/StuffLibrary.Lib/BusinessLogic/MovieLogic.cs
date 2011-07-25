@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using StuffLibrary.Common.Logging;
 using StuffLibrary.Domain;
+using StuffLibrary.Domain.ExtensionMethods;
 using StuffLibrary.Repository;
 
 namespace StuffLibrary.Lib.BusinessLogic
@@ -28,9 +29,27 @@ namespace StuffLibrary.Lib.BusinessLogic
 
         public long Save(Movie movie)
         {
-            _repo.Add(movie);
+            if (movie.IsNew())
+            {
+                CreateNew(movie);
+            }
+            else
+            {
+                Update(movie);
+            }
             _repo.SaveChanges();
             return movie.Id;
+        }
+
+        private void Update(Movie movie)
+        {
+            var existing = _repo.Get<Movie>(movie.Id);
+            existing.Title = movie.Title;
+        }
+
+        private void CreateNew(Movie movie)
+        {
+            _repo.Add(movie);
         }
     }
 }

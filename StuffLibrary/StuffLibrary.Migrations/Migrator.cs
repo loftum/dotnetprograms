@@ -35,5 +35,22 @@ namespace StuffLibrary.Migrations
         {
             MigrateTo(0);
         }
+
+        public void MigrateDown(bool showSql = false)
+        {
+            using (var announcer = new TextWriterAnnouncer(Console.Out) { ShowSql = showSql })
+            {
+                var context = new RunnerContext(announcer)
+                {
+                    Database = _databaseProvider,
+                    Connection = _connectionString,
+                    Target = typeof(M001InitialVersion).Assembly.ToString(),
+                    Task = "migrate:down",
+                    Version = 1
+                };
+                var executor = new TaskExecutor(context);
+                executor.Execute();
+            }
+        }
     }
 }
