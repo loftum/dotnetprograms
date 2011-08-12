@@ -25,7 +25,7 @@ namespace StuffLibrary.IntegrationTesting
             Console.WriteLine(config.Databaseprovider);
             Console.WriteLine(config.ConnectionString);
             var migrationRunner = new Migrator(config.Databaseprovider, config.ConnectionString);
-            migrationRunner.MigrateDown(true);
+            migrationRunner.Rollback(true);
         }
     }
 }

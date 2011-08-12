@@ -1,12 +1,12 @@
-﻿using NHibernate.Event;
-using NHibernate.Event.Default;
+﻿using System;
+using NHibernate.Event;
+using NHibernate.Persister.Entity;
 using StuffLibrary.Common.DateAndTime;
 using StuffLibrary.Domain;
-using StuffLibrary.Domain.ExtensionMethods;
 
 namespace StuffLibrary.Repository.Configuration
 {
-    public class ChangeStampUpdater : DefaultSaveEventListener, IChangeStampUpdater
+    public class ChangeStampUpdater : IChangeStampUpdater, IPreInsertEventListener, IPreUpdateEventListener
     {
         private readonly IDateProvider _dateProvider;
 
@@ -15,23 +15,45 @@ namespace StuffLibrary.Repository.Configuration
             _dateProvider = dateProvider;
         }
 
-        protected override object PerformSaveOrUpdate(SaveOrUpdateEvent evt)
+        public bool OnPreInsert(PreInsertEvent evt)
         {
-            var entity = (DomainObject) evt.Entity;
-            if (entity != null)
-            {
-                ProcessEntityBeforeInsert(entity);
-            }
-            return base.PerformSaveOrUpdate(evt);
+            var entity = evt.Entity as DomainObject;
+            SetChangeStampOn(entity, evt.Persister, evt.State);
+            return false;
         }
 
-        private void ProcessEntityBeforeInsert(DomainObject entity)
+        public bool OnPreUpdate(PreUpdateEvent evt)
         {
+            var entity = evt.Entity as DomainObject;
+            SetChangeStampOn(entity, evt.Persister, evt.State);
+            return false;
+        }
+
+        private void SetChangeStampOn(DomainObject entity, IEntityPersister persister, object[] state)
+        {
+            if (entity == null)
+            {
+                return;
+            }
+            var now = _dateProvider.Now;
+
             if (entity.IsNew())
             {
+                Set(persister, state, "CreatedAt", now);
                 entity.CreatedAt = _dateProvider.Now;
             }
+            Set(persister, state, "ModifiedAt", now);
             entity.ModifiedAt = _dateProvider.Now;
+        }
+
+        private static void Set(IEntityPersister persister, object[] state, string propertyName, object value)
+        {
+            var index = Array.IndexOf(persister.PropertyNames, propertyName);
+            if (index == -1)
+            {
+                return;
+            }
+            state[index] = value;
         }
     }
 }

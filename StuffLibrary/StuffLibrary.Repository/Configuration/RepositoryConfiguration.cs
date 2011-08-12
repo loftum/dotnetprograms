@@ -29,8 +29,8 @@ namespace StuffLibrary.Repository.Configuration
 
         private void RegisterListeners(NHibernate.Cfg.Configuration configuration)
         {
-            configuration.SetListener(ListenerType.Save, _changeStampUpdater);
-            configuration.SetListener(ListenerType.SaveUpdate, _changeStampUpdater);
+            configuration.SetListener(ListenerType.PreInsert, _changeStampUpdater);
+            configuration.SetListener(ListenerType.PreUpdate, _changeStampUpdater);
         }
     }
 }

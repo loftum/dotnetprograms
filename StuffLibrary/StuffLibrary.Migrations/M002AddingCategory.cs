@@ -4,20 +4,20 @@ using StuffLibrary.Migrations.ExtensionMethods;
 namespace StuffLibrary.Migrations
 {
     [Migration(002)]
-    public class M002AddingMovie : Migration
+    public class M002AddingCategory : Migration
     {
         public override void Up()
         {
-            Create.Table("Movie")
+            Create.Table("Category")
                 .WithIdColumn()
                 .WithVersionColumn()
-                .WithColumn("Title").AsString().NotNullable()
-                .WithTimeStamps();
+                .WithTimeStamps()
+                .WithColumn("Name").AsString().NotNullable().Unique();
         }
 
         public override void Down()
         {
-            Delete.Table("Movie");
+            Delete.Table("Category");
         }
     }
 }

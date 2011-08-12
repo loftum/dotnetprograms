@@ -7,6 +7,9 @@ namespace StuffLibrary.Repository.Mappings
         public MovieMap()
         {
             Map(x => x.Title);
+            HasManyToMany(x => x.Categories)
+                .Cascade.All()
+                .Table("MovieCategory");
         }
     }
 }

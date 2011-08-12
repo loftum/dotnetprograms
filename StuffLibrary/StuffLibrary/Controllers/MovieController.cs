@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using StuffLibrary.Common.Exceptions;
+using StuffLibrary.Domain;
+using StuffLibrary.HtmlTools.Dropdowns;
 using StuffLibrary.Lib.BusinessLogic;
 using StuffLibrary.Models.Grids;
 using StuffLibrary.Models.Movies;
@@ -10,10 +13,12 @@ namespace StuffLibrary.Controllers
     public class MovieController : StuffLibraryControllerBase
     {
         private readonly IMovieLogic _movieLogic;
+        private readonly ICategoryLogic _categoryLogic;
 
-        public MovieController(IMovieLogic movieLogic)
+        public MovieController(IMovieLogic movieLogic, ICategoryLogic categoryLogic)
         {
             _movieLogic = movieLogic;
+            _categoryLogic = categoryLogic;
         }
 
         public ActionResult Index()
@@ -38,7 +43,12 @@ namespace StuffLibrary.Controllers
         public ActionResult Edit(long id)
         {
             var movie = _movieLogic.GetMovie(id);
-            var model = new MovieViewModel(movie);
+            var categories = _categoryLogic.GetCategories();
+
+            var model = new MovieViewModel(movie)
+                            {
+                                AvailableCategories = SelectableList.Of(categories, c => new SelectListItem{Text = c.Name, Value = c.Id.ToString()}).Items
+                            };
             return View(model);
         }
 

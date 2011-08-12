@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using StuffLibrary.Common.Logging;
 using StuffLibrary.Domain;
-using StuffLibrary.Domain.ExtensionMethods;
 using StuffLibrary.Repository;
 
 namespace StuffLibrary.Lib.BusinessLogic

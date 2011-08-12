@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\CategoryLogic.cs" />
+    <Compile Include="BusinessLogic\ICategoryLogic.cs" />
     <Compile Include="BusinessLogic\IMovieLogic.cs" />
     <Compile Include="BusinessLogic\MovieLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

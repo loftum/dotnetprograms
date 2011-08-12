@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Ninject;
 using StuffLibrary.Domain;
-using StuffLibrary.Domain.ExtensionMethods;
 using StuffLibrary.IntegrationTesting.NinjectModules;
 using StuffLibrary.Repository;
 using StuffLibrary.UnitTesting;

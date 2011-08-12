@@ -14,6 +14,7 @@ namespace StuffLibrary.NinjectModules
                 Bind(type.GetType()).ToSelf().InRetainableRequestScope();
             }
             Bind<IMovieLogic>().To<MovieLogic>().InRetainableRequestScope();
+            Bind<ICategoryLogic>().To<CategoryLogic>().InRetainableRequestScope();
         }
     }
 }

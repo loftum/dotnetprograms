@@ -1,5 +1,6 @@
-﻿using StuffLibrary.Domain;
-using StuffLibrary.Domain.ExtensionMethods;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using StuffLibrary.Domain;
 
 namespace StuffLibrary.Models.Movies
 {
@@ -16,6 +17,8 @@ namespace StuffLibrary.Models.Movies
         {
             get { return Movie.IsNew() ? "New" : Movie.Title; }
         }
+
+        public IEnumerable<SelectListItem> AvailableCategories { get; set; }
 
         public MovieViewModel() : this(new Movie())
         {

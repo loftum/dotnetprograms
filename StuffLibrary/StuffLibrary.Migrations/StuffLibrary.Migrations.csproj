@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="ExtensionMethods\MigrationExtensions.cs" />
     <Compile Include="M001InitialVersion.cs" />
-    <Compile Include="M002AddingMovie.cs" />
+    <Compile Include="M002AddingCategory.cs" />
+    <Compile Include="M003AddingMovie.cs" />
+    <Compile Include="M004ManyToManyMovieCategory.cs" />
     <Compile Include="Migrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

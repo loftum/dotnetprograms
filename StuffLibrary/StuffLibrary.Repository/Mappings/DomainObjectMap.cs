@@ -9,6 +9,8 @@ namespace StuffLibrary.Repository.Mappings
          {
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
              Id(x => x.Id);
+             OptimisticLock.Version();
+             Version(x => x.Version).Column("Version");
              Map(x => x.CreatedBy);
              Map(x => x.CreatedAt);
              Map(x => x.ModifiedBy);

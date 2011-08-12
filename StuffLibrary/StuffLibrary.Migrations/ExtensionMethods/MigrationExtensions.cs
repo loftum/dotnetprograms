@@ -1,4 +1,5 @@
-﻿using FluentMigrator.Builders.Create.Table;
+﻿using System.Collections.Generic;
+using FluentMigrator.Builders.Create.Table;
 
 namespace StuffLibrary.Migrations.ExtensionMethods
 {
@@ -30,6 +31,16 @@ namespace StuffLibrary.Migrations.ExtensionMethods
                 .WithColumn("CreatedAt").AsDateTime().NotNullable()
                 .WithColumn("ModifiedBy").AsString().Nullable()
                 .WithColumn("ModifiedAt").AsDateTime().NotNullable();
+        }
+
+        private static string ForeignKeyName(string foreignTable)
+        {
+            return string.Format("FK_{0}", foreignTable);
+        }
+
+        private static string ForeignColumnName(string foreignTable)
+        {
+            return string.Format("{0}Id", foreignTable);
         }
     }
 }

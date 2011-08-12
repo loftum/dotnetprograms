@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace StuffLibrary.Common.ExtensionMethods
 {
@@ -11,5 +12,11 @@ namespace StuffLibrary.Common.ExtensionMethods
                  list.Add(otherItem);
              }
          }
+
+        public static string ToJavaScript<T>(this IEnumerable<T> items)
+        {
+            var quotedItems = from i in items select string.Format("\"{0}\"", i);
+            return string.Format("[{0}]", string.Join(",", quotedItems));
+        }
     }
 }
