@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using StuffLibrary.Common.Exceptions;
 using StuffLibrary.Domain;
-using StuffLibrary.HtmlTools.Dropdowns;
 using StuffLibrary.Lib.BusinessLogic;
 using StuffLibrary.Models.Grids;
 using StuffLibrary.Models.Movies;
@@ -31,7 +29,7 @@ namespace StuffLibrary.Controllers
             var movies = from movie 
                     in _movieLogic.GetAllMovies(parameters.Query)
                     select new MovieGridRowViewModel(movie);
-            return Json(new GridViewModel(movies), JsonRequestBehavior.AllowGet);
+            return Json(new JqGridViewModel(parameters, movies), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RegisterNew()

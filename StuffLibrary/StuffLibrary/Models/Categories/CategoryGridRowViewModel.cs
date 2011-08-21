@@ -4,18 +4,28 @@ using StuffLibrary.Models.Grids;
 
 namespace StuffLibrary.Models.Categories
 {
-    public class CategoryGridRowViewModel : IGridRowViewModel
+    public class CategoryGridRowViewModel : GridRowViewModelBase<Category>
     {
-        public string RowId { get { return Id.ToString(); } }
         [TransferToGrid]
         public long Id { get; set; }
         [TransferToGrid]
         public string Name { get; set; }
 
-        public CategoryGridRowViewModel(Category category)
+        public CategoryGridRowViewModel(Category category) : base(category)
         {
             Id = category.Id;
             Name = category.Name;
+        }
+
+        public override object OrderByValue(string orderBy)
+        {
+            switch(orderBy)
+            {
+                case "Name":
+                    return Name;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

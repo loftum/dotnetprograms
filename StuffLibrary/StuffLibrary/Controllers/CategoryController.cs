@@ -27,7 +27,7 @@ namespace StuffLibrary.Controllers
             var categories = from category 
                                  in _categoryLogic.GetCategories()
                                  select new CategoryGridRowViewModel(category);
-            return Json(new GridViewModel(categories), JsonRequestBehavior.AllowGet);
+            return Json(new JqGridViewModel(categories), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(long id)

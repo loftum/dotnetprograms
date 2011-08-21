@@ -1,10 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StuffLibrary.Common.ExtensionMethods
 {
     public static class CollectionExtensions
     {
+        public static IEnumerable<T> Order<T, TKey>(this IEnumerable<T> items, OrderType orderType, Func<T, TKey> keySelector)
+        {
+            return orderType == OrderType.Ascending
+                ? items.OrderBy(keySelector)
+                : items.OrderByDescending(keySelector);
+        }
+
         public static void AddRange<T>(this IList<T> list, IEnumerable<T> otherItems)
         {
             foreach (var otherItem in otherItems)

@@ -5,13 +5,8 @@ using StuffLibrary.Models.Grids;
 
 namespace StuffLibrary.Models.Movies
 {
-    public class MovieGridRowViewModel : IGridRowViewModel
+    public class MovieGridRowViewModel : GridRowViewModelBase<Movie>
     {
-        public string RowId
-        {
-            get { return Id.ToString(); }
-        }
-
         [TransferToGrid]
         public long Id { get; set; }
         [TransferToGrid]
@@ -19,11 +14,22 @@ namespace StuffLibrary.Models.Movies
         [TransferToGrid]
         public string Category { get; set; }
 
-        public MovieGridRowViewModel(Movie movie)
+        public MovieGridRowViewModel(Movie movie) : base(movie)
         {
             Id = movie.Id;
             Title = movie.Title;
             Category = string.Join(", ", movie.Categories.Select(c => c.Name));
+        }
+
+        public override object OrderByValue(string orderBy)
+        {
+            switch(orderBy)
+            {
+                case "Title":
+                    return Title;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

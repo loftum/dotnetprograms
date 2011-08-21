@@ -89,7 +89,8 @@
     <Compile Include="Models\Categories\CategoryGridRowViewModel.cs" />
     <Compile Include="Models\Categories\CategoryIndexViewModel.cs" />
     <Compile Include="Models\Categories\CategoryViewModel.cs" />
-    <Compile Include="Models\Grids\GridViewModel.cs" />
+    <Compile Include="Models\Grids\GridRowViewModelBase.cs" />
+    <Compile Include="Models\Grids\JqGridViewModel.cs" />
     <Compile Include="Models\Grids\IGridRowViewModel.cs" />
     <Compile Include="Models\Grids\JqGridParameters.cs" />
     <Compile Include="Models\Grids\JqGridRow.cs" />
@@ -139,6 +140,7 @@
     <Content Include="Content\themes\smoothness\jquery-ui-1.8.14.smoothness.css" />
     <Content Include="Content\ui.jqgrid.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\common\grid\grid.locale-en.js" />
     <Content Include="Scripts\common\grid\grid.locale-no.js" />
     <Content Include="Scripts\common\grid\plugins\grid.postext.js" />
     <Content Include="Scripts\common\jquery-1.6.1.js" />

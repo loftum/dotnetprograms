@@ -23,6 +23,7 @@
                 colModel: colModel,
                 sortname: 'Title',
                 sortorder: 'asc',
+                rowNum:20,
                 width: 1000,
                 viewrecords: true,
                 hidegrid: false,
