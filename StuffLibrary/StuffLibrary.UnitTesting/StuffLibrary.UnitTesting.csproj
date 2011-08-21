@@ -56,6 +56,7 @@
     <Compile Include="Builders\DomainBuilderBase.cs" />
     <Compile Include="Builders\MovieBuilder.cs" />
     <Compile Include="BusinessLogic\MovieLogicTest.cs" />
+    <Compile Include="Faking\FakeQueryable.cs" />
     <Compile Include="Faking\FakeQueryOver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Some.cs" />

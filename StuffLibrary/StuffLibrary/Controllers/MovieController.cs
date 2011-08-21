@@ -26,30 +26,34 @@ namespace StuffLibrary.Controllers
             return View(new MovieIndexViewModel());
         }
 
-        public ActionResult JsonMovies()
+        public ActionResult JsonMovies(JqGridParameters parameters)
         {
             var movies = from movie 
-                    in _movieLogic.GetAllMovies()
+                    in _movieLogic.GetAllMovies(parameters.Query)
                     select new MovieGridRowViewModel(movie);
             return Json(new GridViewModel(movies), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RegisterNew()
         {
-            var model = new MovieViewModel();
+            var model = ModelFor(new Movie());
             return View("Edit", model);
         }
 
         public ActionResult Edit(long id)
         {
             var movie = _movieLogic.GetMovie(id);
-            var categories = _categoryLogic.GetCategories();
-
-            var model = new MovieViewModel(movie)
-                            {
-                                AvailableCategories = SelectableList.Of(categories, c => new SelectListItem{Text = c.Name, Value = c.Id.ToString()}).Items
-                            };
+            var model = ModelFor(movie);
             return View(model);
+        }
+
+        private MovieViewModel ModelFor(Movie movie)
+        {
+            var categories = _categoryLogic.GetCategories();
+            return new MovieViewModel(movie)
+            {
+                AvailableCategories = from c in categories select c.Name
+            };
         }
 
         public ActionResult Save(MovieViewModel model)

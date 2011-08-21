@@ -86,8 +86,12 @@
     <Compile Include="HtmlTools\Builders\HtmlSubmit.cs" />
     <Compile Include="HtmlTools\Dropdowns\SelectableList.cs" />
     <Compile Include="HtmlTools\HtmlHelperExtensions.cs" />
+    <Compile Include="Models\Categories\CategoryGridRowViewModel.cs" />
+    <Compile Include="Models\Categories\CategoryIndexViewModel.cs" />
+    <Compile Include="Models\Categories\CategoryViewModel.cs" />
     <Compile Include="Models\Grids\GridViewModel.cs" />
     <Compile Include="Models\Grids\IGridRowViewModel.cs" />
+    <Compile Include="Models\Grids\JqGridParameters.cs" />
     <Compile Include="Models\Grids\JqGridRow.cs" />
     <Compile Include="Models\GuiElements\GuiElementsViewModel.cs" />
     <Compile Include="Models\Messages\FlashMessage.cs" />
@@ -104,6 +108,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\stufflibrary.css" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Content\themes\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Content\themes\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Content\themes\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Content\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\cupertino\jquery-ui-1.8.16.cupertino.css" />
     <Content Include="Content\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -118,14 +137,19 @@
     <Content Include="Content\themes\smoothness\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\smoothness\jquery-ui-1.8.14.smoothness.css" />
+    <Content Include="Content\ui.jqgrid.css" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\common\grid.locale-no.js" />
+    <Content Include="Scripts\common\grid\grid.locale-no.js" />
+    <Content Include="Scripts\common\grid\plugins\grid.postext.js" />
     <Content Include="Scripts\common\jquery-1.6.1.js" />
     <Content Include="Scripts\common\jquery-1.6.2.min.js" />
     <Content Include="Scripts\common\jquery-ui-1.8.14.smoothness.min.js" />
-    <Content Include="Scripts\common\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\common\jquery-ui-1.8.16.cupertino.min.js" />
+    <Content Include="Scripts\common\grid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\StuffLibrary\Site.Master.js" />
     <Content Include="Scripts\StuffLibrary\stufflibrary.common.js" />
+    <Content Include="Views\Category\Edit.aspx" />
+    <Content Include="Views\Category\Index.aspx" />
     <Content Include="Views\GuiElements\Index.aspx" />
     <Content Include="Views\Movie\Index.aspx" />
     <Content Include="Views\Movie\Edit.aspx" />

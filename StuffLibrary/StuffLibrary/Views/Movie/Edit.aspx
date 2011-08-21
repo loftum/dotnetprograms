@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="HeadingContent" runat="server">
     <h2>
-        <a href="/Movie">Movie</a> // <%= Model.MovieTitle %>
+        <a href="/Movie">Movies</a> // <%= Model.MovieTitle %>
     </h2>
 </asp:Content>
 
@@ -15,6 +15,7 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
+            console.debug("Categories: " + <%= Model.AvailableCategories.ToJavaScript() %> );
             $("#category").autocomplete({
                 source: <%= Model.AvailableCategories.ToJavaScript() %>
             });

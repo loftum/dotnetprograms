@@ -1,37 +1,39 @@
+using System.Linq;
 using NHibernate;
+using NHibernate.Linq;
 using StuffLibrary.Domain;
 
 namespace StuffLibrary.Repository
 {
     public class StuffLibraryRepo : IStuffLibraryRepo
     {
-        private readonly ISession _session;
+        public ISession Session { get; private set; }
         private readonly ITransaction _transaction;
 
         public StuffLibraryRepo(ISession session)
         {
-            _session = session;
-            _transaction = _session.BeginTransaction();
+            Session = session;
+            _transaction = Session.BeginTransaction();
         }
 
         public TDomainObject Get<TDomainObject>(long id) where TDomainObject : DomainObject
         {
-            return _session.Get<TDomainObject>(id);
+            return Session.Get<TDomainObject>(id);
         }
 
-        public IQueryOver<TDomainObject> GetAll<TDomainObject>() where TDomainObject : DomainObject
+        public IQueryable<TDomainObject> GetAll<TDomainObject>() where TDomainObject : DomainObject
         {
-            return _session.QueryOver<TDomainObject>();
+            return Session.Query<TDomainObject>();
         }
 
         public void Add<TDomainObject>(TDomainObject domainObject) where TDomainObject : DomainObject
         {
-            _session.Save(domainObject);
+            Session.Save(domainObject);
         }
 
         public void Delete<TDomainObject>(TDomainObject domainObject) where TDomainObject : DomainObject
         {
-            _session.Delete(domainObject);
+            Session.Delete(domainObject);
         }
 
         public void SaveChanges()
@@ -46,7 +48,7 @@ namespace StuffLibrary.Repository
                 _transaction.Rollback();
             }
             _transaction.Dispose();
-            _session.Dispose();
+            Session.Dispose();
         }
 
         public void Rollback()

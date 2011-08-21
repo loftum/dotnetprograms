@@ -67,7 +67,7 @@ namespace StuffLibrary.IntegrationTesting.Repository
                 _repo.Add(new Movie{Title = string.Format("Title {0}", ii)});
             }
 
-            var gottenMovies = _repo.GetAll<Movie>().List();
+            var gottenMovies = _repo.GetAll<Movie>();
             CustomAssert.ThatCollection(gottenMovies).HasCount(5);
         }
     }

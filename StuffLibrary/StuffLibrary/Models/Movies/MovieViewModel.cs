@@ -18,7 +18,7 @@ namespace StuffLibrary.Models.Movies
             get { return Movie.IsNew() ? "New" : Movie.Title; }
         }
 
-        public IEnumerable<SelectListItem> AvailableCategories { get; set; }
+        public IEnumerable<string> AvailableCategories { get; set; }
 
         public MovieViewModel() : this(new Movie())
         {

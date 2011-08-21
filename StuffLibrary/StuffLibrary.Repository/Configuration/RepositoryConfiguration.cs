@@ -22,7 +22,10 @@ namespace StuffLibrary.Repository.Configuration
             var factory = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(_config.ConnectionString))
                 .ExposeConfiguration(RegisterListeners)
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<RepositoryConfiguration>())
+                .Mappings(m => 
+                    m.FluentMappings
+                    .AddFromAssemblyOf<RepositoryConfiguration>()
+                    .Conventions.Add<ForeignKeyConvention>())
                 .BuildSessionFactory();
             return factory;
         }

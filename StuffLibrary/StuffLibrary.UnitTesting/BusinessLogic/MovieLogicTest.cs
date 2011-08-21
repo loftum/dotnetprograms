@@ -30,9 +30,9 @@ namespace StuffLibrary.UnitTesting.BusinessLogic
         {
             var movie1 = Build.Movie().WithTitle(Some.Title).Item;
             var movie2 = Build.Movie().WithTitle(Some.OtherTitle).Item;
-            var allMovies = new FakeQueryOver<Movie>(movie1, movie2);
+            var allMovies = new FakeQueryable<Movie>(movie1, movie2);
             _repoMock.Setup(repo => repo.GetAll<Movie>()).Returns(allMovies);
-            var movies = _movieLogic.GetAllMovies();
+            var movies = _movieLogic.GetAllMovies("");
             CustomAssert.ThatCollection(movies)
                 .HasCount(2)
                 .Contains(movie1)
@@ -40,11 +40,22 @@ namespace StuffLibrary.UnitTesting.BusinessLogic
         }
 
         [Test]
-        public void ShouldSaveMovie()
+        public void Save_ShouldSaveNewMovie()
         {
-            var movie = Build.Movie().WithTitle(Some.Title).Item;
+            var movie = Build.NewMovie().WithTitle(Some.Title).Item;
             _movieLogic.Save(movie);
             _repoMock.Verify(repo => repo.Add(movie));
+            _repoMock.Verify(repo => repo.SaveChanges());
+        }
+
+        [Test]
+        public void Save_ShouldUpdateExistingMovie()
+        {
+            var existing = Build.Movie().WithTitle(Some.Title).Item;
+            _repoMock.Setup(repo => repo.Get<Movie>(existing.Id)).Returns(existing);
+            var updated = Build.NewMovie().WithId(existing.Id).WithTitle(Some.OtherTitle).Item;
+            _movieLogic.Save(updated);
+            _repoMock.Verify(repo => repo.Add(updated), Times.Never());
             _repoMock.Verify(repo => repo.SaveChanges());
         }
     }

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ChangeStampUpdater.cs" />
+    <Compile Include="Configuration\ForeignKeyConvention.cs" />
     <Compile Include="Configuration\IChangeStampUpdater.cs" />
     <Compile Include="Configuration\IRepositoryConfiguration.cs" />
     <Compile Include="Configuration\RepositoryConfiguration.cs" />

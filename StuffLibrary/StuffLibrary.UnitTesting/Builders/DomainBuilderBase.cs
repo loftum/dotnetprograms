@@ -13,6 +13,11 @@ namespace StuffLibrary.UnitTesting.Builders
             Item = item;
         }
 
+        protected static TItem NewItem()
+        {
+            return new TItem();
+        }
+
         protected static TItem ExistingItem()
         {
             return new TItem{Id = NextId()};
@@ -23,7 +28,5 @@ namespace StuffLibrary.UnitTesting.Builders
             Item.Id = id;
             return MySelf;
         }
-
-        
     }
 }

@@ -6,5 +6,10 @@
         {
             return MovieBuilder.Existing();
         }
+
+        public static MovieBuilder NewMovie()
+        {
+            return MovieBuilder.New();
+        }
     }
 }

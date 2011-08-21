@@ -9,7 +9,9 @@ namespace StuffLibrary.Repository.Mappings
             Map(x => x.Title);
             HasManyToMany(x => x.Categories)
                 .Cascade.All()
-                .Table("MovieCategory");
+                .Table("MovieCategory")
+                .ChildKeyColumn("CategoryId")
+                .ParentKeyColumn("MovieId");
         }
     }
 }

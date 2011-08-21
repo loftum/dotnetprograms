@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using NHibernate.Criterion;
+using NHibernate.Linq;
+using StuffLibrary.Common.ExtensionMethods;
 using StuffLibrary.Common.Logging;
 using StuffLibrary.Domain;
 using StuffLibrary.Repository;
@@ -21,9 +27,14 @@ namespace StuffLibrary.Lib.BusinessLogic
             return _repo.Get<Movie>(id);
         }
 
-        public IEnumerable<Movie> GetAllMovies()
+        public IEnumerable<Movie> GetAllMovies(string query)
         {
-            return _repo.GetAll<Movie>().List();
+            var movies = _repo.GetAll<Movie>();
+            if (!query.IsNullOrEmpty())
+            {
+                movies = movies.Where(movie => movie.Title.Contains(query));
+            }
+            return movies;
         }
 
         public long Save(Movie movie)

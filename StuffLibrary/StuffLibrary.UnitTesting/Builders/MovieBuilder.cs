@@ -8,6 +8,11 @@ namespace StuffLibrary.UnitTesting.Builders
         {
         }
 
+        public static MovieBuilder New()
+        {
+            return new MovieBuilder(NewItem());
+        }
+
         public static MovieBuilder Existing()
         {
             return new MovieBuilder(ExistingItem());
