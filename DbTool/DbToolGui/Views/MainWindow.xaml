@@ -1,0 +1,28 @@
+<Window x:Class="DbToolGui.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DbTool" Height="600" Width="800">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                <Button Name="ConnectButton" Content="Connect" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
+                <ComboBox Name="ConnectionBox"
+                          ItemsSource="{Binding Path=AvailableConnections, Mode=OneWay}"
+                          SelectedItem="{Binding Path=SelectedConnection, Mode=TwoWay}">
+                </ComboBox>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+                <TextBox Name="StatusTextBox" Text="{Binding Path=StatusText}" DockPanel.Dock="Bottom" />
+                <DataGrid Name="ResultTable">
+                    
+                </DataGrid>
+            </DockPanel>
+            <Grid>
+                <TextBox Name="EditorBox"
+                         FontFamily="Courier New" FontSize="10"
+                         AcceptsReturn="True" AcceptsTab="true"
+                         Text="{Binding Path=EditorText, Mode=OneWayToSource}"></TextBox>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

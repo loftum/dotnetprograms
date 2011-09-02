@@ -18,9 +18,7 @@ namespace DbTool.Lib.Tasks
         public override bool AreValid(IList<string> args)
         {
             var count = args.Count;
-            return count > 1 &&
-                   !string.IsNullOrWhiteSpace(args[1]) &&
-                   (count < 2 || !string.IsNullOrWhiteSpace(args[2]));
+            return count > 1 && !string.IsNullOrWhiteSpace(args[1]);
         }
 
         public override void DoExecute(IList<string> args)
@@ -34,7 +32,7 @@ namespace DbTool.Lib.Tasks
             }
             var connectionString = Settings.GetConnectionString(databaseName);
             var assembly = Assembly.LoadFrom(Settings.MigrationPath);
-            var migrator = new Migrator.Migrator("sqlserver", connectionString, assembly, true, new Logger(true, Logger));
+            var migrator = new Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, Logger));
 
             if (string.IsNullOrWhiteSpace(versionString))
             {

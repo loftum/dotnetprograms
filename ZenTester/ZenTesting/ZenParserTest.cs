@@ -10,7 +10,7 @@ namespace ZenTesting
     public class ZenParserTest
     {
         private const string BaseUrl = "https://agilezen.com/api/v1";
-        private const string ApiKey = "";
+        private const string ApiKey = "f14df34ca9214a0fb755da4b0670d2fa";
 
         private ZenParser _parser;
 
@@ -23,7 +23,7 @@ namespace ZenTesting
         [Test]
         public void Should()
         {
-            const string relativeUrl = "";
+            const string relativeUrl = "/projects/16113/stories/61?with=everything";
             var request = (HttpWebRequest) WebRequest.Create(BaseUrl + relativeUrl);
             request.Headers["X-Zen-ApiKey"] = ApiKey;
             request.ContentType = "application/xml";
