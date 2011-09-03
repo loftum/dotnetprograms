@@ -6,6 +6,7 @@
         Default = 1,
         Keyword = 2,
         Function = 3,
-        Operator = 4
+        Operator = 4,
+        String = 5
     }
 }

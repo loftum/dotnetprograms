@@ -15,7 +15,7 @@ namespace DbToolGui.Highlighting
         {
             Keywords = new[] {"select", "insert", "update", "delete", "drop", "distinct", "from", "left", "outer", "join", "on", "where", "in", "order", "by", "asc", "desc"};
             Functions = new[] {"migrate", "up", "down"};
-            Operators = new[] {""};
+            Operators = new[] {"+", "-", "*", "/", "="};
             Separators = new[] {' ', '.'};
         }
 
@@ -36,6 +36,12 @@ namespace DbToolGui.Highlighting
             return Separators.Any(s => s.Equals(value));
         }
 
+        public bool IsOperator(string word)
+        {
+            var lower = word.ToLowerInvariant();
+            return Operators.Any(o => o.Equals(lower));
+        }
+
         public TagType GetTypeOf(string word)
         {
             if (IsKeyword(word))
@@ -45,6 +51,10 @@ namespace DbToolGui.Highlighting
             if (IsFunction(word))
             {
                 return TagType.Function;
+            }
+            if (IsOperator(word))
+            {
+                return TagType.Operator;
             }
             return TagType.Nothing;
         }

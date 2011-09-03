@@ -7,6 +7,6 @@ namespace DbToolGui.Providers
     {
         IEnumerable<string> GetConnectionNames();
         string GetDefaultConnectionName();
-        DbConnection GetConnection(string selectedConnection);
+        ConnectionData GetConnection(string selectedConnection);
     }
 }

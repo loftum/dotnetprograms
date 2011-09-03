@@ -11,8 +11,7 @@ namespace DbTool.Lib.Configuration
         public string DataDirectory { get; set; }
         public string LogDirectory { get; set; }
         public string BackupDirectory { get; set; }
-        public string MigrationPath { get; set; }
-        public IList<DbConnection> Connections { get; set; }
+        public IList<ConnectionData> Connections { get; set; }
 
         public static DbToolSettings Default
         {
@@ -23,15 +22,15 @@ namespace DbTool.Lib.Configuration
                         DataDirectory = "dataDir",
                         LogDirectory = "logDir",
                         BackupDirectory = "backupDir",
-                        MigrationPath = "migrationPath",
-                        Connections = new List<DbConnection>
+                        Connections = new List<ConnectionData>
                         {
-                            new DbConnection
+                            new ConnectionData
                             {
                                 Name = "default",
                                 Host = @".\SQLEXPRESS",
                                 ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MyDB;Integrated Security=True;MultipleActiveResultSets=True",
-                                Default = true
+                                Default = true,
+                                MigrationPath = "migrationPath"
                             }
                         }
                     };
@@ -39,9 +38,14 @@ namespace DbTool.Lib.Configuration
         }
 
         [JsonIgnore]
-        public DbConnection DefaultConnection
+        public ConnectionData DefaultConnection
         {
             get { return Connections.Where(c => c.Default).FirstOrDefault(); }
+        }
+
+        public ConnectionData GetConnection(string name)
+        {
+            return Connections.Where(c => c.Name.Equals(name)).FirstOrDefault();
         }
 
         public bool HasConnectionString(string name)

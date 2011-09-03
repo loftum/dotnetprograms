@@ -52,7 +52,7 @@ namespace DbToolGui.Highlighting
             int endIndex = 0;
             for (var ii = 0; ii < text.Length; ii++)
             {
-                if (Char.IsWhiteSpace(text[ii]) | _syntaxProvider.IsSeparator(text[ii]))
+                if (_syntaxProvider.IsSeparator(text[ii]))
                 {
                     if (ii > 0 && !(_syntaxProvider.IsSeparator(text[ii-1])))
                     {
@@ -93,6 +93,9 @@ namespace DbToolGui.Highlighting
                     };
                 tags.Add(tag);
             }
+
+
+
             Format(tags);
         }
 

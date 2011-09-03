@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Migrator.Framework, Version=0.9.0.26940, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Ninject">
       <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
     </Reference>
@@ -67,6 +68,8 @@
     <Compile Include="Connections\IDatabaseCommunicator.cs" />
     <Compile Include="Connections\IDbCommandResult.cs" />
     <Compile Include="Connections\IDbCommandExecutor.cs" />
+    <Compile Include="Connections\MigrationExecutor.cs" />
+    <Compile Include="Connections\MigrationResult.cs" />
     <Compile Include="Connections\NonQueryExecutor.cs" />
     <Compile Include="Connections\NonQueryResult.cs" />
     <Compile Include="Connections\QueryExecutor.cs" />

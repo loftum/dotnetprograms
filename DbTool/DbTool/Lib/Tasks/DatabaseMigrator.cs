@@ -4,7 +4,7 @@ using System.Reflection;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
-using Migrator.Framework.Loggers;
+using DbTool.Lib.Migrating;
 
 namespace DbTool.Lib.Tasks
 {
@@ -30,18 +30,16 @@ namespace DbTool.Lib.Tasks
             {
                 throw new DbToolException("No connection for " + databaseName + " is defined.");
             }
-            var connectionString = Settings.GetConnectionString(databaseName);
-            var assembly = Assembly.LoadFrom(Settings.MigrationPath);
-            var migrator = new Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, Logger));
 
+            var migrationRunner = new MigrationRunner(Settings.GetConnection(databaseName), Logger);
             if (string.IsNullOrWhiteSpace(versionString))
             {
-                migrator.MigrateToLastVersion();
+                migrationRunner.MigrateToLatest();
             }
             else
             {
                 var version = TryGetVersion(versionString);
-                migrator.MigrateTo(version);
+                migrationRunner.MigrateTo(version);
             }
         }
 

@@ -77,7 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lib\Configuration\DbConnection.cs" />
+    <Compile Include="Lib\Configuration\ConnectionData.cs" />
     <Compile Include="Lib\Configuration\DbToolConfig.cs" />
     <Compile Include="Lib\Configuration\DbToolSection.cs" />
     <Compile Include="Lib\Configuration\DbToolSettings.cs" />
@@ -90,6 +90,9 @@
     <Compile Include="Lib\Extensions\TypeExtensions.cs" />
     <Compile Include="Lib\Logging\ConsoleLogger.cs" />
     <Compile Include="Lib\Logging\IDbToolLogger.cs" />
+    <Compile Include="Lib\Logging\MemoryLogger.cs" />
+    <Compile Include="Lib\Migrating\IMigrationLogger.cs" />
+    <Compile Include="Lib\Migrating\MigrationRunner.cs" />
     <Compile Include="Lib\Tasks\DatabaseBackuper.cs" />
     <Compile Include="Lib\Tasks\DatabaseCreator.cs" />
     <Compile Include="Lib\Tasks\DatabaseDeleter.cs" />

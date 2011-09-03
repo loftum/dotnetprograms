@@ -15,6 +15,7 @@ namespace DbToolGui.Connections
             get { return _sqlConnection != null; }
         }
 
+        private ConnectionData _connectionData;
         private SqlConnection _sqlConnection;
 
         public DatabaseCommunicator()
@@ -22,12 +23,13 @@ namespace DbToolGui.Connections
             ConnectedTo = string.Empty;
         }
 
-        public void ConnectTo(DbConnection connectionData)
+        public void ConnectTo(ConnectionData connectionData)
         {
             if (IsConnected)
             {
                 throw new UserException(ExceptionType.AlreadyConnected);
             }
+            _connectionData = connectionData;
             _sqlConnection = new SqlConnection(connectionData.ConnectionString);
             ConnectedTo = connectionData.Name;
         }
@@ -65,7 +67,7 @@ namespace DbToolGui.Connections
             }
             if (statement.StartsWith("migrate"))
             {
-                
+                return new MigrationExecutor(_connectionData);
             }
             return new NonQueryExecutor(_sqlConnection);
         }

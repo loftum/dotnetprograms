@@ -30,16 +30,17 @@
                          AcceptsReturn="True" AcceptsTab="true"
                          Text="{Binding Path=QueryResult, Mode=OneWay}"
                          />
-                <Button Name="ExecuteButton" Content="Execute" DockPanel.Dock="Top" Command="{Binding Path=ExecuteCommand}" />
                 <RichTextBox Name="EditorBox"
                          FontFamily="Courier New" FontSize="12"
                          AcceptsReturn="True" AcceptsTab="true"
                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                          TextChanged="EditorBox_TextChanged"
                          KeyUp="EditorBox_KeyUp">
-                    <FlowDocument Name="EditorDocument">
-                        
-                    </FlowDocument>
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
                 </RichTextBox>
             </DockPanel>
         </DockPanel>

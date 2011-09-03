@@ -6,7 +6,7 @@ namespace DbToolGui.Connections
     {
         string ConnectedTo { get; }
         bool IsConnected { get; }
-        void ConnectTo(DbConnection connectionData);
+        void ConnectTo(ConnectionData connectionData);
         void Disconnect();
         IDbCommandResult Execute(string statement);
     }

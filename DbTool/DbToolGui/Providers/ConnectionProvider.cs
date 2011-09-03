@@ -18,14 +18,14 @@ namespace DbToolGui.Providers
             return _config.Settings.DefaultConnection.Name;
         }
 
-        public DbConnection GetConnection(string selectedConnection)
+        public ConnectionData GetConnection(string selectedConnection)
         {
             return GetConnections()
                 .Where(c => c.Name.Equals(selectedConnection))
                 .SingleOrDefault();
         }
 
-        private IEnumerable<DbConnection> GetConnections()
+        private IEnumerable<ConnectionData> GetConnections()
         {
             return _config.Settings.Connections;
         }

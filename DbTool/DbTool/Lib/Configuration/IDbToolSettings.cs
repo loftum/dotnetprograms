@@ -5,8 +5,8 @@
         string DataDirectory { get; }
         string LogDirectory { get; }
         string BackupDirectory { get; }
-        string MigrationPath { get; }
-        DbConnection DefaultConnection { get; }
+        ConnectionData DefaultConnection { get; }
+        ConnectionData GetConnection(string name);
         bool HasConnectionString(string name);
         string GetConnectionString(string name);
     }
