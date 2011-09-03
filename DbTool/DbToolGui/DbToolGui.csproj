@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,7 +60,35 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Connections\ColumnDescriptor.cs" />
+    <Compile Include="Connections\DatabaseCommunicator.cs" />
+    <Compile Include="Connections\DbCommandResultBase.cs" />
+    <Compile Include="Connections\ErrorResult.cs" />
+    <Compile Include="Connections\IDatabaseCommunicator.cs" />
+    <Compile Include="Connections\IDbCommandResult.cs" />
+    <Compile Include="Connections\IDbCommandExecutor.cs" />
+    <Compile Include="Connections\NonQueryExecutor.cs" />
+    <Compile Include="Connections\NonQueryResult.cs" />
+    <Compile Include="Connections\QueryExecutor.cs" />
+    <Compile Include="Connections\QueryResult.cs" />
+    <Compile Include="Connections\UnknownExecutor.cs" />
+    <Compile Include="Exceptions\ExceptionType.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
+    <Compile Include="ExtensionMethods\ComparisonExtensions.cs" />
+    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Highlighting\HighlightStyle.cs" />
+    <Compile Include="Highlighting\TagType.cs" />
+    <Compile Include="Highlighting\SyntaxHighlighter.cs" />
+    <Compile Include="Highlighting\ISyntaxHighlighter.cs" />
+    <Compile Include="Highlighting\ISyntaxProvider.cs" />
+    <Compile Include="Highlighting\DbToolSyntaxProvider.cs" />
+    <Compile Include="Highlighting\Tag.cs" />
+    <Compile Include="Modules\DatabaseModule.cs" />
+    <Compile Include="Modules\ViewModelModule.cs" />
     <Compile Include="Providers\ConnectionProvider.cs" />
+    <Compile Include="Providers\IConnectionProvider.cs" />
     <Compile Include="ViewModels\DbToolGuiViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelException.cs" />
@@ -103,6 +134,13 @@
       <Project>{74E31DD3-0DA6-4529-82CA-82D46F8A994E}</Project>
       <Name>DbTool</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\db.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dbmin.ico" />
+    <Resource Include="Images\dbplus.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

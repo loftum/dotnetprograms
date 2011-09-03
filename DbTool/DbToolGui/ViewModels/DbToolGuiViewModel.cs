@@ -1,17 +1,38 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DbToolGui.Commands;
 using DbToolGui.Connections;
+using DbToolGui.ExtensionMethods;
 using DbToolGui.Providers;
 
 namespace DbToolGui.ViewModels
 {
     public class DbToolGuiViewModel : ViewModelBase
     {
-        private readonly ConnectionProvider _connectionProvider = new ConnectionProvider();
-        private readonly DatabaseCommunicator _communicator = new DatabaseCommunicator();
+        public string Title
+        {
+            get
+            {
+                return _communicator.IsConnected
+                           ? string.Format("DbTool - {0}", _communicator.ConnectedTo)
+                           : "DbTool";
+            }
+        }
+
+        public string Icon
+        {
+            get { return _communicator.IsConnected ? "/Images/dbplus.ico" : "/Images/db.ico"; }
+        }
+
+        private readonly IConnectionProvider _connectionProvider;
+        private readonly IDatabaseCommunicator _communicator;
 
         public ICommand ExecuteCommand { get; private set; }
+        public string ConnectCommandName
+        {
+            get { return _communicator.IsConnected ? "Disconnect" : "Connect"; }
+        }
         public ICommand ConnectCommand { get; private set; }
 
         private string _statusText;
@@ -21,12 +42,15 @@ namespace DbToolGui.ViewModels
             set { _statusText = value; OnPropertiesChanged("StatusText"); }
         }
 
-        private string _editorText;
-        public string EditorText
+        public string EditorText { get; set; }
+
+        private string _queryResult;
+        public string QueryResult
         {
-            get { return _editorText; }
-            set { _editorText = value; OnPropertyChanged("EditorText"); }
+            get { return _queryResult; }
+            set { _queryResult = value; OnPropertyChanged("QueryResult"); }
         }
+
 
         public ObservableCollection<string> AvailableConnections { get; private set; }
         
@@ -37,9 +61,12 @@ namespace DbToolGui.ViewModels
             set { _selectedConnection = value; OnPropertiesChanged("SelectedConnection"); }
         }
 
-        public DbToolGuiViewModel()
+        public DbToolGuiViewModel(IConnectionProvider connectionProvider, IDatabaseCommunicator communicator)
         {
-            ConnectCommand = new DelegateCommand(Connect);
+            _connectionProvider = connectionProvider;
+            _communicator = communicator;
+
+            ConnectCommand = new DelegateCommand(ToggleConnect);
             ExecuteCommand = new DelegateCommand(ExecuteQuery);
             AvailableConnections = new ObservableCollection<string>();
             foreach (var connection in _connectionProvider.GetConnectionNames())
@@ -49,7 +76,27 @@ namespace DbToolGui.ViewModels
             SelectedConnection = _connectionProvider.GetDefaultConnectionName();
         }
 
-        private void Connect(object obj)
+        private void ToggleConnect(object arg)
+        {
+            if (_communicator.IsConnected)
+            {
+                Disconnect();
+            }
+            else
+            {
+                Connect();
+            }
+        }
+
+        private void Disconnect()
+        {
+            var name = _communicator.ConnectedTo;
+            _communicator.Disconnect();
+            StatusText = string.Format("Disconnected from {0}", name);
+            FireOnConnectionPropertiesChanged();
+        }
+
+        private void Connect()
         {
             if (string.IsNullOrEmpty(_selectedConnection))
             {
@@ -68,12 +115,31 @@ namespace DbToolGui.ViewModels
                 return;
             }
             _communicator.ConnectTo(connection);
-            StatusText = string.Format("Connected to {0}", SelectedConnection);
+            StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
+            FireOnConnectionPropertiesChanged();
+        }
+
+        private void FireOnConnectionPropertiesChanged()
+        {
+            OnPropertiesChanged("ConnectCommandName", "Icon", "Title");
         }
 
         private void ExecuteQuery(object arg)
         {
-
+            var query = EditorText.Trim();
+            if (query.IsNullOrEmpty())
+            {
+                return;
+            }
+            try
+            {
+                var result = _communicator.Execute(query);
+                QueryResult = result.ToString();
+            }
+            catch (Exception ex)
+            {
+                QueryResult = ex.ToString();
+            }
         }
     }
 }

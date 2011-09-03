@@ -7,7 +7,7 @@ namespace DbToolGui.ExtensionMethods
     {
         private const string Undefined = "Undefined";
 
-        public static string GetDescription(this Enum value)
+        public static string GetDescription(this Enum value, params object[] args)
         {
             if (value == null)
             {
@@ -19,7 +19,8 @@ namespace DbToolGui.ExtensionMethods
                 return Undefined;
             }
             var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+            var description = (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+            return string.Format(description, args);
         }
     }
 }

@@ -4,7 +4,7 @@ using DbTool.Lib.Configuration;
 
 namespace DbToolGui.Providers
 {
-    public class ConnectionProvider
+    public class ConnectionProvider : IConnectionProvider
     {
         private readonly IDbToolConfig _config = new DbToolConfig();
 
