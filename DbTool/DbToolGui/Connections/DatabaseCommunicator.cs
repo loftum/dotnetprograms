@@ -8,7 +8,10 @@ namespace DbToolGui.Connections
 {
     public class DatabaseCommunicator : IDatabaseCommunicator
     {
-        public string ConnectedTo { get; private set; }
+        public string ConnectedTo
+        {
+            get { return _connectionData == null ? string.Empty : _connectionData.Name; }
+        }
 
         public bool IsConnected
         {
@@ -18,10 +21,6 @@ namespace DbToolGui.Connections
         private ConnectionData _connectionData;
         private SqlConnection _sqlConnection;
 
-        public DatabaseCommunicator()
-        {
-            ConnectedTo = string.Empty;
-        }
 
         public void ConnectTo(ConnectionData connectionData)
         {
@@ -31,7 +30,6 @@ namespace DbToolGui.Connections
             }
             _connectionData = connectionData;
             _sqlConnection = new SqlConnection(connectionData.ConnectionString);
-            ConnectedTo = connectionData.Name;
         }
 
         public void Disconnect()
@@ -41,7 +39,7 @@ namespace DbToolGui.Connections
                 _sqlConnection.Close();
                 _sqlConnection.Dispose();
                 _sqlConnection = null;
-                ConnectedTo = string.Empty;
+                _connectionData = null;
             }
         }
 
