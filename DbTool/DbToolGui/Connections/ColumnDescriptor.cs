@@ -4,11 +4,13 @@ namespace DbToolGui.Connections
 {
     public class ColumnDescriptor
     {
+        public int Index { get; private set; }
         public string Name { get; private set; }
         public Type Type { get; private set; }
 
-        public ColumnDescriptor(string name, Type type)
+        public ColumnDescriptor(int index, string name, Type type)
         {
+            Index = index;
             Name = name;
             Type = type;
         }

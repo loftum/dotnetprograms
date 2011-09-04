@@ -13,24 +13,28 @@ namespace DbToolGui.Connections
         private readonly IList<ColumnDescriptor> _columns;
         public IEnumerable<ColumnDescriptor> Columns { get { return _columns; } }
 
-        private readonly IList<IDictionary<string, object>> _rows;
-        public IEnumerable<IDictionary<string, object>> Rows { get { return _rows; } }
+
+        private readonly IList<Record> _records;
+        public IEnumerable<Record> Rows
+        {
+            get { return _records; }
+        }
 
         public QueryResult()
         {
             _columns = new List<ColumnDescriptor>();
-            _rows = new List<IDictionary<string, object>>();
+            _records = new List<Record>();
         }
 
         public void AddRow(IEnumerable<object> values)
         {
             var list = values.ToList();
-            var row = new Dictionary<string, object>();
+            var record = new Record();
             for (var ii=0; ii<_columns.Count; ii++)
             {
-                row[_columns[ii].Name] = list[ii];
+                record.Add(new Property(_columns[ii].Name, list[ii]));
             }
-            _rows.Add(row);
+            _records.Add(record);
         }
 
         public void AddColumn(string name, Type type)
@@ -39,7 +43,12 @@ namespace DbToolGui.Connections
             {
                 name = "(Unknown)";
             }
-            _columns.Add(new ColumnDescriptor(name, type));
+            _columns.Add(new ColumnDescriptor(NextIndex(), name, type));
+        }
+
+        private int NextIndex()
+        {
+            return _columns.Count;
         }
 
         protected override string ConvertToString()
@@ -47,9 +56,9 @@ namespace DbToolGui.Connections
             var builder = new StringBuilder();
             var columnNames = _columns.Select(c => c.Name);
             builder.AppendLine(string.Join(" | ", columnNames));
-            foreach (var row in _rows)
+            foreach (var row in Rows)
             {
-                var values = columnNames.Select(columnName => row[columnName]);
+                var values = columnNames.Select(columnName => row.Get(columnName));
                 builder.AppendLine(string.Join(" | ", values));
             }
             return builder.ToString();

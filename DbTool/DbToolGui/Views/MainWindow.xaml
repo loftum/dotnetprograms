@@ -1,8 +1,14 @@
 <Window x:Class="DbToolGui.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{Binding Path=Title}" Height="600" Width="800"
+        xmlns:ExtensionMethods="clr-namespace:DbToolGui.ExtensionMethods" Title="{Binding Path=Title}" Height="600" Width="800"
         Icon="{Binding Path=Icon}">
+    <Window.Resources>
+        <DataTemplate x:Key="PropertyValueTemplate">
+            <TextBox Text="{Binding Path=Value, Mode=OneWay}"
+                     IsReadOnly="True" BorderThickness="0" BorderBrush="Black"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <DockPanel LastChildFill="True">
             <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
@@ -15,6 +21,7 @@
             <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
                 <TextBox Name="StatusTextBox"
                          IsReadOnly="True"
+                         Foreground="DarkGray"
                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                          AcceptsReturn="True" AcceptsTab="true"
                          Text="{Binding Path=StatusText}"
@@ -22,12 +29,10 @@
                 </TextBox>
             </DockPanel>
             <DockPanel LastChildFill="True">
-                <TextBox Name="ResultTable" DockPanel.Dock="Bottom"
-                         IsReadOnly="True"
-                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-                         AcceptsReturn="True" AcceptsTab="true"
-                         Text="{Binding Path=QueryResult, Mode=OneWay}"
-                         />
+                <DataGrid Name="ResultTable" DockPanel.Dock="Bottom"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
+                    ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
                 <RichTextBox Name="EditorBox"
                          FontFamily="Courier New" FontSize="12"
                          AcceptsReturn="True" AcceptsTab="true"

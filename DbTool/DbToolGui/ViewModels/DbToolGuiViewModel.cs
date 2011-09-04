@@ -45,14 +45,14 @@ namespace DbToolGui.ViewModels
 
         public string EditorText { get; set; }
 
-        private string _queryResult;
-        public string QueryResult
+        private string _resultText;
+        public string ResultText
         {
-            get { return _queryResult; }
-            set { _queryResult = value; OnPropertyChanged("QueryResult"); }
+            get { return _resultText; }
+            set { _resultText = value; OnPropertyChanged("ResultText"); }
         }
 
-
+        public QueryResultViewModel QueryResult { get; private set; }
         public ObservableCollection<string> AvailableConnections { get; private set; }
         
         private string _selectedConnection;
@@ -68,13 +68,14 @@ namespace DbToolGui.ViewModels
             _communicator = communicator;
 
             ConnectCommand = new DelegateCommand(ToggleConnect);
-            ExecuteCommand = new DelegateCommand(ExecuteQuery);
+            ExecuteCommand = new DelegateCommand(ExecuteStatement);
             AvailableConnections = new ObservableCollection<string>();
             foreach (var connection in _connectionProvider.GetConnectionNames())
             {
                 AvailableConnections.Add(connection);
             }
             SelectedConnection = _connectionProvider.GetDefaultConnectionName();
+            QueryResult = new QueryResultViewModel();
         }
 
         private void ToggleConnect(object arg)
@@ -125,25 +126,33 @@ namespace DbToolGui.ViewModels
             OnPropertiesChanged("ConnectCommandName", "Icon", "Title");
         }
 
-        private void ExecuteQuery(object arg)
+        private void ExecuteStatement(object arg)
         {
-            var query = EditorText.Trim();
-            if (query.IsNullOrEmpty())
+            var statement = EditorText.Trim();
+            if (statement.IsNullOrEmpty())
             {
                 return;
             }
             try
             {
-                var result = _communicator.Execute(query);
-                QueryResult = result.ToString();
+                QueryResult.Clear();
+                var result = _communicator.Execute(statement);
+                if (result is QueryResult)
+                {
+                    QueryResult.Show((QueryResult) result);
+                }
+                else
+                {
+                    ResultText = result.ToString();
+                }
             }
             catch(UserException ex)
             {
-                QueryResult = ex.Message;
+                ResultText = ex.Message;
             }
             catch (Exception ex)
             {
-                QueryResult = ex.ToString();
+                ResultText = ex.ToString();
             }
         }
     }
