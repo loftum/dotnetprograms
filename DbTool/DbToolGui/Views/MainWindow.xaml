@@ -14,8 +14,8 @@
             <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
                 <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
                 <ComboBox Name="ConnectionBox"
-                          ItemsSource="{Binding Path=AvailableConnections, Mode=OneWay}"
-                          SelectedItem="{Binding Path=SelectedConnection, Mode=TwoWay}">
+                          ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
+                          SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}">
                 </ComboBox>
             </DockPanel>
             <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
@@ -29,10 +29,19 @@
                 </TextBox>
             </DockPanel>
             <DockPanel LastChildFill="True">
-                <DataGrid Name="ResultTable" DockPanel.Dock="Bottom"
+                <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+                    <TextBox Name="ResultTextBox" Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
+                             Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
+                         IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True" AcceptsTab="true"
+                             DockPanel.Dock="Top"/>
+                    <DataGrid Name="ResultTable" Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
                     ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
+
+                </DockPanel>
+                
                 <RichTextBox Name="EditorBox"
                          FontFamily="Courier New" FontSize="12"
                          AcceptsReturn="True" AcceptsTab="true"

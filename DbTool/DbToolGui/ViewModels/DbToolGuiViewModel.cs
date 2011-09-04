@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DbToolGui.Commands;
 using DbToolGui.Connections;
@@ -45,22 +44,8 @@ namespace DbToolGui.ViewModels
 
         public string EditorText { get; set; }
 
-        private string _resultText;
-        public string ResultText
-        {
-            get { return _resultText; }
-            set { _resultText = value; OnPropertyChanged("ResultText"); }
-        }
-
+        public ConnectionViewModel Connection { get; private set; }
         public QueryResultViewModel QueryResult { get; private set; }
-        public ObservableCollection<string> AvailableConnections { get; private set; }
-        
-        private string _selectedConnection;
-        public string SelectedConnection
-        {
-            get { return _selectedConnection; }
-            set { _selectedConnection = value; OnPropertiesChanged("SelectedConnection"); }
-        }
 
         public DbToolGuiViewModel(IConnectionProvider connectionProvider, IDatabaseCommunicator communicator)
         {
@@ -69,12 +54,8 @@ namespace DbToolGui.ViewModels
 
             ConnectCommand = new DelegateCommand(ToggleConnect);
             ExecuteCommand = new DelegateCommand(ExecuteStatement);
-            AvailableConnections = new ObservableCollection<string>();
-            foreach (var connection in _connectionProvider.GetConnectionNames())
-            {
-                AvailableConnections.Add(connection);
-            }
-            SelectedConnection = _connectionProvider.GetDefaultConnectionName();
+            
+            Connection = new ConnectionViewModel(_connectionProvider);
             QueryResult = new QueryResultViewModel();
         }
 
@@ -100,7 +81,7 @@ namespace DbToolGui.ViewModels
 
         private void Connect()
         {
-            if (string.IsNullOrEmpty(_selectedConnection))
+            if (string.IsNullOrEmpty(Connection.SelectedConnection))
             {
                 StatusText = "No connection selected";
                 return;
@@ -110,10 +91,10 @@ namespace DbToolGui.ViewModels
                 StatusText = string.Format("Already conneced to {0}", _communicator.ConnectedTo);
                 return;
             }
-            var connection = _connectionProvider.GetConnection(SelectedConnection);
+            var connection = _connectionProvider.GetConnection(Connection.SelectedConnection);
             if (connection == null)
             {
-                StatusText = string.Format("Invalid connection {0}", SelectedConnection);
+                StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
                 return;
             }
             _communicator.ConnectTo(connection);
@@ -137,22 +118,15 @@ namespace DbToolGui.ViewModels
             {
                 QueryResult.Clear();
                 var result = _communicator.Execute(statement);
-                if (result is QueryResult)
-                {
-                    QueryResult.Show((QueryResult) result);
-                }
-                else
-                {
-                    ResultText = result.ToString();
-                }
+                QueryResult.Show(result);
             }
             catch(UserException ex)
             {
-                ResultText = ex.Message;
+                QueryResult.Show(ex.Message);
             }
             catch (Exception ex)
             {
-                ResultText = ex.ToString();
+                QueryResult.Show(ex.ToString());
             }
         }
     }

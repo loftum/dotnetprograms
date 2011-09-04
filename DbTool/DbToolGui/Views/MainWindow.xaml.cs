@@ -10,11 +10,10 @@ using Ninject;
 
 namespace DbToolGui.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly DbToolGuiViewModel _viewModel;
         private readonly ISyntaxHighlighter _highlighter;
-
 
         public MainWindow()
         {

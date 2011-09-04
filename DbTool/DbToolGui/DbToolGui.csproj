@@ -100,6 +100,7 @@
     <Compile Include="Modules\ViewModelModule.cs" />
     <Compile Include="Providers\ConnectionProvider.cs" />
     <Compile Include="Providers\IConnectionProvider.cs" />
+    <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\DbToolGuiViewModel.cs" />
     <Compile Include="ViewModels\QueryResultViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
