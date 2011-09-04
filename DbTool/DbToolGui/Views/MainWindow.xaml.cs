@@ -15,6 +15,7 @@ namespace DbToolGui.Views
         private readonly DbToolGuiViewModel _viewModel;
         private readonly ISyntaxHighlighter _highlighter;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,9 +37,13 @@ namespace DbToolGui.Views
 
         private string GetEditorText()
         {
-            var document = EditorBox.Document;
-            var textRange = new TextRange(document.ContentStart, document.ContentEnd);
-            return textRange.Text;
+            if (EditorBox.Selection.IsEmpty)
+            {
+                var document = EditorBox.Document;
+                var textRange = new TextRange(document.ContentStart, document.ContentEnd);
+                return textRange.Text;    
+            }
+            return EditorBox.Selection.Text;
         }
 
         private void EditorBox_TextChanged(object sender, TextChangedEventArgs e)

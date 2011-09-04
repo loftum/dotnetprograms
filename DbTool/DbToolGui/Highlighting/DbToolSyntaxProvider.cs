@@ -13,9 +13,12 @@ namespace DbToolGui.Highlighting
 
         public DbToolSyntaxProvider()
         {
-            Keywords = new[] {"select", "insert", "update", "delete", "drop", "distinct", "from", "left", "outer", "join", "on", "where", "in", "order", "by", "asc", "desc"};
-            Functions = new[] {"migrate", "up", "down"};
-            Operators = new[] {"+", "-", "*", "/", "="};
+            Keywords = new[] { "select", "insert", "update", "delete", "drop", "distinct",
+                "from", "left", "outer", "join", "on",
+                "where", "and", "or", "not", "in",
+                "group", "order", "by", "asc", "desc" };
+            Functions = new[] {"migrate", "up", "down", "getschema"};
+            Operators = new[] {"+", "-", "*", "/", "=", "!=", "<", ">", "<>"};
             Separators = new[] {' ', '.'};
         }
 

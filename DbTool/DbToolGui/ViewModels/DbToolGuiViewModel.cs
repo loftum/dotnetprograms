@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DbToolGui.Commands;
 using DbToolGui.Connections;
+using DbToolGui.Exceptions;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Providers;
 
@@ -135,6 +136,10 @@ namespace DbToolGui.ViewModels
             {
                 var result = _communicator.Execute(query);
                 QueryResult = result.ToString();
+            }
+            catch(UserException ex)
+            {
+                QueryResult = ex.Message;
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -7,6 +8,7 @@ namespace DbToolGui.Highlighting
 {
     public class SyntaxHighlighter : ISyntaxHighlighter
     {
+        private const string StringPattern = @"'[^']*'";
         private readonly ISyntaxProvider _syntaxProvider;
         private readonly FlowDocument _document;
         private readonly IDictionary<TagType, HighlightStyle> _styles;
@@ -22,6 +24,8 @@ namespace DbToolGui.Highlighting
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkCyan));
             _styles[TagType.Operator] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Gray));
+            _styles[TagType.String] = new HighlightStyle()
+                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkRed));
             _styles[TagType.Default] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
         }
@@ -46,57 +50,90 @@ namespace DbToolGui.Highlighting
         private void CheckWordsInRun(Run run)
         {
             var tags = new List<Tag>();
+            tags.AddRange(GetKeywordTagsIn(run));
+            //tags.AddRange(GetStringTagsIn(run));
+            Format(tags);
+        }
+
+        private IEnumerable<Tag> GetKeywordTagsIn(Run run)
+        {
             var text = run.Text;
+            var tags = new List<Tag>();
 
             var startIndex = 0;
-            int endIndex = 0;
             for (var ii = 0; ii < text.Length; ii++)
             {
-                if (_syntaxProvider.IsSeparator(text[ii]))
+                if (!_syntaxProvider.IsSeparator(text[ii]))
                 {
-                    if (ii > 0 && !(_syntaxProvider.IsSeparator(text[ii-1])))
-                    {
-                        endIndex = ii - 1;
-                        string word = text.Substring(startIndex, endIndex - startIndex + 1);
-
-                        var type = _syntaxProvider.GetTypeOf(word);
-                        if (type != TagType.Nothing)
-                        {
-                            var tag = new Tag
-                                {
-                                    Type = type,
-                                    Word = word,
-                                    StartPosition =
-                                        run.ContentStart.GetPositionAtOffset(startIndex,
-                                                                                LogicalDirection.Forward),
-                                    EndPosition =
-                                        run.ContentStart.GetPositionAtOffset(endIndex + 1,
-                                                                                LogicalDirection.Backward)
-                                };
-                            tags.Add(tag);
-                        }
-                    }
-                    startIndex = ii + 1;
+                    continue;
                 }
+                if (ii > 0 && !(_syntaxProvider.IsSeparator(text[ii - 1])))
+                {
+                    var endIndex = ii;
+                    var word = text.Substring(startIndex, endIndex - startIndex);
+
+                    var type = _syntaxProvider.GetTypeOf(word);
+                    if (type != TagType.Nothing)
+                    {
+                        var tag = new Tag
+                                      {
+                                          Type = type,
+                                          Word = word,
+                                          StartPosition =
+                                              run.ContentStart.GetPositionAtOffset(startIndex,
+                                                                                   LogicalDirection.Forward),
+                                          EndPosition =
+                                              run.ContentStart.GetPositionAtOffset(endIndex,
+                                                                                   LogicalDirection.Backward)
+                                      };
+                        tags.Add(tag);
+                    }
+                }
+                startIndex = ii + 1;
             }
-            
+
             var lastWord = text.Substring(startIndex, text.Length - startIndex);
-            if (_syntaxProvider.IsKeyword(lastWord))
+            var lastType = _syntaxProvider.GetTypeOf(lastWord);
+            if (lastType != TagType.Nothing)
             {
                 var tag = new Tag
+                {
+                    Type = lastType,
+                    StartPosition =
+                        run.ContentStart.GetPositionAtOffset(startIndex, LogicalDirection.Forward),
+                    EndPosition =
+                        run.ContentStart.GetPositionAtOffset(startIndex + lastWord.Length, LogicalDirection.Backward),
+                    Word = lastWord
+                };
+                tags.Add(tag);
+            }
+            return tags;
+        }
+
+        
+
+        private static IEnumerable<Tag> GetStringTagsIn(Run run)
+        {
+            var text = run.Text;
+            var tags = new List<Tag>();
+            var matches = new Regex(StringPattern).Matches(text);
+            for (var ii=0; ii<matches.Count; ii++)
+            {
+                var group = matches[ii].Groups[0];
+                var tag = new Tag
                     {
+                        Type = TagType.String,
+                        Word = group.Value,
                         StartPosition =
-                            run.ContentStart.GetPositionAtOffset(startIndex, LogicalDirection.Forward),
+                            run.ContentStart.GetPositionAtOffset(group.Index,
+                                                                LogicalDirection.Forward),
                         EndPosition =
-                            run.ContentStart.GetPositionAtOffset(endIndex + 1, LogicalDirection.Backward),
-                        Word = lastWord
+                            run.ContentStart.GetPositionAtOffset(group.Index + group.Length,
+                                                                LogicalDirection.Backward)
                     };
                 tags.Add(tag);
             }
-
-
-
-            Format(tags);
+            return tags;
         }
 
         private void Format(IEnumerable<Tag> tags)

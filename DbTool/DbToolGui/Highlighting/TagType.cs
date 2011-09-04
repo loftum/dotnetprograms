@@ -7,6 +7,7 @@
         Keyword = 2,
         Function = 3,
         Operator = 4,
-        String = 5
+        String = 5,
+        Object = 6
     }
 }

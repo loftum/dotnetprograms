@@ -65,9 +65,13 @@ namespace DbToolGui.Connections
             {
                 return new QueryExecutor(_sqlConnection);
             }
-            if (statement.StartsWith("migrate"))
+            if (statement.StartsWithIgnoreCase("migrate"))
             {
                 return new MigrationExecutor(_connectionData);
+            }
+            if (statement.StartsWithIgnoreCase("getschema"))
+            {
+                return new SchemaExecutor(_sqlConnection);
             }
             return new NonQueryExecutor(_sqlConnection);
         }

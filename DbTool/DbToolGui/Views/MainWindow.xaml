@@ -20,8 +20,6 @@
                          Text="{Binding Path=StatusText}"
                          DockPanel.Dock="Bottom" >
                 </TextBox>
-                
-                
             </DockPanel>
             <DockPanel LastChildFill="True">
                 <TextBox Name="ResultTable" DockPanel.Dock="Bottom"

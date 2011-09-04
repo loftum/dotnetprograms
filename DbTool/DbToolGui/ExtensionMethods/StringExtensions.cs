@@ -7,6 +7,11 @@
             return string.IsNullOrEmpty(value);
         }
 
+        public static bool IsNotNullOrEmpty(this string value)
+        {
+            return !string.IsNullOrEmpty(value);
+        }
+
         public static string ValueOrEmpty(this string value)
         {
             return value ?? string.Empty;

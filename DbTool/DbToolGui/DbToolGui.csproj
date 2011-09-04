@@ -68,12 +68,15 @@
     <Compile Include="Connections\IDatabaseCommunicator.cs" />
     <Compile Include="Connections\IDbCommandResult.cs" />
     <Compile Include="Connections\IDbCommandExecutor.cs" />
+    <Compile Include="Connections\MessageResult.cs" />
     <Compile Include="Connections\MigrationExecutor.cs" />
     <Compile Include="Connections\MigrationResult.cs" />
     <Compile Include="Connections\NonQueryExecutor.cs" />
     <Compile Include="Connections\NonQueryResult.cs" />
     <Compile Include="Connections\QueryExecutor.cs" />
     <Compile Include="Connections\QueryResult.cs" />
+    <Compile Include="Connections\SchemaExecutor.cs" />
+    <Compile Include="Connections\SchemaQuery.cs" />
     <Compile Include="Connections\UnknownExecutor.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
