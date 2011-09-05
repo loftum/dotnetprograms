@@ -2,59 +2,66 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ExtensionMethods="clr-namespace:DbToolGui.ExtensionMethods" Title="{Binding Path=Title}" Height="600" Width="800"
-        Icon="{Binding Path=Icon}">
+        Icon="{Binding Path=Icon}" xmlns:my="clr-namespace:DbToolGui.Controls">
     <Window.Resources>
         <DataTemplate x:Key="PropertyValueTemplate">
-            <TextBox Text="{Binding Path=Value, Mode=OneWay}"
+            <TextBox Text="{Binding Path=ValueAsString, Mode=OneWay}"
                      IsReadOnly="True" BorderThickness="0" BorderBrush="Black"/>
         </DataTemplate>
     </Window.Resources>
-    <Grid>
-        <DockPanel LastChildFill="True">
-            <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
-                <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
-                <ComboBox Name="ConnectionBox"
-                          ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
-                          SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}">
-                </ComboBox>
-            </DockPanel>
-            <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
-                <TextBox Name="StatusTextBox"
-                         IsReadOnly="True"
-                         Foreground="DarkGray"
-                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                         AcceptsReturn="True" AcceptsTab="true"
-                         Text="{Binding Path=StatusText}"
-                         DockPanel.Dock="Bottom" >
-                </TextBox>
-            </DockPanel>
-            <DockPanel LastChildFill="True">
-                <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
-                    <TextBox Name="ResultTextBox" Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
-                             Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
-                         IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                         AcceptsReturn="True" AcceptsTab="true"
-                             DockPanel.Dock="Top"/>
-                    <DataGrid Name="ResultTable" Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
-                    ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
-
-                </DockPanel>
-                
-                <RichTextBox Name="EditorBox"
-                         FontFamily="Courier New" FontSize="12"
-                         AcceptsReturn="True" AcceptsTab="true"
-                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                         TextChanged="EditorBox_TextChanged"
-                         KeyUp="EditorBox_KeyUp">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>
-            </DockPanel>
+    <DockPanel Name="MainPanel" LastChildFill="True">
+        <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
+            <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
+            <ComboBox Name="ConnectionBox"
+                        ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
+                        SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}">
+            </ComboBox>
         </DockPanel>
-    </Grid>
+        <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
+            <StatusBar Background="White" Foreground="DarkGray">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding Path=StatusText, Mode=OneWay}" />
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <RichTextBox Name="EditorBox" Grid.Row="0"
+                        FontFamily="Courier New" FontSize="12"
+                        AcceptsReturn="True" AcceptsTab="true"
+                        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                        BorderThickness="0"
+                        TextChanged="EditorBox_TextChanged"
+                        KeyUp="EditorBox_KeyUp">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                          Background="LightCyan"
+                          Grid.Row="1" ResizeBehavior="PreviousAndNext"
+                          Height="5" />
+            
+            <DockPanel Name="ResultPanel" Grid.Row="2" >
+                
+                <TextBox Name="ResultTextBox" Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
+                            Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
+                        IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True" AcceptsTab="true"
+                            DockPanel.Dock="Top"/>
+                <DataGrid Name="ResultTable" Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
+                ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
+
+            </DockPanel>
+            
+        </Grid>
+    </DockPanel>
 </Window>

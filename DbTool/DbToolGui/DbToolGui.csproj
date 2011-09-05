@@ -81,7 +81,6 @@
     <Compile Include="Connections\SchemaQuery.cs" />
     <Compile Include="Connections\UnknownExecutor.cs" />
     <Compile Include="Controls\CustomBoundColumn.cs" />
-    <Compile Include="Controls\MyDataGrid.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
