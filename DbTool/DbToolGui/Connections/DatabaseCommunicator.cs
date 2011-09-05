@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Threading;
 using DbTool.Lib.Configuration;
 using DbToolGui.Exceptions;
 using DbToolGui.ExtensionMethods;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
+using System.Threading;
 using System.Windows.Input;
 using DbToolGui.Commands;
 using DbToolGui.Connections;
@@ -117,8 +119,10 @@ namespace DbToolGui.ViewModels
             try
             {
                 QueryResult.Clear();
+                StatusText = "Executing";
                 var result = _communicator.Execute(statement);
                 QueryResult.Show(result);
+                StatusText = "Done";
             }
             catch(UserException ex)
             {
