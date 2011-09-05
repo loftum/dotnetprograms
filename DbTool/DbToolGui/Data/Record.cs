@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Linq;
 using DbToolGui.ExtensionMethods;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Data
 {
     public class Record
     {

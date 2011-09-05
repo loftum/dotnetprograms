@@ -8,6 +8,8 @@ namespace DbTool.Lib.Configuration
 {
     public class DbToolSettings : IDbToolSettings
     {
+        public bool LoadSchema { get; set; }
+        public int MaxResult { get; set; }
         public string DataDirectory { get; set; }
         public string LogDirectory { get; set; }
         public string BackupDirectory { get; set; }

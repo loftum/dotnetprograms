@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DbToolGui.Data;
 using DbToolGui.ExtensionMethods;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class QueryResult : DbCommandResultBase
     {

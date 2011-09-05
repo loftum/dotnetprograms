@@ -1,6 +1,6 @@
-﻿using System.Data.SqlClient;
+using System.Data.SqlClient;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class NonQueryExecutor : IDbCommandExecutor
     {

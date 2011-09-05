@@ -1,4 +1,4 @@
-﻿namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public abstract class DbCommandResultBase : IDbCommandResult
     {

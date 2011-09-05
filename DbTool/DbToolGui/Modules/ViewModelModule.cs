@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using DbToolGui.Highlighting;
+using Ninject.Modules;
 
 namespace DbToolGui.Modules
 {
@@ -6,7 +7,9 @@ namespace DbToolGui.Modules
     {
         public override void Load()
         {
-            
+            Bind<ISyntaxProvider>().To<DbToolSyntaxProvider>().InSingletonScope();
+            Bind<ISyntaxHighlighterFactory>().To<SyntaxHighlighterFactory>().InSingletonScope();
+            Bind<ISchemaObjectProvider>().To<SchemaObjectProvider>().InSingletonScope();
         }
     }
 }

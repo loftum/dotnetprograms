@@ -9,10 +9,12 @@ namespace DbToolGui.Highlighting
         public IEnumerable<string> Functions { get; private set; }
         public IEnumerable<string> Operators { get; private set; }
         public IEnumerable<char> Separators { get; private set; }
-        
 
-        public DbToolSyntaxProvider()
+        private readonly ISchemaObjectProvider _schemaObjectProvider;
+
+        public DbToolSyntaxProvider(ISchemaObjectProvider schemaObjectProvider)
         {
+            _schemaObjectProvider = schemaObjectProvider;
             Keywords = new[] { "select", "insert", "update", "delete", "drop", "distinct",
                 "from", "left", "outer", "join", "on",
                 "where", "and", "or", "not", "in",
@@ -45,6 +47,11 @@ namespace DbToolGui.Highlighting
             return Operators.Any(o => o.Equals(lower));
         }
 
+        private bool IsObject(string word)
+        {
+            return _schemaObjectProvider.IsObject(word);
+        }
+
         public TagType GetTypeOf(string word)
         {
             if (IsKeyword(word))
@@ -58,6 +65,10 @@ namespace DbToolGui.Highlighting
             if (IsOperator(word))
             {
                 return TagType.Operator;
+            }
+            if (IsObject(word))
+            {
+                return TagType.Object;
             }
             return TagType.Nothing;
         }

@@ -2,6 +2,8 @@
 {
     public interface IDbToolSettings
     {
+        bool LoadSchema { get; set; }
+        int MaxResult { get; set; }
         string DataDirectory { get; }
         string LogDirectory { get; }
         string BackupDirectory { get; }

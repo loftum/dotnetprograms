@@ -1,7 +1,7 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class SchemaExecutor : IDbCommandExecutor
     {
@@ -33,7 +33,7 @@ namespace DbToolGui.Connections
             finally
             {
                 _sqlConnection.Close();
-            }   
+            }
         }
 
         private DataTable GetSchemaFrom(string command)

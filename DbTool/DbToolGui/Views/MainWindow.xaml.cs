@@ -1,4 +1,3 @@
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -18,11 +17,11 @@ namespace DbToolGui.Views
         public MainWindow()
         {
             InitializeComponent();
-            var kernel = new StandardKernel(new ViewModelModule(), new DatabaseModule());
-
+            var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
             _viewModel = kernel.Get<DbToolGuiViewModel>();
             DataContext = _viewModel;
-            _highlighter = new SyntaxHighlighter(EditorBox.Document);
+            var factory = kernel.Get<ISyntaxHighlighterFactory>();
+            _highlighter = factory.CreateFor(EditorBox.Document);
         }
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)

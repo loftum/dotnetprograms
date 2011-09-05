@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class ErrorResult : DbCommandResultBase
     {

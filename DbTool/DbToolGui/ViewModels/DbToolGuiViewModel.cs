@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
-using System.Threading;
 using System.Windows.Input;
+using DbTool.Lib.Configuration;
 using DbToolGui.Commands;
-using DbToolGui.Connections;
+using DbToolGui.Communication;
 using DbToolGui.Exceptions;
 using DbToolGui.ExtensionMethods;
+using DbToolGui.Highlighting;
 using DbToolGui.Providers;
 
 namespace DbToolGui.ViewModels
@@ -49,10 +49,18 @@ namespace DbToolGui.ViewModels
         public ConnectionViewModel Connection { get; private set; }
         public QueryResultViewModel QueryResult { get; private set; }
 
-        public DbToolGuiViewModel(IConnectionProvider connectionProvider, IDatabaseCommunicator communicator)
+        private readonly IDbToolSettings _settings;
+        private readonly ISchemaObjectProvider _schemaObjectProvider;
+
+        public DbToolGuiViewModel(IConnectionProvider connectionProvider,
+            IDatabaseCommunicator communicator,
+            IDbToolSettings settings,
+            ISchemaObjectProvider schemaObjectProvider)
         {
             _connectionProvider = connectionProvider;
             _communicator = communicator;
+            _settings = settings;
+            _schemaObjectProvider = schemaObjectProvider;
 
             ConnectCommand = new DelegateCommand(ToggleConnect);
             ExecuteCommand = new DelegateCommand(ExecuteStatement);
@@ -102,6 +110,10 @@ namespace DbToolGui.ViewModels
             _communicator.ConnectTo(connection);
             StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
             FireOnConnectionPropertiesChanged();
+            if (_settings.LoadSchema)
+            {
+                _schemaObjectProvider.Schema = _communicator.LoadSchema();    
+            }
         }
 
         private void FireOnConnectionPropertiesChanged()

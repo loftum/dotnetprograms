@@ -6,7 +6,12 @@ namespace DbToolGui.Providers
 {
     public class ConnectionProvider : IConnectionProvider
     {
-        private readonly IDbToolConfig _config = new DbToolConfig();
+        private readonly IDbToolConfig _config;
+
+        public ConnectionProvider(IDbToolConfig config)
+        {
+            _config = config;
+        }
 
         public IEnumerable<string> GetConnectionNames()
         {

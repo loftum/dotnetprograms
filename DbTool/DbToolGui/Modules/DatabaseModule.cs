@@ -1,4 +1,4 @@
-﻿using DbToolGui.Connections;
+﻿using DbToolGui.Communication;
 using DbToolGui.Providers;
 using Ninject.Modules;
 

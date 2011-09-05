@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
 using DbToolGui.ExtensionMethods;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class SchemaQuery
     {

@@ -1,6 +1,6 @@
-﻿using DbToolGui.Exceptions;
+using DbToolGui.Exceptions;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class UnknownExecutor : IDbCommandExecutor
     {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -13,10 +12,10 @@ namespace DbToolGui.Highlighting
         private readonly FlowDocument _document;
         private readonly IDictionary<TagType, HighlightStyle> _styles;
 
-        public SyntaxHighlighter(FlowDocument document)
+        public SyntaxHighlighter(FlowDocument document, ISyntaxProvider syntaxProvider)
         {
             _document = document;
-            _syntaxProvider = new DbToolSyntaxProvider();
+            _syntaxProvider = syntaxProvider;
             _styles = new Dictionary<TagType, HighlightStyle>();
             _styles[TagType.Keyword] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Blue));
@@ -28,6 +27,8 @@ namespace DbToolGui.Highlighting
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkRed));
             _styles[TagType.Default] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
+            _styles[TagType.Object] = new HighlightStyle()
+                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Olive));
         }
 
         public void Highlight()
@@ -109,8 +110,6 @@ namespace DbToolGui.Highlighting
             }
             return tags;
         }
-
-        
 
         private static IEnumerable<Tag> GetStringTagsIn(Run run)
         {

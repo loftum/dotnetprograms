@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Extensions;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication.Commands
 {
     public class MigrationExecutor : IDbCommandExecutor
     {

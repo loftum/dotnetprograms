@@ -1,6 +1,8 @@
 using DbTool.Lib.Configuration;
+using DbToolGui.Communication.Commands;
+using DbToolGui.Data;
 
-namespace DbToolGui.Connections
+namespace DbToolGui.Communication
 {
     public interface IDatabaseCommunicator
     {
@@ -9,5 +11,6 @@ namespace DbToolGui.Connections
         void ConnectTo(ConnectionData connectionData);
         void Disconnect();
         IDbCommandResult Execute(string statement);
+        Schema LoadSchema();
     }
 }
