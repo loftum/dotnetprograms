@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DbTool.Lib.Configuration;
 using DbToolGui.Commands;
 using DbToolGui.Communication;
+using DbToolGui.Communication.Commands;
 using DbToolGui.Exceptions;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
@@ -50,6 +52,7 @@ namespace DbToolGui.ViewModels
         public ConnectionViewModel Connection { get; private set; }
         public QueryResultViewModel QueryResult { get; private set; }
 
+        private readonly Dispatcher _dispatcher;
         private readonly IDbToolSettings _settings;
         private readonly ISchemaObjectProvider _schemaObjectProvider;
 
@@ -58,6 +61,7 @@ namespace DbToolGui.ViewModels
             IDbToolSettings settings,
             ISchemaObjectProvider schemaObjectProvider)
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             _connectionProvider = connectionProvider;
             _communicator = communicator;
             _settings = settings;
@@ -134,9 +138,8 @@ namespace DbToolGui.ViewModels
             {
                 QueryResult.Clear();
                 StatusText = "Executing";
-                var result = _communicator.Execute(statement);
-                QueryResult.Show(result);
-                StatusText = "Done";
+                new Thread(() => _communicator.StartExecute(statement, ResultReady)).Start();
+                
             }
             catch(UserException ex)
             {
@@ -146,6 +149,17 @@ namespace DbToolGui.ViewModels
             {
                 QueryResult.Show(ex.ToString());
             }
+        }
+
+        private void ResultReady(IDbCommandResult result)
+        {
+            _dispatcher.Invoke(DispatcherPriority.Normal, new Action<IDbCommandResult>(ShowResult), result);
+        }
+
+        private void ShowResult(IDbCommandResult result)
+        {
+            QueryResult.Show(result);
+            StatusText = "Done";
         }
     }
 }

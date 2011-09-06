@@ -10,6 +10,7 @@ namespace DbToolGui.Communication.Commands
     public class QueryResult : DbCommandResultBase
     {
         public string Query { get; set; }
+        public long Rowcount { get; private set; }
 
         private readonly IList<ColumnDescriptor> _columns;
         public IEnumerable<ColumnDescriptor> Columns { get { return _columns; } }
@@ -25,13 +26,16 @@ namespace DbToolGui.Communication.Commands
         {
             _columns = new List<ColumnDescriptor>();
             _records = new List<Record>();
+            AddColumn("RowNum", typeof(long));
         }
 
         public void AddRow(IEnumerable<object> values)
         {
-            var list = values.ToList();
+            var list = new List<object>();
+            list.Add(++Rowcount);
+            list.AddRange(values);
             var record = new Record();
-            for (var ii=0; ii<_columns.Count; ii++)
+            for (var ii = 0; ii < _columns.Count; ii++)
             {
                 record.Add(new Property(_columns[ii].Name, list[ii]));
             }

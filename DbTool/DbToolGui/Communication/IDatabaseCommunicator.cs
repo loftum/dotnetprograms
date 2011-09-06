@@ -6,6 +6,7 @@ namespace DbToolGui.Communication
 {
     public interface IDatabaseCommunicator
     {
+        void StartExecute(string statement, DatabaseCommunicator.ResultCallback callback);
         string ConnectedTo { get; }
         bool IsConnected { get; }
         void ConnectTo(ConnectionData connectionData);

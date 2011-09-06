@@ -48,8 +48,8 @@ namespace DbToolGui.ViewModels
                     TemplateName = "PropertyValueTemplate"
                 });
             }
-
             Records.AddRange(queryResult.Rows);
+            ResultText = string.Format("Rowcount: {0}", queryResult.Rowcount);
         }
 
         public void Show(IDbCommandResult result)

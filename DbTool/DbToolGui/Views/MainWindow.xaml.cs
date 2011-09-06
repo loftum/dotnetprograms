@@ -1,4 +1,3 @@
-using System.Threading;
 using System.Windows.Documents;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;

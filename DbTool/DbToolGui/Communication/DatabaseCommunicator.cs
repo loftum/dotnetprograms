@@ -10,6 +10,8 @@ namespace DbToolGui.Communication
 {
     public class DatabaseCommunicator : IDatabaseCommunicator
     {
+        public delegate void ResultCallback(IDbCommandResult result);
+
         public string ConnectedTo
         {
             get { return _connectionData == null ? string.Empty : _connectionData.Name; }
@@ -62,6 +64,12 @@ namespace DbToolGui.Communication
             {
                 return new ErrorResult(e);
             }
+        }
+
+        public void StartExecute(string statement, ResultCallback callback)
+        {
+            var result = Execute(statement);
+            callback(result);
         }
 
         private IDbCommandExecutor GetExecutorFor(string statement)
