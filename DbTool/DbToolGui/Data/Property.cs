@@ -29,5 +29,10 @@ namespace DbToolGui.Data
             }
             return Value.ToString();
         }
+
+        public override string ToString()
+        {
+            return ParseValue();
+        }
     }
 }

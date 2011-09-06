@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -32,7 +31,6 @@ namespace DbToolGui.Highlighting
             }
         }
 
-        private const string StringPattern = @"'[^']*'";
         private readonly ISyntaxProvider _syntaxProvider;
         private readonly Dispatcher _dispatcher;
         private readonly RichTextBox _textBox;
@@ -58,6 +56,8 @@ namespace DbToolGui.Highlighting
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
             _styles[TagType.Object] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Olive));
+            _styles[TagType.Setting] = new HighlightStyle()
+                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkMagenta));
             _textBox.TextChanged += HandleTextChanged;
         }
 
@@ -84,7 +84,6 @@ namespace DbToolGui.Highlighting
                 if (TextChanged)
                 {
                     _dispatcher.Invoke(DispatcherPriority.Normal, new Action(DoHighlight));
-                    //DoHighlight();
                     TextChanged = false;
                 }
                 Thread.Sleep(300);
@@ -102,17 +101,15 @@ namespace DbToolGui.Highlighting
                 var context = navigator.GetPointerContext(LogicalDirection.Backward);
                 if (context == TextPointerContext.ElementStart && navigator.Parent is Run)
                 {
-                    CheckWordsInRun((Run)navigator.Parent);
+                    HighlightWordsIn((Run)navigator.Parent);
                 }
                 navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
             }
         }
 
-        private void CheckWordsInRun(Run run)
+        private void HighlightWordsIn(Run run)
         {
-            var tags = new List<Tag>();
-            tags.AddRange(GetKeywordTagsIn(run));
-            //tags.AddRange(GetStringTagsIn(run));
+            var tags = GetKeywordTagsIn(run);
             _textBox.TextChanged -= HandleTextChanged;
             Format(tags);
             _textBox.TextChanged += HandleTextChanged;
@@ -139,16 +136,12 @@ namespace DbToolGui.Highlighting
                     if (type != TagType.Nothing)
                     {
                         var tag = new Tag
-                                      {
-                                          Type = type,
-                                          Word = word,
-                                          StartPosition =
-                                              run.ContentStart.GetPositionAtOffset(startIndex,
-                                                                                   LogicalDirection.Forward),
-                                          EndPosition =
-                                              run.ContentStart.GetPositionAtOffset(endIndex,
-                                                                                   LogicalDirection.Backward)
-                                      };
+                            {
+                                Type = type,
+                                Word = word,
+                                StartPosition = run.ContentStart.GetPositionAtOffset(startIndex, LogicalDirection.Forward),
+                                EndPosition = run.ContentStart.GetPositionAtOffset(endIndex, LogicalDirection.Backward)
+                            };
                         tags.Add(tag);
                     }
                 }
@@ -173,41 +166,17 @@ namespace DbToolGui.Highlighting
             return tags;
         }
 
-        private static IEnumerable<Tag> GetStringTagsIn(Run run)
-        {
-            var text = run.Text;
-            var tags = new List<Tag>();
-            var matches = new Regex(StringPattern).Matches(text);
-            for (var ii=0; ii<matches.Count; ii++)
-            {
-                var group = matches[ii].Groups[0];
-                var tag = new Tag
-                    {
-                        Type = TagType.String,
-                        Word = group.Value,
-                        StartPosition =
-                            run.ContentStart.GetPositionAtOffset(group.Index,
-                                                                LogicalDirection.Forward),
-                        EndPosition =
-                            run.ContentStart.GetPositionAtOffset(group.Index + group.Length,
-                                                                LogicalDirection.Backward)
-                    };
-                tags.Add(tag);
-            }
-            return tags;
-        }
-
         private void Format(IEnumerable<Tag> tags)
         {
             foreach (var tag in tags)
             {
                 var range = new TextRange(tag.StartPosition, tag.EndPosition);
-                var highlight = GetStyleFor(tag.Type);
-                if (highlight == null)
+                var style = GetStyleFor(tag.Type);
+                if (style == null)
                 {
                     continue;
                 }
-                foreach (var property in highlight.Properties)
+                foreach (var property in style.Properties)
                 {
                     range.ApplyPropertyValue(property.Key, property.Value);
                 }

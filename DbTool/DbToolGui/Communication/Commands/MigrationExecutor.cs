@@ -1,6 +1,6 @@
 using System;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.Extensions;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
 

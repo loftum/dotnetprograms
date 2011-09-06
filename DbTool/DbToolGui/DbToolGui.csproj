@@ -38,6 +38,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Migrator.Framework, Version=0.9.0.26940, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BuildAssets\Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
     </Reference>
@@ -74,6 +78,7 @@
     <Compile Include="Communication\Commands\QueryResult.cs" />
     <Compile Include="Communication\Commands\SchemaExecutor.cs" />
     <Compile Include="Communication\Commands\SchemaQuery.cs" />
+    <Compile Include="Communication\Commands\SetExecutor.cs" />
     <Compile Include="Communication\Commands\UnknownExecutor.cs" />
     <Compile Include="Communication\DatabaseCommunicator.cs" />
     <Compile Include="Communication\IDatabaseCommunicator.cs" />
@@ -87,12 +92,7 @@
     <Compile Include="Data\SchemaTable.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
-    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
-    <Compile Include="ExtensionMethods\ComparisonExtensions.cs" />
     <Compile Include="ExtensionMethods\DataGridExtensions.cs" />
-    <Compile Include="ExtensionMethods\DataRowExtensions.cs" />
-    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Highlighting\HighlightStyle.cs" />
     <Compile Include="Highlighting\ISchemaObjectProvider.cs" />
     <Compile Include="Highlighting\ISyntaxHighlighterFactory.cs" />
@@ -152,6 +152,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
+      <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
+      <Name>DbTool.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbTool\DbTool.csproj">
       <Project>{74E31DD3-0DA6-4529-82CA-82D46F8A994E}</Project>
       <Name>DbTool</Name>

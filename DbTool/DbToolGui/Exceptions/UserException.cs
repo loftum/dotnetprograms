@@ -1,5 +1,5 @@
 using System;
-using DbToolGui.ExtensionMethods;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.Exceptions
 {

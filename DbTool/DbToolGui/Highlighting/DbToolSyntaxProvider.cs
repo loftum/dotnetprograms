@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DbTool.Lib.Configuration;
 
 namespace DbToolGui.Highlighting
 {
@@ -9,6 +10,7 @@ namespace DbToolGui.Highlighting
         public IEnumerable<string> Functions { get; private set; }
         public IEnumerable<string> Operators { get; private set; }
         public IEnumerable<char> Separators { get; private set; }
+        public IEnumerable<string> Settings { get; private set; }
 
         private readonly ISchemaObjectProvider _schemaObjectProvider;
 
@@ -19,9 +21,22 @@ namespace DbToolGui.Highlighting
                 "from", "left", "outer", "join", "on",
                 "where", "and", "or", "not", "in",
                 "group", "order", "by", "asc", "desc" };
-            Functions = new[] {"migrate", "up", "down", "getschema"};
+            Functions = new[] {"migrate", "up", "down", "getschema", "set"};
             Operators = new[] {"+", "-", "*", "/", "=", "!=", "<", ">", "<>"};
-            Separators = new[] {' ', '.'};
+            Separators = new[] {' ', '.','=', '+', '-', '<', '>'};
+            Settings = GetSettings();
+        }
+
+        private static IEnumerable<string> GetSettings()
+        {
+            var type = typeof (IDbToolSettings);
+            return type.GetProperties().Select(property => property.Name.ToLowerInvariant());
+        }
+
+        public bool IsSetting(string word)
+        {
+            var lower = word.ToLowerInvariant();
+            return Settings.Any(s => s.Equals(lower));
         }
 
         public bool IsKeyword(string word)
@@ -69,6 +84,10 @@ namespace DbToolGui.Highlighting
             if (IsObject(word))
             {
                 return TagType.Object;
+            }
+            if (IsSetting(word))
+            {
+                return TagType.Setting;
             }
             return TagType.Nothing;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.Tasks;
+using DbTool.Tasks;
 
 namespace DbTool
 {

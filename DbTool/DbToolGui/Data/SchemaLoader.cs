@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using DbToolGui.ExtensionMethods;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.Data
 {

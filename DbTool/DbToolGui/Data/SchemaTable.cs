@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DbTool.Lib.Extensions;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.Data
 {

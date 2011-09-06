@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Data;
-using DbToolGui.ExtensionMethods;
 
 namespace DbToolGui.Communication.Commands
 {
     public class QueryResult : DbCommandResultBase
     {
+        private const string RowNum = "#";
+
         public string Query { get; set; }
         public long Rowcount { get; private set; }
 
@@ -26,7 +28,7 @@ namespace DbToolGui.Communication.Commands
         {
             _columns = new List<ColumnDescriptor>();
             _records = new List<Record>();
-            AddColumn("RowNum", typeof(long));
+            AddColumn(RowNum, typeof(long));
         }
 
         public void AddRow(IEnumerable<object> values)

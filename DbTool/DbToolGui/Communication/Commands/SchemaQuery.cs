@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DbToolGui.ExtensionMethods;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.Communication.Commands
 {

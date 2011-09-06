@@ -3,11 +3,11 @@ using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Commands;
 using DbToolGui.Communication;
 using DbToolGui.Communication.Commands;
 using DbToolGui.Exceptions;
-using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
 using DbToolGui.Providers;
 

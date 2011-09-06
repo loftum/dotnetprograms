@@ -77,44 +77,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lib\Configuration\ConnectionData.cs" />
-    <Compile Include="Lib\Configuration\DbToolConfig.cs" />
-    <Compile Include="Lib\Configuration\DbToolSection.cs" />
-    <Compile Include="Lib\Configuration\DbToolSettings.cs" />
-    <Compile Include="Lib\Configuration\IDbToolConfig.cs" />
-    <Compile Include="Lib\Configuration\IDbToolSettings.cs" />
-    <Compile Include="Lib\Configuration\ISettingsReader.cs" />
-    <Compile Include="Lib\Configuration\JsonSettingsReader.cs" />
-    <Compile Include="Lib\Exceptions\DbToolException.cs" />
-    <Compile Include="Lib\Extensions\StringExtensions.cs" />
-    <Compile Include="Lib\Extensions\TypeExtensions.cs" />
-    <Compile Include="Lib\Logging\ConsoleLogger.cs" />
-    <Compile Include="Lib\Logging\IDbToolLogger.cs" />
-    <Compile Include="Lib\Logging\MemoryLogger.cs" />
-    <Compile Include="Lib\Migrating\IMigrationLogger.cs" />
-    <Compile Include="Lib\Migrating\MigrationRunner.cs" />
-    <Compile Include="Lib\Tasks\DatabaseBackuper.cs" />
-    <Compile Include="Lib\Tasks\DatabaseCreator.cs" />
-    <Compile Include="Lib\Tasks\DatabaseDeleter.cs" />
-    <Compile Include="Lib\Tasks\DatabaseLister.cs" />
-    <Compile Include="Lib\Tasks\DatabaseMigrator.cs" />
-    <Compile Include="Lib\Tasks\DatabaseRestorer.cs" />
-    <Compile Include="Lib\Tasks\DatabaseVersionViewer.cs" />
-    <Compile Include="Lib\Tasks\DbToolVersionPrinter.cs" />
-    <Compile Include="Lib\Tasks\ITask.cs" />
-    <Compile Include="Lib\Tasks\PercentageLogger.cs" />
-    <Compile Include="Lib\Tasks\SettingsSetter.cs" />
-    <Compile Include="Lib\Tasks\TaskBase.cs" />
-    <Compile Include="Lib\Tasks\TaskProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\DatabaseBackuper.cs" />
+    <Compile Include="Tasks\DatabaseCreator.cs" />
+    <Compile Include="Tasks\DatabaseDeleter.cs" />
+    <Compile Include="Tasks\DatabaseLister.cs" />
+    <Compile Include="Tasks\DatabaseMigrator.cs" />
+    <Compile Include="Tasks\DatabaseRestorer.cs" />
+    <Compile Include="Tasks\DatabaseVersionViewer.cs" />
+    <Compile Include="Tasks\DbToolVersionPrinter.cs" />
+    <Compile Include="Tasks\ITask.cs" />
+    <Compile Include="Tasks\PercentageLogger.cs" />
+    <Compile Include="Tasks\SettingsSetter.cs" />
+    <Compile Include="Tasks\TaskBase.cs" />
+    <Compile Include="Tasks\TaskProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
+      <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
+      <Name>DbTool.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

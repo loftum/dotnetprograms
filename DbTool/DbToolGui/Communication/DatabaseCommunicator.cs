@@ -1,10 +1,10 @@
 using System;
 using System.Data.SqlClient;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Communication.Commands;
 using DbToolGui.Data;
 using DbToolGui.Exceptions;
-using DbToolGui.ExtensionMethods;
 
 namespace DbToolGui.Communication
 {
@@ -24,11 +24,13 @@ namespace DbToolGui.Communication
 
         private ConnectionData _connectionData;
         private SqlConnection _sqlConnection;
+        private readonly IDbToolConfig _config;
         private readonly IDbToolSettings _settings;
 
-        public DatabaseCommunicator(IDbToolSettings settings)
+        public DatabaseCommunicator(IDbToolConfig config)
         {
-            _settings = settings;
+            _config = config;
+            _settings = _config.Settings;
         }
 
         public void ConnectTo(ConnectionData connectionData)
@@ -54,7 +56,7 @@ namespace DbToolGui.Communication
 
         public IDbCommandResult Execute(string statement)
         {
-            ThrowIfNotConnected();
+            
             try
             {
                 var trimmed = statement.Trim();
@@ -74,6 +76,12 @@ namespace DbToolGui.Communication
 
         private IDbCommandExecutor GetExecutorFor(string statement)
         {
+            if (statement.StartsWithIgnoreCase("set"))
+            {
+                return new SetExecutor(_config);
+            }
+
+            ThrowIfNotConnected();
             if (statement.StartsWithIgnoreCase("select"))
             {
                 return new QueryExecutor(_sqlConnection, _settings.MaxResult);

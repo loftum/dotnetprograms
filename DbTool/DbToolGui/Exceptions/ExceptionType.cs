@@ -9,6 +9,10 @@ namespace DbToolGui.Exceptions
         [Description("Not connected to database")]
         NotConnected,
         [Description("Unknown database command '{0}'")]
-        UnknownDatabaseCommand
+        UnknownDatabaseCommand,
+        [Description("Void?")]
+        NoSettingGiven,
+        [Description("{0}? Never heard about.")]
+        UnknownSetting
     }
 }

@@ -1,6 +1,7 @@
 using System.Windows.Documents;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
 using DbToolGui.Modules;
