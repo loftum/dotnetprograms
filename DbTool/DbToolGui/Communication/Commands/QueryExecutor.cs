@@ -25,7 +25,6 @@ namespace DbToolGui.Communication.Commands
                     command.Connection.Open();
                     using (var reader = command.ExecuteReader())
                     {
-                        var numberOfRows = 0;
                         var result = CreateResult(reader);
                         while (reader.Read())
                         {
@@ -35,8 +34,7 @@ namespace DbToolGui.Communication.Commands
                                 values.Add(reader.GetValue(ii));
                             }
                             result.AddRow(values);
-                            numberOfRows++;
-                            if (_maxRows > 0 && numberOfRows > _maxRows)
+                            if (_maxRows > 0 && result.Rowcount >= _maxRows)
                             {
                                 break;
                             }
