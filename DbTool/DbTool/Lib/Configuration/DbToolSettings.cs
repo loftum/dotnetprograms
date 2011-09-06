@@ -21,6 +21,8 @@ namespace DbTool.Lib.Configuration
             {
                 return new DbToolSettings
                     {
+                        LoadSchema = false,
+                        MaxResult = 100,
                         DataDirectory = "dataDir",
                         LogDirectory = "logDir",
                         BackupDirectory = "backupDir",

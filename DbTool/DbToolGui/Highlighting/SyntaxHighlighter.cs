@@ -1,20 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace DbToolGui.Highlighting
 {
     public class SyntaxHighlighter : ISyntaxHighlighter
     {
+        public bool Running { get; private set; }
+        private readonly object _lock = new object();
+        private bool _textChanged;
+        private bool TextChanged
+        {
+            get
+            {
+                lock(_lock)
+                {
+                    return _textChanged;
+                }
+            }
+            set
+            {
+                lock(_lock)
+                {
+                    _textChanged = value;
+                }
+            }
+        }
+
         private const string StringPattern = @"'[^']*'";
         private readonly ISyntaxProvider _syntaxProvider;
+        private readonly Dispatcher _dispatcher;
+        private readonly RichTextBox _textBox;
         private readonly FlowDocument _document;
         private readonly IDictionary<TagType, HighlightStyle> _styles;
 
-        public SyntaxHighlighter(FlowDocument document, ISyntaxProvider syntaxProvider)
+        public SyntaxHighlighter(RichTextBox textBox, Dispatcher dispatcher, ISyntaxProvider syntaxProvider)
         {
-            _document = document;
+            _dispatcher = dispatcher;
+            _textBox = textBox;
+            _document = _textBox.Document;
             _syntaxProvider = syntaxProvider;
             _styles = new Dictionary<TagType, HighlightStyle>();
             _styles[TagType.Keyword] = new HighlightStyle()
@@ -29,9 +58,40 @@ namespace DbToolGui.Highlighting
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
             _styles[TagType.Object] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Olive));
+            _textBox.TextChanged += HandleTextChanged;
+        }
+
+        private void HandleTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextChanged = true;
+        }
+
+        public void StartHighlight()
+        {
+            new Thread(Highlight).Start();
+        }
+
+        public void StopHighlight()
+        {
+            Running = false;
         }
 
         public void Highlight()
+        {
+            Running = true;
+            while(Running)
+            {
+                if (TextChanged)
+                {
+                    _dispatcher.Invoke(DispatcherPriority.Normal, new Action(DoHighlight));
+                    //DoHighlight();
+                    TextChanged = false;
+                }
+                Thread.Sleep(300);
+            }
+        }
+
+        public void DoHighlight()
         {
             var textRange = new TextRange(_document.ContentStart, _document.ContentEnd);
             textRange.ClearAllProperties();
@@ -53,7 +113,9 @@ namespace DbToolGui.Highlighting
             var tags = new List<Tag>();
             tags.AddRange(GetKeywordTagsIn(run));
             //tags.AddRange(GetStringTagsIn(run));
+            _textBox.TextChanged -= HandleTextChanged;
             Format(tags);
+            _textBox.TextChanged += HandleTextChanged;
         }
 
         private IEnumerable<Tag> GetKeywordTagsIn(Run run)

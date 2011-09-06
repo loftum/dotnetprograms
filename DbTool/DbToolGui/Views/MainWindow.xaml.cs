@@ -1,6 +1,7 @@
-using System.Windows.Controls;
+using System.Threading;
 using System.Windows.Documents;
 using System.Windows.Input;
+using DbTool.Lib.Configuration;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
 using DbToolGui.Modules;
@@ -11,17 +12,21 @@ namespace DbToolGui.Views
 {
     public partial class MainWindow
     {
-        private readonly DbToolGuiViewModel _viewModel;
+        private readonly IDbToolConfig _config;
+        private readonly MainViewModel _viewModel;
         private readonly ISyntaxHighlighter _highlighter;
 
         public MainWindow()
         {
             InitializeComponent();
             var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
-            _viewModel = kernel.Get<DbToolGuiViewModel>();
+            _viewModel = kernel.Get<MainViewModel>();
             DataContext = _viewModel;
             var factory = kernel.Get<ISyntaxHighlighterFactory>();
-            _highlighter = factory.CreateFor(EditorBox.Document);
+            _highlighter = factory.CreateFor(EditorBox, Dispatcher);
+            _highlighter.StartHighlight();
+
+            _config = kernel.Get<IDbToolConfig>();
         }
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)
@@ -44,14 +49,10 @@ namespace DbToolGui.Views
             return EditorBox.Selection.Text;
         }
 
-        private void EditorBox_TextChanged(object sender, TextChangedEventArgs e)
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (_highlighter != null)
-            {
-                EditorBox.TextChanged -= EditorBox_TextChanged;
-                _highlighter.Highlight();
-                EditorBox.TextChanged += EditorBox_TextChanged;
-            }
+            _highlighter.StopHighlight();
+            _config.SaveSettings();
         }
     }
 }

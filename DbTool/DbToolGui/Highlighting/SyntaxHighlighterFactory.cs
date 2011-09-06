@@ -1,4 +1,5 @@
-﻿using System.Windows.Documents;
+﻿using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace DbToolGui.Highlighting
 {
@@ -11,9 +12,9 @@ namespace DbToolGui.Highlighting
             _syntaxProvider = syntaxProvider;
         }
 
-        public SyntaxHighlighter CreateFor(FlowDocument document)
+        public SyntaxHighlighter CreateFor(RichTextBox textBox, Dispatcher dispatcher)
         {
-            return new SyntaxHighlighter(document, _syntaxProvider);
+            return new SyntaxHighlighter(textBox, dispatcher, _syntaxProvider);
         }
     }
 }

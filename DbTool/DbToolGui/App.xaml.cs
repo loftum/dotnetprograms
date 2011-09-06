@@ -1,9 +1,7 @@
-﻿using System.Windows;
-
-namespace DbToolGui
+﻿namespace DbToolGui
 {
-    public partial class App : Application
+    public partial class App
     {
-        
+
     }
 }

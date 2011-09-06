@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Threading;
 using DbTool.Lib.Configuration;
 using DbToolGui.Commands;
 using DbToolGui.Communication;
@@ -10,7 +11,7 @@ using DbToolGui.Providers;
 
 namespace DbToolGui.ViewModels
 {
-    public class DbToolGuiViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         public string Title
         {
@@ -52,7 +53,7 @@ namespace DbToolGui.ViewModels
         private readonly IDbToolSettings _settings;
         private readonly ISchemaObjectProvider _schemaObjectProvider;
 
-        public DbToolGuiViewModel(IConnectionProvider connectionProvider,
+        public MainViewModel(IConnectionProvider connectionProvider,
             IDatabaseCommunicator communicator,
             IDbToolSettings settings,
             ISchemaObjectProvider schemaObjectProvider)
@@ -108,12 +109,13 @@ namespace DbToolGui.ViewModels
                 return;
             }
             _communicator.ConnectTo(connection);
-            StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
             FireOnConnectionPropertiesChanged();
             if (_settings.LoadSchema)
             {
+                StatusText = "Loading schema objects";
                 _schemaObjectProvider.Schema = _communicator.LoadSchema();    
             }
+            StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
         }
 
         private void FireOnConnectionPropertiesChanged()

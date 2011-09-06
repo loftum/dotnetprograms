@@ -4,5 +4,6 @@ namespace DbTool.Lib.Configuration
     {
         DbToolSettings Settings { get; }
         string SettingsPath { get; }
+        void SaveSettings();
     }
 }

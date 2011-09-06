@@ -35,7 +35,6 @@
                         AcceptsReturn="True" AcceptsTab="true"
                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                         BorderThickness="0"
-                        TextChanged="EditorBox_TextChanged"
                         KeyUp="EditorBox_KeyUp">
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">
