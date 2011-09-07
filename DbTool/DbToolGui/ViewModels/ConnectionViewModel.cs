@@ -7,6 +7,13 @@ namespace DbToolGui.ViewModels
     {
         private readonly IConnectionProvider _connectionProvider;
 
+        private bool _enableConnectionDropdown = true;
+        public bool EnableConnectionDropdown
+        {
+            get { return _enableConnectionDropdown; }
+            set { _enableConnectionDropdown = value; OnPropertyChanged("EnableConnectionDropdown"); }
+        }
+
         public ObservableCollection<string> AvailableConnections { get; private set; }
 
         private string _selectedConnection;
@@ -25,6 +32,11 @@ namespace DbToolGui.ViewModels
                 AvailableConnections.Add(connection);
             }
             SelectedConnection = _connectionProvider.GetDefaultConnectionName();
+        }
+
+        public void ShowConnected(bool connected)
+        {
+            EnableConnectionDropdown = !connected;
         }
     }
 }

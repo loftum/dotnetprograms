@@ -79,10 +79,12 @@ namespace DbToolGui.ViewModels
             if (_communicator.IsConnected)
             {
                 Disconnect();
+                Connection.ShowConnected(false);
             }
             else
             {
                 Connect();
+                Connection.ShowConnected(true);
             }
         }
 

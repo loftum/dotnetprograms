@@ -13,8 +13,9 @@
         <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
             <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
             <ComboBox Name="ConnectionBox"
-                        ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
-                        SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}">
+                ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
+                SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}"
+                IsEnabled="{Binding Path=Connection.EnableConnectionDropdown, Mode=OneWay}" >
             </ComboBox>
         </DockPanel>
         <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
@@ -43,7 +44,7 @@
                 </RichTextBox.Resources>
             </RichTextBox>
             <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                          Background="LightCyan"
+                          Background="LightGray"
                           Grid.Row="1" ResizeBehavior="PreviousAndNext"
                           Height="5" />
             
@@ -52,6 +53,7 @@
                 <TextBox Name="ResultTextBox" Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
                             Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
                         IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                        BorderThickness="0" BorderBrush="Transparent"
                         AcceptsReturn="True" AcceptsTab="true"
                             DockPanel.Dock="Top"/>
                 <DataGrid Name="ResultTable" Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
