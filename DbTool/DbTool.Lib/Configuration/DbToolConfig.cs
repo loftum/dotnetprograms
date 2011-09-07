@@ -1,3 +1,4 @@
+using System;
 using System.Configuration;
 using System.IO;
 
@@ -37,6 +38,12 @@ namespace DbTool.Lib.Configuration
 
         public void SaveSettings()
         {
+            if (!File.Exists(SettingsPath))
+            {
+                using (File.Create(SettingsPath))
+                {
+                }
+            }
             Settings.Save(SettingsPath);
         }
     }

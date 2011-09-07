@@ -1,3 +1,5 @@
+using System;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
@@ -52,7 +54,14 @@ namespace DbToolGui.Views
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             _highlighter.StopHighlight();
-            _config.SaveSettings();
+            try
+            {
+                _config.SaveSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Could not save settings: {0}", ex.Message), "Could not save settings", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

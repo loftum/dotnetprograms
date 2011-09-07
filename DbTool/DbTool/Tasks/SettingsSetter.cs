@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
@@ -40,28 +40,15 @@ namespace DbTool.Tasks
             var key = split[0];
             var value = split[1];
 
-            foreach(var property in Settings.GetType().GetProperties())
+            try
             {
-                if (property.Name.EqualsIgnoreCase(key))
-                {
-                    if (CanSet(property))
-                    {
-                        property.SetValue(Settings, value, new object[0]);    
-                    }
-                    else
-                    {
-                        Logger.WriteLine("Cannot set {0}", property.Name);
-                    }
-                    return;
-                }
+                Settings.Set(key, value);
             }
-            Logger.WriteLine("Invalid setting {0}.", key);
-            Logger.WriteLine("Try {0} {1} to view settings", Process.GetCurrentProcess().ProcessName, Name);
-        }
-
-        private static bool CanSet(PropertyInfo property)
-        {
-            return property.PropertyType.IsOneOf(typeof (string), typeof (int), typeof (long), typeof (double));
+            catch (Exception ex)
+            {
+                Logger.WriteLine("Could not set {0}: {1}", key, ex.Message);
+                Logger.WriteLine("Try {0} {1} to view settings", Process.GetCurrentProcess().ProcessName, Name);    
+            }
         }
 
         private void ViewSettings()
