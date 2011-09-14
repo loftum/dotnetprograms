@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Communication\Commands\BackupExecutor.cs" />
     <Compile Include="Communication\Commands\DbCommandResultBase.cs" />
     <Compile Include="Communication\Commands\ErrorResult.cs" />
     <Compile Include="Communication\Commands\IDbCommandExecutor.cs" />

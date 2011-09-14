@@ -94,6 +94,10 @@ namespace DbToolGui.Communication
             {
                 return new SchemaExecutor(_sqlConnection);
             }
+            if (statement.StartsWithIgnoreCase("backup"))
+            {
+                return new BackupExecutor();
+            }
             return new NonQueryExecutor(_sqlConnection);
         }
 
