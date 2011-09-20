@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
-using Microsoft.SqlServer.Management.Smo;
+using DbTool.Lib.Tasks;
 
 namespace DbTool.Tasks
 {
@@ -22,52 +19,24 @@ namespace DbTool.Tasks
 
         public override void DoExecute(IList<string> args)
         {
-            var databaseName = args[1];
-            var server = new Server("(local)");
-            try
-            {
-                server.ConnectionContext.LoginSecure = true;
-                server.ConnectionContext.Connect();
+            var connectionData = Settings.GetConnection(args[1]);
 
-                var backup = new Backup
-                    {
-                        Action = BackupActionType.Database,
-                        Database = databaseName
-                    };
-                var backupPath = GenerateBackupPath(args);
-                Logger.WriteLine("Backing up to {0}", backupPath);
-                backup.Devices.AddDevice(backupPath, DeviceType.File);
-                backup.BackupSetName = new StringBuilder().Append(databaseName).Append(" backup").ToString();
-                backup.PercentComplete += PrintPercentage;
-                backup.Complete += TaskComplete;
-                Logger.WriteLine("Running backup...");
-                backup.SqlBackup(server);
-            }
-            finally
-            {
-                if (server.ConnectionContext.IsOpen)
-                {
-                    Logger.Write("Closing connection...");
-                    server.ConnectionContext.Disconnect();
-                    Logger.WriteLine("OK");
-                }
-            }
+            var parameters = new BackupParameters
+                                 {
+                                     DatabaseName = connectionData.Name,
+                                     FilePath = GetBackupPath(args),
+                                     Server = connectionData.Host
+                                 };
+
+            var backupTask = new BackupTask(Logger, Settings);
+            backupTask.PercentComplete += PrintPercentage;
+            backupTask.Complete += TaskComplete;
+            backupTask.Backup(parameters);
         }
 
-        private string GenerateBackupPath(IList<string> args)
+        private static string GetBackupPath(IList<string> args)
         {
-            if (args.Count > 2)
-            {
-                var name = args[2];
-                return Path.IsPathRooted(name) ?
-                    name :
-                    Path.Combine(Settings.BackupDirectory, name);
-            }
-            var databaseName = args[1];
-            var filename = new StringBuilder(databaseName).Append("_")
-                .Append(DateTime.Now.ToString("yyyyMMdd_hhmmss"))
-                .Append(".bak").ToString();
-            return Path.Combine(Settings.BackupDirectory, filename);
+            return args.Count > 2 ? args[2] : string.Empty;
         }
     }
 }

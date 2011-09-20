@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
+using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
-using Migrator.Framework.Loggers;
 
 namespace DbTool.Lib.Tasks
 {
@@ -13,17 +13,18 @@ namespace DbTool.Lib.Tasks
     {
         private readonly IDbToolLogger _logger;
         private readonly IDbToolSettings _settings;
-
+        public event PercentCompleteEventHandler PercentComplete;
+        public event ServerMessageEventHandler Complete;
+        
         public BackupTask(IDbToolLogger logger, IDbToolSettings settings)
         {
             _logger = logger;
             _settings = settings;
         }
 
-
         public void Backup(BackupParameters parameters)
         {
-            var server = new Server("(local)");
+            var server = new Server(parameters.Server);
             try
             {
                 server.ConnectionContext.LoginSecure = true;
@@ -34,12 +35,12 @@ namespace DbTool.Lib.Tasks
                     Action = BackupActionType.Database,
                     Database = parameters.DatabaseName
                 };
-                var backupPath = GenerateBackupPath(args);
+                var backupPath = GenerateBackupPath(parameters);
                 _logger.WriteLine("Backing up to {0}", backupPath);
                 backup.Devices.AddDevice(backupPath, DeviceType.File);
                 backup.BackupSetName = new StringBuilder().Append(parameters.DatabaseName).Append(" backup").ToString();
-                backup.PercentComplete += PrintPercentage;
-                backup.Complete += TaskComplete;
+                backup.PercentComplete += PercentComplete;
+                backup.Complete += Complete;
                 _logger.WriteLine("Running backup...");
                 backup.SqlBackup(server);
             }
@@ -54,17 +55,15 @@ namespace DbTool.Lib.Tasks
             }
         }
 
-        private string GenerateBackupPath(IList<string> args)
+        private string GenerateBackupPath(BackupParameters parameters)
         {
-            if (args.Count > 2)
+            if (parameters.FilePath.IsNotNullOrEmpty())
             {
-                var name = args[2];
-                return Path.IsPathRooted(name) ?
-                    name :
-                    Path.Combine(_settings.BackupDirectory, name);
+                return Path.IsPathRooted(parameters.FilePath) ?
+                    parameters.FilePath :
+                    Path.Combine(_settings.BackupDirectory, parameters.FilePath);
             }
-            var databaseName = args[1];
-            var filename = new StringBuilder(databaseName).Append("_")
+            var filename = new StringBuilder(parameters.DatabaseName).Append("_")
                 .Append(DateTime.Now.ToString("yyyyMMdd_hhmmss"))
                 .Append(".bak").ToString();
             return Path.Combine(_settings.BackupDirectory, filename);
