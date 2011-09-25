@@ -5,3 +5,5 @@ obj
 sql
 _ReSharper.*
 *ReSharper*
+*.pidb
+*.userprefs
