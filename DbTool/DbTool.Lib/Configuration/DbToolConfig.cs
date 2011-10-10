@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 
@@ -24,6 +25,14 @@ namespace DbTool.Lib.Configuration
                 }
                 return _settings;
             }
+        }
+
+        public IDictionary<string, string> AssemblyMap { get; private set; }
+
+        public DbToolConfig()
+        {
+            AssemblyMap = new Dictionary<string, string>();
+            AssemblyMap["sqlserver"] = "DbTool.Lib.SqlServer.dll";
         }
 
         public string SettingsPath

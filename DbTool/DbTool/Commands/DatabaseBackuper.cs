@@ -3,12 +3,12 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseBackuper : TaskBase
+    public class DatabaseBackuper : TaskCommandBase
     {
-        public DatabaseBackuper(IDbToolLogger logger, IDbToolSettings settings)
-            : base("backup", "<database>", "MyDatabase", logger, settings)
+        public DatabaseBackuper(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("backup", "<database>", "MyDatabase", logger, settings, taskFactory)
         {
         }
 
@@ -28,7 +28,7 @@ namespace DbTool.Tasks
                                      Server = connectionData.Host
                                  };
 
-            var backupTask = new BackupTask(Logger, Settings);
+            var backupTask = TaskFactory.CreateBackupTask(connectionData);
             backupTask.PercentComplete += PrintPercentage;
             backupTask.Complete += TaskComplete;
             backupTask.Backup(parameters);

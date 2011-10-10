@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
+using DbTool.Lib.Tasks;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseDeleter : TaskBase
+    public class DatabaseDeleter : TaskCommandBase
     {
-        public DatabaseDeleter(IDbToolLogger logger, IDbToolSettings settings)
-            : base("delete", "<database>", "MyDatabase", logger, settings)
+        public DatabaseDeleter(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("delete", "<database>", "MyDatabase", logger, settings, taskFactory)
         {
         }
 

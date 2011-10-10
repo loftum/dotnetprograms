@@ -2,21 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{74E31DD3-0DA6-4529-82CA-82D46F8A994E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{00833AC0-4139-45FF-929A-60450E0A67F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbTool</RootNamespace>
-    <AssemblyName>DbTool</AssemblyName>
+    <RootNamespace>DbTool.Lib.SqlServer</RootNamespace>
+    <AssemblyName>DbTool.Lib.SqlServer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -55,23 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
-    <Reference Include="Migrator">
-      <HintPath>..\BuildAssets\Migrator\Migrator.dll</HintPath>
-    </Reference>
     <Reference Include="Migrator.Framework">
       <HintPath>..\BuildAssets\Migrator\Migrator.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Migrator.Providers">
-      <HintPath>..\BuildAssets\Migrator\Migrator.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\BuildAssets\Newtonsoft\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -80,30 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\CommandProvider.cs" />
-    <Compile Include="Commands\DatabaseBackuper.cs" />
-    <Compile Include="Commands\DatabaseCreator.cs" />
-    <Compile Include="Commands\DatabaseDeleter.cs" />
-    <Compile Include="Commands\DatabaseLister.cs" />
-    <Compile Include="Commands\DatabaseMigrator.cs" />
-    <Compile Include="Commands\DatabaseRestorer.cs" />
-    <Compile Include="Commands\DatabaseVersionViewer.cs" />
-    <Compile Include="Commands\DbToolVersionPrinter.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandProvider.cs" />
-    <Compile Include="Commands\PercentageLogger.cs" />
-    <Compile Include="Commands\SettingsSetter.cs" />
-    <Compile Include="Commands\TaskCommandBase.cs" />
-    <Compile Include="Modules\CommandModule.cs" />
-    <Compile Include="Modules\LogModule.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="Tasks\BackupTask.cs" />
+    <Compile Include="Tasks\RestoreTask.cs" />
+    <Compile Include="Tasks\SqlServerProgressTaskBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">

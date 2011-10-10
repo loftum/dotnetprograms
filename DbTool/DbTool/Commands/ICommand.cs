@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public interface ITask
+    public interface ICommand
     {
         string Name { get; }
         string Usage { get; }

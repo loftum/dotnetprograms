@@ -5,9 +5,9 @@ using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseMigrator : TaskBase
+    public class DatabaseMigrator : CommandBase
     {
         public DatabaseMigrator(IDbToolLogger logger, IDbToolSettings settings)
             : base("migrate", "<database> [version]", "MyDatabase 1234", logger, settings)

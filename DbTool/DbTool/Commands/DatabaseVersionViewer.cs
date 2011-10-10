@@ -4,9 +4,9 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseVersionViewer : TaskBase
+    public class DatabaseVersionViewer : CommandBase
     {
         public DatabaseVersionViewer(IDbToolLogger logger, IDbToolSettings settings)
             : base("version", "<database>", "MyDatabase", logger, settings)

@@ -1,7 +1,10 @@
 ﻿using System;
+using DbTool.Commands;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
-using DbTool.Tasks;
+using DbTool.Lib.Modules;
+using DbTool.Modules;
+using Ninject;
 
 namespace DbTool
 {
@@ -9,11 +12,12 @@ namespace DbTool
     {
         static int Main(string[] args)
         {
-            var config = new DbToolConfig();
+            var kernel = CreateKernel();
+            var config = kernel.Get<IDbToolConfig>();
             try
             {
-                var provider = new TaskProvider(config);
-                provider.GetTask(args).Execute(args);
+                var provider = kernel.Get<ICommandProvider>();
+                provider.GetCommand(args).Execute(args);
             }
             catch(DbToolException e)
             {
@@ -29,6 +33,14 @@ namespace DbTool
                 config.SaveSettings();
             }
             return 0;
+        }
+
+        private static IKernel CreateKernel()
+        {
+            return new StandardKernel(new ConfigModule(),
+                new LogModule(),
+                new TaskModule(),
+                new CommandModule());
         }
 
         private static void PrintExceptionMessage(DbToolException exception)

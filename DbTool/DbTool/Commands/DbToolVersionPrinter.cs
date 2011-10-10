@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DbToolVersionPrinter : TaskBase
+    public class DbToolVersionPrinter : CommandBase
     {
         public DbToolVersionPrinter(IDbToolLogger logger, IDbToolSettings settings)
             : base("-version", string.Empty, string.Empty, logger, settings)

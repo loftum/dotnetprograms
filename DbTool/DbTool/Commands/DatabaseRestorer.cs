@@ -3,12 +3,12 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseRestorer : TaskBase
+    public class DatabaseRestorer : TaskCommandBase
     {
-        public DatabaseRestorer(IDbToolLogger logger, IDbToolSettings settings)
-            : base("restore", "<database> <filepath>", @"MyDatabase C:\mydatabase.bak", logger, settings)
+        public DatabaseRestorer(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("restore", "<database> <filepath>", @"MyDatabase C:\mydatabase.bak", logger, settings, taskFactory)
         {
         }
 
@@ -29,7 +29,7 @@ namespace DbTool.Tasks
                     Server = connectionData.Host
                 };
 
-            var restoreTask = new RestoreTask(Logger, Settings);
+            var restoreTask = TaskFactory.CreateRestoreTask(connectionData);
             restoreTask.PercentComplete += PrintPercentage;
             restoreTask.Complete += TaskComplete;
             restoreTask.Restore(parameters);

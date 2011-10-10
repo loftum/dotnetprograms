@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
+using DbTool.Lib.Tasks;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
-    public class DatabaseCreator : TaskBase
+    public class DatabaseCreator : TaskCommandBase
     {
-        public DatabaseCreator(IDbToolLogger logger, IDbToolSettings settings)
-            : base("create", "<databasename>", "MyDatabase", logger, settings)
+        public DatabaseCreator(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("create", "<databasename>", "MyDatabase", logger, settings, taskFactory)
         {
         }
 

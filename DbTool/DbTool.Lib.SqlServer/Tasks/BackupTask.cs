@@ -1,21 +1,19 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
-using Microsoft.SqlServer.Management.Common;
+using DbTool.Lib.Tasks;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace DbTool.Lib.Tasks
+namespace DbTool.Lib.SqlServer.Tasks
 {
-    public class BackupTask
+    public class BackupTask : SqlServerProgressTaskBase, IBackupTask
     {
         private readonly IDbToolLogger _logger;
         private readonly IDbToolSettings _settings;
-        public event PercentCompleteEventHandler PercentComplete;
-        public event ServerMessageEventHandler Complete;
-        
+
         public BackupTask(IDbToolLogger logger, IDbToolSettings settings)
         {
             _logger = logger;
@@ -35,12 +33,13 @@ namespace DbTool.Lib.Tasks
                     Action = BackupActionType.Database,
                     Database = parameters.DatabaseName
                 };
+                
                 var backupPath = GenerateBackupPath(parameters);
                 _logger.WriteLine("Backing up to {0}", backupPath);
                 backup.Devices.AddDevice(backupPath, DeviceType.File);
-                backup.BackupSetName = new StringBuilder().Append(parameters.DatabaseName).Append(" backup").ToString();
-                backup.PercentComplete += PercentComplete;
-                backup.Complete += Complete;
+                backup.BackupSetName = string.Format("{0} backup", parameters.DatabaseName);
+                backup.PercentComplete += HandlePercentComplete;
+                backup.Complete += HandleComplete;
                 _logger.WriteLine("Running backup...");
                 backup.SqlBackup(server);
             }
@@ -63,9 +62,9 @@ namespace DbTool.Lib.Tasks
                     parameters.FilePath :
                     Path.Combine(_settings.BackupDirectory, parameters.FilePath);
             }
-            var filename = new StringBuilder(parameters.DatabaseName).Append("_")
-                .Append(DateTime.Now.ToString("yyyyMMdd_hhmmss"))
-                .Append(".bak").ToString();
+            var filename = string.Format("{0}_{1}.bak",
+                parameters.DatabaseName,
+                DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             return Path.Combine(_settings.BackupDirectory, filename);
         }
     }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. BuildAssets", "0. BuildAssets", "{6DE944F4-AA71-4274-802D-5ADB231ADB39}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. BuildAssets", "00. BuildAssets", "{6DE944F4-AA71-4274-802D-5ADB231ADB39}"
 	ProjectSection(SolutionItems) = preProject
 		BuildAssets\Newtonsoft\Newtonsoft.Json.dll = BuildAssets\Newtonsoft\Newtonsoft.Json.dll
 	EndProjectSection
@@ -18,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbToolGui", "DbToolGui\DbToolGui.csproj", "{9EEB12EF-8DDD-455B-B757-D4445991ECF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib", "DbTool.Lib\DbTool.Lib.csproj", "{BA6E0230-D231-4F44-8820-88D159334D65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.SqlServer", "DbTool.Lib.SqlServer\DbTool.Lib.SqlServer.csproj", "{00833AC0-4139-45FF-929A-60450E0A67F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Applications", "01. Applications", "{AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Libraries", "02. Libraries", "{225A23BF-6410-4FE3-B3F6-F68002201BFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,11 +66,25 @@ Global
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.ActiveCfg = Release|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{00833AC0-4139-45FF-929A-60450E0A67F2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{46DBE12C-58F5-4474-B51B-FF80C3D96167} = {6DE944F4-AA71-4274-802D-5ADB231ADB39}
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E} = {AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}
+		{9EEB12EF-8DDD-455B-B757-D4445991ECF1} = {AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}
+		{BA6E0230-D231-4F44-8820-88D159334D65} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
+		{00833AC0-4139-45FF-929A-60450E0A67F2} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
 	EndGlobalSection
 EndGlobal

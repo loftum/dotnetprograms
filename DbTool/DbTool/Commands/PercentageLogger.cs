@@ -1,7 +1,7 @@
 using System.Text;
 using DbTool.Lib.Logging;
 
-namespace DbTool.Tasks
+namespace DbTool.Commands
 {
     public class PercentageLogger
     {
