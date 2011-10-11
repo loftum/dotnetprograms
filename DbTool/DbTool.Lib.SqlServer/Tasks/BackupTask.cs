@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
