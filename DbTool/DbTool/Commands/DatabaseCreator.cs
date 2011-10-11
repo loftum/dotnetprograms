@@ -20,30 +20,9 @@ namespace DbTool.Commands
 
         public override void DoExecute(IList<string> args)
         {
-            var databaseNAme = args[1];
-            
-            var server = new Server(Settings.DefaultConnection.Host);
-            try
-            {
-                if (server.Databases.Contains(databaseNAme))
-                {
-                    Logger.WriteLine("Database " + databaseNAme + " already exists.");
-                    return;
-                }
-                Logger.Write("Creating database [" + databaseNAme + "] ...");
-                var database = new Database(server, databaseNAme);
-                database.Create();
-                Logger.WriteLine("OK");
-            }
-            finally
-            {
-                if (server.ConnectionContext.IsOpen)
-                {
-                    Logger.Write("Disconnecting...");
-                    server.ConnectionContext.Disconnect();
-                    Logger.WriteLine("OK");
-                }
-            }
+            var databaseName = args[1];
+            var createTask = TaskFactory.CreateCreateDbTask(Settings.DefaultConnection);
+            createTask.Create(databaseName);
         }
     }
 }

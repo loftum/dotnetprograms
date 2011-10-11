@@ -33,6 +33,7 @@ namespace DbTool.Lib.Configuration
         {
             AssemblyMap = new Dictionary<string, string>();
             AssemblyMap["sqlserver"] = "DbTool.Lib.SqlServer.dll";
+            AssemblyMap["mysql"] = "DbTool.Lib.MySql.dll";
         }
 
         public string SettingsPath

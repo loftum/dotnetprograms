@@ -30,8 +30,8 @@ namespace DbTool.Commands
                 new DatabaseBackuper(_logger, _settings, _taskFactory),
                 new DatabaseCreator(_logger, _settings, _taskFactory),
                 new DatabaseLister(_logger, _settings, _taskFactory),
-                new DatabaseMigrator(_logger, _settings),
-                new DatabaseVersionViewer(_logger, _settings),
+                new DatabaseMigrator(_logger, _settings, _taskFactory),
+                new DatabaseVersionViewer(_logger, _settings, _taskFactory),
                 new DbToolVersionPrinter(_logger, _settings),
                 new SettingsSetter(_logger, _settings),
                 this);

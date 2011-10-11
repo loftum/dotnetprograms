@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
-using DbTool.Lib.Migrating;
+using DbTool.Lib.Tasks;
 
 namespace DbTool.Commands
 {
-    public class DatabaseMigrator : CommandBase
+    public class DatabaseMigrator : TaskCommandBase
     {
-        public DatabaseMigrator(IDbToolLogger logger, IDbToolSettings settings)
-            : base("migrate", "<database> [version]", "MyDatabase 1234", logger, settings)
+        public DatabaseMigrator(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("migrate", "<database> [version]", "MyDatabase 1234", logger, settings, taskFactory)
         {
         }
 
@@ -24,21 +24,17 @@ namespace DbTool.Commands
         {
             var databaseName = args[1];
             var versionString = args.Count > 2 ? args[2] : string.Empty;
+            var connection = Settings.GetConnection(databaseName);
+            var migrateDbTask = TaskFactory.CreateMigrateDbTask(connection);
 
-            if (!Settings.HasConnectionString(databaseName))
-            {
-                throw new DbToolException("No connection for " + databaseName + " is defined.");
-            }
-
-            var migrationRunner = new MigrationRunner(Settings.GetConnection(databaseName), Logger);
             if (string.IsNullOrWhiteSpace(versionString))
             {
-                migrationRunner.MigrateToLatest();
+                migrateDbTask.MigrateToLatest();
             }
             else
             {
                 var version = TryGetVersion(versionString);
-                migrationRunner.MigrateTo(version);
+                migrateDbTask.MigrateTo(version);
             }
         }
 
@@ -50,7 +46,7 @@ namespace DbTool.Commands
             }
             catch (Exception)
             {
-                throw new DbToolException(version + " is not a valid number.");
+                throw new DbToolException("{0} is not a valid number.", version);
             }
         }
     }

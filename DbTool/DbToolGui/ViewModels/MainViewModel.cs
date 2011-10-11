@@ -141,7 +141,6 @@ namespace DbToolGui.ViewModels
                 QueryResult.Clear();
                 StatusText = "Executing";
                 new Thread(() => _communicator.StartExecute(statement, ResultReady)).Start();
-                
             }
             catch(UserException ex)
             {

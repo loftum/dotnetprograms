@@ -40,7 +40,8 @@ namespace DbToolGui.Communication
                 throw new UserException(ExceptionType.AlreadyConnected);
             }
             _connectionData = connectionData;
-            _sqlConnection = new SqlConnection(connectionData.ConnectionString);
+            var connectionString = connectionData.GetConnectionString();
+            _sqlConnection = new SqlConnection(connectionString);
         }
 
         public void Disconnect()
@@ -56,7 +57,6 @@ namespace DbToolGui.Communication
 
         public IDbCommandResult Execute(string statement)
         {
-            
             try
             {
                 var trimmed = statement.Trim();

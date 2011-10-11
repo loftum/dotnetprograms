@@ -1,9 +1,7 @@
 namespace DbTool.Lib.Tasks
 {
-    public interface IBackupTask
+    public interface IBackupTask : IProgressTask
     {
-        event TaskProgressEventHandler PercentComplete;
-        event TaskProgressCompleteEventHandler Complete;
         void Backup(BackupParameters parameters);
     }
 }

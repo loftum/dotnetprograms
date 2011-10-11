@@ -8,7 +8,7 @@ namespace DbToolGui.Communication.Commands
 
         public ErrorResult(Exception exception)
         {
-            Message = exception.Message;
+            Message = exception.ToString();
         }
 
         protected override string ConvertToString()

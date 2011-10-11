@@ -60,5 +60,13 @@ namespace DbTool.Lib.ExtensionMethods
             }
             throw new FormatException(string.Format("Cannot convert {0} to {1}", value, type));
         }
+
+        public static void ShouldNotBeNull(this object obj, string name)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException(name);
+            }
+        }
     }
 }

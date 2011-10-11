@@ -6,5 +6,10 @@ namespace DbTool.Lib.Tasks
     {
         IBackupTask CreateBackupTask(ConnectionData connection);
         IRestoreTask CreateRestoreTask(ConnectionData connection);
+        ICreateDbTask CreateCreateDbTask(ConnectionData connection);
+        IDeleteDbTask CreateDeleteDbTask(ConnectionData defaultConnection);
+        IListDbTask CreateListDbTask(ConnectionData connection);
+        IMigrateDbTask CreateMigrateDbTask(ConnectionData connection);
+        IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection);
     }
 }

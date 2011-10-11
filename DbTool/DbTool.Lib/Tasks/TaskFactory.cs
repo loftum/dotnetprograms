@@ -3,7 +3,9 @@ using System.Linq;
 using DbTool.Lib.AssemblyLoading;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
+using DbTool.Lib.Migrating;
 
 namespace DbTool.Lib.Tasks
 {
@@ -22,12 +24,52 @@ namespace DbTool.Lib.Tasks
 
         public IBackupTask CreateBackupTask(ConnectionData connection)
         {
+            connection.ShouldNotBeNull("connection");
             return CreateInstance<IBackupTask>(connection.DatabaseType);
         }
 
         public IRestoreTask CreateRestoreTask(ConnectionData connection)
         {
+            connection.ShouldNotBeNull("connection");
             return CreateInstance<IRestoreTask>(connection.DatabaseType);
+        }
+
+        public ICreateDbTask CreateCreateDbTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            return CreateInstance<ICreateDbTask>(connection.DatabaseType);
+        }
+
+        public IDeleteDbTask CreateDeleteDbTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            return CreateInstance<IDeleteDbTask>(connection.DatabaseType);
+        }
+
+        public IListDbTask CreateListDbTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            return CreateInstance<IListDbTask>(connection.DatabaseType);
+        }
+
+        public IMigrateDbTask CreateMigrateDbTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            if (!connection.HasConnectionString)
+            {
+                throw new DbToolException("No connection for {0} is defined.", connection.Name);
+            }
+            return new MigrationRunner(connection, _logger);
+        }
+
+        public IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            if (!connection.HasConnectionString)
+            {
+                throw new DbToolException("No connection for {0} is defined.", connection.Name);
+            }
+            return new ViewDbVersionTask(connection, _logger);
         }
 
         private T CreateInstance<T>(string databaseType)
@@ -35,7 +77,7 @@ namespace DbTool.Lib.Tasks
             var expectedType = typeof(T);
             var assembly = _assemblyLoader.GetAssemblyFor(databaseType);
             var type = assembly.GetTypes()
-                .Where(t => typeof(IBackupTask).IsAssignableFrom(t) && !t.IsInterface)
+                .Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface)
                 .FirstOrDefault();
             if (type == null)
             {

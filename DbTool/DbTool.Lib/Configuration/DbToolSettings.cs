@@ -30,11 +30,26 @@ namespace DbTool.Lib.Configuration
                         {
                             new ConnectionData
                             {
-                                Name = "default",
+                                Name = "SqlServer",
+                                DatabaseType = "sqlserver",
                                 Host = @".\SQLEXPRESS",
-                                ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MyDB;Integrated Security=True;MultipleActiveResultSets=True",
+                                Database = "MyDB",
+                                IntegratedSecurity = true,
+                                User = "",
+                                Password = "",
                                 Default = true,
-                                MigrationPath = "migrationPath"
+                                MigrationPath = "SqlServerMigrationPath"
+                            },
+                            new ConnectionData
+                            {
+                                Name = "MySql",
+                                DatabaseType = "mysql",
+                                Host = @"localhost",
+                                Database = "MyDB",
+                                User = "root",
+                                Password = "p455w0rD",
+                                Default = false,
+                                MigrationPath = "MySqlMigrationPath"
                             }
                         }
                     };
@@ -61,7 +76,7 @@ namespace DbTool.Lib.Configuration
         {
             return (from connection in Connections 
                     where connection.Name.Equals(name)
-                    select connection.ConnectionString).FirstOrDefault();
+                    select connection.GetConnectionString()).FirstOrDefault();
         }
 
         public static DbToolSettings From(string path)

@@ -10,13 +10,9 @@ namespace DbTool.Lib.SqlServer.Tasks
 {
     public class BackupTask : SqlServerProgressTaskBase, IBackupTask
     {
-        private readonly IDbToolLogger _logger;
-        private readonly IDbToolSettings _settings;
-
         public BackupTask(IDbToolLogger logger, IDbToolSettings settings)
+            : base(logger, settings)
         {
-            _logger = logger;
-            _settings = settings;
         }
 
         public void Backup(BackupParameters parameters)
@@ -34,21 +30,21 @@ namespace DbTool.Lib.SqlServer.Tasks
                 };
                 
                 var backupPath = GenerateBackupPath(parameters);
-                _logger.WriteLine("Backing up to {0}", backupPath);
+                Logger.WriteLine("Backing up to {0}", backupPath);
                 backup.Devices.AddDevice(backupPath, DeviceType.File);
                 backup.BackupSetName = string.Format("{0} backup", parameters.DatabaseName);
                 backup.PercentComplete += HandlePercentComplete;
                 backup.Complete += HandleComplete;
-                _logger.WriteLine("Running backup...");
+                Logger.WriteLine("Running backup...");
                 backup.SqlBackup(server);
             }
             finally
             {
                 if (server.ConnectionContext.IsOpen)
                 {
-                    _logger.Write("Closing connection...");
+                    Logger.Write("Closing connection...");
                     server.ConnectionContext.Disconnect();
-                    _logger.WriteLine("OK");
+                    Logger.WriteLine("OK");
                 }
             }
         }
@@ -59,12 +55,12 @@ namespace DbTool.Lib.SqlServer.Tasks
             {
                 return Path.IsPathRooted(parameters.FilePath) ?
                     parameters.FilePath :
-                    Path.Combine(_settings.BackupDirectory, parameters.FilePath);
+                    Path.Combine(Settings.BackupDirectory, parameters.FilePath);
             }
             var filename = string.Format("{0}_{1}.bak",
                 parameters.DatabaseName,
                 DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            return Path.Combine(_settings.BackupDirectory, filename);
+            return Path.Combine(Settings.BackupDirectory, filename);
         }
     }
 }

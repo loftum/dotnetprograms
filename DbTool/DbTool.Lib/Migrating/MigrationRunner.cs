@@ -1,11 +1,12 @@
 using System.Reflection;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
+using DbTool.Lib.Tasks;
 using Migrator.Framework.Loggers;
 
 namespace DbTool.Lib.Migrating
 {
-    public class MigrationRunner
+    public class MigrationRunner : IMigrateDbTask
     {
         private readonly ConnectionData _connectionData;
         private readonly IDbToolLogger _logger;
@@ -28,7 +29,7 @@ namespace DbTool.Lib.Migrating
 
         private Migrator.Migrator CreateMigrator()
         {
-            var connectionString = _connectionData.ConnectionString;
+            var connectionString = _connectionData.GetConnectionString();
             var assembly = Assembly.LoadFrom(_connectionData.MigrationPath);
             return new Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, _logger));
         }
