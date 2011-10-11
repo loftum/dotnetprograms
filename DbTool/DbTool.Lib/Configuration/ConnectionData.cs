@@ -37,7 +37,7 @@ namespace DbTool.Lib.Configuration
         {
             var elements = new List<string>();
             elements.Add(string.Format("Data Source={0}", Host));
-            if (includeDatabase)
+            if (includeDatabase && Database.IsNotNullOrEmpty())
             {
                 elements.Add(string.Format("Initial Catalog={0}", Database));
             }
@@ -57,7 +57,7 @@ namespace DbTool.Lib.Configuration
         {
             var elements = new List<string>();
             elements.Add(string.Format("Server={0}", Host));
-            if (includeDatabase)
+            if (includeDatabase && Database.IsNotNullOrEmpty())
             {
                 elements.Add(string.Format("Database={0}", Database));
             }

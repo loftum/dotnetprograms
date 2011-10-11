@@ -114,7 +114,9 @@ namespace DbToolGui.ViewModels
                 StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
                 return;
             }
+
             _communicator.ConnectTo(connection);
+            
             FireOnConnectionPropertiesChanged();
             if (_settings.LoadSchema)
             {

@@ -11,7 +11,7 @@ namespace DbToolGui.Communication.Commands
 
         protected override string ConvertToString()
         {
-            return string.Format("{0} number of rows affected.", AffectedRows);
+            return string.Format("{0} rows affected.", AffectedRows);
         }
     }
 }
