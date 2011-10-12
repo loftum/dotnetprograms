@@ -68,14 +68,10 @@
     <Compile Include="Controls\CustomBoundColumn.cs" />
     <Compile Include="ExtensionMethods\DataGridExtensions.cs" />
     <Compile Include="Highlighting\HighlightStyle.cs" />
-    <Compile Include="Highlighting\ISchemaObjectProvider.cs" />
     <Compile Include="Highlighting\ISyntaxHighlighterFactory.cs" />
-    <Compile Include="Highlighting\SchemaObjectProvider.cs" />
     <Compile Include="Highlighting\SyntaxHighlighterFactory.cs" />
-    <Compile Include="Highlighting\TagType.cs" />
     <Compile Include="Highlighting\SyntaxHighlighter.cs" />
     <Compile Include="Highlighting\ISyntaxHighlighter.cs" />
-    <Compile Include="Highlighting\ISyntaxProvider.cs" />
     <Compile Include="Highlighting\DbToolSyntaxProvider.cs" />
     <Compile Include="Highlighting\Tag.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
@@ -124,6 +120,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj">
+      <Project>{74004709-197C-41CC-BF76-1339B1460120}</Project>
+      <Name>DbTool.Lib.Ui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
       <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
       <Name>DbTool.Lib</Name>

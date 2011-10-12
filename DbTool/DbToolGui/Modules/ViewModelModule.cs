@@ -1,4 +1,5 @@
-﻿using DbToolGui.Highlighting;
+﻿using DbTool.Lib.Ui.Syntax;
+using DbToolGui.Highlighting;
 using Ninject.Modules;
 
 namespace DbToolGui.Modules

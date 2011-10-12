@@ -1,4 +1,5 @@
 ﻿using System.Windows.Documents;
+using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
 {

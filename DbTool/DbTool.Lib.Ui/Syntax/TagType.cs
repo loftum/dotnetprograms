@@ -1,4 +1,4 @@
-﻿namespace DbToolGui.Highlighting
+namespace DbTool.Lib.Ui.Syntax
 {
     public enum TagType
     {
