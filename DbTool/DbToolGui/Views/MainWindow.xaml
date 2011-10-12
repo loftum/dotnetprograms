@@ -13,6 +13,7 @@
         <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
             <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
             <ComboBox Name="ConnectionBox"
+                      
                 ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
                 SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}"
                 IsEnabled="{Binding Path=Connection.EnableConnectionDropdown, Mode=OneWay}" >

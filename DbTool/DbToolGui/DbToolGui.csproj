@@ -71,7 +71,6 @@
     <Compile Include="Highlighting\ISyntaxHighlighterFactory.cs" />
     <Compile Include="Highlighting\SyntaxHighlighterFactory.cs" />
     <Compile Include="Highlighting\SyntaxHighlighter.cs" />
-    <Compile Include="Highlighting\ISyntaxHighlighter.cs" />
     <Compile Include="Highlighting\DbToolSyntaxProvider.cs" />
     <Compile Include="Highlighting\Tag.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
