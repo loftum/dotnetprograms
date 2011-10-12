@@ -63,7 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connections\ConnectionFactory.cs" />
+    <Compile Include="Commands\SqlServerExecutorProvider.cs" />
+    <Compile Include="Connections\DbConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\BackupTask.cs" />
     <Compile Include="Tasks\CreateDbTask.cs" />

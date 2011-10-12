@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Data;
 using DbTool.Lib.ExtensionMethods;
-using DbToolGui.Communication.Commands;
 using DbToolGui.Controls;
-using DbToolGui.Data;
 
 namespace DbToolGui.ViewModels
 {

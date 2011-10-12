@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using DbToolGui.Providers;
+using DbTool.Lib.Connections;
 
 namespace DbToolGui.ViewModels
 {
     public class ConnectionViewModel : ViewModelBase
     {
-        private readonly IConnectionProvider _connectionProvider;
+        private readonly IConnectionDataProvider _connectionDataProvider;
 
         private bool _enableConnectionDropdown = true;
         public bool EnableConnectionDropdown
@@ -23,15 +23,15 @@ namespace DbToolGui.ViewModels
             set { _selectedConnection = value; OnPropertiesChanged("SelectedConnection"); }
         }
 
-        public ConnectionViewModel(IConnectionProvider connectionProvider)
+        public ConnectionViewModel(IConnectionDataProvider connectionDataProvider)
         {
-            _connectionProvider = connectionProvider;
+            _connectionDataProvider = connectionDataProvider;
             AvailableConnections = new ObservableCollection<string>();
-            foreach (var connection in _connectionProvider.GetConnectionNames())
+            foreach (var connection in _connectionDataProvider.GetConnectionNames())
             {
                 AvailableConnections.Add(connection);
             }
-            SelectedConnection = _connectionProvider.GetDefaultConnectionName();
+            SelectedConnection = _connectionDataProvider.GetDefaultConnectionName();
         }
 
         public void ShowConnected(bool connected)

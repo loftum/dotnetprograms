@@ -2,14 +2,14 @@
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
+using DbTool.Lib.Communication;
+using DbTool.Lib.Communication.Commands;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Connections;
+using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Commands;
-using DbToolGui.Communication;
-using DbToolGui.Communication.Commands;
-using DbToolGui.Exceptions;
 using DbToolGui.Highlighting;
-using DbToolGui.Providers;
 
 namespace DbToolGui.ViewModels
 {
@@ -30,7 +30,7 @@ namespace DbToolGui.ViewModels
             get { return _communicator.IsConnected ? "/Images/dbplus.ico" : "/Images/db.ico"; }
         }
 
-        private readonly IConnectionProvider _connectionProvider;
+        private readonly IConnectionDataProvider _connectionDataProvider;
         private readonly IDatabaseCommunicator _communicator;
 
         public ICommand ExecuteCommand { get; private set; }
@@ -56,13 +56,13 @@ namespace DbToolGui.ViewModels
         private readonly IDbToolSettings _settings;
         private readonly ISchemaObjectProvider _schemaObjectProvider;
 
-        public MainViewModel(IConnectionProvider connectionProvider,
+        public MainViewModel(IConnectionDataProvider connectionDataProvider,
             IDatabaseCommunicator communicator,
             IDbToolSettings settings,
             ISchemaObjectProvider schemaObjectProvider)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _connectionProvider = connectionProvider;
+            _connectionDataProvider = connectionDataProvider;
             _communicator = communicator;
             _settings = settings;
             _schemaObjectProvider = schemaObjectProvider;
@@ -70,7 +70,7 @@ namespace DbToolGui.ViewModels
             ConnectCommand = new DelegateCommand(ToggleConnect);
             ExecuteCommand = new DelegateCommand(ExecuteStatement);
             
-            Connection = new ConnectionViewModel(_connectionProvider);
+            Connection = new ConnectionViewModel(_connectionDataProvider);
             QueryResult = new QueryResultViewModel();
         }
 
@@ -108,7 +108,7 @@ namespace DbToolGui.ViewModels
                 StatusText = string.Format("Already conneced to {0}", _communicator.ConnectedTo);
                 return;
             }
-            var connection = _connectionProvider.GetConnection(Connection.SelectedConnection);
+            var connection = _connectionDataProvider.GetConnection(Connection.SelectedConnection);
             if (connection == null)
             {
                 StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);

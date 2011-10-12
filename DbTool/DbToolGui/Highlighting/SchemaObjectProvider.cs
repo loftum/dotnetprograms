@@ -1,4 +1,4 @@
-﻿using DbToolGui.Data;
+﻿using DbTool.Lib.Data;
 
 namespace DbToolGui.Highlighting
 {

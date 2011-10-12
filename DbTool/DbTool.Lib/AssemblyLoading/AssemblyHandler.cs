@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Exceptions;
@@ -18,18 +19,38 @@ namespace DbTool.Lib.AssemblyLoading
 
         public T CreateInstance<T>(params object[] constructorArgs)
         {
-            var expectedType = typeof(T);
-            
-            var type = _assembly.GetTypes()
-                .Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface)
-                .FirstOrDefault();
-            if (type == null)
+            var implementingType = TryGetImplementingType<T>();
+            if (implementingType == null)
             {
                 throw new DbToolException("Could not find any {0} for databasetype {1} in assembly {2}",
-                    expectedType.Name, _databaseType, _assembly.GetName());
+                    typeof(T).Name, _databaseType, _assembly.GetName());
             }
 
-            return (T)Activator.CreateInstance(type, constructorArgs);
+            return (T)Activator.CreateInstance(implementingType, constructorArgs);
+        }
+
+        private Type TryGetImplementingType<T>()
+        {
+            var superType = typeof(T);
+            try
+            {
+                return GetSubTypesOf<T>().FirstOrDefault();
+            }
+            catch (ReflectionTypeLoadException)
+            {
+                throw new DbToolException("Could not find any {0} for databasetype {1} in assembly {2}",
+                    superType.Name, _databaseType, _assembly.GetName());
+            }
+        }
+
+        public bool HasType<T>()
+        {
+            return GetSubTypesOf<T>().Any();
+        }
+
+        private IEnumerable<Type> GetSubTypesOf<T>()
+        {
+            return _assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface);
         }
     }
 }
