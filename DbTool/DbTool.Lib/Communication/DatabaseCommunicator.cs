@@ -23,7 +23,6 @@ namespace DbTool.Lib.Communication
         }
 
         private readonly IDbToolConfig _config;
-        private readonly IDbToolSettings _settings;
         private readonly IDbContextFactory _dbConnectionFactory;
 
         private ConnectionData _connectionData;
@@ -32,7 +31,6 @@ namespace DbTool.Lib.Communication
         public DatabaseCommunicator(IDbToolConfig config, IDbContextFactory dbConnectionFactory)
         {
             _config = config;
-            _settings = _config.Settings;
             _dbConnectionFactory = dbConnectionFactory;
         }
 
