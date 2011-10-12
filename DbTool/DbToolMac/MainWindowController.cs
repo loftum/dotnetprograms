@@ -35,14 +35,19 @@ namespace DbToolMac
         }
 		
 		#endregion
-		
-        //strongly typed window accessor
-        public new MainWindow Window {
-            get
-            {
-                return (MainWindow)base.Window;
-            }
+
+        public new MainWindow Window { get { return (MainWindow) base.Window; } }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            EditorBox.AutomaticSpellingCorrectionEnabled = false;
+            EditorBox.ContinuousSpellCheckingEnabled = false;
+            EditorBox.Font = NSFont.FromFontName("Monaco", 12);
+
+
         }
+
     }
 }
 
