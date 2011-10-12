@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbToolMac", "DbToolMac.csproj", "{BF8504D2-032A-45DB-9810-271AEBDF3C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib", "..\DbTool.Lib\DbTool.Lib.csproj", "{BA6E0230-D231-4F44-8820-88D159334D65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.Build.0 = Debug|Any CPU
+		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.Build.0 = Release|Any CPU
+		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Debug|x86.ActiveCfg = Debug|x86
+		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Debug|x86.Build.0 = Debug|x86
+		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Release|x86.ActiveCfg = Release|x86
+		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = DbToolMac.csproj
+	EndGlobalSection
+EndGlobal
