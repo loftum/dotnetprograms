@@ -1,22 +1,22 @@
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace DbToolGui.Communication.Commands
 {
     public class SchemaExecutor : IDbCommandExecutor
     {
-        private readonly SqlConnection _sqlConnection;
+        private readonly DbConnection _dbConnection;
 
-        public SchemaExecutor(SqlConnection sqlConnection)
+        public SchemaExecutor(DbConnection dbConnection)
         {
-            _sqlConnection = sqlConnection;
+            _dbConnection = dbConnection;
         }
 
         public IDbCommandResult Execute(string command)
         {
             try
             {
-                _sqlConnection.Open();
+                _dbConnection.Open();
                 var schema = GetSchemaFrom(command);
                 var result = new QueryResult();
 
@@ -32,7 +32,7 @@ namespace DbToolGui.Communication.Commands
             }
             finally
             {
-                _sqlConnection.Close();
+                _dbConnection.Close();
             }
         }
 
@@ -40,8 +40,8 @@ namespace DbToolGui.Communication.Commands
         {
             var query = new SchemaQuery(command);
             return query.HasNoCollectionName
-                ? _sqlConnection.GetSchema()
-                : _sqlConnection.GetSchema(query.CollectionName, query.RestrictionValues);
+                ? _dbConnection.GetSchema()
+                : _dbConnection.GetSchema(query.CollectionName, query.RestrictionValues);
         }
     }
 }

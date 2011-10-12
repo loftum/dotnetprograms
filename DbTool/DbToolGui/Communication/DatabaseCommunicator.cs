@@ -1,6 +1,7 @@
 using System;
-using System.Data.SqlClient;
+using System.Data.Common;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Connections;
 using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Communication.Commands;
 using DbToolGui.Data;
@@ -19,18 +20,20 @@ namespace DbToolGui.Communication
 
         public bool IsConnected
         {
-            get { return _sqlConnection != null; }
+            get { return _dbConnection != null; }
         }
 
         private ConnectionData _connectionData;
-        private SqlConnection _sqlConnection;
+        private DbConnection _dbConnection;
         private readonly IDbToolConfig _config;
         private readonly IDbToolSettings _settings;
+        private readonly IConnectionFactory _connectionFactory;
 
-        public DatabaseCommunicator(IDbToolConfig config)
+        public DatabaseCommunicator(IDbToolConfig config, IConnectionFactory connectionFactory)
         {
             _config = config;
             _settings = _config.Settings;
+            _connectionFactory = connectionFactory;
         }
 
         public void ConnectTo(ConnectionData connectionData)
@@ -40,17 +43,16 @@ namespace DbToolGui.Communication
                 throw new UserException(ExceptionType.AlreadyConnected);
             }
             _connectionData = connectionData;
-            var connectionString = connectionData.GetConnectionString();
-            _sqlConnection = new SqlConnection(connectionString);
+            _dbConnection = _connectionFactory.CreateConnection(connectionData);
         }
 
         public void Disconnect()
         {
             if (IsConnected)
             {
-                _sqlConnection.Close();
-                _sqlConnection.Dispose();
-                _sqlConnection = null;
+                _dbConnection.Close();
+                _dbConnection.Dispose();
+                _dbConnection = null;
                 _connectionData = null;
             }
         }
@@ -84,7 +86,7 @@ namespace DbToolGui.Communication
             ThrowIfNotConnected();
             if (statement.StartsWithIgnoreCase("select"))
             {
-                return new QueryExecutor(_sqlConnection, _settings.MaxResult);
+                return new QueryExecutor(_dbConnection, _settings.MaxResult);
             }
             if (statement.StartsWithIgnoreCase("migrate"))
             {
@@ -92,13 +94,13 @@ namespace DbToolGui.Communication
             }
             if (statement.StartsWithIgnoreCase("getschema"))
             {
-                return new SchemaExecutor(_sqlConnection);
+                return new SchemaExecutor(_dbConnection);
             }
             if (statement.StartsWithIgnoreCase("backup"))
             {
                 return new BackupExecutor();
             }
-            return new NonQueryExecutor(_sqlConnection);
+            return new NonQueryExecutor(_dbConnection);
         }
 
         private void ThrowIfNotConnected()
@@ -112,7 +114,7 @@ namespace DbToolGui.Communication
         public Schema LoadSchema()
         {
             ThrowIfNotConnected();
-            return new SchemaLoader(_sqlConnection).Load();
+            return new SchemaLoader(_dbConnection).Load();
         }
     }
 }

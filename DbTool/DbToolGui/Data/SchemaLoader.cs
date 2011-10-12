@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.Data
@@ -9,11 +9,11 @@ namespace DbToolGui.Data
         private const string TableName = "TABLE_NAME";
         private const string ColumnName = "COLUMN_NAME";
 
-        private readonly SqlConnection _sqlConnection;
+        private readonly DbConnection _dbConnection;
 
-        public SchemaLoader(SqlConnection sqlConnection)
+        public SchemaLoader(DbConnection dbConnection)
         {
-            _sqlConnection = sqlConnection;
+            _dbConnection = dbConnection;
         }
 
         public Schema Load()
@@ -22,8 +22,8 @@ namespace DbToolGui.Data
 
             try
             {
-                _sqlConnection.Open();
-                var schemaTable = _sqlConnection.GetSchema("Columns");
+                _dbConnection.Open();
+                var schemaTable = _dbConnection.GetSchema("Columns");
 
                 foreach (DataRow row in schemaTable.Rows)
                 {
@@ -33,7 +33,7 @@ namespace DbToolGui.Data
             }
             finally
             {
-                _sqlConnection.Close();
+                _dbConnection.Close();
             }
 
             return schema;

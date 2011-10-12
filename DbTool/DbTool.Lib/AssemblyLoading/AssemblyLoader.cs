@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Exceptions;
 
 namespace DbTool.Lib.AssemblyLoading
 {
@@ -13,11 +16,11 @@ namespace DbTool.Lib.AssemblyLoading
             _config = config;
         }
 
-        public Assembly GetAssemblyFor(string databaseType)
+        public AssemblyHandler GetAssemblyFor(string databaseType)
         {
             var assemblyPath = GetAssemblyPathFor(databaseType);
             var assembly = Assembly.LoadFile(assemblyPath);
-            return assembly;
+            return new AssemblyHandler(databaseType, assembly);
         }
 
         private string GetAssemblyPathFor(string databaseType)

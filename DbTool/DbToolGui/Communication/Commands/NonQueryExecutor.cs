@@ -1,19 +1,19 @@
-using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace DbToolGui.Communication.Commands
 {
     public class NonQueryExecutor : IDbCommandExecutor
     {
-        private readonly SqlConnection _sqlConnection;
+        private readonly DbConnection _dbConnection;
 
-        public NonQueryExecutor(SqlConnection sqlConnection)
+        public NonQueryExecutor(DbConnection dbConnection)
         {
-            _sqlConnection = sqlConnection;
+            _dbConnection = dbConnection;
         }
 
         public IDbCommandResult Execute(string statement)
         {
-            using (var command = _sqlConnection.CreateCommand())
+            using (var command = _dbConnection.CreateCommand())
             {
                 try
                 {

@@ -26,7 +26,7 @@ namespace DbTool.Lib.Configuration
         {
             switch(DatabaseType)
             {
-                case "lala":
+                case "mysql":
                     return GetConnectionStringForMySql(includeDatabase);
                 default:
                     return GetDefaultConnectionString(includeDatabase);

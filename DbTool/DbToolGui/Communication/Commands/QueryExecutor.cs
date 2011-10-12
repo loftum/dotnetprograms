@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace DbToolGui.Communication.Commands
 {
     public class QueryExecutor : IDbCommandExecutor
     {
-        private readonly SqlConnection _sqlConnection;
+        private readonly DbConnection _dbConnection;
         private readonly int _maxRows;
 
-        public QueryExecutor(SqlConnection sqlConnection, int maxRows)
+        public QueryExecutor(DbConnection dbConnection, int maxRows)
         {
-            _sqlConnection = sqlConnection;
+            _dbConnection = dbConnection;
             _maxRows = maxRows;
         }
 
         public IDbCommandResult Execute(string query)
         {
-            using (var command = _sqlConnection.CreateCommand())
+            using (var command = _dbConnection.CreateCommand())
             {
                 try
                 {

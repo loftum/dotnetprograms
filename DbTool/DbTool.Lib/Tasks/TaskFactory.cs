@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using DbTool.Lib.AssemblyLoading;
+﻿using DbTool.Lib.AssemblyLoading;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
@@ -74,18 +72,7 @@ namespace DbTool.Lib.Tasks
 
         private T CreateInstance<T>(string databaseType)
         {
-            var expectedType = typeof(T);
-            var assembly = _assemblyLoader.GetAssemblyFor(databaseType);
-            var type = assembly.GetTypes()
-                .Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface)
-                .FirstOrDefault();
-            if (type == null)
-            {
-                throw new DbToolException("Could not find any {0} for databasetype {1} in assembly {2}",
-                    expectedType.Name, databaseType, assembly.GetName());
-            }
-
-            return (T) Activator.CreateInstance(type, new object[] {_logger, _config.Settings});
+            return _assemblyLoader.GetAssemblyFor(databaseType).CreateInstance<T>(_logger, _config.Settings);
         }
     }
 }

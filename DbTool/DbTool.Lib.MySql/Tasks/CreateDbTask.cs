@@ -15,9 +15,9 @@ namespace DbTool.Lib.MySql.Tasks
         public void Create(string databaseName)
         {
             var connectionString = Settings.DefaultConnection.GetConnectionString(false);
-            Logger.WriteLine("ConnectionString = {0}", connectionString);
             using (var connection = new MySqlConnection(connectionString))
             {
+                
                 try
                 {
                     connection.Open();
