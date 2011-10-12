@@ -44,8 +44,6 @@ namespace DbToolMac
             EditorBox.AutomaticSpellingCorrectionEnabled = false;
             EditorBox.ContinuousSpellCheckingEnabled = false;
             EditorBox.Font = NSFont.FromFontName("Monaco", 12);
-
-
         }
 
     }

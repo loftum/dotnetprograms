@@ -5,12 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbToolMac", "DbToolMac.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib", "..\DbTool.Lib\DbTool.Lib.csproj", "{BA6E0230-D231-4F44-8820-88D159334D65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.Ui", "..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj", "{74004709-197C-41CC-BF76-1339B1460120}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74004709-197C-41CC-BF76-1339B1460120}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{74004709-197C-41CC-BF76-1339B1460120}.Debug|x86.Build.0 = Debug|Any CPU
+		{74004709-197C-41CC-BF76-1339B1460120}.Release|x86.ActiveCfg = Release|Any CPU
+		{74004709-197C-41CC-BF76-1339B1460120}.Release|x86.Build.0 = Release|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.Build.0 = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.ActiveCfg = Release|Any CPU
