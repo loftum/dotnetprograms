@@ -124,10 +124,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj">
-      <Project>{45DC0B50-D067-4261-9F04-01B49DF157DE}</Project>
-      <Name>DbTool.Lib.Ui</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
       <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
       <Name>DbTool.Lib</Name>
