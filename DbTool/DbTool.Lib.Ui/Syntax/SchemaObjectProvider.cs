@@ -1,6 +1,6 @@
-﻿using DbTool.Lib.Data;
+using DbTool.Lib.Data;
 
-namespace DbToolGui.Highlighting
+namespace DbTool.Lib.Ui.Syntax
 {
     public class SchemaObjectProvider : ISchemaObjectProvider
     {

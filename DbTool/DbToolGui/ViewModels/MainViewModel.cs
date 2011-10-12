@@ -8,6 +8,7 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Commands;
 using DbToolGui.Highlighting;
 

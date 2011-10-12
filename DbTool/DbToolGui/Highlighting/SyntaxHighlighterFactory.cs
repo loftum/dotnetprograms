@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Threading;
+using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
 {

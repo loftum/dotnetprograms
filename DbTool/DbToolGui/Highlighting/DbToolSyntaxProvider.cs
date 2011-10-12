@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
 {
