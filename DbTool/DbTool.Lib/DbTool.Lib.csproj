@@ -131,6 +131,7 @@
     <Compile Include="Tasks\TaskProgressCompleteEventArgs.cs" />
     <Compile Include="Tasks\TaskProgressEventArgs.cs" />
     <Compile Include="Tasks\ViewDbVersionTask.cs" />
+    <Compile Include="Modules\DatabaseModule.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

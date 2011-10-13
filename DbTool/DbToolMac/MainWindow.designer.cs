@@ -25,6 +25,9 @@ namespace DbToolMac
 
 		[Outlet]
 		MonoMac.AppKit.NSTableView ResultTable { get; set; }
+
+		[Action ("Connection_Click:")]
+		partial void Connection_Click (MonoMac.Foundation.NSObject sender);
 	}
 
 	[Register ("MainWindow")]

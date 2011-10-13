@@ -8,8 +8,6 @@ namespace DbToolMac
 {
     public partial class MainWindow : MonoMac.AppKit.NSWindow
     {
-		#region Constructors
-		
         // Called when created from unmanaged code
         public MainWindow(IntPtr handle) : base (handle)
         {
@@ -27,8 +25,6 @@ namespace DbToolMac
         void Initialize()
         {
         }
-		
-		#endregion
     }
 }
 
