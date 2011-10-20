@@ -1,8 +1,9 @@
-using System;
 using Ninject.Modules;
 using Ninject.Activation;
-using MonoMac.AppKit;
-using DbToolMac.Delegation;
+using DbTool.Lib.Connections;
+using DbTool.Lib.Communication;
+using DbTool.Lib.Configuration;
+using DbTool.Lib.Ui.Syntax;
 using Ninject;
 
 namespace DbToolMac.Modules
@@ -11,14 +12,16 @@ namespace DbToolMac.Modules
     {
         public override void Load()
         {
-            Bind<IDbToolControllerDelegate>().To<DbToolControllerDelegate>().InSingletonScope();
             Bind<MainWindowController>().ToMethod(CreateController).InSingletonScope();
         }
 
         private static MainWindowController CreateController(IContext context)
         {
-            var controllerDelegate = context.Kernel.Get<IDbToolControllerDelegate>();
-            return new MainWindowController(controllerDelegate);
+            var kernel = context.Kernel;
+            return new MainWindowController(kernel.Get<IConnectionDataProvider>(),
+                kernel.Get<IDatabaseCommunicator>(),
+                kernel.Get<IDbToolSettings>(),
+                kernel.Get<ISchemaObjectProvider>());
         }
     }
 }

@@ -14,6 +14,7 @@ namespace DbTool.Lib.Configuration
         public string LogDirectory { get; set; }
         public string BackupDirectory { get; set; }
         public IList<ConnectionData> Connections { get; set; }
+        public IDictionary<string, string> AssemblyMap { get; set; }
 
         public static DbToolSettings Default
         {
@@ -26,6 +27,11 @@ namespace DbTool.Lib.Configuration
                         DataDirectory = "dataDir",
                         LogDirectory = "logDir",
                         BackupDirectory = "backupDir",
+                        AssemblyMap = new Dictionary<string, string>
+                        {
+                            {"mysql", "DbTool.Lib.MySql.dll"},
+                            {"sqlserver", "DbTool.Lib.SqlServer.dll"}
+                        },
                         Connections = new List<ConnectionData>
                         {
                             new ConnectionData

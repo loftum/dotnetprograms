@@ -27,15 +27,6 @@ namespace DbTool.Lib.Configuration
             }
         }
 
-        public IDictionary<string, string> AssemblyMap { get; private set; }
-
-        public DbToolConfig()
-        {
-            AssemblyMap = new Dictionary<string, string>();
-            AssemblyMap["sqlserver"] = "DbTool.Lib.SqlServer.dll";
-            AssemblyMap["mysql"] = "DbTool.Lib.MySql.dll";
-        }
-
         public string SettingsPath
         {
             get { return GetAppSetting("SettingsPath"); }

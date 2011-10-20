@@ -6,7 +6,6 @@ namespace DbTool.Lib.Configuration
     {
         DbToolSettings Settings { get; }
         string SettingsPath { get; }
-        IDictionary<string, string> AssemblyMap { get; }
         void SaveSettings();
     }
 }

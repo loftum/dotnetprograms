@@ -49,6 +49,7 @@
     <Compile Include="Syntax\SchemaObjectProvider.cs" />
     <Compile Include="Syntax\TagType.cs" />
     <Compile Include="Modules\UiModule.cs" />
+    <Compile Include="Models\IQueryResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -67,5 +68,6 @@
   -->
   <ItemGroup>
     <Folder Include="Modules\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

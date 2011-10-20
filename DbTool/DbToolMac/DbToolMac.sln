@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib", "..\DbTool.Lib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.Ui", "..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj", "{74004709-197C-41CC-BF76-1339B1460120}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.MySql", "..\DbTool.Lib.MySql\DbTool.Lib.MySql.csproj", "{F6F4AC01-3087-408E-8A25-42EF402B945A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,6 +27,10 @@ Global
 		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Debug|x86.Build.0 = Debug|x86
 		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Release|x86.ActiveCfg = Release|x86
 		{BF8504D2-032A-45DB-9810-271AEBDF3C4D}.Release|x86.Build.0 = Release|x86
+		{F6F4AC01-3087-408E-8A25-42EF402B945A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6F4AC01-3087-408E-8A25-42EF402B945A}.Debug|x86.Build.0 = Debug|Any CPU
+		{F6F4AC01-3087-408E-8A25-42EF402B945A}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6F4AC01-3087-408E-8A25-42EF402B945A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = DbToolMac.csproj

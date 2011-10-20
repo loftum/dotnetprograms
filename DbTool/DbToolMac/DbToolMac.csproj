@@ -53,12 +53,11 @@
     <Compile Include="AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\MainWindowViewModel.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="ExtensionMethods\NSTextViewExtensions.cs" />
     <Compile Include="Modules\ApplicationModule.cs" />
-    <Compile Include="Delegation\DbToolControllerDelegate.cs" />
-    <Compile Include="Delegation\IDbToolControllerDelegate.cs" />
+    <Compile Include="Models\QueryResultViewModel.cs" />
+    <Compile Include="Models\ConnectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />
@@ -66,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
@@ -73,7 +73,6 @@
     <Folder Include="Models\" />
     <Folder Include="ExtensionMethods\" />
     <Folder Include="Modules\" />
-    <Folder Include="Delegation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">

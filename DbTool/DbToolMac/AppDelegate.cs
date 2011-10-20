@@ -7,6 +7,7 @@ using Ninject;
 using DbTool.Lib.Modules;
 using DbToolMac.Modules;
 using DbTool.Lib.Ui.Modules;
+using DbTool.Lib.Configuration;
 
 namespace DbToolMac
 {
@@ -33,12 +34,12 @@ namespace DbToolMac
 
         public override void WillTerminate(NSNotification notification)
         {
-            if (!_kernel.IsDisposed)
+            if (_kernel != null && !_kernel.IsDisposed)
             {
+                _kernel.Get<IDbToolConfig>().SaveSettings();
                 _kernel.Dispose();
             }
             _kernel = null;
-            base.WillTerminate(notification);
         }
     }
 }
