@@ -8,6 +8,7 @@ using DbTool.Lib.ExtensionMethods;
 using DbToolMac.Models;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+using DbTool.Lib.Ui.ModelBinding;
 
 namespace DbToolMac
 {
@@ -15,14 +16,12 @@ namespace DbToolMac
     {
         public new MainWindow Window { get { return (MainWindow)base.Window; } }
 
+        [Export("model")]
+        public MainWindowViewModel Model {get; private set;}
         [Export("connection")]
         public ConnectionViewModel Connection { get; private set; }
         [Export("query")]
         public QueryResultViewModel Query { get; private set; }
-        [Export("statusText")]
-        public string StatusText { get; set; }
-        [Export("title")]
-        public string Title {get; set;}
 
         private readonly IConnectionDataProvider _connectionDataProvider;
         private readonly IDatabaseCommunicator _communicator;
@@ -65,16 +64,21 @@ namespace DbToolMac
 
         void Initialize()
         {
+            Model = new MainWindowViewModel();
             Connection = new ConnectionViewModel(_connectionDataProvider);
             Query = new QueryResultViewModel();
-            StatusText = "Pølse";
-            Title = "DbTool";
         }
 
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
             EditorBox.Font = NSFont.FromFontName("Monaco", 12);
+            new ModelBinder<MainWindowViewModel>(Model)
+                .Bind(model => model.StatusText, () => StatusField.StringValue = Model.StatusText)
+                .Bind(model => model.Title, () => Window.Title = Model.Title);
+            new ModelBinder<ConnectionViewModel>(Connection)
+                .Bind(model => model.ConnectionButtonText, () => ConnectionButton.Title = Connection.ConnectionButtonText);
+
         }
 
         partial void Connection_Click(NSObject sender)
@@ -101,35 +105,37 @@ namespace DbToolMac
         {
             var name = _communicator.ConnectedTo;
             _communicator.Disconnect();
-            StatusText = string.Format("Disconnected from {0}", name);
-            Title = "DbTool";
+            Model.StatusText = string.Format("Disconnected from {0}", name);
+            Model.Title = "DbTool";
+            Connection.ShowConnected(true);
         }
 
         private void Connect()
         {
             if (Connection.SelectedConnection.IsNullOrEmpty())
             {
-                StatusText = "No connection selected";
+                Model.StatusText = "No connection selected";
                 return;
             }
             if (_communicator.IsConnected)
             {
-                StatusText = string.Format("Already connected to {0}", _communicator.ConnectedTo);
+                Model.StatusText = string.Format("Already connected to {0}", _communicator.ConnectedTo);
                 return;
             }
             var connection = _connectionDataProvider.GetConnection(Connection.SelectedConnection);
             if (connection == null)
             {
-                StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
+                Model.StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
             }
             _communicator.ConnectTo(connection);
             if (_settings.LoadSchema)
             {
-                StatusText = "Loading schema objects";
+                Model.StatusText = "Loading schema objects";
                 _schemaObjectProvider.Schema = _communicator.LoadSchema();
             }
-            Title = string.Format("DbTool - {0}", _communicator.ConnectedTo);
-            StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
+            Model.Title = string.Format("DbTool - {0}", _communicator.ConnectedTo);
+            Model.StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
+            Connection.ShowConnected(true);
         }
     }
 }

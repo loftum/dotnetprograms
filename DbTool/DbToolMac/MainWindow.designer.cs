@@ -12,6 +12,9 @@ namespace DbToolMac
 	partial class MainWindowController
 	{
 		[Outlet]
+		MonoMac.AppKit.NSTextField StatusField { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSComboBox ConnectionBox { get; set; }
 
 		[Outlet]

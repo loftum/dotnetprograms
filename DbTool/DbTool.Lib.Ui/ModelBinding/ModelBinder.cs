@@ -17,9 +17,10 @@ namespace DbTool.Lib.Ui.ModelBinding
             _model.ModelChange += HandleModelChange;
         }
 
-        public void Bind<TProperty>(Expression<Func<TModel, TProperty>> property, Action action)
+        public ModelBinder<TModel> Bind<TProperty>(Expression<Func<TModel, TProperty>> property, Action action)
         {
             _actions[property.GetPropertyId()] = action;
+            return this;
         }
 
         private void HandleModelChange(object sender, ModelChangeEventArgs e)

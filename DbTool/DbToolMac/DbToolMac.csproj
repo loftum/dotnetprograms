@@ -58,6 +58,8 @@
     <Compile Include="Modules\ApplicationModule.cs" />
     <Compile Include="Models\QueryResultViewModel.cs" />
     <Compile Include="Models\ConnectionViewModel.cs" />
+    <Compile Include="Models\MainWindowViewModel.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />
