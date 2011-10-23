@@ -5,11 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{74004709-197C-41CC-BF76-1339B1460120}</ProjectGuid>
+    <ProjectGuid>{E31297FE-5C9A-4477-84CA-D57BE213E70C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbTool.Lib.Ui</RootNamespace>
-    <AssemblyName>DbTool.Lib.Ui</AssemblyName>
+    <RootNamespace>DbTool.Testing</RootNamespace>
+    <AssemblyName>DbTool.Testing</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,6 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\Lib\3rdParty\NUnit-2.5.7.10213\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\..\Lib\3rdParty\NUnit-2.5.7.10213\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.fixtures">
+      <HintPath>..\..\Lib\3rdParty\NUnit-2.5.7.10213\nunit.fixtures.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\Lib\3rdParty\NUnit-2.5.7.10213\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,30 +50,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Ninject">
-      <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods\ModelExpressionExtensions.cs" />
-    <Compile Include="Highlighting\ISyntaxHighlighter.cs" />
-    <Compile Include="ModelBinding\ModelBinder.cs" />
-    <Compile Include="Models\IViewModel.cs" />
-    <Compile Include="Models\ModelChangeEventArgs.cs" />
-    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\PropertyExpressionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Syntax\ISchemaObjectProvider.cs" />
-    <Compile Include="Syntax\ISyntaxProvider.cs" />
-    <Compile Include="Syntax\SchemaObjectProvider.cs" />
-    <Compile Include="Syntax\TagType.cs" />
-    <Compile Include="Modules\UiModule.cs" />
-    <Compile Include="Models\IQueryResultViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
-      <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
-      <Name>DbTool.Lib</Name>
+    <ProjectReference Include="..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj">
+      <Project>{74004709-197C-41CC-BF76-1339B1460120}</Project>
+      <Name>DbTool.Lib.Ui</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -71,5 +69,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
 </Project>

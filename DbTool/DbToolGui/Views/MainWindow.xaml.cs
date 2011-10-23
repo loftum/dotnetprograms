@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Ui.Highlighting;
 using DbToolGui.Highlighting;
 using DbToolGui.Modules;
 using DbToolGui.ViewModels;

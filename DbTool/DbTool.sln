@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.MySql", "DbTool.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.Ui", "DbTool.Lib.Ui\DbTool.Lib.Ui.csproj", "{74004709-197C-41CC-BF76-1339B1460120}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09. Testing", "09. Testing", "{6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Testing", "DbTool.Testing\DbTool.Testing.csproj", "{E31297FE-5C9A-4477-84CA-D57BE213E70C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +110,16 @@ Global
 		{74004709-197C-41CC-BF76-1339B1460120}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{74004709-197C-41CC-BF76-1339B1460120}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{74004709-197C-41CC-BF76-1339B1460120}.Release|x86.ActiveCfg = Release|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,5 +133,6 @@ Global
 		{BA6E0230-D231-4F44-8820-88D159334D65} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
 		{F6F4AC01-3087-408E-8A25-42EF402B945A} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
 		{74004709-197C-41CC-BF76-1339B1460120} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
+		{E31297FE-5C9A-4477-84CA-D57BE213E70C} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
 	EndGlobalSection
 EndGlobal
