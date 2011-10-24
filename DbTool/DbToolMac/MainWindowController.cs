@@ -9,6 +9,7 @@ using DbToolMac.Models;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using DbTool.Lib.Ui.ModelBinding;
+using DbTool.Lib.Communication.Commands;
 
 namespace DbToolMac
 {
@@ -31,7 +32,6 @@ namespace DbToolMac
         // Called when created from unmanaged code
         public MainWindowController(IntPtr handle) : base (handle)
         {
-            Console.WriteLine("ctor with Intptr={0}", handle);
             Initialize();
         }
 		
@@ -39,7 +39,6 @@ namespace DbToolMac
         [Export ("initWithCoder:")]
         public MainWindowController(NSCoder coder) : base (coder)
         {
-            Console.WriteLine("initWithCoder {0}", coder);
             Initialize();
         }
 		
@@ -72,7 +71,7 @@ namespace DbToolMac
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            EditorBox.Font = NSFont.FromFontName("Monaco", 12);
+
             new ModelBinder<MainWindowViewModel>(Model)
                 .Bind(model => model.StatusText, () => StatusField.StringValue = Model.StatusText)
                 .Bind(model => model.Title, () => Window.Title = Model.Title);
@@ -81,13 +80,26 @@ namespace DbToolMac
 
         }
 
+        public override void KeyUp(NSEvent e)
+        {
+            if (e.KeyCode == 0x60)
+            {
+                _communicator.StartExecute(EditorBox.GetSelectedOrAllText(), QueryFinished);
+            }
+        }
+
+        private void QueryFinished(IDbCommandResult result)
+        {
+            Model.StatusText = "Done";
+        }
+
         partial void Connection_Click(NSObject sender)
         {
             ToggleConnect();
             var statement = EditorBox.GetSelectedOrAllText();
             ResultTextBox.SetText(statement);
         }
-
+ 
         private void ToggleConnect()
         {
             if (_communicator.IsConnected)

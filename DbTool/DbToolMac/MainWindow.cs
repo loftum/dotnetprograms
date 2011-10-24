@@ -6,7 +6,7 @@ using MonoMac.AppKit;
 
 namespace DbToolMac
 {
-    public partial class MainWindow : MonoMac.AppKit.NSWindow
+    public partial class MainWindow : NSWindow
     {
         // Called when created from unmanaged code
         public MainWindow(IntPtr handle) : base (handle)
@@ -21,7 +21,6 @@ namespace DbToolMac
             Initialize();
         }
 		
-        // Shared initialization code
         void Initialize()
         {
         }

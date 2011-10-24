@@ -8,33 +8,33 @@ using MonoMac.Foundation;
 
 namespace DbToolMac
 {
-	[Register ("MainWindowController")]
-	partial class MainWindowController
-	{
-		[Outlet]
-		MonoMac.AppKit.NSTextField StatusField { get; set; }
+ [Register ("MainWindowController")]
+ partial class MainWindowController
+ {
+     [Outlet]
+     MonoMac.AppKit.NSTextField StatusField { get; set; }
 
-		[Outlet]
-		MonoMac.AppKit.NSComboBox ConnectionBox { get; set; }
+     [Outlet]
+     MonoMac.AppKit.NSComboBox ConnectionBox { get; set; }
 
-		[Outlet]
-		MonoMac.AppKit.NSButton ConnectionButton { get; set; }
+     [Outlet]
+     MonoMac.AppKit.NSButton ConnectionButton { get; set; }
 
-		[Outlet]
-		MonoMac.AppKit.NSTextView EditorBox { get; set; }
+     [Outlet]
+     MonoMac.AppKit.NSTextView ResultTextBox { get; set; }
 
-		[Outlet]
-		MonoMac.AppKit.NSTextView ResultTextBox { get; set; }
+     [Outlet]
+     MonoMac.AppKit.NSTableView ResultTable { get; set; }
 
-		[Outlet]
-		MonoMac.AppKit.NSTableView ResultTable { get; set; }
+     [Outlet]
+     MonoMac.AppKit.NSTextView EditorBox { get; set; }
 
-		[Action ("Connection_Click:")]
-		partial void Connection_Click (MonoMac.Foundation.NSObject sender);
-	}
+     [Action ("Connection_Click:")]
+     partial void Connection_Click (MonoMac.Foundation.NSObject sender);
+ }
 
-	[Register ("MainWindow")]
-	partial class MainWindow
-	{
-	}
+ [Register ("MainWindow")]
+ partial class MainWindow
+ {
+ }
 }
