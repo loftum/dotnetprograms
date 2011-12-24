@@ -7,7 +7,7 @@ namespace DbTool.Commands
     public class DbToolVersionPrinter : CommandBase
     {
         public DbToolVersionPrinter(IDbToolLogger logger, IDbToolSettings settings)
-            : base("-version", string.Empty, string.Empty, logger, settings)
+            : base("--version", string.Empty, string.Empty, logger, settings)
         {
         }
 
@@ -18,7 +18,7 @@ namespace DbTool.Commands
 
         public override void DoExecute(IList<string> args)
         {
-            Logger.WriteLine("42");
+            Logger.WriteLine(DbToolValues.Version);
         }
     }
 }

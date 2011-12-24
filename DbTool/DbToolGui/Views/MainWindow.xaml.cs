@@ -1,10 +1,11 @@
 using System;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
+using DbTool.Lib.Ui.Worksheet;
+using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
 using DbToolGui.Modules;
 using DbToolGui.ViewModels;
@@ -17,6 +18,7 @@ namespace DbToolGui.Views
         private readonly IDbToolConfig _config;
         private readonly MainViewModel _viewModel;
         private readonly ISyntaxHighlighter _highlighter;
+        private readonly IWorksheetManager _worksheetManager;
 
         public MainWindow()
         {
@@ -29,26 +31,17 @@ namespace DbToolGui.Views
             _highlighter.StartHighlight();
 
             _config = kernel.Get<IDbToolConfig>();
+            _worksheetManager = kernel.Get<IWorksheetManager>();
+            EditorBox.AppendText(_worksheetManager.Read());
         }
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F5 || (e.Key.In(Key.Return, Key.Enter) && (Keyboard.Modifiers & ModifierKeys.Control) > 0))
             {
-                _viewModel.EditorText = GetEditorText();
+                _viewModel.EditorText = EditorBox.GetSelectedOrAllText();
                 _viewModel.ExecuteCommand.Execute(sender);
             }
-        }
-
-        private string GetEditorText()
-        {
-            if (EditorBox.Selection.IsEmpty)
-            {
-                var document = EditorBox.Document;
-                var textRange = new TextRange(document.ContentStart, document.ContentEnd);
-                return textRange.Text;    
-            }
-            return EditorBox.Selection.Text;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -57,6 +50,7 @@ namespace DbToolGui.Views
             try
             {
                 _config.SaveSettings();
+                _worksheetManager.Save(EditorBox.GetAllText());
             }
             catch (Exception ex)
             {

@@ -82,6 +82,7 @@
     <Compile Include="Configuration\DbToolConfig.cs" />
     <Compile Include="Configuration\DbToolSection.cs" />
     <Compile Include="Configuration\DbToolSettings.cs" />
+    <Compile Include="Configuration\DbToolValues.cs" />
     <Compile Include="Configuration\IDbToolConfig.cs" />
     <Compile Include="Configuration\IDbToolSettings.cs" />
     <Compile Include="Connections\ConnectionDataProvider.cs" />

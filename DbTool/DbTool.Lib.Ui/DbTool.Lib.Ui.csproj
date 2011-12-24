@@ -55,6 +55,8 @@
     <Compile Include="Syntax\TagType.cs" />
     <Compile Include="Modules\UiModule.cs" />
     <Compile Include="Models\IQueryResultViewModel.cs" />
+    <Compile Include="Worksheet\IWorksheetManager.cs" />
+    <Compile Include="Worksheet\WorksheetManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

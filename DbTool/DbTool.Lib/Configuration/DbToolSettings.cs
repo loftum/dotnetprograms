@@ -8,6 +8,7 @@ namespace DbTool.Lib.Configuration
 {
     public class DbToolSettings : IDbToolSettings
     {
+        public string WorksheetFile { get; set; }
         public bool LoadSchema { get; set; }
         public int MaxResult { get; set; }
         public string DataDirectory { get; set; }
@@ -22,6 +23,7 @@ namespace DbTool.Lib.Configuration
             {
                 return new DbToolSettings
                     {
+                        WorksheetFile = "worksheet.sql",
                         LoadSchema = false,
                         MaxResult = 100,
                         DataDirectory = "dataDir",

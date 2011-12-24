@@ -10,6 +10,7 @@ namespace DbTool.Lib.Configuration
         string BackupDirectory { get; }
         IDictionary<string, string> AssemblyMap { get; }
         ConnectionData DefaultConnection { get; }
+        string WorksheetFile { get; set; }
         ConnectionData GetConnection(string name);
         bool HasConnectionString(string name);
         string GetConnectionString(string name);

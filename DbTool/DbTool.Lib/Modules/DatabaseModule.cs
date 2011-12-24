@@ -1,4 +1,3 @@
-using DbTool.Lib.AssemblyLoading;
 using DbTool.Lib.Communication;
 using DbTool.Lib.Connections;
 using Ninject.Modules;

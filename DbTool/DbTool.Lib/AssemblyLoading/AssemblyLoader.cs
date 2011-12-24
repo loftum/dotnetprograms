@@ -18,7 +18,7 @@ namespace DbTool.Lib.AssemblyLoading
         public AssemblyHandler GetAssemblyFor(string databaseType)
         {
             var assemblyName = _config.Settings.AssemblyMap[databaseType];
-            var assemblyPath = _pathResolver.GetFullPathOf(assemblyName);
+            var assemblyPath = _pathResolver.GetFullPathOfExisting(assemblyName);
             var assembly = Assembly.LoadFile(assemblyPath);
             return new AssemblyHandler(databaseType, assembly);
         }

@@ -7,6 +7,16 @@ namespace DbTool.Lib.FileSystem
 {
     public class PathResolver : IPathResolver
     {
+        public string GetFullPathOfExisting(string filename)
+        {
+            var fullPath = GetFullPathOf(filename);
+            if (!fullPath.Exists())
+            {
+                throw new DbToolException("Could not find file {0}", fullPath);
+            }
+            return fullPath;
+        }
+
         public string GetFullPathOf(string filename)
         {
             filename.ShouldNotBeNullOrWhitespace("filename");
@@ -17,12 +27,7 @@ namespace DbTool.Lib.FileSystem
             }
 
             var currentDir = GetCurrentDir();
-            var fullPath = currentDir.CombineWith(filename);
-            if (!fullPath.Exists())
-            {
-                throw new DbToolException("Could not find file {0}", fullPath);
-            }
-            return fullPath;
+            return currentDir.CombineWith(filename);
         }
 
         private static string GetCurrentDir()
