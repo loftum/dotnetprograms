@@ -8,15 +8,24 @@ namespace DbTool.Lib.ExtensionMethods
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
         {
-            return collection == null || collection.Count() == 0;
+            return collection == null || !collection.Any();
         }
 
         public static void AddRange<T>(this ObservableCollection<T> collection, IEnumerable<T> items)
         {
+            collection.ShouldNotBeNull("collection");
             foreach (var item in items)
             {
                 collection.Add(item);
             }
+        }
+
+        public static List<T> ToListWith<T>(this T item, params T[] others)
+        {
+            item.ShouldNotBeNull("item");
+            var allItems = new List<T> {item};
+            allItems.AddRange(others);
+            return allItems;
         }
     }
 }

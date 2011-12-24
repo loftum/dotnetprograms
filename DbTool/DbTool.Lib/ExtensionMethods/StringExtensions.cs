@@ -4,6 +4,19 @@ namespace DbTool.Lib.ExtensionMethods
 {
     public static class StringExtensions
     {
+        public static void ShouldNotBeNullOrWhitespace(this string value, string name)
+        {
+            if (value.IsNullOrWhitespace())
+            {
+                throw new ArgumentNullException(name);
+            }
+        }
+
+        public static bool IsNullOrWhitespace(this string value)
+        {
+            return string.IsNullOrWhiteSpace(value);
+        }
+
         public static bool IsNullOrEmpty(this string value)
         {
             return string.IsNullOrEmpty(value);

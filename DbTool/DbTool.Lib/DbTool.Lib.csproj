@@ -106,9 +106,12 @@
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="ExtensionMethods\RegexExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="ExtensionMethods\TypeExtensions.cs" />
+    <Compile Include="FileSystem\IPathResolver.cs" />
+    <Compile Include="FileSystem\PathResolver.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />

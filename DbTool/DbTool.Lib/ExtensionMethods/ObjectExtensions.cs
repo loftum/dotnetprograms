@@ -30,38 +30,38 @@ namespace DbTool.Lib.ExtensionMethods
 
         public static object ConvertTo(this object value, Type type)
         {
-            if (value.GetType().Equals(type))
+            if (value.GetType() == type)
             {
                 return value;
             }
-            if (type.Equals(typeof(int)))
+            if (type == typeof(int))
             {
                 return Convert.ToInt32(value);
             }
-            if (type.Equals(typeof(long)))
+            if (type == typeof(long))
             {
                 return Convert.ToInt64(value);
             }
-            if (type.Equals(typeof(double)))
+            if (type == typeof(double))
             {
                 return Convert.ToDouble(value);
             }
-            if (type.Equals(typeof(bool)))
+            if (type == typeof(bool))
             {
                 return Convert.ToBoolean(value);
             }
-            if (type.Equals(typeof(string)))
+            if (type == typeof(string))
             {
                 return Convert.ToString(value);
             }
-            if (type.Equals(typeof(DateTime)))
+            if (type == typeof(DateTime))
             {
                 return Convert.ToDateTime(value);
             }
             throw new FormatException(string.Format("Cannot convert {0} to {1}", value, type));
         }
 
-        public static void ShouldNotBeNull(this object obj, string name)
+        public static void ShouldNotBeNull(this object obj, string name = null)
         {
             if (obj == null)
             {

@@ -1,24 +1,24 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.Exceptions;
+using DbTool.Lib.FileSystem;
 
 namespace DbTool.Lib.AssemblyLoading
 {
     public class AssemblyLoader : IAssemblyLoader
     {
         private readonly IDbToolConfig _config;
+        private readonly IPathResolver _pathResolver;
 
-        public AssemblyLoader(IDbToolConfig config)
+        public AssemblyLoader(IDbToolConfig config, IPathResolver pathResolver)
         {
             _config = config;
+            _pathResolver = pathResolver;
         }
 
         public AssemblyHandler GetAssemblyFor(string databaseType)
         {
-            var assemblyPath = _config.Settings.AssemblyMap[databaseType];
+            var assemblyName = _config.Settings.AssemblyMap[databaseType];
+            var assemblyPath = _pathResolver.GetFullPathOf(assemblyName);
             var assembly = Assembly.LoadFile(assemblyPath);
             return new AssemblyHandler(databaseType, assembly);
         }
