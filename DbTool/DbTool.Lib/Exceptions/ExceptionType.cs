@@ -13,6 +13,8 @@ namespace DbTool.Lib.Exceptions
         [Description("Void?")]
         NoSettingGiven,
         [Description("{0}? Never heard about.")]
-        UnknownSetting
+        UnknownSetting,
+        [Description("There is no context defined. Create a context.")]
+        NoContextExists
     }
 }

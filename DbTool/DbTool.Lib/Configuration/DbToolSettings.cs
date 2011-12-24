@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DbTool.Lib.Exceptions;
+using DbTool.Lib.ExtensionMethods;
 using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
@@ -14,75 +15,72 @@ namespace DbTool.Lib.Configuration
         public string DataDirectory { get; set; }
         public string LogDirectory { get; set; }
         public string BackupDirectory { get; set; }
-        public IList<ConnectionData> Connections { get; set; }
+        public string CurrentContextName { get; set; }
+        public IList<DbToolContext> Contexts { get; set; }
         public IDictionary<string, string> AssemblyMap { get; set; }
+
+        public DbToolSettings()
+        {
+            Contexts = new List<DbToolContext>();
+            AssemblyMap = new Dictionary<string, string>();
+        }
 
         public static DbToolSettings Default
         {
-            get
+            get { return DbToolSettingsFactory.CreateDefault(); }
+        }
+        
+        public void AddContext(DbToolContext context)
+        {
+            Contexts.Add(context);
+        }
+
+        public DbToolSettings WithContext(DbToolContext context)
+        {
+            AddContext(context);
+            return this;
+        }
+
+        [JsonIgnore]
+        public DbToolContext CurrentContext
+        {
+            get { return GetCurrentOrFirstContext(); }
+        }
+
+        private DbToolContext GetCurrentOrFirstContext()
+        {
+            if (Contexts.IsNullOrEmpty())
             {
-                return new DbToolSettings
-                    {
-                        WorksheetFile = "worksheet.sql",
-                        LoadSchema = false,
-                        MaxResult = 100,
-                        DataDirectory = "dataDir",
-                        LogDirectory = "logDir",
-                        BackupDirectory = "backupDir",
-                        AssemblyMap = new Dictionary<string, string>
-                        {
-                            {"mysql", "DbTool.Lib.MySql.dll"},
-                            {"sqlserver", "DbTool.Lib.SqlServer.dll"}
-                        },
-                        Connections = new List<ConnectionData>
-                        {
-                            new ConnectionData
-                            {
-                                Name = "SqlServer",
-                                DatabaseType = "sqlserver",
-                                Host = @".\SQLEXPRESS",
-                                Database = "MyDB",
-                                IntegratedSecurity = true,
-                                User = "",
-                                Password = "",
-                                Default = true,
-                                MigrationPath = "SqlServerMigrationPath"
-                            },
-                            new ConnectionData
-                            {
-                                Name = "MySql",
-                                DatabaseType = "mysql",
-                                Host = @"localhost",
-                                Database = "MyDB",
-                                User = "root",
-                                Password = "p455w0rD",
-                                Default = false,
-                                MigrationPath = "MySqlMigrationPath"
-                            }
-                        }
-                    };
+                throw new UserException(ExceptionType.NoContextExists);
             }
+            var currentContext = Contexts.Where(c => c.Name.Equals(CurrentContextName)).FirstOrDefault();
+            if (currentContext == null)
+            {
+                currentContext = Contexts.First();
+                CurrentContextName = currentContext.Name;
+            }
+            return currentContext;
         }
 
         [JsonIgnore]
         public ConnectionData DefaultConnection
         {
-            get { return Connections.Where(c => c.Default).FirstOrDefault(); }
+            get { return CurrentContext.Connections.Where(c => c.Default).FirstOrDefault(); }
         }
 
         public ConnectionData GetConnection(string name)
         {
-            return Connections.Where(c => c.Name.Equals(name)).FirstOrDefault();
+            return CurrentContext.Connections.Where(c => c.Name.Equals(name)).FirstOrDefault();
         }
 
         public bool HasConnectionString(string name)
         {
-            return Connections.Any(c => c.Name.Equals(name));
+            return CurrentContext.Connections.Any(c => c.Name.Equals(name));
         }
 
         public string GetConnectionString(string name)
         {
-            return (from connection in Connections 
+            return (from connection in CurrentContext.Connections 
                     where connection.Name.Equals(name)
                     select connection.GetConnectionString()).FirstOrDefault();
         }

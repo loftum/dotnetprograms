@@ -80,8 +80,11 @@
     <Compile Include="Communication\IDatabaseCommunicator.cs" />
     <Compile Include="Configuration\ConnectionData.cs" />
     <Compile Include="Configuration\DbToolConfig.cs" />
+    <Compile Include="Configuration\DbToolContext.cs" />
+    <Compile Include="Configuration\DbToolCredentials.cs" />
     <Compile Include="Configuration\DbToolSection.cs" />
     <Compile Include="Configuration\DbToolSettings.cs" />
+    <Compile Include="Configuration\DbToolSettingsFactory.cs" />
     <Compile Include="Configuration\DbToolValues.cs" />
     <Compile Include="Configuration\IDbToolConfig.cs" />
     <Compile Include="Configuration\IDbToolSettings.cs" />

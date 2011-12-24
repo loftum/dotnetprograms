@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,6 +27,14 @@ namespace DbTool.Lib.ExtensionMethods
             var allItems = new List<T> {item};
             allItems.AddRange(others);
             return allItems;
+        }
+
+        public static void Each<T>(this IEnumerable<T> collection, Action<T> action)
+        {
+            foreach (var item in collection)
+            {
+                action(item);
+            }
         }
     }
 }

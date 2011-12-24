@@ -25,14 +25,12 @@ namespace DbTool.Lib.Connections
 
         public ConnectionData GetConnection(string selectedConnection)
         {
-            return GetConnections()
-                .Where(c => c.Name.Equals(selectedConnection))
-                .SingleOrDefault();
+            return GetConnections().SingleOrDefault(c => c.Name.Equals(selectedConnection));
         }
 
         private IEnumerable<ConnectionData> GetConnections()
         {
-            return _config.Settings.Connections;
+            return _config.Settings.CurrentContext.Connections;
         }
     }
 }

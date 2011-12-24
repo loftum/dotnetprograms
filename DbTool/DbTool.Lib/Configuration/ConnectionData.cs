@@ -7,18 +7,43 @@ namespace DbTool.Lib.Configuration
     public class ConnectionData
     {
         [JsonIgnore]
+        public DbToolContext Parent { get; set; }
+
+        [JsonIgnore]
         public bool HasConnectionString
         {
             get { return GetConnectionString().IsNotNullOrEmpty(); }
         }
-        
-        public string Name { get; set; }
-        public string DatabaseType { get; set; }
-        public string Host { get; set; }
+
+        private string _name;
+        public string Name
+        {
+            get { return _name ?? Database; }
+            set { _name = value; }
+        }
+        private string _databaseType;
+        public string DatabaseType
+        {
+            get { return _databaseType ?? Parent.DatabaseType; }
+            set { _databaseType = value; }
+        }
+
+        private string _host;
+        public string Host
+        {
+            get { return _host ?? Parent.Host; }
+            set { _host = value; }
+        }
+
         public string Database { get; set; }
-        public string User { get; set; }
-        public string Password { get; set; }
-        public bool IntegratedSecurity { get; set; }
+
+        private DbToolCredentials _credentials;
+        public DbToolCredentials Credentials
+        {
+            get { return _credentials ?? Parent.Credentials; }
+            set { _credentials = value; }
+        }
+
         public bool Default { get; set; }
         public string MigrationPath { get; set; }
 
@@ -41,14 +66,14 @@ namespace DbTool.Lib.Configuration
             {
                 elements.Add(string.Format("Initial Catalog={0}", Database));
             }
-            if (IntegratedSecurity)
+            if (Credentials.IntegratedSecurity)
             {
-                elements.Add(string.Format("Integrated Security={0}", IntegratedSecurity));
+                elements.Add(string.Format("Integrated Security={0}", Credentials.IntegratedSecurity));
             }
             else
             {
-                elements.Add(string.Format("User Id={0}", User));
-                elements.Add(string.Format("Password={0}", Password));
+                elements.Add(string.Format("User Id={0}", Credentials.User));
+                elements.Add(string.Format("Password={0}", Credentials.Password));
             }
             return string.Join(";", elements);
         }
@@ -61,8 +86,8 @@ namespace DbTool.Lib.Configuration
             {
                 elements.Add(string.Format("Database={0}", Database));
             }
-            elements.Add(string.Format("Uid={0}", User));
-            elements.Add(string.Format("Pwd={0}", Password));
+            elements.Add(string.Format("Uid={0}", Credentials.User));
+            elements.Add(string.Format("Pwd={0}", Credentials.Password));
             return string.Join(";", elements);
         }
     }
