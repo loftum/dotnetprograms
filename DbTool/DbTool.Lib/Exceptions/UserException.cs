@@ -3,7 +3,7 @@ using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Exceptions
 {
-    public class UserException : Exception
+    public class UserException : DbToolException
     {
         public ExceptionType Type { get; private set; }
 

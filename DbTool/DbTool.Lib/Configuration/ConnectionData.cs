@@ -40,7 +40,14 @@ namespace DbTool.Lib.Configuration
         private DbToolCredentials _credentials;
         public DbToolCredentials Credentials
         {
-            get { return _credentials ?? Parent.Credentials; }
+            get
+            {
+                if (_credentials != null)
+                {
+                    return _credentials;
+                }
+                return Parent == null ? null : Parent.Credentials;
+            }
             set { _credentials = value; }
         }
 

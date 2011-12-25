@@ -20,6 +20,11 @@ namespace DbTool.Lib.Configuration
             }
         }
 
+        public DbToolContext(string name) : this()
+        {
+            Name = name;
+        }
+
         public DbToolContext()
         {
             Connections = new List<ConnectionData>();

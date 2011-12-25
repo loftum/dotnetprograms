@@ -25,15 +25,16 @@ namespace DbTool.Commands
             _logger = logger;
             _settings = config.Settings;
             _taskFactory = taskFactory;
-            Add(new DatabaseRestorer(_logger, _settings, _taskFactory),
-                new DatabaseDeleter(_logger, _settings, _taskFactory),
-                new DatabaseBackuper(_logger, _settings, _taskFactory),
-                new DatabaseCreator(_logger, _settings, _taskFactory),
-                new DatabaseLister(_logger, _settings, _taskFactory),
-                new DatabaseMigrator(_logger, _settings, _taskFactory),
-                new DatabaseVersionViewer(_logger, _settings, _taskFactory),
-                new DbToolVersionPrinter(_logger, _settings),
-                new SettingsSetter(_logger, _settings),
+            Add(new RestoreDatabase(_logger, _settings, _taskFactory),
+                new DeleteDatabase(_logger, _settings, _taskFactory),
+                new BackupDatabase(_logger, _settings, _taskFactory),
+                new CreateDatabase(_logger, _settings, _taskFactory),
+                new ListeDatabases(_logger, _settings, _taskFactory),
+                new MigrateDatabase(_logger, _settings, _taskFactory),
+                new ViewDatabaseVersion(_logger, _settings, _taskFactory),
+                new ViewDbToolVersion(_logger, _settings),
+                new ContextCommand(_logger, _settings),
+                new SetSettings(_logger, _settings),
                 this);
         }
 

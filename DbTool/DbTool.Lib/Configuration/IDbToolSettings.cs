@@ -8,11 +8,17 @@ namespace DbTool.Lib.Configuration
         string DataDirectory { get; }
         string LogDirectory { get; }
         string BackupDirectory { get; }
+        string CurrentContextName { get; set; }
+        DbToolContext CurrentContext { get; }
+        IList<DbToolContext> Contexts { get; set; }
         IDictionary<string, string> AssemblyMap { get; }
         ConnectionData DefaultConnection { get; }
         string WorksheetFile { get; set; }
         ConnectionData GetConnection(string name);
         bool HasConnectionString(string name);
         string GetConnectionString(string name);
+        void SetCurrentContext(string contextName);
+        void DeleteContext(string contextName);
+        void Addcontext(string contextName);
     }
 }

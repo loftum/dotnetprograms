@@ -16,6 +16,8 @@ namespace DbTool.Lib.Configuration
         public string LogDirectory { get; set; }
         public string BackupDirectory { get; set; }
         public string CurrentContextName { get; set; }
+        [JsonIgnore]
+        public DbToolContext CurrentContext{ get { return GetCurrentOrFirstContext(); }}
         public IList<DbToolContext> Contexts { get; set; }
         public IDictionary<string, string> AssemblyMap { get; set; }
 
@@ -41,10 +43,33 @@ namespace DbTool.Lib.Configuration
             return this;
         }
 
-        [JsonIgnore]
-        public DbToolContext CurrentContext
+        public void SetCurrentContext(string contextName)
         {
-            get { return GetCurrentOrFirstContext(); }
+            var context = Contexts.FirstOrDefault(c => c.Name.EqualsIgnoreCase(contextName));
+            if (context == null)
+            {
+                throw new UserException(ExceptionType.UnknownContext, contextName);
+            }
+            CurrentContextName = context.Name;
+        }
+
+        public void Addcontext(string contextName)
+        {
+            if (Contexts.Any(c => c.Name.EqualsIgnoreCase(contextName)))
+            {
+                throw new UserException(ExceptionType.ContextAlreadyExists, contextName);
+            }
+            Contexts.Add(new DbToolContext(contextName));
+        }
+
+        public void DeleteContext(string contextName)
+        {
+            var context = Contexts.FirstOrDefault(c => c.Name.EqualsIgnoreCase(contextName));
+            if (context == null)
+            {
+                throw new UserException(ExceptionType.UnknownContext, contextName);
+            }
+            Contexts.Remove(context);
         }
 
         private DbToolContext GetCurrentOrFirstContext()

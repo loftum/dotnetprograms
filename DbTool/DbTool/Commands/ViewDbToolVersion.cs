@@ -4,9 +4,9 @@ using DbTool.Lib.Logging;
 
 namespace DbTool.Commands
 {
-    public class DbToolVersionPrinter : CommandBase
+    public class ViewDbToolVersion : CommandBase
     {
-        public DbToolVersionPrinter(IDbToolLogger logger, IDbToolSettings settings)
+        public ViewDbToolVersion(IDbToolLogger logger, IDbToolSettings settings)
             : base("--version", string.Empty, string.Empty, logger, settings)
         {
         }

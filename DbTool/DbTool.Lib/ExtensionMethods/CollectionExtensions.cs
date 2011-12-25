@@ -9,7 +9,13 @@ namespace DbTool.Lib.ExtensionMethods
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
         {
-            return collection == null || !collection.Any();
+            return collection == null || collection.IsEmpty();
+        }
+
+        public static bool IsEmpty<T>(this IEnumerable<T> collection)
+        {
+            collection.ShouldNotBeNull("collection");
+            return !collection.Any();
         }
 
         public static void AddRange<T>(this ObservableCollection<T> collection, IEnumerable<T> items)
@@ -31,6 +37,7 @@ namespace DbTool.Lib.ExtensionMethods
 
         public static void Each<T>(this IEnumerable<T> collection, Action<T> action)
         {
+            collection.ShouldNotBeNull("collection");
             foreach (var item in collection)
             {
                 action(item);

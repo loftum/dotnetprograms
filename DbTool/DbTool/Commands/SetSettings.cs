@@ -8,9 +8,9 @@ using DbTool.Lib.Logging;
 
 namespace DbTool.Commands
 {
-    public class SettingsSetter : CommandBase
+    public class SetSettings : CommandBase
     {
-        public SettingsSetter(IDbToolLogger logger, IDbToolSettings settings)
+        public SetSettings(IDbToolLogger logger, IDbToolSettings settings)
             : base("set", "<setting>:<value>", @"BackupDirectory:C:\Backup", logger, settings)
         {
         }

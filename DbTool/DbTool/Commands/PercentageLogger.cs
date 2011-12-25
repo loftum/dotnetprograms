@@ -19,7 +19,7 @@ namespace DbTool.Commands
             {
                 _logger.Write("[");
             }
-            int dots = percent/10*4;
+            var dots = percent/10*4;
             if (dots > _lastDots)
             {
                 if (percent < 100)
@@ -37,7 +37,7 @@ namespace DbTool.Commands
         private static string GetDots(int number)
         {
             var builder = new StringBuilder();
-            for (int ii = 0; ii < number; ii++)
+            for (var ii = 0; ii < number; ii++)
             {
                 builder.Append(".");
             }
