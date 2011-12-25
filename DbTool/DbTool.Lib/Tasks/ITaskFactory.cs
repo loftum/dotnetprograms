@@ -11,5 +11,6 @@ namespace DbTool.Lib.Tasks
         IListDbTask CreateListDbTask(ConnectionData connection);
         IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database);
         IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection);
+        IPopulateContextTask CreatePopulateContextTask(ConnectionData connection);
     }
 }

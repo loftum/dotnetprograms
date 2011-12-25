@@ -15,7 +15,6 @@ namespace DbTool.Lib.MySql.Tasks
         public void Delete(string databaseName)
         {
             var connectionString = Settings.DefaultConnection.GetConnectionString();
-            Logger.WriteLine("ConnectionString = {0}", connectionString);
             using (var connection = new MySqlConnection(connectionString))
             {
                 try

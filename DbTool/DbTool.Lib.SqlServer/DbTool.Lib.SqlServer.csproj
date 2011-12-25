@@ -70,6 +70,7 @@
     <Compile Include="Tasks\CreateDbTask.cs" />
     <Compile Include="Tasks\DeleteDbTask.cs" />
     <Compile Include="Tasks\ListDbTask.cs" />
+    <Compile Include="Tasks\PopulateContextTask.cs" />
     <Compile Include="Tasks\RestoreTask.cs" />
     <Compile Include="Tasks\SqlServerProgressTaskBase.cs" />
   </ItemGroup>

@@ -23,6 +23,8 @@ namespace DbTool.Lib.Exceptions
         [Description("No credentials are provided for connection {0}")]
         NoCredentialsProvided,
         [Description("Unknown database {0} in current context")]
-        UnknownDatabase
+        UnknownDatabase,
+        [Description("Database {0} already exists")]
+        DatabaseAlreadyExists
     }
 }

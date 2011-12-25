@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using DbTool.Lib.Exceptions;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Configuration
 {
@@ -25,11 +28,25 @@ namespace DbTool.Lib.Configuration
             Credentials = credentials;
             return this;
         }
+        
+        public void AddDatabase(DbToolDatabase database)
+        {
+            if (Databases.Any(d => d.Name.EqualsIgnoreCase(database.Name)))
+            {
+                throw new UserException(ExceptionType.DatabaseAlreadyExists, database.Name);
+            }
+            Databases.Add(database);
+            database.Parent = this;
+        }
+        
+        public void RemoveDatabase(string name)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public DbToolContext WithDatabase(DbToolDatabase database)
         {
-            Databases.Add(database);
-            database.Parent = this;
+            AddDatabase(database);
             return this;
         }
 

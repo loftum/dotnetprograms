@@ -30,6 +30,7 @@ namespace DbTool.Commands
                 new BackupDatabase(_logger, _settings, _taskFactory),
                 new CreateDatabase(_logger, _settings, _taskFactory),
                 new ListeDatabases(_logger, _settings, _taskFactory),
+                new PopulateContext(_logger, _settings, _taskFactory),
                 new MigrateDatabase(_logger, _settings, _taskFactory),
                 new ViewDatabaseVersion(_logger, _settings, _taskFactory),
                 new ViewDbToolVersion(_logger, _settings),

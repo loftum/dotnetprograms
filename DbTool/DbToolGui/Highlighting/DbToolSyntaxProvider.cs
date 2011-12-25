@@ -22,7 +22,7 @@ namespace DbToolGui.Highlighting
                 "from", "left", "outer", "join", "on",
                 "where", "and", "or", "not", "in",
                 "group", "order", "by", "asc", "desc" };
-            Functions = new[] {"migrate", "up", "down", "getschema", "set"};
+            Functions = new[] {"migrate", "up", "down", "show", "set"};
             Operators = new[] {"+", "-", "*", "/", "=", "!=", "<", ">", "<>"};
             Separators = new[] {' ', '.','=', '+', '-', '<', '>'};
             Settings = GetSettings();

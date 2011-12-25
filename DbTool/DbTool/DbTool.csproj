@@ -88,6 +88,7 @@
     <Compile Include="Commands\DeleteDatabase.cs" />
     <Compile Include="Commands\ListeDatabases.cs" />
     <Compile Include="Commands\MigrateDatabase.cs" />
+    <Compile Include="Commands\PopulateContext.cs" />
     <Compile Include="Commands\RestoreDatabase.cs" />
     <Compile Include="Commands\ViewDatabaseVersion.cs" />
     <Compile Include="Commands\ViewDbToolVersion.cs" />

@@ -50,6 +50,12 @@ namespace DbTool.Lib.Tasks
             return CreateInstance<IListDbTask>(connection.DatabaseType);
         }
 
+        public IPopulateContextTask CreatePopulateContextTask(ConnectionData connection)
+        {
+            connection.ShouldNotBeNull("connection");
+            return CreateInstance<IPopulateContextTask>(connection.DatabaseType);
+        }
+
         public IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database)
         {
             database.ShouldNotBeNull("database");

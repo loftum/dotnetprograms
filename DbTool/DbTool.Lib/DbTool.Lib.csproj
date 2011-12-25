@@ -132,6 +132,7 @@
     <Compile Include="Tasks\IDeleteDbTask.cs" />
     <Compile Include="Tasks\IListDbTask.cs" />
     <Compile Include="Tasks\IMigrateDbTask.cs" />
+    <Compile Include="Tasks\IPopulateContextTask.cs" />
     <Compile Include="Tasks\IProgressTask.cs" />
     <Compile Include="Tasks\IRestoreTask.cs" />
     <Compile Include="Tasks\ITaskFactory.cs" />

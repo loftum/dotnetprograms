@@ -29,7 +29,7 @@ namespace DbTool.Lib.Communication.Commands
             {
                 return new MigrationExecutor(Database);
             }
-            if (statement.StartsWithIgnoreCase("getschema"))
+            if (statement.StartsWithIgnoreCase("show"))
             {
                 return new SchemaExecutor(DbConnection);
             }
