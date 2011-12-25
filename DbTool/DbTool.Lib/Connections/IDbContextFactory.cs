@@ -4,6 +4,6 @@ namespace DbTool.Lib.Connections
 {
     public interface IDbContextFactory
     {
-        DbContext CreateDbContext(ConnectionData connectionData);
+        DbContext CreateDbContext(DbToolDatabase database);
     }
 }

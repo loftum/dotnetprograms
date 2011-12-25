@@ -8,14 +8,14 @@ namespace DbTool.Lib.Communication.Commands
     {
         private readonly IDbToolConfig _config;
         protected readonly IDbToolSettings Settings;
-        protected readonly ConnectionData ConnectionData;
+        protected readonly DbToolDatabase Database;
         protected readonly DbConnection DbConnection;
 
-        public DefaultExecutorProvider(IDbToolConfig config, ConnectionData connectionData, DbConnection dbConnection)
+        public DefaultExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection)
         {
             _config = config;
             Settings = _config.Settings;
-            ConnectionData = connectionData;
+            Database = database;
             DbConnection = dbConnection;
         }
 
@@ -27,7 +27,7 @@ namespace DbTool.Lib.Communication.Commands
             }
             if (statement.StartsWithIgnoreCase("migrate"))
             {
-                return new MigrationExecutor(ConnectionData);
+                return new MigrationExecutor(Database);
             }
             if (statement.StartsWithIgnoreCase("getschema"))
             {

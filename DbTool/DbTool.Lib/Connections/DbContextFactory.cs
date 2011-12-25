@@ -16,24 +16,24 @@ namespace DbTool.Lib.Connections
             _assemblyLoader = assemblyLoader;
         }
 
-        public DbContext CreateDbContext(ConnectionData connectionData)
+        public DbContext CreateDbContext(DbToolDatabase database)
         {
-            var handler = _assemblyLoader.GetAssemblyFor(connectionData.DatabaseType);
-            var connection = handler.CreateInstance<IDbConnectionFactory>().CreateConnection(connectionData);
+            var handler = _assemblyLoader.GetAssemblyFor(database.DatabaseType);
+            var connection = handler.CreateInstance<IDbConnectionFactory>().CreateConnection(database.GetConnectionData());
             
-            var executorProvider = CreateExecutorProvider(connectionData, connection, handler);
+            var executorProvider = CreateExecutorProvider(database, connection, handler);
 
             return new DbContext(connection, executorProvider);
         }
 
-        private IExecutorProvider CreateExecutorProvider(ConnectionData connectionData, DbConnection connection,
+        private IExecutorProvider CreateExecutorProvider(DbToolDatabase database, DbConnection connection,
                                                          AssemblyHandler handler)
         {
             if (handler.HasType<IExecutorProvider>())
             {
-                return handler.CreateInstance<IExecutorProvider>(_config, connectionData, connection);
+                return handler.CreateInstance<IExecutorProvider>(_config, database, connection);
             }
-            return new DefaultExecutorProvider(_config, connectionData, connection);
+            return new DefaultExecutorProvider(_config, database, connection);
         }
     }
 }

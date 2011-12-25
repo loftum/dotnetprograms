@@ -58,6 +58,8 @@
     <Compile Include="AssemblyLoading\AssemblyHandler.cs" />
     <Compile Include="AssemblyLoading\AssemblyLoader.cs" />
     <Compile Include="AssemblyLoading\IAssemblyLoader.cs" />
+    <Compile Include="Collections\IChild.cs" />
+    <Compile Include="Collections\ParentChildList.cs" />
     <Compile Include="Communication\Commands\BackupExecutor.cs" />
     <Compile Include="Communication\Commands\DbCommandResultBase.cs" />
     <Compile Include="Communication\Commands\DefaultExecutorProvider.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Configuration\DbToolConfig.cs" />
     <Compile Include="Configuration\DbToolContext.cs" />
     <Compile Include="Configuration\DbToolCredentials.cs" />
+    <Compile Include="Configuration\DbToolDatabase.cs" />
     <Compile Include="Configuration\DbToolSection.cs" />
     <Compile Include="Configuration\DbToolSettings.cs" />
     <Compile Include="Configuration\DbToolSettingsFactory.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="Modules\ConfigModule.cs" />
     <Compile Include="Modules\TaskModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializing\DbToolSettingsSerializer.cs" />
     <Compile Include="Tasks\BackupParameters.cs" />
     <Compile Include="Tasks\IBackupTask.cs" />
     <Compile Include="Tasks\ICreateDbTask.cs" />

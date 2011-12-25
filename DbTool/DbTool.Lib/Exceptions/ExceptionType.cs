@@ -19,6 +19,10 @@ namespace DbTool.Lib.Exceptions
         [Description("Unkonwn context: {0}")]
         UnknownContext,
         [Description("Context {0} already exists")]
-        ContextAlreadyExists
+        ContextAlreadyExists,
+        [Description("No credentials are provided for connection {0}")]
+        NoCredentialsProvided,
+        [Description("Unknown database {0} in current context")]
+        UnknownDatabase
     }
 }

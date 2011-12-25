@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Configuration
 {
@@ -9,16 +8,7 @@ namespace DbTool.Lib.Configuration
         public string DatabaseType { get; set; }
         public string Host { get; set; }
         public DbToolCredentials Credentials { get; set; }
-        private IList<ConnectionData> _connections;
-        public IList<ConnectionData> Connections
-        {
-            get { return _connections; }
-            set 
-            {
-                _connections = value;
-                _connections.Each(connection => connection.Parent = this);
-            }
-        }
+        public IList<DbToolDatabase> Databases { get; set; }
 
         public DbToolContext(string name) : this()
         {
@@ -27,13 +17,7 @@ namespace DbTool.Lib.Configuration
 
         public DbToolContext()
         {
-            Connections = new List<ConnectionData>();
-        }
-
-        public void AddConnection(ConnectionData connection)
-        {
-            Connections.Add(connection);
-            connection.Parent = this;
+            Databases = new List<DbToolDatabase>();
         }
 
         public DbToolContext WithCredentials(DbToolCredentials credentials)
@@ -42,10 +26,42 @@ namespace DbTool.Lib.Configuration
             return this;
         }
 
-        public DbToolContext WithConnection(ConnectionData connection)
+        public DbToolContext WithDatabase(DbToolDatabase connection)
         {
-            AddConnection(connection);
+            Databases.Add(connection);
+            connection.Parent = this;
             return this;
+        }
+
+        public ConnectionData GetDefaultConnection()
+        {
+            return new ConnectionData
+                {
+                    DatabaseType = DatabaseType,
+                    Host = Host,
+                    Credentials = Credentials
+                };
+        }
+
+        public string ConnectionString
+        {
+            get { return GenerateConnectionString(); }
+        }
+
+        private string GenerateConnectionString()
+        {
+            var elements = new List<string> {string.Format("Data Source={0}", Host)};
+
+            if (Credentials.IntegratedSecurity)
+            {
+                elements.Add(string.Format("Integrated Security={0}", Credentials.IntegratedSecurity));
+            }
+            else
+            {
+                elements.Add(string.Format("User Id={0}", Credentials.User));
+                elements.Add(string.Format("Password={0}", Credentials.Password));
+            }
+            return string.Join(";", elements);
         }
     }
 }

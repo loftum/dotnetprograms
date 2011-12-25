@@ -9,7 +9,7 @@ namespace DbTool.Lib.Communication
         void StartExecute(string statement, DatabaseCommunicator.ResultCallback callback);
         string ConnectedTo { get; }
         bool IsConnected { get; }
-        void ConnectTo(ConnectionData connectionData);
+        void ConnectTo(DbToolDatabase connectionData);
         void Disconnect();
         IDbCommandResult Execute(string statement);
         Schema LoadSchema();

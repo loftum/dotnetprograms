@@ -8,18 +8,18 @@ namespace DbTool.Lib.Communication.Commands
 {
     public class MigrationExecutor : IDbCommandExecutor
     {
-        private readonly ConnectionData _connectionData;
+        private readonly DbToolDatabase _database;
 
-        public MigrationExecutor(ConnectionData connectionData)
+        public MigrationExecutor(DbToolDatabase database)
         {
-            _connectionData = connectionData;
+            _database = database;
         }
 
         public IDbCommandResult Execute(string statement)
         {
             var version = GetVersionFrom(statement);
             var logger = new MemoryLogger();
-            var runner = new MigrationRunner(_connectionData, logger);
+            var runner = new MigrationRunner(_database, logger);
             if (version.HasValue)
             {
                 runner.MigrateTo(version.Value);

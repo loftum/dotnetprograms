@@ -14,7 +14,7 @@ namespace DbTool.Lib.Communication
 
         public string ConnectedTo
         {
-            get { return _connectionData == null ? string.Empty : _connectionData.Name; }
+            get { return _database == null ? string.Empty : _database.Name; }
         }
 
         public bool IsConnected
@@ -25,7 +25,7 @@ namespace DbTool.Lib.Communication
         private readonly IDbToolConfig _config;
         private readonly IDbContextFactory _dbConnectionFactory;
 
-        private ConnectionData _connectionData;
+        private DbToolDatabase _database;
         private DbContext _dbContext;
 
         public DatabaseCommunicator(IDbToolConfig config, IDbContextFactory dbConnectionFactory)
@@ -34,13 +34,13 @@ namespace DbTool.Lib.Communication
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public void ConnectTo(ConnectionData connectionData)
+        public void ConnectTo(DbToolDatabase connectionData)
         {
             if (IsConnected)
             {
                 throw new UserException(ExceptionType.AlreadyConnected);
             }
-            _connectionData = connectionData;
+            _database = connectionData;
             _dbContext = _dbConnectionFactory.CreateDbContext(connectionData);
         }
 
@@ -51,7 +51,7 @@ namespace DbTool.Lib.Communication
                 _dbContext.DbConnection.Close();
                 _dbContext.DbConnection.Dispose();
                 _dbContext = null;
-                _connectionData = null;
+                _database = null;
             }
         }
 

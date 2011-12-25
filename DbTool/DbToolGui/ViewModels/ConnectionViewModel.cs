@@ -64,9 +64,9 @@ namespace DbToolGui.ViewModels
         private void PopulateConnectionsFor(DbToolContext context)
         {
             AvailableConnections.Clear();
-            context.Connections.Each(connection => AvailableConnections.Add(connection.Name));
+            context.Databases.Each(connection => AvailableConnections.Add(connection.Name));
 
-            var firstConnection = context.Connections.FirstOrDefault();
+            var firstConnection = context.Databases.FirstOrDefault();
             if (firstConnection != null)
             {
                 SelectedConnection = firstConnection.Name;

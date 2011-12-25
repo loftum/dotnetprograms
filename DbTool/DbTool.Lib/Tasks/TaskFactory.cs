@@ -50,14 +50,10 @@ namespace DbTool.Lib.Tasks
             return CreateInstance<IListDbTask>(connection.DatabaseType);
         }
 
-        public IMigrateDbTask CreateMigrateDbTask(ConnectionData connection)
+        public IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database)
         {
-            connection.ShouldNotBeNull("connection");
-            if (!connection.HasConnectionString)
-            {
-                throw new DbToolException("No connection for {0} is defined.", connection.Name);
-            }
-            return new MigrationRunner(connection, _logger);
+            database.ShouldNotBeNull("database");
+            return new MigrationRunner(database, _logger);
         }
 
         public IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection)

@@ -6,8 +6,8 @@ namespace DbTool.Lib.SqlServer.Commands
 {
     public class SqlServerExecutorProvider : DefaultExecutorProvider
     {
-        public SqlServerExecutorProvider(IDbToolConfig config, ConnectionData connectionData, DbConnection dbConnection)
-            : base(config, connectionData, dbConnection)
+        public SqlServerExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection)
+            : base(config, database, dbConnection)
         {
         }
     }

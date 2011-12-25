@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Serializing;
 using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
@@ -90,53 +90,33 @@ namespace DbTool.Lib.Configuration
         [JsonIgnore]
         public ConnectionData DefaultConnection
         {
-            get { return CurrentContext.Connections.Where(c => c.Default).FirstOrDefault(); }
+            get { return CurrentContext.GetDefaultConnection(); }
         }
 
         public ConnectionData GetConnection(string name)
         {
-            return CurrentContext.Connections.Where(c => c.Name.Equals(name)).FirstOrDefault();
+            var database = GetDatabase(name);
+            return database.GetConnectionData();
         }
 
-        public bool HasConnectionString(string name)
+        public DbToolDatabase GetDatabase(string name)
         {
-            return CurrentContext.Connections.Any(c => c.Name.Equals(name));
-        }
-
-        public string GetConnectionString(string name)
-        {
-            return (from connection in CurrentContext.Connections 
-                    where connection.Name.Equals(name)
-                    select connection.GetConnectionString()).FirstOrDefault();
+            var database = CurrentContext.Databases.Where(d => d.Name.Equals(name)).FirstOrDefault();
+            if (database == null)
+            {
+                throw new UserException(ExceptionType.UnknownDatabase, name);
+            }
+            return database;
         }
 
         public static DbToolSettings From(string path)
         {
-            var serialized = Read(path);
-            return JsonConvert.DeserializeObject<DbToolSettings>(serialized);
-        }
-
-        private static string Read(string path)
-        {
-            if (!File.Exists(path))
-            {
-                throw new DbToolException("Missing settings file: " + path);
-            }
-            using (var reader = new StreamReader(File.OpenRead(path)))
-            {
-                return reader.ReadToEnd();
-            }
+            return DbToolSettingsSerializer.From(path);
         }
 
         public void Save(string path)
         {
-            using (var writer = new StreamWriter(File.Create(path)))
-            {
-                var serialized = Serialize();
-                writer.Write(serialized);
-                writer.Flush();
-                writer.Close();
-            }
+            DbToolSettingsSerializer.Save(this, path);
         }
 
         private string Serialize()

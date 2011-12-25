@@ -43,9 +43,8 @@ namespace DbTool.Lib.Configuration
                                          User = "",
                                          Password = "",
                                      })
-                .WithConnection(new ConnectionData
+                .WithDatabase(new DbToolDatabase
                                     {
-                                        Default = true,
                                         Database = "SqlServerDb",
                                         MigrationPath = "SqlServerMigrationPath",
                                     });
@@ -65,9 +64,8 @@ namespace DbTool.Lib.Configuration
                     User = "root",
                     Password = "p455w0rD",
                 })
-                .WithConnection(new ConnectionData
+                .WithDatabase(new DbToolDatabase
                 {
-                    Default = true,
                     Database = "MySqlDb",
                     MigrationPath = "SqlServerMigrationPath",
                 });

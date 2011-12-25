@@ -8,12 +8,12 @@ namespace DbTool.Lib.Migrating
 {
     public class MigrationRunner : IMigrateDbTask
     {
-        private readonly ConnectionData _connectionData;
+        private readonly DbToolDatabase _database;
         private readonly IDbToolLogger _logger;
 
-        public MigrationRunner(ConnectionData connectionData, IDbToolLogger logger)
+        public MigrationRunner(DbToolDatabase database, IDbToolLogger logger)
         {
-            _connectionData = connectionData;
+            _database = database;
             _logger = logger;
         }
 
@@ -29,8 +29,8 @@ namespace DbTool.Lib.Migrating
 
         private Migrator.Migrator CreateMigrator()
         {
-            var connectionString = _connectionData.GetConnectionString();
-            var assembly = Assembly.LoadFrom(_connectionData.MigrationPath);
+            var connectionString = _database.GetConnectionData().GetConnectionString();
+            var assembly = Assembly.LoadFrom(_database.MigrationPath);
             return new Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, _logger));
         }
     }

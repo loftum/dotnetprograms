@@ -7,8 +7,8 @@ namespace DbTool.Lib.MySql.Commands
 {
     public class MySqlExecutorProvider : DefaultExecutorProvider
     {
-        public MySqlExecutorProvider(IDbToolConfig config, ConnectionData connectionData, DbConnection dbConnection)
-            : base(config, connectionData, dbConnection)
+        public MySqlExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection)
+            : base(config, database, dbConnection)
         {
         }
 

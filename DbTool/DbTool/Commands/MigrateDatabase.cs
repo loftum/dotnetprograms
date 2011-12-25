@@ -24,8 +24,8 @@ namespace DbTool.Commands
         {
             var databaseName = args[1];
             var versionString = args.Count > 2 ? args[2] : string.Empty;
-            var connection = Settings.GetConnection(databaseName);
-            var migrateDbTask = TaskFactory.CreateMigrateDbTask(connection);
+            var database = Settings.GetDatabase(databaseName);
+            var migrateDbTask = TaskFactory.CreateMigrateDbTask(database);
 
             if (string.IsNullOrWhiteSpace(versionString))
             {

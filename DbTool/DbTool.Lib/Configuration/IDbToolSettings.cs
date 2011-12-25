@@ -15,10 +15,10 @@ namespace DbTool.Lib.Configuration
         ConnectionData DefaultConnection { get; }
         string WorksheetFile { get; set; }
         ConnectionData GetConnection(string name);
-        bool HasConnectionString(string name);
-        string GetConnectionString(string name);
+        DbToolDatabase GetDatabase(string name);
         void SetCurrentContext(string contextName);
         void DeleteContext(string contextName);
         void Addcontext(string contextName);
+        
     }
 }

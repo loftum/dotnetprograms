@@ -105,7 +105,7 @@ namespace DbToolGui.ViewModels
                 StatusText = string.Format("Already conneced to {0}", _communicator.ConnectedTo);
                 return;
             }
-            var connection = _settings.CurrentContext.Connections
+            var connection = _settings.CurrentContext.Databases
                 .FirstOrDefault(c => c.Name.Equals(Connection.SelectedConnection));
             
             if (connection == null)
