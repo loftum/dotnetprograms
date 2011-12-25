@@ -26,10 +26,10 @@ namespace DbTool.Lib.Configuration
             return this;
         }
 
-        public DbToolContext WithDatabase(DbToolDatabase connection)
+        public DbToolContext WithDatabase(DbToolDatabase database)
         {
-            Databases.Add(connection);
-            connection.Parent = this;
+            Databases.Add(database);
+            database.Parent = this;
             return this;
         }
 
@@ -41,27 +41,6 @@ namespace DbTool.Lib.Configuration
                     Host = Host,
                     Credentials = Credentials
                 };
-        }
-
-        public string ConnectionString
-        {
-            get { return GenerateConnectionString(); }
-        }
-
-        private string GenerateConnectionString()
-        {
-            var elements = new List<string> {string.Format("Data Source={0}", Host)};
-
-            if (Credentials.IntegratedSecurity)
-            {
-                elements.Add(string.Format("Integrated Security={0}", Credentials.IntegratedSecurity));
-            }
-            else
-            {
-                elements.Add(string.Format("User Id={0}", Credentials.User));
-                elements.Add(string.Format("Password={0}", Credentials.Password));
-            }
-            return string.Join(";", elements);
         }
     }
 }

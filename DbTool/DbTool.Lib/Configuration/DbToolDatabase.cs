@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
 {
@@ -18,22 +19,29 @@ namespace DbTool.Lib.Configuration
         private string _databaseType;
         public string DatabaseType
         {
-            get { return _databaseType ?? Parent.DatabaseType; }
+            get { return _databaseType ?? FromParentOrDefault(p => p.DatabaseType); }
             set { _databaseType = value; }
         }
 
         private string _host;
         public string Host
         {
-            get { return _host ?? Parent.Host; }
+            get { return _host ?? FromParentOrDefault(p => p.Host); }
             set { _host = value; }
         }
 
         private DbToolCredentials _credentials;
         public DbToolCredentials Credentials
         {
-            get { return _credentials ?? Parent.Credentials; }
+            get { return _credentials ?? FromParentOrDefault(p => p.Credentials); }
             set { _credentials = value; }
+        }
+
+        public T FromParentOrDefault<T>(Func<DbToolContext,T> propertyFunc, T defaultValue = default(T))
+        {
+            return Parent == null
+                ? default(T)
+                : propertyFunc(Parent);
         }
 
         public string MigrationPath { get; set; }

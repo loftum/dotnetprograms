@@ -13,8 +13,7 @@ namespace DbTool.Lib.Serializing
             var serialized = Read(path);
             var settings = JsonConvert.DeserializeObject<DbToolSettings>(serialized);
             settings.Contexts.Each(context =>
-                context.Databases
-                    .Each(connection => connection.Parent = context));
+                context.Databases.Each(d => d.Parent = context));
             return settings;
         }
 

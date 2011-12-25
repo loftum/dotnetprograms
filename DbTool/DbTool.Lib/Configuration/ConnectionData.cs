@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using DbTool.Lib.ExtensionMethods;
-using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
 {
     public class ConnectionData
     {
-        [JsonIgnore]
         public bool HasConnectionString
         {
             get { return GetConnectionString().IsNotNullOrEmpty(); }
@@ -23,17 +21,17 @@ namespace DbTool.Lib.Configuration
             switch(DatabaseType)
             {
                 case "mysql":
-                    return GetConnectionStringForMySql(includeDatabase);
+                    return GetConnectionStringForMySql();
                 default:
-                    return GetDefaultConnectionString(includeDatabase);
+                    return GetDefaultConnectionString();
             }
         }
 
-        private string GetDefaultConnectionString(bool includeDatabase)
+        private string GetDefaultConnectionString()
         {
             var elements = new List<string>();
             elements.Add(string.Format("Data Source={0}", Host));
-            if (includeDatabase && Database.IsNotNullOrEmpty())
+            if (Database.IsNotNullOrEmpty())
             {
                 elements.Add(string.Format("Initial Catalog={0}", Database));
             }
@@ -49,11 +47,11 @@ namespace DbTool.Lib.Configuration
             return string.Join(";", elements);
         }
 
-        private string GetConnectionStringForMySql(bool includeDatabase)
+        private string GetConnectionStringForMySql()
         {
             var elements = new List<string>();
             elements.Add(string.Format("Server={0}", Host));
-            if (includeDatabase && Database.IsNotNullOrEmpty())
+            if (Database.IsNotNullOrEmpty())
             {
                 elements.Add(string.Format("Database={0}", Database));
             }

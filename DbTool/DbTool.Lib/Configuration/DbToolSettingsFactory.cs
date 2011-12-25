@@ -53,12 +53,12 @@ namespace DbTool.Lib.Configuration
         private static DbToolContext DefaultMySqlContext()
         {
             return new DbToolContext
-            {
-                Name = "MySql",
-                DatabaseType = "mysql",
-                Host = @"localhost"
+                    {
+                        Name = "MySql",
+                        DatabaseType = "mysql",
+                        Host = @"localhost"
 
-            }
+                    }
                 .WithCredentials(new DbToolCredentials
                 {
                     User = "root",
