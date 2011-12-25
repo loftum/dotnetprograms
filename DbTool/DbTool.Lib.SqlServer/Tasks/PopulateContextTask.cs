@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 using Microsoft.SqlServer.Management.Smo;
@@ -13,47 +15,61 @@ namespace DbTool.Lib.SqlServer.Tasks
         {
         }
 
-        public void PopulateContext()
+        public void Populate(IEnumerable<string> databases, bool overwriteExisting)
         {
-            PopulateContext(false);
-        }
+            var existingNames = GetExistingDatabaseNames();
+            DoPopulate(databases.Where(n => existingNames.Any(e => e.EqualsIgnoreCase(n))), overwriteExisting);
 
-        public void RepopulateContext()
-        {
-            PopulateContext(true);
-        }
-
-        private void PopulateContext(bool overwriteExisting)
-        {
-            var server = new Server(Settings.DefaultConnection.Host);
-            try
+            foreach (var name in databases.Where(n => !existingNames.Any(e => e.EqualsIgnoreCase(n))))
             {
-                var context = Settings.CurrentContext;
-                for (var ii = 0; ii < server.Databases.Count; ii++)
-                {
-                    var name = server.Databases[ii].Name;
-                    var contextHasDatabase = context.Databases.Any(d => d.Name.Equals(name));
-                    var shallAdd = overwriteExisting || !contextHasDatabase;
+                Logger.WriteLine("{0} does not exist in database", name);
+            }
+        }
 
-                    if (shallAdd)
+        public void PopulateAll(bool overwriteExisting)
+        {
+            DoPopulate(GetExistingDatabaseNames(), overwriteExisting);
+        }
+
+        private void DoPopulate(IEnumerable<string> databases, bool overwriteExisting)
+        {
+            var context = Settings.CurrentContext;
+            foreach (var name in databases)
+            {
+                var contextHasDatabase = context.Databases.Any(d => d.Name.Equals(name));
+                var shallAdd = overwriteExisting || !contextHasDatabase;
+                if (shallAdd)
+                {
+                    var database = new DbToolDatabase { Database = name };
+                    if (contextHasDatabase)
                     {
-                        var database = new DbToolDatabase { Database = name };
-                        if (contextHasDatabase)
-                        {
-                            Logger.WriteLine("Overwriting {0}", name);
-                            context.RemoveDatabase(name);
-                            context.AddDatabase(database);
-                        }
-                        else
-                        {
-                            Logger.WriteLine("Adding {0}", name);
-                            context.AddDatabase(database);    
-                        }
+                        Logger.WriteLine("Overwriting {0}", name);
+                        context.RemoveDatabase(name);
+                        context.AddDatabase(database);
                     }
                     else
                     {
-                        Logger.WriteLine("Skipping {0}", name);
+                        Logger.WriteLine("Adding {0}", name);
+                        context.AddDatabase(database);
                     }
+                }
+                else
+                {
+                    Logger.WriteLine("Skipping {0}", name);
+                }
+            }
+        }
+
+        private IEnumerable<string> GetExistingDatabaseNames()
+        {
+            var databases = new List<string>();
+            var server = new Server(Settings.DefaultConnection.Host);
+            try
+            {
+                for (var ii = 0; ii < server.Databases.Count; ii++)
+                {
+                    var name = server.Databases[ii].Name;
+                    databases.Add(name);
                 }
             }
             finally
@@ -65,6 +81,7 @@ namespace DbTool.Lib.SqlServer.Tasks
                     Logger.WriteLine("OK");
                 }
             }
+            return databases;
         }
     }
 }

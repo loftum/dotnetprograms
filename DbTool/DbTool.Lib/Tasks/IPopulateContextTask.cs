@@ -1,8 +1,10 @@
-﻿namespace DbTool.Lib.Tasks
+﻿using System.Collections.Generic;
+
+namespace DbTool.Lib.Tasks
 {
     public interface IPopulateContextTask
     {
-        void PopulateContext();
-        void RepopulateContext();
+        void PopulateAll(bool overwriteExisting);
+        void Populate(IEnumerable<string> databases, bool overwriteExisting);
     }
 }

@@ -41,7 +41,12 @@ namespace DbTool.Lib.Configuration
         
         public void RemoveDatabase(string name)
         {
-            throw new System.NotImplementedException();
+            var database = Databases.Where(d => d.Name.EqualsIgnoreCase(name)).FirstOrDefault();
+            if (database == null)
+            {
+                return;
+            }
+            Databases.Remove(database);
         }
 
         public DbToolContext WithDatabase(DbToolDatabase database)
