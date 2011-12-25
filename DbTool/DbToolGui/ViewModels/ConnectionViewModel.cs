@@ -1,17 +1,33 @@
 ﻿using System.Collections.ObjectModel;
-using DbTool.Lib.Connections;
+using System.Linq;
+using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {
     public class ConnectionViewModel : ViewModelBase
     {
-        private readonly IConnectionDataProvider _connectionDataProvider;
+        private readonly IDbToolSettings _settings;
 
         private bool _enableConnectionDropdown = true;
         public bool EnableConnectionDropdown
         {
             get { return _enableConnectionDropdown; }
-            set { _enableConnectionDropdown = value; OnPropertyChanged("EnableConnectionDropdown"); }
+            set { _enableConnectionDropdown = value; OnPropertyChanged(() => EnableConnectionDropdown); }
+        }
+
+        public ObservableCollection<string> AvailableContexts { get; private set; }
+
+        private string _selectedContext;
+        public string SelectedContext
+        {
+            get { return _selectedContext; }
+            set
+            {
+                _selectedContext = value;
+                OnPropertyChanged(() => SelectedContext);
+                PopulateConnectionsFor(value);
+            }
         }
 
         public ObservableCollection<string> AvailableConnections { get; private set; }
@@ -20,18 +36,41 @@ namespace DbToolGui.ViewModels
         public string SelectedConnection
         {
             get { return _selectedConnection; }
-            set { _selectedConnection = value; OnPropertiesChanged("SelectedConnection"); }
+            set { _selectedConnection = value; OnPropertyChanged(() => SelectedConnection); }
         }
 
-        public ConnectionViewModel(IConnectionDataProvider connectionDataProvider)
+        public ConnectionViewModel(IDbToolSettings settings)
         {
-            _connectionDataProvider = connectionDataProvider;
+            _settings = settings;
+            AvailableContexts = new ObservableCollection<string>();
             AvailableConnections = new ObservableCollection<string>();
-            foreach (var connection in _connectionDataProvider.GetConnectionNames())
+            PopulateContexts();
+            PopulateConnectionsFor(_settings.CurrentContext);
+        }
+
+        private void PopulateContexts()
+        {
+            _settings.Contexts.Each(context => AvailableContexts.Add(context.Name));
+            var currentContext = _settings.CurrentContext;
+            SelectedContext = currentContext.Name;
+        }
+
+        private void PopulateConnectionsFor(string contextName)
+        {
+            var context = _settings.Contexts.First(c => c.Name.Equals(contextName));
+            PopulateConnectionsFor(context);
+        }
+
+        private void PopulateConnectionsFor(DbToolContext context)
+        {
+            AvailableConnections.Clear();
+            context.Connections.Each(connection => AvailableConnections.Add(connection.Name));
+
+            var firstConnection = context.Connections.FirstOrDefault();
+            if (firstConnection != null)
             {
-                AvailableConnections.Add(connection);
+                SelectedConnection = firstConnection.Name;
             }
-            SelectedConnection = _connectionDataProvider.GetDefaultConnectionName();
         }
 
         public void ShowConnected(bool connected)

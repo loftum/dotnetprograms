@@ -13,7 +13,6 @@ namespace DbToolGui.Modules
             Bind<IPathResolver>().To<PathResolver>().InSingletonScope();
             Bind<IAssemblyLoader>().To<AssemblyLoader>().InSingletonScope();
             Bind<IDbContextFactory>().To<DbContextFactory>().InSingletonScope();
-            Bind<IConnectionDataProvider>().To<ConnectionDataProvider>().InSingletonScope();
             Bind<IDatabaseCommunicator>().To<DatabaseCommunicator>().InSingletonScope();
         }
     }

@@ -37,18 +37,15 @@ namespace DbTool.Lib.Configuration
 
         public string Database { get; set; }
 
-        private DbToolCredentials _credentials;
-        public DbToolCredentials Credentials
+        public DbToolCredentials Credentials { get; set; }
+
+        private DbToolCredentials GetCredentials()
         {
-            get
+            if (Credentials != null)
             {
-                if (_credentials != null)
-                {
-                    return _credentials;
-                }
-                return Parent == null ? null : Parent.Credentials;
+                return Credentials;
             }
-            set { _credentials = value; }
+            return Parent == null ? null : Parent.Credentials;
         }
 
         public bool Default { get; set; }
@@ -73,14 +70,15 @@ namespace DbTool.Lib.Configuration
             {
                 elements.Add(string.Format("Initial Catalog={0}", Database));
             }
-            if (Credentials.IntegratedSecurity)
+            var credentials = GetCredentials();
+            if (credentials.IntegratedSecurity)
             {
-                elements.Add(string.Format("Integrated Security={0}", Credentials.IntegratedSecurity));
+                elements.Add(string.Format("Integrated Security={0}", credentials.IntegratedSecurity));
             }
             else
             {
-                elements.Add(string.Format("User Id={0}", Credentials.User));
-                elements.Add(string.Format("Password={0}", Credentials.Password));
+                elements.Add(string.Format("User Id={0}", credentials.User));
+                elements.Add(string.Format("Password={0}", credentials.Password));
             }
             return string.Join(";", elements);
         }
@@ -93,8 +91,9 @@ namespace DbTool.Lib.Configuration
             {
                 elements.Add(string.Format("Database={0}", Database));
             }
-            elements.Add(string.Format("Uid={0}", Credentials.User));
-            elements.Add(string.Format("Pwd={0}", Credentials.Password));
+            var credentials = GetCredentials();
+            elements.Add(string.Format("Uid={0}", credentials.User));
+            elements.Add(string.Format("Pwd={0}", credentials.Password));
             return string.Join(";", elements);
         }
     }

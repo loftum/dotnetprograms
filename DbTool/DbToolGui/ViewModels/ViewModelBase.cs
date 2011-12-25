@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using DbTool.Lib.Ui.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {
@@ -12,6 +15,11 @@ namespace DbToolGui.ViewModels
             {
                 OnPropertyChanged(propertyName);
             }
+        }
+
+        protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
+        {
+            OnPropertyChanged(property.GetPropertyId());
         }
 
         protected void OnPropertyChanged(string propertyName)

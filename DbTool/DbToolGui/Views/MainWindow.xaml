@@ -12,12 +12,22 @@
     <DockPanel Name="MainPanel" LastChildFill="True">
         <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
             <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
-            <ComboBox Name="ConnectionBox"
-                      
-                ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
-                SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}"
-                IsEnabled="{Binding Path=Connection.EnableConnectionDropdown, Mode=OneWay}" >
-            </ComboBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox Name="ContextBox" Grid.Column="0"
+                    ItemsSource="{Binding Path=Connection.AvailableContexts, Mode=OneWay}"
+                    SelectedItem="{Binding Path=Connection.SelectedContext, Mode=TwoWay}"
+                    IsEnabled="{Binding Path=Connection.EnableConnectionDropdown, Mode=OneWay}"
+                    />
+                <ComboBox Name="ConnectionBox" Grid.Column="1"
+                    ItemsSource="{Binding Path=Connection.AvailableConnections, Mode=OneWay}"
+                    SelectedItem="{Binding Path=Connection.SelectedConnection, Mode=TwoWay}"
+                    IsEnabled="{Binding Path=Connection.EnableConnectionDropdown, Mode=OneWay}"
+                    />
+            </Grid>
         </DockPanel>
         <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
             <StatusBar Background="White" Foreground="DarkGray">

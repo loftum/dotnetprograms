@@ -88,10 +88,8 @@
     <Compile Include="Configuration\DbToolValues.cs" />
     <Compile Include="Configuration\IDbToolConfig.cs" />
     <Compile Include="Configuration\IDbToolSettings.cs" />
-    <Compile Include="Connections\ConnectionDataProvider.cs" />
     <Compile Include="Connections\DbContextFactory.cs" />
     <Compile Include="Connections\DbContext.cs" />
-    <Compile Include="Connections\IConnectionDataProvider.cs" />
     <Compile Include="Connections\IDbConnectionFactory.cs" />
     <Compile Include="Connections\IDbContextFactory.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />

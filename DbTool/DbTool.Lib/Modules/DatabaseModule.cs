@@ -1,5 +1,4 @@
 using DbTool.Lib.Communication;
-using DbTool.Lib.Connections;
 using Ninject.Modules;
 
 namespace DbTool.Lib.Modules
@@ -8,7 +7,6 @@ namespace DbTool.Lib.Modules
     {
         public override void Load()
         {
-            Bind<IConnectionDataProvider>().To<ConnectionDataProvider>().InSingletonScope();
             Bind<IDatabaseCommunicator>().To<DatabaseCommunicator>().InSingletonScope();
         }
     }

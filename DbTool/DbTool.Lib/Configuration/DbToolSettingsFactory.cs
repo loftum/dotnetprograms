@@ -11,26 +11,22 @@ namespace DbTool.Lib.Configuration
                 .WithContext(DefaultMySqlContext());
         }
 
-        private static DbToolContext DefaultMySqlContext()
+        private static DbToolSettings CreateDefaultSettings()
         {
-            return new DbToolContext
-                       {
-                           Name = "MySql",
-                           DatabaseType = "mysql",
-                           Host = @"localhost"
-
-                       }
-                .WithCredentials(new DbToolCredentials
-                                     {
-                                         User = "root",
-                                         Password = "p455w0rD",
-                                     })
-                .WithConnection(new ConnectionData
-                                    {
-                                        Default = true,
-                                        Database = "MyDB",
-                                        MigrationPath = "SqlServerMigrationPath",
-                                    });
+            return new DbToolSettings
+            {
+                WorksheetFile = "worksheet.sql",
+                LoadSchema = false,
+                MaxResult = 100,
+                DataDirectory = "dataDir",
+                LogDirectory = "logDir",
+                BackupDirectory = "backupDir",
+                AssemblyMap = new Dictionary<string, string>
+                    {
+                        {"mysql", "DbTool.Lib.MySql.dll"},
+                        {"sqlserver", "DbTool.Lib.SqlServer.dll"}
+                    }
+            };
         }
 
         private static DbToolContext DefaultSqlServerContext()
@@ -50,27 +46,31 @@ namespace DbTool.Lib.Configuration
                 .WithConnection(new ConnectionData
                                     {
                                         Default = true,
-                                        Database = "MyDB",
+                                        Database = "SqlServerDb",
                                         MigrationPath = "SqlServerMigrationPath",
                                     });
         }
 
-        private static DbToolSettings CreateDefaultSettings()
+        private static DbToolContext DefaultMySqlContext()
         {
-            return new DbToolSettings
-                       {
-                           WorksheetFile = "worksheet.sql",
-                           LoadSchema = false,
-                           MaxResult = 100,
-                           DataDirectory = "dataDir",
-                           LogDirectory = "logDir",
-                           BackupDirectory = "backupDir",
-                           AssemblyMap = new Dictionary<string, string>
-                                             {
-                                                 {"mysql", "DbTool.Lib.MySql.dll"},
-                                                 {"sqlserver", "DbTool.Lib.SqlServer.dll"}
-                                             }
-                       };
+            return new DbToolContext
+            {
+                Name = "MySql",
+                DatabaseType = "mysql",
+                Host = @"localhost"
+
+            }
+                .WithCredentials(new DbToolCredentials
+                {
+                    User = "root",
+                    Password = "p455w0rD",
+                })
+                .WithConnection(new ConnectionData
+                {
+                    Default = true,
+                    Database = "MySqlDb",
+                    MigrationPath = "SqlServerMigrationPath",
+                });
         }
     }
 }
