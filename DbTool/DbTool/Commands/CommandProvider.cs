@@ -20,7 +20,7 @@ namespace DbTool.Commands
             _settings = config.Settings;
             _taskFactory = taskFactory;
             Add(new RestoreDatabase(_logger, _settings, _taskFactory),
-                new DeleteDatabase(_logger, _settings, _taskFactory),
+                new DropDatabase(_logger, _settings, _taskFactory),
                 new BackupDatabase(_logger, _settings, _taskFactory),
                 new CreateDatabase(_logger, _settings, _taskFactory),
                 new ListeDatabases(_logger, _settings, _taskFactory),

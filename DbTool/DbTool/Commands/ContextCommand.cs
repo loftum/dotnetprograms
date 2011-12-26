@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
@@ -7,12 +8,28 @@ namespace DbTool.Commands
 {
     public class ContextCommand : CommandBase
     {
-        private const string Delete = "-d";
-        private const string Add = "-a";
+        private const string AddFlag = "-a";
+        private const string DeleteFlag = "-d";
 
         public ContextCommand(IDbToolLogger logger, IDbToolSettings settings)
-            : base("context", "[name]", "MyContext", logger, settings)
+            : base("context", GetUsage(), GetExamples(), logger, settings)
         {
+        }
+
+        private static IEnumerable<string> GetUsage()
+        {
+            return string.Format("[context] [{0}] [{1}]", AddFlag, DeleteFlag).AsArray();
+        }
+
+        private static IEnumerable<string> GetExamples()
+        {
+            return new []
+                {
+                    "lists contexts",
+                    "mycontext : switches to mycontext",
+                    "-a mycontext : adds mycontext",
+                    "-d mycontext : removes mycontext"
+                };
         }
 
         public override bool AreValid(CommandArgs args)
@@ -40,10 +57,10 @@ namespace DbTool.Commands
             var flag = args.Flags.First();
             switch(flag)
             {
-                case Add:
+                case AddFlag:
                     CreateContext(args.Arguments[0]);
                     break;
-                case Delete:
+                case DeleteFlag:
                     DeleteContext(args.Arguments[0]);
                     break;
                 default:

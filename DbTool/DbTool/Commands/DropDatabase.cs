@@ -4,10 +4,10 @@ using DbTool.Lib.Tasks;
 
 namespace DbTool.Commands
 {
-    public class DeleteDatabase : TaskCommandBase
+    public class DropDatabase : TaskCommandBase
     {
-        public DeleteDatabase(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("delete", "<database>", "MyDatabase", logger, settings, taskFactory)
+        public DropDatabase(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base("drop", "<database>", "MyDatabase", logger, settings, taskFactory)
         {
         }
 
