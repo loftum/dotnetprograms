@@ -9,7 +9,11 @@ namespace DbTool.Lib.Data
 
         public string Name { get; private set; }
         public object Value { get; private set; }
-        public string ValueAsString { get { return ParseValue(); } }
+
+        public string ValueAsString
+        {
+            get { return ParseValue(); }
+        }
 
         public Property(string name, object value)
         {

@@ -6,7 +6,10 @@
     <Window.Resources>
         <DataTemplate x:Key="PropertyValueTemplate">
             <TextBox Text="{Binding Path=ValueAsString, Mode=OneWay}"
-                     IsReadOnly="True" BorderThickness="0" BorderBrush="Black"/>
+                     FontFamily="Arial"
+                     IsReadOnly="True" 
+                     BorderThickness="0"
+                     BorderBrush="DarkGray"/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel Name="MainPanel" LastChildFill="True">
@@ -61,18 +64,25 @@
             
             <DockPanel Name="ResultPanel" Grid.Row="2" >
                 
-                <TextBox Name="ResultTextBox" Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
-                            Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
-                        IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-                        BorderThickness="0" BorderBrush="Transparent"
-                        AcceptsReturn="True" AcceptsTab="true"
-                            DockPanel.Dock="Top"/>
-                <DataGrid Name="ResultTable" Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
-                        CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True" CanUserSortColumns="False"
-                        AutoGenerateColumns="False"
-                        ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
+                <TextBox Name="ResultTextBox"
+                         Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
+                         Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
+                         IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                         BorderThickness="0" BorderBrush="Transparent"
+                         AcceptsReturn="True" AcceptsTab="true"
+                         DockPanel.Dock="Top"/>
+                <DataGrid Name="ResultTable"
+                          HorizontalGridLinesBrush="DarkGray"
+                          VerticalGridLinesBrush="DarkGray"
+                          BorderBrush="DarkGray"
+                          Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserReorderColumns="True"
+                          CanUserSortColumns="False"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
                 ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
-
             </DockPanel>
             
         </Grid>

@@ -1,25 +1,44 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using DbTool.Lib.Data;
 
 namespace DbToolGui.Controls
 {
     public class CustomBoundColumn : DataGridBoundColumn
     {
-        public string TemplateName { get; set; }
+        private readonly ColumnDescriptor _descriptor;
+
+        public CustomBoundColumn(ColumnDescriptor descriptor)
+        {
+            _descriptor = descriptor;
+            Header = _descriptor.Name;
+        }
+
+        public void Update(DataGridRow row)
+        {
+            var record = (Record)row.Item;
+            var content = GetContent(row);
+            if (content == null)
+            {
+                return;
+            }
+            content.Text = record.Properties[_descriptor.Index].ValueAsString;
+        }
+
+        private TextBox GetContent(DataGridRow row)
+        {
+            return (TextBox) GetCellContent(row);
+        }
 
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
-            var binding = new Binding(((Binding) Binding).Path.Path)
-                {
-                    Source = dataItem
-                };
-            var content = new ContentControl
-                {
-                    ContentTemplate = (DataTemplate) cell.FindResource(TemplateName)
-                };
-            content.SetBinding(ContentControl.ContentProperty, binding);
-            return content;
+            var record = (Record) dataItem;
+            return new TextBox
+                          {
+                              Text = record.Properties[_descriptor.Index].ValueAsString,
+                              DataContext = dataItem,
+                              BorderThickness = new Thickness(0)
+                          };
         }
 
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)

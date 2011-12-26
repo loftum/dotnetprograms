@@ -40,13 +40,7 @@ namespace DbToolGui.ViewModels
         {
             foreach (var column in queryResult.Columns)
             {
-                var binding = new Binding(string.Format("Properties[{0}]", column.Index)) { Mode = BindingMode.OneWay };
-                Columns.Add(new CustomBoundColumn
-                {
-                    Header = column.Name,
-                    Binding = binding,
-                    TemplateName = "PropertyValueTemplate"
-                });
+                Columns.Add(new CustomBoundColumn(column));
             }
             Records.AddRange(queryResult.Rows);
             ResultText = string.Format("Rowcount: {0}", queryResult.Rowcount);
@@ -80,7 +74,7 @@ namespace DbToolGui.ViewModels
 
         private void FireVisibilityChanged()
         {
-            OnPropertiesChanged("TableVisibility", "ResultTextVisibility");   
+            OnPropertiesChanged(() => TableVisibility, () => ResultTextVisibility);
         }
     }
 }

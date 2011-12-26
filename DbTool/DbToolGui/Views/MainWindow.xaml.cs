@@ -1,10 +1,12 @@
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Worksheet;
+using DbToolGui.Controls;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Highlighting;
 using DbToolGui.Modules;
@@ -33,6 +35,15 @@ namespace DbToolGui.Views
             _config = kernel.Get<IDbToolConfig>();
             _worksheetManager = kernel.Get<IWorksheetManager>();
             EditorBox.SetText(_worksheetManager.Load().TrimEndingWhitespaces());
+            ResultTable.LoadingRow += NastilyUpdateRowToAvoidStupidRowRecyclingProblems;
+        }
+
+        private void NastilyUpdateRowToAvoidStupidRowRecyclingProblems(object sender, DataGridRowEventArgs e)
+        {
+            foreach (CustomBoundColumn column in _viewModel.QueryResult.Columns)
+            {
+                column.Update(e.Row);
+            }
         }
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)

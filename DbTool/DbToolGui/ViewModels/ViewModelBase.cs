@@ -17,6 +17,14 @@ namespace DbToolGui.ViewModels
             }
         }
 
+        protected void OnPropertiesChanged<TProperty>(params Expression<Func<TProperty>>[] expressions)
+        {
+            foreach (var expression in expressions)
+            {
+                OnPropertyChanged(expression);
+            }
+        }
+
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
         {
             OnPropertyChanged(property.GetPropertyId());
