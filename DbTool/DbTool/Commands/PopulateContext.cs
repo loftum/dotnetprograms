@@ -10,7 +10,7 @@ namespace DbTool.Commands
         private const string Overwrite = "-f";
 
         public PopulateContext(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("populate", "[database|database2..] [-f] (overwrite existing)", "MyDatabase -f", logger, settings, taskFactory)
+            : base("populate", "[database|database2..] [-f (=overwrite existing)]", "MyDatabase -f", logger, settings, taskFactory)
         {
         }
 
