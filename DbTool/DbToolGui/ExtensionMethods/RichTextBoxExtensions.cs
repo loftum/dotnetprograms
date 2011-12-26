@@ -21,5 +21,18 @@ namespace DbToolGui.ExtensionMethods
                 ? textBox.GetAllText()
                 : textBox.Selection.Text;
         }
+
+        public static void ClearAllText(this RichTextBox textBox)
+        {
+            textBox.SetText(string.Empty);
+        }
+
+        public static void SetText(this RichTextBox textBox, string value)
+        {
+            textBox.ShouldNotBeNull("textBox");
+            var document = textBox.Document;
+            var textRange = new TextRange(document.ContentStart, document.ContentEnd);
+            textRange.Text = value;
+        }
     }
 }

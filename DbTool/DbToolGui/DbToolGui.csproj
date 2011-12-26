@@ -67,6 +67,7 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Controls\CustomBoundColumn.cs" />
     <Compile Include="ExtensionMethods\DataGridExtensions.cs" />
+    <Compile Include="ExtensionMethods\KeyExtensions.cs" />
     <Compile Include="ExtensionMethods\RichTextBoxExtensions.cs" />
     <Compile Include="Highlighting\HighlightStyle.cs" />
     <Compile Include="Highlighting\ISyntaxHighlighterFactory.cs" />

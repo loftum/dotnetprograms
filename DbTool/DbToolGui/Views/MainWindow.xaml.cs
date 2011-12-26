@@ -32,12 +32,12 @@ namespace DbToolGui.Views
 
             _config = kernel.Get<IDbToolConfig>();
             _worksheetManager = kernel.Get<IWorksheetManager>();
-            EditorBox.AppendText(_worksheetManager.Read());
+            EditorBox.SetText(_worksheetManager.Load().TrimEndingWhitespaces());
         }
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F5 || (e.Key.In(Key.Return, Key.Enter) && (Keyboard.Modifiers & ModifierKeys.Control) > 0))
+            if (e.Key == Key.F5 || e.Key.CombinationOf(ModifierKeys.Control, Key.Return, Key.Enter))
             {
                 _viewModel.EditorText = EditorBox.GetSelectedOrAllText();
                 _viewModel.ExecuteCommand.Execute(sender);
@@ -50,7 +50,7 @@ namespace DbToolGui.Views
             try
             {
                 _config.SaveSettings();
-                _worksheetManager.Save(EditorBox.GetAllText());
+                _worksheetManager.Save(EditorBox.GetAllText().TrimEndingWhitespaces());
             }
             catch (Exception ex)
             {

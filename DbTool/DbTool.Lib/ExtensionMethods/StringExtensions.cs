@@ -59,5 +59,11 @@ namespace DbTool.Lib.ExtensionMethods
             }
             return value.Split(new[] {' ', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries);
         }
+
+        public static string TrimEndingWhitespaces(this string value)
+        {
+            value.ShouldNotBeNull("value");
+            return value.TrimEnd(null);
+        }
     }
 }

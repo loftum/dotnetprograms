@@ -27,10 +27,9 @@ namespace DbTool.Lib.Ui.Worksheet
                     writer.Flush();
                 }
             }
-
         }
 
-        public string Read()
+        public string Load()
         {
             var worksheetFile = _settings.WorksheetFile;
             if (!worksheetFile.Exists())
