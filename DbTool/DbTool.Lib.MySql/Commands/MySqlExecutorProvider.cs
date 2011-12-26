@@ -16,7 +16,7 @@ namespace DbTool.Lib.MySql.Commands
         {
             if (statement.StartsWithIgnoreCase("show") || statement.StartsWithIgnoreCase("describe"))
             {
-                return new QueryExecutor(DbConnection, Settings.MaxResult);
+                return new SqlExecutor(DbConnection, Settings.MaxResult);
             }
             return base.GetExecutorFor(statement);
         }

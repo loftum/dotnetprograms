@@ -1,43 +1,47 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands.DbSchema
 {
     public class SchemaQuery
     {
+        private const string QueryPattern =
+            @"^show[\s]+([\S\s]+)[\s]+from[\s]+([\S]+)[[\s]+where[\s]+([\S]+)[\s]*([=]{1})[\s]*([\S]+)[\s]*]?$";
+
         public bool HasNoCollectionName
         {
             get { return CollectionName.IsNullOrEmpty(); }
         }
         public string CollectionName { get; private set; }
         public IEnumerable<string> ColumnNames { get; private set; }
-        public string[] RestrictionValues { get; private set; }
+        public bool SelectAll { get; private set; }
 
         public SchemaQuery(string query)
         {
             Validate(query);
-            CollectionName = GetCollectionNameFrom(query);
-            RestrictionValues = GetRestrictionValuesFrom(query);
+            Parse(query);
+            SelectAll = !ColumnNames.Any() || ColumnNames.Contains("*");
         }
 
-        private static string[] GetRestrictionValuesFrom(string query)
+        private void Parse(string query)
         {
-            var split = query.Split(new[] { ' ' }).ToList();
-            if (split.Count < 3)
+            var regex = new Regex(QueryPattern);
+            var match = regex.Match(query);
+            ColumnNames = match.Groups[1].Value.Split(new[] {','})
+                .Select(c => c.ToLowerInvariant().Trim())
+                .Where(c => !c.IsNullOrEmpty());
+            CollectionName = match.Groups[2].Value.Trim();
+        }
+
+        private void Validate(string query)
+        {
+            if (!query.Matches(QueryPattern))
             {
-                return new string[0];
+                throw new UserException(ExceptionType.InvalidSchemaQuery);
             }
-            return split.Skip(2).Select(v => v.Replace("'", "")).ToArray();
-        }
-
-        private static string GetCollectionNameFrom(string query)
-        {
-            var split = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            return split.Length < 2
-                ? null
-                : split[1];
         }
     }
 }

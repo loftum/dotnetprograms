@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 
 namespace DbTool.Lib.Communication.DbCommands.DbSchema
 {
@@ -21,11 +22,12 @@ namespace DbTool.Lib.Communication.DbCommands.DbSchema
                 var schema = GetSchemaFrom(query);
                 var result = new QueryResult();
 
-                
-
                 foreach (DataColumn column in schema.Columns)
                 {
-                    result.AddColumn(column.ColumnName, column.DataType);
+                    if (query.SelectAll || query.ColumnNames.Contains(column.ColumnName.ToLowerInvariant()))
+                    {
+                        result.AddColumn(column.ColumnName, column.DataType);
+                    }
                 }
                 foreach (DataRow row in schema.Rows)
                 {
@@ -43,7 +45,7 @@ namespace DbTool.Lib.Communication.DbCommands.DbSchema
         {
             return query.HasNoCollectionName
                 ? _dbConnection.GetSchema()
-                : _dbConnection.GetSchema(query.CollectionName, query.RestrictionValues);
+                : _dbConnection.GetSchema(query.CollectionName);
         }
     }
 }

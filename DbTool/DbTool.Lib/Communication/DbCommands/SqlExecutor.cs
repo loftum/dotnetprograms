@@ -4,12 +4,12 @@ using System.Data.Common;
 
 namespace DbTool.Lib.Communication.DbCommands
 {
-    public class QueryExecutor : IDbCommandExecutor
+    public class SqlExecutor : IDbCommandExecutor
     {
         private readonly DbConnection _dbConnection;
         private readonly int _maxRows;
 
-        public QueryExecutor(DbConnection dbConnection, int maxRows)
+        public SqlExecutor(DbConnection dbConnection, int maxRows)
         {
             _dbConnection = dbConnection;
             _maxRows = maxRows;

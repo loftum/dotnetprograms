@@ -24,7 +24,11 @@ namespace DbTool.Lib.Communication.DbCommands
         {
             if (statement.StartsWithIgnoreCase("select"))
             {
-                return new QueryExecutor(DbConnection, Settings.MaxResult);
+                return new SqlExecutor(DbConnection, Settings.MaxResult);
+            }
+            if (statement.StartsWithIgnoreCase("from"))
+            {
+                return new LinqExecutor(DbConnection, Settings.MaxResult);
             }
             if (statement.StartsWithIgnoreCase("migrate"))
             {
