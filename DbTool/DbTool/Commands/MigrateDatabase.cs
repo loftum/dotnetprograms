@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
@@ -14,16 +13,15 @@ namespace DbTool.Commands
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
-            var count = args.Count;
-            return count > 1 && !string.IsNullOrWhiteSpace(args[1]);
+            return args.HasArguments;
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
-            var databaseName = args[1];
-            var versionString = args.Count > 2 ? args[2] : string.Empty;
+            var databaseName = args.Arguments[0];
+            var versionString = args.AllArguments.Count > 1 ? args.Arguments[1] : string.Empty;
             var database = Settings.GetDatabase(databaseName);
             var migrateDbTask = TaskFactory.CreateMigrateDbTask(database);
 

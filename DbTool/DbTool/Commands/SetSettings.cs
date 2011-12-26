@@ -15,14 +15,14 @@ namespace DbTool.Commands
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
             return true;
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
-            if (args.Count < 2)
+            if (!args.HasArguments)
             {
                 ViewSettings();
                 return;
@@ -30,12 +30,12 @@ namespace DbTool.Commands
             TrySet(args);
         }
 
-        private void TrySet(IList<string> args)
+        private void TrySet(CommandArgs args)
         {
-            var split = args[1].Split(':');
+            var split = args.Arguments[0].Split(':');
             if (split.Length < 2)
             {
-                throw new DbToolException(string.Format("Invalid parameter {0}", args[1]));
+                throw new DbToolException(string.Format("Invalid parameter {0}", args.Arguments[0]));
             }
             var key = split[0];
             var value = split[1];

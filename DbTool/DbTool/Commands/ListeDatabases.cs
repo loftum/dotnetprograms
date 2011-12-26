@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
@@ -12,12 +11,12 @@ namespace DbTool.Commands
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
             return true;
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
             var listDbTask = TaskFactory.CreateListDbTask(Settings.DefaultConnection);
             listDbTask.ListDatabases();

@@ -29,23 +29,24 @@ namespace DbTool.Commands
 
         public void Execute(IList<string> args)
         {
-            if (!AreValid(args))
+            var commandArgs = new CommandArgs(args);
+            if (!AreValid(commandArgs) || commandArgs.Help)
             {
                 Logger.WriteLine(GenerateUsageText());
                 return;
             }
-            DoExecute(args);
+            DoExecute(commandArgs);
         }
 
-        public abstract bool AreValid(IList<string> args);
-        public abstract void DoExecute(IList<string> args);
+        public abstract bool AreValid(CommandArgs args);
+        public abstract void DoExecute(CommandArgs args);
 
         public string GenerateUsageText()
         {
-            var builder = new StringBuilder()
-                    .Append("Usage: ").Append(Name).Append(" ").AppendLine(Usage)
-                    .Append("Example: ").Append(Name).Append(" ").AppendLine(Example);
-            return builder.ToString();
+            return new StringBuilder()
+                .AppendFormat("Usage: {0} {1}", Name, Usage).AppendLine()
+                .AppendFormat("Example: {0} {1}", Name, Example).AppendLine()
+                .ToString();
         }
 
         protected void PrintPercentage(object sender, TaskProgressEventArgs e)

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
@@ -15,37 +15,36 @@ namespace DbTool.Commands
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
-            return true;
+            return !(args.HasFlags && !args.HasArguments);
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
-            switch (args.Count)
+            if (!args.HasArguments)
             {
-                case 1:
-                    PrintContexts();
-                    break;
-                case 2:
-                    SwitchContextTo(args[1]);
-                    break;
-                default:
-                    HandleContext(args);
-                    break;
+                PrintContexts();
+                return;
             }
+
+            if (!args.HasFlags)
+            {
+                SwitchContextTo(args.Arguments[0]);
+            }
+            HandleContext(args);
         }
 
-        private void HandleContext(IList<string> args)
+        private void HandleContext(CommandArgs args)
         {
-            var flag = args[1];
+            var flag = args.Flags.First();
             switch(flag)
             {
                 case Add:
-                    CreateContext(args[2]);
+                    CreateContext(args.Arguments[0]);
                     break;
                 case Delete:
-                    DeleteContext(args[2]);
+                    DeleteContext(args.Arguments[0]);
                     break;
                 default:
                     Logger.WriteLine("Unknown flag {0}", flag);

@@ -25,5 +25,12 @@ namespace DbTool.Lib.ExtensionMethods
             var match = regex.Match(value);
             return value.Replace(match.Groups[0].Value, newValue);
         }
+
+        public static bool Matches(this string value, string pattern)
+        {
+            value.ShouldNotBeNull("value");
+            pattern.ShouldNotBeNull("pattern");
+            return Regex.IsMatch(value, pattern);
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
@@ -12,20 +11,18 @@ namespace DbTool.Commands
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
-            return args.Count > 2 &&
-                !string.IsNullOrWhiteSpace(args[1]) &&
-                !string.IsNullOrWhiteSpace(args[2]);
+            return args.HasArguments && args.Arguments.Count > 1;
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
-            var connectionData = Settings.GetConnection(args[1]);
+            var connectionData = Settings.GetConnection(args.Arguments[0]);
             var parameters = new BackupParameters
                 {
                     DatabaseName = connectionData.Name,
-                    FilePath = args[2],
+                    FilePath = args.Arguments[1],
                     Server = connectionData.Host
                 };
 

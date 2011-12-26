@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
@@ -12,21 +10,21 @@ namespace DbTool.Commands
         private const string Overwrite = "-f";
 
         public PopulateContext(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("populate", "", "", logger, settings, taskFactory)
+            : base("populate", "[database|database2..] [-f] (overwrite existing)", "MyDatabase -f", logger, settings, taskFactory)
         {
         }
 
-        public override bool AreValid(IList<string> args)
+        public override bool AreValid(CommandArgs args)
         {
             return true;
         }
 
-        public override void DoExecute(IList<string> args)
+        public override void DoExecute(CommandArgs args)
         {
             var populateContextTask = TaskFactory.CreatePopulateContextTask(Settings.DefaultConnection);
-            var overwriteExisting = args.Contains(Overwrite);
+            var overwriteExisting = args.Flags.Contains(Overwrite);
 
-            var databases = args.Where(a => !IsKeyword(a));
+            var databases = args.Arguments;
             if (databases.Any())
             {
                 populateContextTask.Populate(databases, overwriteExisting);
@@ -35,11 +33,6 @@ namespace DbTool.Commands
             {
                 populateContextTask.PopulateAll(overwriteExisting);    
             }
-        }
-
-        private bool IsKeyword(string word)
-        {
-            return word.In(Overwrite, Name);
         }
     }
 }
