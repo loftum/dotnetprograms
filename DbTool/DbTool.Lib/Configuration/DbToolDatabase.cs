@@ -50,6 +50,7 @@ namespace DbTool.Lib.Configuration
         {
             return new ConnectionData
                 {
+                    Name = Name,
                     Credentials = Credentials,
                     Database = Database,
                     DatabaseType = DatabaseType,

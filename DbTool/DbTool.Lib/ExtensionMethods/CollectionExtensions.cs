@@ -55,8 +55,13 @@ namespace DbTool.Lib.ExtensionMethods
 
         public static List<T> ToListWith<T>(this T item, params T[] others)
         {
+            return item.ToListWith(others.ToList());
+        }
+
+        public static List<T> ToListWith<T>(this T item, IEnumerable<T> others)
+        {
             item.ShouldNotBeNull("item");
-            var allItems = new List<T> {item};
+            var allItems = new List<T> { item };
             allItems.AddRange(others);
             return allItems;
         }

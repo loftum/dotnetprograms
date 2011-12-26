@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DbTool.Lib.Communication;
-using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
@@ -95,7 +95,8 @@ namespace DbToolGui.ViewModels
 
         private void Connect()
         {
-            if (string.IsNullOrEmpty(Connection.SelectedConnection))
+            var databaseName = Connection.SelectedConnection;
+            if (string.IsNullOrEmpty(databaseName))
             {
                 StatusText = "No connection selected";
                 return;
@@ -105,16 +106,14 @@ namespace DbToolGui.ViewModels
                 StatusText = string.Format("Already conneced to {0}", _communicator.ConnectedTo);
                 return;
             }
-            var connection = _settings.CurrentContext.Databases
-                .FirstOrDefault(c => c.Name.Equals(Connection.SelectedConnection));
-            
-            if (connection == null)
+            var database = _settings.CurrentContext.GetDatabase(databaseName);
+            if (database == null)
             {
                 StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
                 return;
             }
 
-            _communicator.ConnectTo(connection);
+            _communicator.ConnectTo(database);
             
             FireOnConnectionPropertiesChanged();
             if (_settings.LoadSchema)

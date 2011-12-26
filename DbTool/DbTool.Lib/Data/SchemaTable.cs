@@ -25,7 +25,7 @@ namespace DbTool.Lib.Data
 
         public bool ContainsObject(string word)
         {
-            return Columns.Any(c => StringExtensions.EqualsIgnoreCase(c.Name, word));
+            return Columns.Any(c => c.Name.EqualsIgnoreCase(word));
         }
     }
 }

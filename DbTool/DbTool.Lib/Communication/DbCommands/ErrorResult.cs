@@ -1,6 +1,6 @@
 using System;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class ErrorResult : DbCommandResultBase
     {

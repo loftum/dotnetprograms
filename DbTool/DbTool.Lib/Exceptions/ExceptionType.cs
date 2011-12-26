@@ -25,6 +25,8 @@ namespace DbTool.Lib.Exceptions
         [Description("Unknown database {0} in current context")]
         UnknownDatabase,
         [Description("Database {0} already exists")]
-        DatabaseAlreadyExists
+        DatabaseAlreadyExists,
+        [Description("Invalid schema query")]
+        InvalidSchemaQuery
     }
 }

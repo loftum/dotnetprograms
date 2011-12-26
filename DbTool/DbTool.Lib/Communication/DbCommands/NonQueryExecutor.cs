@@ -1,6 +1,6 @@
 using System.Data.Common;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class NonQueryExecutor : IDbCommandExecutor
     {

@@ -1,8 +1,9 @@
 using System.Data.Common;
+using DbTool.Lib.Communication.DbCommands.DbSchema;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class DefaultExecutorProvider : IExecutorProvider
     {

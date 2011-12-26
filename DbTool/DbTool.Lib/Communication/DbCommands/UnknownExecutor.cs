@@ -1,6 +1,6 @@
 using DbTool.Lib.Exceptions;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class UnknownExecutor : IDbCommandExecutor
     {

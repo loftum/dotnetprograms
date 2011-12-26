@@ -4,7 +4,7 @@ using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class MigrationExecutor : IDbCommandExecutor
     {

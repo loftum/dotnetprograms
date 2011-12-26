@@ -2,6 +2,7 @@
 using System.Linq;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
+using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
 {
@@ -12,6 +13,11 @@ namespace DbTool.Lib.Configuration
         public string Host { get; set; }
         public DbToolCredentials Credentials { get; set; }
         public IList<DbToolDatabase> Databases { get; set; }
+        [JsonIgnore]
+        public IEnumerable<DbToolDatabase> Connections
+        {
+            get { return GetDefaultDatabase().ToListWith(Databases); }
+        }
 
         public DbToolContext(string name) : this()
         {
@@ -55,14 +61,30 @@ namespace DbTool.Lib.Configuration
             return this;
         }
 
-        public ConnectionData GetDefaultConnection()
+        public DbToolDatabase GetDatabase(string name)
         {
-            return new ConnectionData
+            if (name.Equals("Default"))
+            {
+                return GetDefaultDatabase();
+            }
+            return Databases.Where(d => d.Name.Equals(name)).FirstOrDefault();
+        }
+
+        public DbToolDatabase GetDefaultDatabase()
+        {
+            return new DbToolDatabase
                 {
+                    Name= "Default",
+                    Credentials = Credentials,
                     DatabaseType = DatabaseType,
                     Host = Host,
-                    Credentials = Credentials
+                    Parent = this
                 };
+        }
+
+        public ConnectionData GetDefaultConnection()
+        {
+            return GetDefaultDatabase().GetConnectionData();
         }
     }
 }

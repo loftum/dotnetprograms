@@ -1,5 +1,5 @@
 using System;
-using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
 using DbTool.Lib.Data;

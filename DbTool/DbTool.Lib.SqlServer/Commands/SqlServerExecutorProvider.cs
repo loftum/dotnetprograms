@@ -1,5 +1,5 @@
 ﻿using System.Data.Common;
-using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Configuration;
 
 namespace DbTool.Lib.SqlServer.Commands

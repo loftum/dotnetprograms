@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Data;
 using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Controls;

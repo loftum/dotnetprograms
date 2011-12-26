@@ -2,7 +2,7 @@ using System;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 
-namespace DbTool.Lib.Communication.Commands
+namespace DbTool.Lib.Communication.DbCommands
 {
     public class SetExecutor : IDbCommandExecutor
     {
