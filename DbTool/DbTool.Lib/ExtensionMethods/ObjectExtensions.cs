@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
 
 namespace DbTool.Lib.ExtensionMethods
@@ -67,6 +68,11 @@ namespace DbTool.Lib.ExtensionMethods
             {
                 throw new ArgumentNullException(name);
             }
+        }
+
+        public static bool ShouldBeViewedInTable<T>(this T value)
+        {
+            return value is IEnumerable && !(value is string);
         }
     }
 }

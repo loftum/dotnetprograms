@@ -66,6 +66,7 @@
     <Compile Include="Collections\ParentChildList.cs" />
     <Compile Include="Communication\DatabaseCommunicator.cs" />
     <Compile Include="Communication\DbCommands\BackupExecutor.cs" />
+    <Compile Include="Communication\DbCommands\CSharpExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbCommandResultBase.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaQuery.cs" />

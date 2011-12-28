@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,11 +32,15 @@ namespace DbTool.Lib.Communication.DbCommands
             AddColumn(RowNum, typeof(long));
         }
 
-        public void AddRow(IEnumerable<object> values)
+        public void AddRow(IEnumerable values)
         {
-            var list = new List<object>();
+            var list = new ArrayList();
             list.Add(++Rowcount);
-            list.AddRange(values);
+            foreach (var value in values)
+            {
+                list.Add(value);
+            }
+            
             var record = new Record();
             for (var ii = 0; ii < _columns.Count; ii++)
             {

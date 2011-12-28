@@ -35,13 +35,9 @@ namespace DbTool.Lib.Communication.DbCommands
                 var linqExpression = command.Replace(rawSql, "data");
                 var sql = rawSql.Replace(")", string.Empty).Replace("(", string.Empty);
 
-                var data = Query(sql);
-                
-                var method = evaluator.Compile(linqExpression);
-
-                object methodResult = new List<dynamic>();
-                method.Invoke(ref methodResult);
-                var result = new QueryResult();
+                var data = new string[] {"a", "b", "c"};
+                var methodResult = evaluator.Evaluate(linqExpression);
+                var result = new MessageResult("Result: " + methodResult);
                 return result;
             }
             catch (Exception ex)

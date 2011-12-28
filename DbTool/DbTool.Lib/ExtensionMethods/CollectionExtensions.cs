@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -31,6 +32,12 @@ namespace DbTool.Lib.ExtensionMethods
             {
                 throw new ArgumentNullException(string.Format("collection {0} cannot be null or empty", name));
             }
+        }
+
+        public static bool IsEmpty(this IEnumerable collection)
+        {
+            collection.ShouldNotBeNull("collection");
+            return !collection.Cast<object>().Any();
         }
 
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
@@ -73,6 +80,36 @@ namespace DbTool.Lib.ExtensionMethods
             {
                 action(item);
             }
+        }
+
+        public static Type GetTypeOfValues(this IEnumerable collection)
+        {
+            collection.ShouldNotBeNull("collection");
+            if (collection.IsEmpty())
+            {
+                return typeof (object);
+            }
+            Type returnType = null;
+            foreach (var item in collection)
+            {
+                var currentType = item.GetType();
+                if (returnType == null)
+                {
+                    returnType = currentType;
+                }
+                else if (currentType != returnType)
+                {
+                    if (returnType.IsAssignableFrom(currentType))
+                    {
+                        returnType = currentType;
+                    }
+                    else
+                    {
+                        return typeof(object);    
+                    }
+                }
+            }
+            return returnType ?? typeof(object);
         }
     }
 }

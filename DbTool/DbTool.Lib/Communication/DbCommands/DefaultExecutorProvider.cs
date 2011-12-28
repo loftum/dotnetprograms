@@ -11,6 +11,7 @@ namespace DbTool.Lib.Communication.DbCommands
         protected readonly IDbToolSettings Settings;
         protected readonly DbToolDatabase Database;
         protected readonly DbConnection DbConnection;
+        private readonly CSharpExecutor _cSharpExecutor;
 
         public DefaultExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection)
         {
@@ -18,6 +19,7 @@ namespace DbTool.Lib.Communication.DbCommands
             Settings = _config.Settings;
             Database = database;
             DbConnection = dbConnection;
+            _cSharpExecutor = new CSharpExecutor();
         }
 
         public virtual IDbCommandExecutor GetExecutorFor(string statement)
@@ -26,9 +28,13 @@ namespace DbTool.Lib.Communication.DbCommands
             {
                 return new SqlExecutor(DbConnection, Settings.MaxResult);
             }
-            if (statement.StartsWithIgnoreCase("from"))
+            if (statement.StartsWithIgnoreCase("insert") ||
+                statement.StartsWithIgnoreCase("update") ||
+                statement.StartsWithIgnoreCase("delete") ||
+                statement.StartsWithIgnoreCase("drop") ||
+                statement.StartsWithIgnoreCase("create"))
             {
-                return new LinqExecutor(DbConnection, Settings.MaxResult);
+                return new NonQueryExecutor(DbConnection);
             }
             if (statement.StartsWithIgnoreCase("migrate"))
             {
@@ -42,7 +48,7 @@ namespace DbTool.Lib.Communication.DbCommands
             {
                 return new BackupExecutor();
             }
-            return new NonQueryExecutor(DbConnection);
+            return _cSharpExecutor;
         }
     }
 }
