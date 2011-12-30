@@ -1,5 +1,6 @@
 using System;
 using DbTool.Lib.Communication.DbCommands;
+using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
 using DbTool.Lib.Data;
@@ -62,7 +63,7 @@ namespace DbTool.Lib.Communication
                 var trimmed = statement.Trim();
                 return GetExecutorFor(trimmed).Execute(trimmed);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return new ErrorResult(e);
             }

@@ -6,7 +6,7 @@ using System.Text;
 using DbTool.Lib.Data;
 using DbTool.Lib.ExtensionMethods;
 
-namespace DbTool.Lib.Communication.DbCommands
+namespace DbTool.Lib.Communication.DbCommands.Results
 {
     public class QueryResult : DbCommandResultBase
     {

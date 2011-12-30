@@ -1,4 +1,4 @@
-namespace DbTool.Lib.Communication.DbCommands
+namespace DbTool.Lib.Communication.DbCommands.Results
 {
     public class MigrationResult : DbCommandResultBase
     {

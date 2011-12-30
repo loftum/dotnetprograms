@@ -5,6 +5,22 @@ namespace DbTool.Lib.Configuration
 {
     public class ConnectionData
     {
+        public string ProviderName
+        {
+            get
+            {
+                switch (DatabaseType)
+                {
+                    case "sqlserver":
+                        return "System.Data.SqlClient";
+                    case "mysql":
+                        return "MySql.Data.MySqlClient";
+                    default:
+                        return "System.Data.SqlClient";
+                }
+            }
+        }
+
         public bool HasConnectionString
         {
             get { return GetConnectionString().IsNotNullOrEmpty(); }

@@ -1,3 +1,4 @@
+using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Exceptions;
 
 namespace DbTool.Lib.Communication.DbCommands

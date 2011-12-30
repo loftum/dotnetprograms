@@ -1,6 +1,7 @@
 using System;
+using DbTool.Lib.Exceptions;
 
-namespace DbTool.Lib.Communication.DbCommands
+namespace DbTool.Lib.Communication.DbCommands.Results
 {
     public class ErrorResult : DbCommandResultBase
     {
@@ -8,7 +9,14 @@ namespace DbTool.Lib.Communication.DbCommands
 
         public ErrorResult(Exception exception)
         {
-            Message = exception.Message;
+            if (exception is DbToolException)
+            {
+                Message = exception.Message;    
+            }
+            else
+            {
+                Message = exception.ToString();
+            }
         }
 
         protected override string ConvertToString()

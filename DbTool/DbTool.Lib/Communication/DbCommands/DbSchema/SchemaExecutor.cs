@@ -1,6 +1,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using DbTool.Lib.Communication.DbCommands.Results;
 
 namespace DbTool.Lib.Communication.DbCommands.DbSchema
 {

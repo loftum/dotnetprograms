@@ -1,4 +1,5 @@
 using System.Data.Common;
+using DbTool.Lib.Communication.DbCommands.Results;
 
 namespace DbTool.Lib.Communication.DbCommands
 {

@@ -1,4 +1,5 @@
 using System;
+using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;

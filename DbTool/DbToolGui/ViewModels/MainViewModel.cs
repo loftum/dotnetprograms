@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using DbTool.Lib.Communication;
 using DbTool.Lib.Communication.DbCommands;
+using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;

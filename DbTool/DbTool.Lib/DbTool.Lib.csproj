@@ -66,23 +66,23 @@
     <Compile Include="Collections\ParentChildList.cs" />
     <Compile Include="Communication\DatabaseCommunicator.cs" />
     <Compile Include="Communication\DbCommands\BackupExecutor.cs" />
-    <Compile Include="Communication\DbCommands\CSharpExecutor.cs" />
+    <Compile Include="Communication\DbCommands\CSharp\CollectionConverter.cs" />
+    <Compile Include="Communication\DbCommands\CSharp\CSharpExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbCommandResultBase.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaQuery.cs" />
     <Compile Include="Communication\DbCommands\DefaultExecutorProvider.cs" />
-    <Compile Include="Communication\DbCommands\ErrorResult.cs" />
     <Compile Include="Communication\DbCommands\IDbCommandExecutor.cs" />
-    <Compile Include="Communication\DbCommands\IDbCommandResult.cs" />
     <Compile Include="Communication\DbCommands\IExecutorProvider.cs" />
-    <Compile Include="Communication\DbCommands\LinqExecutor.cs" />
-    <Compile Include="Communication\DbCommands\MessageResult.cs" />
     <Compile Include="Communication\DbCommands\MigrationExecutor.cs" />
-    <Compile Include="Communication\DbCommands\MigrationResult.cs" />
     <Compile Include="Communication\DbCommands\NonQueryExecutor.cs" />
-    <Compile Include="Communication\DbCommands\NonQueryResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\ErrorResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\IDbCommandResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\MessageResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\MigrationResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\NonQueryResult.cs" />
+    <Compile Include="Communication\DbCommands\Results\QueryResult.cs" />
     <Compile Include="Communication\DbCommands\SqlExecutor.cs" />
-    <Compile Include="Communication\DbCommands\QueryResult.cs" />
     <Compile Include="Communication\DbCommands\SetExecutor.cs" />
     <Compile Include="Communication\DbCommands\UnknownExecutor.cs" />
     <Compile Include="Communication\IDatabaseCommunicator.cs" />
@@ -91,7 +91,6 @@
     <Compile Include="Configuration\DbToolContext.cs" />
     <Compile Include="Configuration\DbToolCredentials.cs" />
     <Compile Include="Configuration\DbToolDatabase.cs" />
-    <Compile Include="Configuration\DbToolSection.cs" />
     <Compile Include="Configuration\DbToolSettings.cs" />
     <Compile Include="Configuration\DbToolSettingsFactory.cs" />
     <Compile Include="Configuration\DbToolValues.cs" />
@@ -150,7 +149,12 @@
     <Compile Include="Tasks\ViewDbVersionTask.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DbTool.Lib.CSharp\DbTool.Lib.CSharp.csproj">
+      <Project>{D6DE13EF-F308-41E3-8481-0C79779BD29F}</Project>
+      <Name>DbTool.Lib.CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
