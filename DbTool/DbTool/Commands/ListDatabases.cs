@@ -4,9 +4,9 @@ using DbTool.Lib.Tasks;
 
 namespace DbTool.Commands
 {
-    public class ListeDatabases : TaskCommandBase
+    public class ListDatabases : TaskCommandBase
     {
-        public ListeDatabases(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+        public ListDatabases(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
             : base("list", string.Empty, string.Empty, logger, settings, taskFactory)
         {
         }
@@ -19,7 +19,8 @@ namespace DbTool.Commands
         public override void DoExecute(CommandArgs args)
         {
             var listDbTask = TaskFactory.CreateListDbTask(Settings.DefaultConnection);
-            listDbTask.ListDatabases();
+            var showAll = args.Flags.Contains("-a");
+            listDbTask.ListDatabases(showAll);
         }
     }
 }

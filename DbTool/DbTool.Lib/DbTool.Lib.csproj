@@ -100,6 +100,8 @@
     <Compile Include="Connections\DbContext.cs" />
     <Compile Include="Connections\IDbConnectionFactory.cs" />
     <Compile Include="Connections\IDbContextFactory.cs" />
+    <Compile Include="CSharp\CSharpEvaluator.cs" />
+    <Compile Include="CSharp\CSharpResult.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Record.cs" />

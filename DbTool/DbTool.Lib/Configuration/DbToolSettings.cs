@@ -59,7 +59,7 @@ namespace DbTool.Lib.Configuration
             {
                 throw new UserException(ExceptionType.ContextAlreadyExists, contextName);
             }
-            Contexts.Add(new DbToolContext(contextName));
+            Contexts.Add(DbToolContext.Default(contextName));
         }
 
         public void DeleteContext(string contextName)

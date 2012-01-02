@@ -28,6 +28,19 @@ namespace DbTool.Lib.Configuration
         {
             Databases = new List<DbToolDatabase>();
         }
+        
+        public static DbToolContext Default(string name)
+        {
+            return new DbToolContext(name)
+            {
+                DatabaseType = "sqlserver",
+                Host = "(local)",
+            }
+            .WithCredentials(new DbToolCredentials
+                    {
+                        IntegratedSecurity = true
+                    });
+        }
 
         public DbToolContext WithCredentials(DbToolCredentials credentials)
         {

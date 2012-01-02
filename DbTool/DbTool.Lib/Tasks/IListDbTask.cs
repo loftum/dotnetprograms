@@ -2,6 +2,6 @@
 {
     public interface IListDbTask
     {
-        void ListDatabases();
+        void ListDatabases(bool showAll);
     }
 }

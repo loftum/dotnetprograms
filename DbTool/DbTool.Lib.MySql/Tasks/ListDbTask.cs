@@ -13,7 +13,7 @@ namespace DbTool.Lib.MySql.Tasks
 
         }
 
-        public void ListDatabases()
+        public void ListDatabases(bool showAll)
         {
             var connectionString = Settings.DefaultConnection.GetConnectionString();
             using (var connection = new MySqlConnection(connectionString))

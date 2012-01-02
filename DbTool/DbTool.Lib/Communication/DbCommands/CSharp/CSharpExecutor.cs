@@ -1,17 +1,18 @@
+using System;
 using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
+using DbTool.Lib.CSharp;
 using DbTool.Lib.CSharp.WebMatrix;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
-using Mono.CSharp;
 
 namespace DbTool.Lib.Communication.DbCommands.CSharp
 {
     public class CSharpExecutor : IDbCommandExecutor
     {
-        private readonly Evaluator _evaluator;
+        private readonly CSharpEvaluator _cSharpEvaluator;
         private readonly CollectionConverter _collectionConverter;
         private WebMatrixQuery _query = new WebMatrixQuery();
         private DbToolDatabase _db;
@@ -21,39 +22,22 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             set
             {
                 _db = value;
-                object result;
-                bool resultSet;
-                _evaluator.Evaluate(string.Format("_query.ConnectionString = \"{0}\";", _db.GetConnectionData().GetConnectionString()), out result, out resultSet);
-                _evaluator.Evaluate(string.Format("_query.ProviderName = \"{0}\";", _db.GetConnectionData().ProviderName),out result,out resultSet);
+                _cSharpEvaluator.Run(string.Format("_query.ConnectionString = \"{0}\";", _db.GetConnectionData().GetConnectionString()));
+                _cSharpEvaluator.Run(string.Format("_query.ProviderName = \"{0}\";", _db.GetConnectionData().ProviderName));
             }
         }
 
         public CSharpExecutor()
         {
             _collectionConverter = new CollectionConverter();
-            var report = new Report(new ConsoleReportPrinter());
-            var parser = new CommandLineParser(report);
-            var settings = parser.ParseArguments(new string[0]);
-            settings.AssemblyReferences.Add("System.Core.dll");
-            settings.AssemblyReferences.Add("WebMatrix.Data.dll");
-            settings.AssemblyReferences.Add("DbTool.Lib.CSharp.dll");
-            object result;
-            bool resultSet;
-            _evaluator = new Evaluator(settings, report);
-            
-            _evaluator.Run("using System;");
-            _evaluator.Run("using System.Linq;");
-            _evaluator.Run("using System.Collections.Generic;");
-            _evaluator.Run("using WebMatrix.Data;");
-            _evaluator.Run("using DbTool.Lib.CSharp.WebMatrix;");
-            _evaluator.Evaluate("var _query=new WebMatrixQuery();", out result, out resultSet);
+            _cSharpEvaluator = new CSharpEvaluator();
         }
 
         public IDbCommandResult Execute(string command)
         {
             if (command.StartsWith("using "))
             {
-                _evaluator.Run(command);
+                _cSharpEvaluator.Run(command);
                 return new MessageResult("");
             }
             
@@ -64,34 +48,30 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
         {
             if (command.Equals("vars"))
             {
-                var vars = _evaluator.GetVars();
-                return new MessageResult(string.Format("Vars:\n{0}",vars));
+                return new MessageResult(string.Format("Vars:\n{0}", string.Join(Environment.NewLine, _cSharpEvaluator.Vars)));
             }
             if (command.Equals("usings"))
             {
-                var usings = _evaluator.GetUsing();
-                return new MessageResult(string.Format("Usings:\n{0}", usings));
+                return new MessageResult(string.Format("Usings:\n{0}", string.Join(Environment.NewLine, _cSharpEvaluator.Usings)));
             }
 
             command = ModifySql(command);
             var builder = new StringBuilder();
             builder.AppendFormat("Running: {0}", command).AppendLine();
 
-            object value;
-            bool valueIsSet;
-            var returnMessage = _evaluator.Evaluate(command, out value, out valueIsSet);
-            
-            if (valueIsSet)
+            var result = _cSharpEvaluator.Run(command);
+
+            if (result.ResultSet)
             {
-                if (value.ShouldBeViewedInTable())
+                if (result.Result.ShouldBeViewedInTable())
                 {
-                    return _collectionConverter.Convert((IEnumerable)value);
+                    return _collectionConverter.Convert((IEnumerable)result.Result);
                 }
-                builder.AppendLine(value.ToString());
+                builder.AppendLine(result.Result.ToString());
             }
-            if (!returnMessage.IsNotNullOrEmpty())
+            if (result.HasMessage)
             {
-                builder.AppendLine(returnMessage);
+                builder.AppendLine(result.Message);
             }
             return new MessageResult(builder.ToString());
         }

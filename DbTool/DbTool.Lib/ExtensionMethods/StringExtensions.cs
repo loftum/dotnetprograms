@@ -1,9 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DbTool.Lib.ExtensionMethods
 {
     public static class StringExtensions
     {
+        public static IEnumerable<string> SplitLines(this string value)
+        {
+            return value.IsNullOrEmpty()
+                ? Enumerable.Empty<string>()
+                : value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+        }
+
         public static void ShouldNotBeNullOrWhitespace(this string value, string name)
         {
             if (value.IsNullOrWhitespace())

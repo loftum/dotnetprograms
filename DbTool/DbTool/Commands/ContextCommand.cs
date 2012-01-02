@@ -49,7 +49,10 @@ namespace DbTool.Commands
             {
                 SwitchContextTo(args.Arguments[0]);
             }
-            HandleContext(args);
+            else
+            {
+                HandleContext(args);
+            }
         }
 
         private void HandleContext(CommandArgs args)
