@@ -4,7 +4,7 @@ using Mono.CSharp;
 
 namespace DbTool.Lib.CSharp
 {
-    public class CSharpEvaluator
+    public class MonoCSharpEvaluator : ICSharpEvaluator
     {
         public IEnumerable<string> Vars
         {
@@ -18,7 +18,7 @@ namespace DbTool.Lib.CSharp
 
         private Evaluator _evaluator;
 
-        public CSharpEvaluator()
+        public MonoCSharpEvaluator()
         {
             Init();
         }

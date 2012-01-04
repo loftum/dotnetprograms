@@ -12,7 +12,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
 {
     public class CSharpExecutor : IDbCommandExecutor
     {
-        private readonly CSharpEvaluator _cSharpEvaluator;
+        private readonly ICSharpEvaluator _cSharpEvaluator;
         private readonly CollectionConverter _collectionConverter;
         private WebMatrixQuery _query = new WebMatrixQuery();
         private DbToolDatabase _db;
@@ -30,7 +30,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
         public CSharpExecutor()
         {
             _collectionConverter = new CollectionConverter();
-            _cSharpEvaluator = new CSharpEvaluator();
+            _cSharpEvaluator = new MonoCSharpEvaluator();
         }
 
         public IDbCommandResult Execute(string command)

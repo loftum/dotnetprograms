@@ -51,6 +51,10 @@
     <Reference Include="Ninject">
       <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Roslyn.Compilers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Roslyn.Compilers.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Roslyn.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Roslyn.Services.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -103,8 +107,10 @@
     <Compile Include="Connections\DbContext.cs" />
     <Compile Include="Connections\IDbConnectionFactory.cs" />
     <Compile Include="Connections\IDbContextFactory.cs" />
-    <Compile Include="CSharp\CSharpEvaluator.cs" />
+    <Compile Include="CSharp\MonoCSharpEvaluator.cs" />
     <Compile Include="CSharp\CSharpResult.cs" />
+    <Compile Include="CSharp\ICSharpEvaluator.cs" />
+    <Compile Include="CSharp\RoslynCSharpEvaluator.cs" />
     <Compile Include="DatabaseType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
