@@ -35,7 +35,7 @@ namespace DbTool.Lib.Data
             {
                 _dbConnection.Close();
             }
-
+            schema.RefreshObjectNameCache();
             return schema;
         }
     }

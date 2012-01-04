@@ -8,24 +8,31 @@ namespace DbTool.Lib.Data
     {
         public Schema Schema { get; private set; }
         public string Name { get; private set; }
-        private readonly IList<SchemaColumn> _columns;
-        public IEnumerable<SchemaColumn> Columns { get { return _columns; } }
+
+        public IEnumerable<SchemaColumn> Columns
+        {
+            get { return _columns.Values; }
+        }
+
+        private readonly IDictionary<string, SchemaColumn> _columns;
 
         public SchemaTable(Schema schema, string name)
         {
             Schema = schema;
             Name = name;
-            _columns = new List<SchemaColumn>();
+            _columns = new Dictionary<string, SchemaColumn>();
         }
 
         public void Add(SchemaColumn column)
         {
-            _columns.Add(column);
+            var lower = column.Name.ToLowerInvariant();
+            _columns[lower] = column;
         }
 
         public bool ContainsObject(string word)
         {
-            return Columns.Any(c => c.Name.EqualsIgnoreCase(word));
+            var lower = word.ToLowerInvariant();
+            return _columns.ContainsKey(word) || _columns.Values.Any(c => c.Name.EqualsIgnoreCase(lower));
         }
     }
 }

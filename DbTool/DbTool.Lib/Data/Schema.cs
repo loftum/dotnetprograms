@@ -1,33 +1,58 @@
 using System.Collections.Generic;
-using System.Linq;
-using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Data
 {
     public class Schema
     {
-        private readonly IList<SchemaTable> _tables;
-        public IEnumerable<SchemaTable> Tables { get { return _tables; } }
+        private readonly ISet<string> _objectNames;
+        private readonly IDictionary<string, SchemaTable> _tables;
 
         public Schema()
         {
-            _tables = new List<SchemaTable>();
+            _tables = new Dictionary<string, SchemaTable>();
+            _objectNames = new HashSet<string>();
         }
 
         public SchemaTable GetOrCreateTable(string name)
         {
-            var table = _tables.Where(t => t.Name.Equals(name)).FirstOrDefault();
+            var lower = name.ToLowerInvariant();
+            var table = GetTable(lower);
             if (table == null)
             {
                 table = new SchemaTable(this, name);
-                _tables.Add(table);
+                _tables[lower] = table;
             }
             return table;
         }
 
-        public bool ContainsObject(string word)
+        private SchemaTable GetTable(string lowerCaseName)
         {
-            return Tables.Any(table => table.Name.EqualsIgnoreCase(word) || table.ContainsObject(word));
+            try
+            {
+                return _tables[lowerCaseName];
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
+
+        public bool ContainsObject(string lowerCase)
+        {
+            return _objectNames.Contains(lowerCase);
+        }
+
+        public void RefreshObjectNameCache()
+        {
+            _objectNames.Clear();
+            foreach (var table in _tables.Values)
+            {
+                _objectNames.Add(table.Name.ToLowerInvariant());
+                foreach (var column in table.Columns)
+                {
+                    _objectNames.Add(column.Name.ToLowerInvariant());
+                }
+            }
         }
     }
 }

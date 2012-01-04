@@ -54,6 +54,11 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             {
                 return new MessageResult(string.Format("Usings:\n{0}", string.Join(Environment.NewLine, _cSharpEvaluator.Usings)));
             }
+            if (command.Equals("reset"))
+            {
+                _cSharpEvaluator.Init();
+                return new MessageResult(string.Format("Reset C# Evaluator"));
+            }
 
             command = ModifySql(command);
             var builder = new StringBuilder();
@@ -78,10 +83,13 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
 
         private string ModifySql(string command)
         {
-            if (command.Matches(@"\${1}\({1}[\s\S]+\)"))
+            const string pattern = @"\${1}(<[^\s]+>)?\({1}[\s\S]+\){1}";
+            if (command.Matches(pattern))
             {
-                var rawSql = Regex.Match(command, @"\${1}\({1}[\s\S]+\)").Value;
-                var query = rawSql.Replace("$", "_query.Query").Replace("(", "(\"").Replace(")", "\")");
+                var rawSql = Regex.Match(command, pattern).Value;
+                var query = rawSql.Replace("$", "_query.Query")
+                    .Replace("(", "(\"")
+                    .Replace(")", "\")");
                 command = command.Replace(rawSql, query);
             }
             return command;

@@ -9,6 +9,7 @@ namespace DbTool.Lib.Ui.Syntax
         Operator = 4,
         String = 5,
         Object = 6,
-        Setting = 7
+        Setting = 7,
+        CSharp = 8
     }
 }

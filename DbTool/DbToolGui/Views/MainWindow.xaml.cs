@@ -25,6 +25,7 @@ namespace DbToolGui.Views
         public MainWindow()
         {
             InitializeComponent();
+            ConsoleLogger.Instance.TextBox = Console;
             var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
             _viewModel = kernel.Get<MainViewModel>();
             DataContext = _viewModel;
@@ -48,11 +49,12 @@ namespace DbToolGui.Views
 
         private void EditorBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F5 || e.Key.CombinationOf(ModifierKeys.Control, Key.Return, Key.Enter))
+            if (e.Key != Key.F5)
             {
-                _viewModel.EditorText = EditorBox.GetSelectedOrAllText();
-                _viewModel.ExecuteCommand.Execute(sender);
+                return;
             }
+            _viewModel.EditorText = EditorBox.GetSelectedOrAllText();
+            _viewModel.ExecuteCommand.Execute(sender);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

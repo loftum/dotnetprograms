@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Threading;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Syntax;
 
@@ -12,7 +13,9 @@ namespace DbToolGui.Highlighting
 {
     public class SyntaxHighlighter : ISyntaxHighlighter
     {
-        public bool Running { get; private set; }
+        private Timer _timer;
+
+        private bool _highlighting;
         private readonly object _lock = new object();
         private bool _textChanged;
         private bool TextChanged
@@ -46,6 +49,8 @@ namespace DbToolGui.Highlighting
             _document = _textBox.Document;
             _syntaxProvider = syntaxProvider;
             _styles = new Dictionary<TagType, HighlightStyle>();
+            _styles[TagType.CSharp] = new HighlightStyle()
+                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Red));
             _styles[TagType.Keyword] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Blue));
             _styles[TagType.Function] = new HighlightStyle()
@@ -70,48 +75,56 @@ namespace DbToolGui.Highlighting
 
         public void StartHighlight()
         {
-            new Thread(Highlight).Start();
+            _timer = new Timer(1000);
+            _timer.Elapsed += HandleElapsed;
+            _timer.Start();
+        }
+
+        private void HandleElapsed(object sender, ElapsedEventArgs e)
+        {
+            if (TextChanged && !_highlighting)
+            {
+                Highlight();
+            }
         }
 
         public void StopHighlight()
         {
-            Running = false;
+            _timer.Stop();
+            _timer.Elapsed -= HandleElapsed;
+            _timer.Dispose();
         }
 
-        public void Highlight()
+        private void Highlight()
         {
-            Running = true;
-            while(Running)
-            {
-                if (TextChanged)
-                {
-                    _dispatcher.Invoke(DispatcherPriority.Normal, new Action(DoHighlight));
-                    TextChanged = false;
-                }
-                Thread.Sleep(300);
-            }
+            _highlighting = true;
+            _dispatcher.Invoke(DispatcherPriority.Background, new Action(DoHighlight));
+            TextChanged = false;
+            _highlighting = false;
         }
 
-        public void DoHighlight()
+        private void DoHighlight()
         {
             var textRange = new TextRange(_document.ContentStart, _document.ContentEnd);
             textRange.ClearAllProperties();
 
             var navigator = _document.ContentStart;
-            while (navigator.CompareTo(_document.ContentEnd) < 0)
+            var end = _document.ContentEnd;
+            var tags = new List<Tag>();
+            while (navigator.CompareTo(end) < 0)
             {
                 var context = navigator.GetPointerContext(LogicalDirection.Backward);
                 if (context == TextPointerContext.ElementStart && navigator.Parent is Run)
                 {
-                    HighlightWordsIn((Run)navigator.Parent);
+                    tags.AddRange(GetKeywordTagsIn((Run)navigator.Parent));
                 }
                 navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
             }
+            Highlight(tags);
         }
 
-        private void HighlightWordsIn(Run run)
+        private void Highlight(IEnumerable<Tag> tags)
         {
-            var tags = GetKeywordTagsIn(run);
             _textBox.TextChanged -= HandleTextChanged;
             Format(tags);
             _textBox.TextChanged += HandleTextChanged;
@@ -121,6 +134,10 @@ namespace DbToolGui.Highlighting
         {
             var text = run.Text;
             var tags = new List<Tag>();
+            if (text.IsSingleWord())
+            {
+                return tags;
+            }
 
             var startIndex = 0;
             for (var ii = 0; ii < text.Length; ii++)

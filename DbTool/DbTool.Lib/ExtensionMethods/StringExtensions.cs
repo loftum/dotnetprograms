@@ -13,6 +13,12 @@ namespace DbTool.Lib.ExtensionMethods
                 : value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        public static bool IsSingleWord(this string value)
+        {
+            value.ShouldNotBeNull("value");
+            return value.Matches(@"^[\S]+$");
+        }
+
         public static void ShouldNotBeNullOrWhitespace(this string value, string name)
         {
             if (value.IsNullOrWhitespace())

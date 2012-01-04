@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using DbTool.Lib.Data;
 
 namespace DbToolGui.Controls
@@ -37,6 +36,7 @@ namespace DbToolGui.Controls
             return new TextBox
                           {
                               IsReadOnly = true,
+                              FontSize = 12,
                               Height = 20,
                               Text = record.Properties[_descriptor.Index].ValueAsString,
                               DataContext = dataItem,

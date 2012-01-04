@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using WebMatrix.Data;
 
@@ -25,6 +26,20 @@ namespace DbTool.Lib.CSharp.WebMatrix
             using (var db = Database.OpenConnectionString(ConnectionString, ProviderName))
             {
                 var result = db.Query(sql);
+                return result;
+            }
+        }
+
+        public IEnumerable<T> Query<T>(string sql)
+        {
+            if (IsOneWord(sql))
+            {
+                sql = string.Format("select * from {0}", sql);
+            }
+
+            using (var db = Database.OpenConnectionString(ConnectionString, ProviderName))
+            {
+                var result = db.Query(sql).Cast<T>();
                 return result;
             }
         }
