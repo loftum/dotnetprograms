@@ -18,8 +18,7 @@ namespace DbTool.Lib.Ui.Worksheet
 
         public void Save(string worksheetText)
         {
-            var worksheetPath = _pathResolver.GetFullPathOf(_settings.WorksheetFile);
-            using (var stream = File.Open(worksheetPath, FileMode.OpenOrCreate, FileAccess.Write))
+            using (var stream = TruncateOrCreateWorkSheetFile())
             {
                 using (var writer = new StreamWriter(stream))
                 {
@@ -27,6 +26,13 @@ namespace DbTool.Lib.Ui.Worksheet
                     writer.Flush();
                 }
             }
+        }
+
+        private FileStream TruncateOrCreateWorkSheetFile()
+        {
+            var worksheetPath = _pathResolver.GetFullPathOf(_settings.WorksheetFile);
+            var fileMode = worksheetPath.Exists() ? FileMode.Truncate : FileMode.Create;
+            return File.Open(worksheetPath, fileMode, FileAccess.Write);
         }
 
         public string Load()

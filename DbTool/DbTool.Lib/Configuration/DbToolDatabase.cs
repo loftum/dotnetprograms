@@ -1,4 +1,5 @@
 ﻿using System;
+using DbTool.Lib.ExtensionMethods;
 using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration
@@ -44,7 +45,14 @@ namespace DbTool.Lib.Configuration
                 : propertyFunc(Parent);
         }
 
+        public string MigrationType { get; set; }
         public string MigrationPath { get; set; }
+
+        [JsonIgnore]
+        public bool CanMigrate
+        {
+            get { return !(MigrationPath.IsNullOrEmpty() || MigrationType.IsNullOrEmpty()); }
+        }
 
         public ConnectionData GetConnectionData()
         {

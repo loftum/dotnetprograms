@@ -6,12 +6,12 @@ using Migrator.Framework.Loggers;
 
 namespace DbTool.Lib.Migrating
 {
-    public class MigrationRunner : IMigrateDbTask
+    public class MigratorDotNetRunner : IMigrateDbTask
     {
         private readonly DbToolDatabase _database;
         private readonly IDbToolLogger _logger;
 
-        public MigrationRunner(DbToolDatabase database, IDbToolLogger logger)
+        public MigratorDotNetRunner(DbToolDatabase database, IDbToolLogger logger)
         {
             _database = database;
             _logger = logger;
@@ -27,11 +27,11 @@ namespace DbTool.Lib.Migrating
             CreateMigrator().MigrateToLastVersion();
         }
 
-        private Migrator.Migrator CreateMigrator()
+        private global::Migrator.Migrator CreateMigrator()
         {
             var connectionString = _database.GetConnectionData().GetConnectionString();
             var assembly = Assembly.LoadFrom(_database.MigrationPath);
-            return new Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, _logger));
+            return new global::Migrator.Migrator("sqlserver", connectionString, assembly, false, new Logger(false, _logger));
         }
     }
 }

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
@@ -7,8 +9,18 @@ namespace DbTool.Commands
     public class CreateDatabase : TaskCommandBase
     {
         public CreateDatabase(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("create", "<databasename>", "MyDatabase", logger, settings, taskFactory)
+            : base("create", logger, settings, taskFactory)
         {
+        }
+
+        protected override IEnumerable<string> GetUsages()
+        {
+            return "<databasename>".AsArray();
+        }
+
+        protected override IEnumerable<string> GetExamples()
+        {
+            return "MyDatabase".AsArray();
         }
 
         public override bool AreValid(CommandArgs args)

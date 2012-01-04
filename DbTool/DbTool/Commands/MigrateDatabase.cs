@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
@@ -9,8 +11,18 @@ namespace DbTool.Commands
     public class MigrateDatabase : TaskCommandBase
     {
         public MigrateDatabase(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("migrate", "<database> [version]", "MyDatabase 1234", logger, settings, taskFactory)
+            : base("migrate", logger, settings, taskFactory)
         {
+        }
+
+        protected override IEnumerable<string> GetUsages()
+        {
+            return "<database> [version]".AsArray();
+        }
+
+        protected override IEnumerable<string> GetExamples()
+        {
+            return new[] {"MyDatabase", "MyDatabase 1234"};
         }
 
         public override bool AreValid(CommandArgs args)

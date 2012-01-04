@@ -20,7 +20,7 @@ namespace DbTool.Lib.Communication.DbCommands
         {
             var version = GetVersionFrom(statement);
             var logger = new MemoryLogger();
-            var runner = new MigrationRunner(_database, logger);
+            var runner = new MigratorDotNetRunner(_database, logger);
             if (version.HasValue)
             {
                 runner.MigrateTo(version.Value);

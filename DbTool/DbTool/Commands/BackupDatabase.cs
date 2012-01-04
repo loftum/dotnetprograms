@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
@@ -7,8 +9,18 @@ namespace DbTool.Commands
     public class BackupDatabase : TaskCommandBase
     {
         public BackupDatabase(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("backup", "<database>", "MyDatabase", logger, settings, taskFactory)
+            : base("backup", logger, settings, taskFactory)
         {
+        }
+
+        protected override IEnumerable<string> GetUsages()
+        {
+            return "<database>".AsArray();
+        }
+
+        protected override IEnumerable<string> GetExamples()
+        {
+            return "MyDatabase".AsArray();
         }
 
         public override bool AreValid(CommandArgs args)

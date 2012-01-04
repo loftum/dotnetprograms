@@ -12,16 +12,16 @@ namespace DbTool.Commands
         private const string DeleteFlag = "-d";
 
         public ContextCommand(IDbToolLogger logger, IDbToolSettings settings)
-            : base("context", GetUsage(), GetExamples(), logger, settings)
+            : base("context", logger, settings)
         {
         }
 
-        private static IEnumerable<string> GetUsage()
+        protected override IEnumerable<string> GetUsages()
         {
             return string.Format("[context] [{0}] [{1}]", AddFlag, DeleteFlag).AsArray();
         }
 
-        private static IEnumerable<string> GetExamples()
+        protected override IEnumerable<string> GetExamples()
         {
             return new []
                 {

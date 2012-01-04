@@ -11,8 +11,18 @@ namespace DbTool.Commands
     public class SetSettings : CommandBase
     {
         public SetSettings(IDbToolLogger logger, IDbToolSettings settings)
-            : base("set", "<setting>:<value>", @"BackupDirectory:C:\Backup", logger, settings)
+            : base("set", logger, settings)
         {
+        }
+
+        protected override IEnumerable<string> GetUsages()
+        {
+            return "<setting>:<value>".AsArray();
+        }
+
+        protected override IEnumerable<string> GetExamples()
+        {
+            return @"BackupDirectory:C:\Backup".AsArray();
         }
 
         public override bool AreValid(CommandArgs args)

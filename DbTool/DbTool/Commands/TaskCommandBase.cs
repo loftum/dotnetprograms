@@ -8,8 +8,8 @@ namespace DbTool.Commands
     {
         protected ITaskFactory TaskFactory { get; private set; }
 
-        protected TaskCommandBase(string name, string usage, string example, IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base(name, usage, example, logger, settings)
+        protected TaskCommandBase(string name, IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
+            : base(name, logger, settings)
         {
             TaskFactory = taskFactory;
         }

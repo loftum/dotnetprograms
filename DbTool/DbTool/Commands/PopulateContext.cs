@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 
@@ -10,8 +12,18 @@ namespace DbTool.Commands
         private const string Overwrite = "-f";
 
         public PopulateContext(IDbToolLogger logger, IDbToolSettings settings, ITaskFactory taskFactory)
-            : base("populate", "[database|database2..] [-f (=overwrite existing)]", "MyDatabase -f", logger, settings, taskFactory)
+            : base("populate", logger, settings, taskFactory)
         {
+        }
+
+        protected override IEnumerable<string> GetUsages()
+        {
+            return string.Format("[database|database2..] [{0} (=overwrite existing)]", Overwrite).AsArray();
+        }
+
+        protected override IEnumerable<string> GetExamples()
+        {
+            return string.Format("MyDatabase {0}", Overwrite).AsArray();
         }
 
         public override bool AreValid(CommandArgs args)

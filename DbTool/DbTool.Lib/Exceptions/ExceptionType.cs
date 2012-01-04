@@ -27,6 +27,12 @@ namespace DbTool.Lib.Exceptions
         [Description("Database {0} already exists")]
         DatabaseAlreadyExists,
         [Description("Invalid schema query")]
-        InvalidSchemaQuery
+        InvalidSchemaQuery,
+        [Description("No migrationinfo available for database {0}")]
+        MissingMigrationInfo,
+        [Description("Unknown migration type: {0}")]
+        UnknownMigrationType,
+        [Description("DatabaseType {0} is not supported with MigSharp")]
+        UnsupportedMigSharpProviderName
     }
 }

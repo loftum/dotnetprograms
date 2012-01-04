@@ -39,6 +39,9 @@
     <Reference Include="Migrator.Providers">
       <HintPath>..\BuildAssets\Migrator\Migrator.Providers.dll</HintPath>
     </Reference>
+    <Reference Include="MigSharp">
+      <HintPath>..\..\Lib\3rdParty\MigSharp\MigSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.CSharp">
       <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.dll</HintPath>
     </Reference>
@@ -102,6 +105,7 @@
     <Compile Include="Connections\IDbContextFactory.cs" />
     <Compile Include="CSharp\CSharpEvaluator.cs" />
     <Compile Include="CSharp\CSharpResult.cs" />
+    <Compile Include="DatabaseType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Record.cs" />
@@ -127,8 +131,8 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
-    <Compile Include="Migrating\IMigrationLogger.cs" />
-    <Compile Include="Migrating\MigrationRunner.cs" />
+    <Compile Include="Migrating\MigratorDotNetRunner.cs" />
+    <Compile Include="Migrating\MigSharpRunner.cs" />
     <Compile Include="Modules\ConfigModule.cs" />
     <Compile Include="Modules\TaskModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +161,7 @@
       <Name>DbTool.Lib.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

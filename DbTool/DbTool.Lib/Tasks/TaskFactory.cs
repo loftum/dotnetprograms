@@ -59,7 +59,19 @@ namespace DbTool.Lib.Tasks
         public IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database)
         {
             database.ShouldNotBeNull("database");
-            return new MigrationRunner(database, _logger);
+            if (!database.CanMigrate)
+            {
+                throw new UserException(ExceptionType.MissingMigrationInfo, database.Name);
+            }
+            switch(database.MigrationType.ToLowerInvariant())
+            {
+                case "migrator.net":
+                    return new MigratorDotNetRunner(database, _logger);
+                case "migsharp":
+                    return new MigSharpRunner(database);
+                default:
+                    throw new UserException(ExceptionType.UnknownMigrationType, database.MigrationType);
+            }
         }
 
         public IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection)
