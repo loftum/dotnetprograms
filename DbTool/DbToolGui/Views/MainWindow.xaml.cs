@@ -25,7 +25,7 @@ namespace DbToolGui.Views
         public MainWindow()
         {
             InitializeComponent();
-            ConsoleLogger.Instance.TextBox = Console;
+            DebugLogger.Instance.TextBox = DebugBox;
             var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
             _viewModel = kernel.Get<MainViewModel>();
             DataContext = _viewModel;

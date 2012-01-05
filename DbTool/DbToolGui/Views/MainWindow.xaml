@@ -12,7 +12,7 @@
                      BorderBrush="DarkGray"/>
         </DataTemplate>
     </Window.Resources>
-    <DockPanel Name="MainPanel" LastChildFill="True">
+    <DockPanel Name="MainPanel" LastChildFill="True" Grid.Column="1">
         <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
             <Button Name="ConnectButton" Content="{Binding Path=ConnectCommandName, Mode=OneWay}" Command="{Binding Path=ConnectCommand}" DockPanel.Dock="Right" />
             <Grid>
@@ -40,61 +40,77 @@
             </StatusBar>
         </DockPanel>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="200px" />
-                </Grid.ColumnDefinitions>
-                <RichTextBox Name="EditorBox" Grid.Row="0" Grid.Column="0"
-                        FontFamily="Courier New" FontSize="12"
-                        AcceptsReturn="True" AcceptsTab="true"
-                        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                        BorderThickness="0"
-                        KeyUp="EditorBox_KeyUp">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBox Name="DebugBox"
+                         HorizontalScrollBarVisibility="Auto"
+                         VerticalScrollBarVisibility="Auto"
+                         IsReadOnly="true"
+                         FontFamily="Courier New"
+                         FontSize="12"
+                         BorderThickness="0"
+                         BorderBrush="Transparent"
+                         AcceptsReturn="True"
+                         AcceptsTab="true"
+                         Background="DarkGray"
+                         Foreground="White" />
+            </Grid>
+            <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                          Background="LightGray"
+                          Grid.Column="1" ResizeBehavior="PreviousAndNext"
+                          Width="5" />
+            
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <RichTextBox Name="EditorBox" Grid.Row="0"
+                            FontFamily="Courier New" FontSize="12"
+                            AcceptsReturn="True" AcceptsTab="true"
+                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                            BorderThickness="0"
+                            KeyUp="EditorBox_KeyUp">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0"/>
                         </Style>
                     </RichTextBox.Resources>
                 </RichTextBox>
-                <TextBox Grid.Column="1" Name="Console">
-                    
-                </TextBox>
-            </Grid>
+
+                <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                Background="LightGray"
+                                Grid.Row="1" ResizeBehavior="PreviousAndNext"
+                                Height="5" />
             
-            <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                          Background="LightGray"
-                          Grid.Row="1" ResizeBehavior="PreviousAndNext"
-                          Height="5" />
-            
-            <DockPanel Name="ResultPanel" Grid.Row="2" >
+                <DockPanel Name="ResultPanel" Grid.Row="2" >
                 
-                <TextBox Name="ResultTextBox"
-                         Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
-                         Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
-                         IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-                         BorderThickness="0" BorderBrush="Transparent"
-                         AcceptsReturn="True" AcceptsTab="true"
-                         DockPanel.Dock="Top"/>
-                <DataGrid Name="ResultTable"
-                          HorizontalGridLinesBrush="DarkGray"
-                          VerticalGridLinesBrush="DarkGray"
-                          BorderBrush="DarkGray"
-                          Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          CanUserReorderColumns="True"
-                          CanUserSortColumns="False"
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
-                ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
-            </DockPanel>
-            
+                    <TextBox Name="ResultTextBox"
+                                Text="{Binding Path=QueryResult.ResultText, Mode=OneWay}"
+                                Visibility="{Binding Path=QueryResult.ResultTextVisibility, Mode=OneWay}"
+                                IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                                BorderThickness="0" BorderBrush="Transparent"
+                                AcceptsReturn="True" AcceptsTab="true"
+                                DockPanel.Dock="Top"/>
+                    <DataGrid Name="ResultTable"
+                                HorizontalGridLinesBrush="DarkGray"
+                                VerticalGridLinesBrush="DarkGray"
+                                BorderBrush="DarkGray"
+                                Visibility="{Binding Path=QueryResult.TableVisibility, Mode=OneWay}"
+                                CanUserAddRows="False"
+                                CanUserDeleteRows="False"
+                                CanUserReorderColumns="True"
+                                CanUserSortColumns="False"
+                                AutoGenerateColumns="False"
+                                ItemsSource="{Binding Path=QueryResult.Records, Mode=OneWay}"
+                    ExtensionMethods:DataGridExtensions.Columns="{Binding Path=QueryResult.Columns, Mode=OneWay}" />
+                </DockPanel>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

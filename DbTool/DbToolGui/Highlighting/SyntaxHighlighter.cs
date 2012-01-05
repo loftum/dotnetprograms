@@ -8,12 +8,14 @@ using System.Windows.Threading;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Syntax;
+using DbToolGui.Views;
 
 namespace DbToolGui.Highlighting
 {
     public class SyntaxHighlighter : ISyntaxHighlighter
     {
         private Timer _timer;
+        private readonly IDebugLogger _logger;
 
         private bool _highlighting;
         private readonly object _lock = new object();
@@ -50,8 +52,8 @@ namespace DbToolGui.Highlighting
             _syntaxProvider = syntaxProvider;
             _styles = new Dictionary<TagType, HighlightStyle>();
             _styles[TagType.CSharp] = new HighlightStyle()
-                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Red));
-            _styles[TagType.Keyword] = new HighlightStyle()
+                .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DodgerBlue));
+            _styles[TagType.SqlKeyword] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Blue));
             _styles[TagType.Function] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkCyan));
@@ -66,6 +68,7 @@ namespace DbToolGui.Highlighting
             _styles[TagType.Setting] = new HighlightStyle()
                 .With(TextElement.ForegroundProperty, new SolidColorBrush(Colors.DarkMagenta));
             _textBox.TextChanged += HandleTextChanged;
+            _logger = DebugLogger.Instance;
         }
 
         private void HandleTextChanged(object sender, TextChangedEventArgs e)
@@ -116,7 +119,8 @@ namespace DbToolGui.Highlighting
                 var context = navigator.GetPointerContext(LogicalDirection.Backward);
                 if (context == TextPointerContext.ElementStart && navigator.Parent is Run)
                 {
-                    tags.AddRange(GetKeywordTagsIn((Run)navigator.Parent));
+                    var run = (Run) navigator.Parent;
+                    tags.AddRange(GetKeywordTagsIn(run));
                 }
                 navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
             }

@@ -57,7 +57,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             if (command.Equals("reset"))
             {
                 _cSharpEvaluator.Init();
-                return new MessageResult(string.Format("Reset C# Evaluator"));
+                return new MessageResult(string.Format("C# Evaluator is reset"));
             }
 
             command = ModifySql(command);

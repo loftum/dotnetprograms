@@ -83,7 +83,8 @@
     <Compile Include="ViewModels\QueryResultViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelException.cs" />
-    <Compile Include="Views\ConsoleLogger.cs" />
+    <Compile Include="Views\DebugLogger.cs" />
+    <Compile Include="Views\IDebugLogger.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
