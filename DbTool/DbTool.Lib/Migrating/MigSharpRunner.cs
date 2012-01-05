@@ -1,6 +1,8 @@
 using System.Reflection;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Tasks;
+using MigSharp;
 
 namespace DbTool.Lib.Migrating
 {
@@ -27,7 +29,9 @@ namespace DbTool.Lib.Migrating
         {
             var providerName = DatabaseType.ToMigSharpProvider(_database.DatabaseType);
             var connection = _database.GetConnectionData();
-            var migrator = new MigSharp.Migrator(connection.GetConnectionString(), providerName);
+            var options = new MigrationOptions();
+            options.SupportedProviders.Set(providerName.AsArray());
+            var migrator = new MigSharp.Migrator(connection.GetConnectionString(), providerName, options);
             return migrator;
         }
     }
