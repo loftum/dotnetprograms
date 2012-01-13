@@ -33,11 +33,20 @@
             </Grid>
         </DockPanel>
         <DockPanel Name="StatusPanel" DockPanel.Dock="Bottom">
-            <StatusBar Background="White" Foreground="DarkGray">
-                <StatusBarItem>
-                    <TextBlock Text="{Binding Path=StatusText, Mode=OneWay}" />
-                </StatusBarItem>
-            </StatusBar>
+            <DockPanel LastChildFill="True">
+                <TextBox Name="MemoryUsageBox" DockPanel.Dock="Right"
+                         IsReadOnly="True"
+                         Text="{Binding Path=MemoryUsage, Mode=OneWay}"
+                         Foreground="LightGray"
+                         Background="White"
+                         BorderThickness="0"
+                         BorderBrush="Transparent" />
+                <StatusBar Background="White" Foreground="DarkGray">
+                    <StatusBarItem>
+                        <TextBlock Text="{Binding Path=StatusText, Mode=OneWay}" />
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
         </DockPanel>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -127,6 +127,7 @@
     <Compile Include="ExtensionMethods\DataRowExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
+    <Compile Include="ExtensionMethods\LongExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="ExtensionMethods\RegexExtensions.cs" />
@@ -137,6 +138,8 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
+    <Compile Include="Memory\IMemoryMeter.cs" />
+    <Compile Include="Memory\MemoryMeter.cs" />
     <Compile Include="Migrating\MigratorDotNetRunner.cs" />
     <Compile Include="Migrating\MigSharpRunner.cs" />
     <Compile Include="Modules\ConfigModule.cs" />

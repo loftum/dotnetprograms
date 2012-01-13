@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DbTool.Lib.Communication;
-using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Memory;
 using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Commands;
 
@@ -29,6 +28,14 @@ namespace DbToolGui.ViewModels
         public string Icon
         {
             get { return _communicator.IsConnected ? "/Images/dbplus.ico" : "/Images/db.ico"; }
+        }
+
+        private MemoryMeter _memoryMeter;
+        private string _memoryUsage;
+        public string MemoryUsage
+        {
+            get { return _memoryUsage; }
+            set { _memoryUsage = value; OnPropertyChanged(() => MemoryUsage); }
         }
 
         private readonly IDatabaseCommunicator _communicator;
@@ -70,6 +77,8 @@ namespace DbToolGui.ViewModels
             
             Connection = new ConnectionViewModel(_settings);
             QueryResult = new QueryResultViewModel();
+            _memoryMeter = new MemoryMeter(mem => MemoryUsage = mem.ToMemoryUsage());
+            _memoryMeter.Start();
         }
 
         private void ToggleConnect(object arg)
