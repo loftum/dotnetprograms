@@ -72,7 +72,9 @@
     <Compile Include="Tasks\ListDbTask.cs" />
     <Compile Include="Tasks\PopulateContextTask.cs" />
     <Compile Include="Tasks\RestoreTask.cs" />
+    <Compile Include="Tasks\ServerExtensions.cs" />
     <Compile Include="Tasks\SqlServerProgressTaskBase.cs" />
+    <Compile Include="Tasks\SqlServerUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">

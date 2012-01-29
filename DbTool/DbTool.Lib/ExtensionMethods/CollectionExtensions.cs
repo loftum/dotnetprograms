@@ -14,6 +14,12 @@ namespace DbTool.Lib.ExtensionMethods
             return new[]{item};
         }
 
+        public static string StringJoin<T>(this IEnumerable<T> collection, string separator, string defaultValue = null)
+        {
+            collection.ShouldNotBeNull("collection");
+            return collection.Any() ? string.Join(separator, collection) : defaultValue;
+        }
+
         public static IEnumerable<T> Except<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
         {
             collection.ShouldNotBeNull("collection");
