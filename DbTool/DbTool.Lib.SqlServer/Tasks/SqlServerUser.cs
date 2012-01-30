@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.SqlServer.Management.Smo;
 
 namespace DbTool.Lib.SqlServer.Tasks
@@ -17,6 +18,16 @@ namespace DbTool.Lib.SqlServer.Tasks
             Login = user.Login;
             Database = user.Parent.Name;
             Roles = user.EnumRoles().Cast<string>().ToList();
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder().Append(Name);
+            if (Roles.Any())
+            {
+                builder.AppendFormat(" ({0})", string.Join(",", Roles));
+            }
+            return builder.ToString();
         }
     }
 }

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
 using Microsoft.SqlServer.Management.Smo;
@@ -39,8 +38,7 @@ namespace DbTool.Lib.SqlServer.Tasks
                 }
 
                 var users = server.GetLoginUsers(database);
-                var usernames = users.Select(user => user.Name);
-                Logger.WriteLine("User mappings to restore: {0}", usernames.StringJoin(",", "None"));
+                Logger.WriteLine("User mappings to restore: {0}", string.Join(",", users));
 
                 RelocateFiles(database, restore);
                 
@@ -84,7 +82,7 @@ namespace DbTool.Lib.SqlServer.Tasks
         {
             try
             {
-                Logger.WriteLine("User: {0}, Roles: {0}", user.Name, user.Roles.StringJoin(",", "None"));
+                Logger.WriteLine("User: {0}", user);
                 var newUser = new User(database, user.Name)
                     {
                         Login = user.Login
@@ -142,7 +140,6 @@ namespace DbTool.Lib.SqlServer.Tasks
                 Logger.WriteLine("Relocating log file [{0}] to {1}", logFile.Name, physicalPath);
             }
         }
-
 
         private string GetFullPathFrom(string filePath)
         {
