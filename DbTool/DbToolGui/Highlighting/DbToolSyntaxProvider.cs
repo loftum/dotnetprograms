@@ -28,7 +28,7 @@ namespace DbToolGui.Highlighting
                 "group", "order", "by", "asc", "desc" });
             _functions = new HashSet<string>(new[] { "migrate", "up", "down", "show", "set", "vars", "usings", "$" });
             _operators = new HashSet<string>(new[] {"+", "-", "*", "/", "=", "!=", "<", ">", "<>"});
-            _separators = new HashSet<char>(new[] {' ', '.','=', '+', '-', '<', '>', '(', ')', '\t', '\n', '\r'});
+            _separators = new HashSet<char>(new[] {' ', '.', ';','=', '+', '-', '<', '>', '(', ')', '\t', '\n', '\r'});
             _settings = new HashSet<string>(GetSettings());
             _cSharpKeywords = new HashSet<string>(new[]{"var", "void", "string", "object", "dynamic",
                 "int", "long", "double", "float", "decimal",  "bool", "char",

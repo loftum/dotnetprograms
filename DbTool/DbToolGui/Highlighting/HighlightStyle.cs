@@ -1,21 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows.Media;
+using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
 {
     public class HighlightStyle
     {
-        public IDictionary<DependencyProperty, object> Properties { get; private set; }
-
-        public HighlightStyle()
-        {
-            Properties = new Dictionary<DependencyProperty, object>();
-        }
-
-        public HighlightStyle With(DependencyProperty property, object value)
-        {
-            Properties[property] = value;
-            return this;
-        }
+        public TagType Type { get; set; }
+        public Brush Foreground { get; set; }
     }
 }

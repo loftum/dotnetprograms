@@ -66,15 +66,18 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Controls\CustomBoundColumn.cs" />
+    <Compile Include="Controls\Syntax\EditorTextBox.xaml.cs">
+      <DependentUpon>EditorTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Syntax\HighlightStyleCollection.cs" />
+    <Compile Include="Controls\Syntax\NotifyableWordCollection.cs" />
     <Compile Include="ExtensionMethods\DataGridExtensions.cs" />
     <Compile Include="ExtensionMethods\KeyExtensions.cs" />
     <Compile Include="ExtensionMethods\RichTextBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\TextBoxExtensions.cs" />
     <Compile Include="Highlighting\HighlightStyle.cs" />
-    <Compile Include="Highlighting\ISyntaxHighlighterFactory.cs" />
-    <Compile Include="Highlighting\SyntaxHighlighterFactory.cs" />
-    <Compile Include="Highlighting\SyntaxHighlighter.cs" />
+    <Compile Include="Highlighting\DbToolSyntaxParser.cs" />
     <Compile Include="Highlighting\DbToolSyntaxProvider.cs" />
-    <Compile Include="Highlighting\Tag.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
     <Compile Include="Modules\SettingsModule.cs" />
     <Compile Include="Modules\ViewModelModule.cs" />
@@ -92,6 +95,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Controls\Syntax\EditorTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

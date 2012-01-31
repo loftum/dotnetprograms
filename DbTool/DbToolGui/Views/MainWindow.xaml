@@ -1,8 +1,9 @@
 <Window x:Class="DbToolGui.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{Binding Path=Title}" Height="600" Width="800"
-        Icon="{Binding Path=Icon}" xmlns:my="clr-namespace:DbToolGui.Controls"
-        xmlns:ExtensionMethods="clr-namespace:DbToolGui.ExtensionMethods">
+        Icon="{Binding Path=Icon}" xmlns:ExtensionMethods="clr-namespace:DbToolGui.ExtensionMethods"
+        xmlns:Syntax="clr-namespace:DbToolGui.Controls.Syntax"
+        xmlns:Highlighting="clr-namespace:DbToolGui.Highlighting">
     <Window.Resources>
         <DataTemplate x:Key="PropertyValueTemplate">
             <TextBox Text="{Binding Path=ValueAsString, Mode=OneWay}"
@@ -11,6 +12,26 @@
                      BorderThickness="0"
                      BorderBrush="DarkGray"/>
         </DataTemplate>
+
+        <Syntax:HighlightStyleCollection x:Key="DefaultSyntaxStyle">
+            <Highlighting:HighlightStyle Type="CSharp" Foreground="DodgerBlue" />
+            <Highlighting:HighlightStyle Type="SqlKeyword" Foreground="Blue" />
+            <Highlighting:HighlightStyle Type="Function" Foreground="DarkCyan" />
+            <Highlighting:HighlightStyle Type="String" Foreground="DarkRed" />
+            <Highlighting:HighlightStyle Type="Default" Foreground="Black" />
+            <Highlighting:HighlightStyle Type="Object" Foreground="Olive" />
+            <Highlighting:HighlightStyle Type="Setting" Foreground="DarkMagenta" />
+            <Highlighting:HighlightStyle Type="Operator" Foreground="Gray" />
+        </Syntax:HighlightStyleCollection>
+
+        <Style x:Key="DefaultStyle" TargetType="Syntax:EditorTextBox">
+            <Setter Property="CursorColor" Value="Black" />
+            <Setter Property="BackgroundBrush" Value="White"/>
+            <Setter Property="ForegroundBrush" Value="Black" />
+            <Setter Property="LineNumberBrush" Value="Gray" />
+            <Setter Property="HighlightStyles" Value="{StaticResource DefaultSyntaxStyle}" />
+        </Style>
+
     </Window.Resources>
     <DockPanel Name="MainPanel" LastChildFill="True" Grid.Column="1">
         <DockPanel Name="TopPanel" DockPanel.Dock="Top" LastChildFill="True">
@@ -79,18 +100,14 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <RichTextBox Name="EditorBox" Grid.Row="0"
-                            FontFamily="Courier New" FontSize="12"
-                            AcceptsReturn="True" AcceptsTab="true"
-                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                            BorderThickness="0"
-                            KeyUp="EditorBox_KeyUp">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>
+                <Syntax:EditorTextBox x:Name="EditorBox" Style="{StaticResource DefaultStyle}"
+                    Grid.Row="0"
+                    FontFamily="Courier New" FontSize="12"
+                    AcceptsReturn="True" AcceptsTab="True"
+                    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                    BorderThickness="0" BorderBrush="LightGray" LineNumberBrush="LightGray"
+                    KeyUp="EditorBox_KeyUp">
+                </Syntax:EditorTextBox>
 
                 <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                 Background="LightGray"

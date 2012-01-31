@@ -1,4 +1,3 @@
-using System;
 using Ninject.Modules;
 using DbTool.Lib.Ui.Syntax;
 

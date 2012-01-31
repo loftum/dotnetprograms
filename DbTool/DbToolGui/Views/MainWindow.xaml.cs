@@ -8,7 +8,6 @@ using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Worksheet;
 using DbToolGui.Controls;
 using DbToolGui.ExtensionMethods;
-using DbToolGui.Highlighting;
 using DbToolGui.Modules;
 using DbToolGui.ViewModels;
 using Ninject;
@@ -19,7 +18,6 @@ namespace DbToolGui.Views
     {
         private readonly IDbToolConfig _config;
         private readonly MainViewModel _viewModel;
-        private readonly ISyntaxHighlighter _highlighter;
         private readonly IWorksheetManager _worksheetManager;
 
         public MainWindow()
@@ -29,13 +27,11 @@ namespace DbToolGui.Views
             var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
             _viewModel = kernel.Get<MainViewModel>();
             DataContext = _viewModel;
-            var factory = kernel.Get<ISyntaxHighlighterFactory>();
-            _highlighter = factory.CreateFor(EditorBox, Dispatcher);
-            _highlighter.StartHighlight();
+            EditorBox.SyntaxParser = kernel.Get<ISyntaxParser>();
 
             _config = kernel.Get<IDbToolConfig>();
             _worksheetManager = kernel.Get<IWorksheetManager>();
-            EditorBox.SetText(_worksheetManager.Load().TrimEndingWhitespaces());
+            EditorBox.Text = _worksheetManager.Load().TrimEndingWhitespaces();
             ResultTable.LoadingRow += NastilyUpdateRowToAvoidStupidRowRecyclingProblems;
         }
 
@@ -59,11 +55,10 @@ namespace DbToolGui.Views
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            _highlighter.StopHighlight();
             try
             {
                 _config.SaveSettings();
-                _worksheetManager.Save(EditorBox.GetAllText().TrimEndingWhitespaces());
+                _worksheetManager.Save(EditorBox.Text.TrimEndingWhitespaces());
             }
             catch (Exception ex)
             {

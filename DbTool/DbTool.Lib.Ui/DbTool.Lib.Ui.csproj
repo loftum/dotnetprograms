@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\ModelExpressionExtensions.cs" />
-    <Compile Include="Highlighting\ISyntaxHighlighter.cs" />
+    <Compile Include="Highlighting\ISyntaxParser.cs" />
     <Compile Include="ModelBinding\ModelBinder.cs" />
     <Compile Include="Models\IViewModel.cs" />
     <Compile Include="Models\ModelChangeEventArgs.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="Syntax\ISchemaObjectProvider.cs" />
     <Compile Include="Syntax\ISyntaxProvider.cs" />
     <Compile Include="Syntax\SchemaObjectProvider.cs" />
+    <Compile Include="Syntax\Tag.cs" />
     <Compile Include="Syntax\TagType.cs" />
     <Compile Include="Modules\UiModule.cs" />
     <Compile Include="Models\IQueryResultViewModel.cs" />
