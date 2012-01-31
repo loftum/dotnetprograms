@@ -10,6 +10,8 @@ namespace DbTool.Lib.Ui.Syntax
         String = 5,
         Object = 6,
         Setting = 7,
-        CSharp = 8
+        CSharp = 8,
+        SqlComment = 9,
+        CSharpComment = 10
     }
 }

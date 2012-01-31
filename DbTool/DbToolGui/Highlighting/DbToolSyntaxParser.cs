@@ -63,19 +63,22 @@ namespace DbToolGui.Highlighting
         private static IEnumerable<Tag> GetStringsIn(string text)
         {
             var strings = new List<Tag>();
-            strings.AddRange(MatchesOf(text, "\"{1}[^\"]*\"{1}"));
-            strings.AddRange(MatchesOf(text, @"'{1}[^']*'{1}"));
+            strings.AddRange(MatchesOf(text, "\"{1}[^\"]*\"{1}", TagType.String));
+            strings.AddRange(MatchesOf(text, @"'{1}[^']*'{1}", TagType.String));
+            strings.AddRange(MatchesOf(text, @"-{2}[^\n]*", TagType.SqlComment));
+            strings.AddRange(MatchesOf(text, @"/{2}[^\n]*", TagType.CSharpComment));
+            strings.AddRange(MatchesOf(text, @"(/\*){1}[\w\W]*(\*/){1}", TagType.CSharpComment));
             return strings;
         }
 
-        private static IEnumerable<Tag> MatchesOf(string text, string pattern)
+        private static IEnumerable<Tag> MatchesOf(string text, string pattern, TagType tagType)
         {
             var matches = Regex.Matches(text, pattern);
             var strings = new List<Tag>();
             for (var ii = 0; ii < matches.Count; ii++)
             {
                 var group = matches[ii].Groups[0];
-                strings.Add(new Tag { StartPosition = group.Index, EndPosition = group.Index + group.Length, Type = TagType.String, Word = group.Value });
+                strings.Add(new Tag { StartPosition = group.Index, EndPosition = group.Index + group.Length, Type = tagType, Word = group.Value });
             }
             return strings;
         }

@@ -22,6 +22,8 @@
             <Highlighting:HighlightStyle Type="Object" Foreground="Olive" />
             <Highlighting:HighlightStyle Type="Setting" Foreground="DarkMagenta" />
             <Highlighting:HighlightStyle Type="Operator" Foreground="Gray" />
+            <Highlighting:HighlightStyle Type="SqlComment" Foreground="DarkGray" />
+            <Highlighting:HighlightStyle Type="CSharpComment" Foreground="Green" />
         </Syntax:HighlightStyleCollection>
 
         <Style x:Key="DefaultStyle" TargetType="Syntax:EditorTextBox">
