@@ -107,10 +107,10 @@
     <Compile Include="Connections\DbContext.cs" />
     <Compile Include="Connections\IDbConnectionFactory.cs" />
     <Compile Include="Connections\IDbContextFactory.cs" />
-    <Compile Include="CSharp\MonoCSharpEvaluator.cs" />
     <Compile Include="CSharp\CSharpResult.cs" />
     <Compile Include="CSharp\ICSharpEvaluator.cs" />
-    <Compile Include="CSharp\RoslynCSharpEvaluator.cs" />
+    <Compile Include="CSharp\Mono\DbToolInteractive.cs" />
+    <Compile Include="CSharp\Mono\MonoCSharpEvaluator.cs" />
     <Compile Include="DatabaseType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />

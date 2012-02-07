@@ -11,7 +11,7 @@ namespace DbTool.Lib.Memory
         public MemoryMeter(Action<long> action)
         {
             _action = action;
-            _timer = new Timer(5000);
+            _timer = new Timer(10000);
             _timer.Elapsed += HandleElapsed;
         }
 
