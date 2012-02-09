@@ -25,7 +25,7 @@ namespace DbTool.Lib.Communication.DbCommands
                     command.CommandText = query.Trim();
                     command.Connection.Open();
                     using (var reader = command.ExecuteReader())
-                    {
+                    {                        
                         var result = CreateResult(reader);
                         while (reader.Read())
                         {

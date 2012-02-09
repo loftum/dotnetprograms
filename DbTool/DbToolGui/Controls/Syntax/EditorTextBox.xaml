@@ -15,7 +15,7 @@
                     <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Grid.Column="1" />
                     <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="{TemplateBinding LineNumberBrush}" Margin="0,0,4,0"/>
                     <Canvas Grid.Column="1" Background="Transparent" IsHitTestVisible="True">
-                        <ListBox Name="suggestionList" Canvas.Top="10" Canvas.Left="40" Height="150">
+                        <ListBox Name="SuggestionList" Canvas.Top="10" Canvas.Left="40" Height="150">
                             <ListBoxItem>Test</ListBoxItem>
                             <ListBoxItem>Test2</ListBoxItem>
                             <ListBoxItem>Test3</ListBoxItem>

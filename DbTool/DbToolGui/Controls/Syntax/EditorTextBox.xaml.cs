@@ -60,7 +60,7 @@ namespace DbToolGui.Controls.Syntax
             BackgroundProperty.OverrideMetadata(typeof(EditorTextBox),
                 new FrameworkPropertyMetadata(OnBackgroundChanged));
 
-            Loaded += SyntaxHighligtTextBox_Loaded;
+            Loaded += EditorTextBox_Loaded;
             HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             AcceptsTab = true;
@@ -71,7 +71,6 @@ namespace DbToolGui.Controls.Syntax
             TabSize = 4;
 
             InitializeComponent();
-
         }
 
         public event RoutedEventHandler SyntaxRulesChanged
@@ -477,16 +476,16 @@ namespace DbToolGui.Controls.Syntax
             return Color.FromArgb(0, (byte)(255 - color.R), (byte)(255 - color.G), (byte)(255 - color.B));
         }
 
-        private void SyntaxHighligtTextBox_Loaded(object sender, RoutedEventArgs e)
+        private void EditorTextBox_Loaded(object sender, RoutedEventArgs e)
         {
             if (VisualTreeHelper.GetChildrenCount(this) > 0)
             {
-                var bd = VisualTreeHelper.GetChild(this, 0); // Border
-                var gd = VisualTreeHelper.GetChild(bd, 0); // Grid
-                var sv = VisualTreeHelper.GetChild(gd, 0) as ScrollViewer; // Scrollbar
-                sv.ScrollChanged += (s2, e2) => InvalidateVisual();
+                var border = VisualTreeHelper.GetChild(this, 0); // Border
+                var grid = VisualTreeHelper.GetChild(border, 0); // Grid
+                var scrollViewer = VisualTreeHelper.GetChild(grid, 0) as ScrollViewer; // Scrollbar
+                scrollViewer.ScrollChanged += (s2, e2) => InvalidateVisual();
 
-                _suggestionCanvas = VisualTreeHelper.GetChild(gd, 2) as Canvas; // canvas
+                _suggestionCanvas = VisualTreeHelper.GetChild(grid, 2) as Canvas; // canvas
                 _suggestionList = VisualTreeHelper.GetChild(_suggestionCanvas, 0) as ListBox; // listbox
 
                 HideSuggestionList();
@@ -498,7 +497,7 @@ namespace DbToolGui.Controls.Syntax
 
         private void ShowSuggestionList()
         {
-            Point position = GetRectFromCharacterIndex(this.CaretIndex).BottomRight;
+            Point position = GetRectFromCharacterIndex(CaretIndex).BottomRight;
 
             _suggestionCanvas.IsHitTestVisible = true;
 
@@ -506,10 +505,13 @@ namespace DbToolGui.Controls.Syntax
             double top = position.Y;
 
             if (left + _suggestionList.ActualWidth > _suggestionCanvas.ActualWidth)
+            {
                 left = _suggestionCanvas.ActualWidth - _suggestionList.ActualWidth;
-
+            }
             if (top + _suggestionList.ActualHeight > _suggestionCanvas.ActualHeight)
+            {
                 top = _suggestionCanvas.ActualHeight - _suggestionList.ActualHeight;
+            }   
 
             Canvas.SetLeft(_suggestionList, left);
             Canvas.SetTop(_suggestionList, top);

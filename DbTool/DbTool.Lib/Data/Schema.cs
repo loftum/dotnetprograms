@@ -4,13 +4,15 @@ namespace DbTool.Lib.Data
 {
     public class Schema
     {
-        private readonly ISet<string> _objectNames;
+        private readonly ISet<string> _columnNames; 
+        private readonly ISet<string> _tableNames;
         private readonly IDictionary<string, SchemaTable> _tables;
 
         public Schema()
         {
             _tables = new Dictionary<string, SchemaTable>();
-            _objectNames = new HashSet<string>();
+            _tableNames = new HashSet<string>();
+            _columnNames = new HashSet<string>();
         }
 
         public SchemaTable GetOrCreateTable(string name)
@@ -37,20 +39,26 @@ namespace DbTool.Lib.Data
             }
         }
 
-        public bool ContainsObject(string lowerCase)
+        public bool ContainsColumn(string lowerCase)
         {
-            return _objectNames.Contains(lowerCase);
+            return _columnNames.Contains(lowerCase);
+        }
+
+        public bool ContainsTable(string lowerCase)
+        {
+            return _tableNames.Contains(lowerCase);
         }
 
         public void RefreshObjectNameCache()
         {
-            _objectNames.Clear();
+            _tableNames.Clear();
+            _columnNames.Clear();
             foreach (var table in _tables.Values)
             {
-                _objectNames.Add(table.Name.ToLowerInvariant());
+                _tableNames.Add(table.Name.ToLowerInvariant());
                 foreach (var column in table.Columns)
                 {
-                    _objectNames.Add(column.Name.ToLowerInvariant());
+                    _columnNames.Add(column.Name.ToLowerInvariant());
                 }
             }
         }

@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
-using System.Xml;
 using WebMatrix.Data;
 
-namespace DbTool.Lib.CSharp.WebMatrix
+namespace DbTool.Lib.Communication.DbCommands.WebMatrix
 {
     public class ClassGenerator
     {

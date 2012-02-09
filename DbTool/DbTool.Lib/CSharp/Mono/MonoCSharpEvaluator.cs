@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using DbTool.Lib.CSharp.WebMatrix;
+using DbTool.Lib.Communication.DbCommands.WebMatrix;
 using DbTool.Lib.ExtensionMethods;
 using Mono.CSharp;
 using WebMatrix.Data;
@@ -14,7 +14,7 @@ namespace DbTool.Lib.CSharp.Mono
         private static readonly string[] InitialUsings = new[]
             {
                 "System", "System.Linq", "System.Collections.Generic",
-                "WebMatrix.Data", "DbTool.Lib.CSharp.WebMatrix"
+                "WebMatrix.Data", "DbTool.Lib.Communication.DbCommands.WebMatrix"
             };
 
         public IEnumerable<string> Vars

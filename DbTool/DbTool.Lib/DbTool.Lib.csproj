@@ -92,6 +92,10 @@
     <Compile Include="Communication\DbCommands\SqlExecutor.cs" />
     <Compile Include="Communication\DbCommands\SetExecutor.cs" />
     <Compile Include="Communication\DbCommands\UnknownExecutor.cs" />
+    <Compile Include="Communication\DbCommands\WebMatrix\ClassGenerator.cs" />
+    <Compile Include="Communication\DbCommands\WebMatrix\DynamicDataRow.cs" />
+    <Compile Include="Communication\DbCommands\WebMatrix\DynamicDataRowPropertyDescriptor.cs" />
+    <Compile Include="Communication\DbCommands\WebMatrix\WebMatrixQuery.cs" />
     <Compile Include="Communication\IDatabaseCommunicator.cs" />
     <Compile Include="Configuration\ConnectionData.cs" />
     <Compile Include="Configuration\DbToolConfig.cs" />

@@ -25,9 +25,22 @@ namespace DbTool.Lib.Ui.Syntax
             }
         }
 
-        public bool IsObject(string word)
+        public TagType GetTypeOf(string word)
         {
-            return Schema != null && Schema.ContainsObject(word);
+            if (Schema == null)
+            {
+                return TagType.Nothing;
+            }
+            var lowercase = word.ToLowerInvariant();
+            if (Schema.ContainsTable(lowercase))
+            {
+                return TagType.Object;
+            }
+            if (Schema.ContainsColumn(lowercase))
+            {
+                return TagType.Property;
+            }
+            return TagType.Nothing;
         }
     }
 }

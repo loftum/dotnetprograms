@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Communication.DbCommands.Results;
+using DbTool.Lib.Communication.DbCommands.WebMatrix;
 using DbTool.Lib.ExtensionMethods;
 using WebMatrix.Data;
 
@@ -26,12 +27,34 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             {
                 return QueryResultOfDynamicRecord(values.Cast<DynamicRecord>());
             }
+            if (type == typeof(DynamicDataRow))
+            {
+                return QueryResultOfDynamicDataRow(values.Cast<DynamicDataRow>());
+            }
             if (type.IsAssignableFrom(typeof(IDictionary)))
             {
                 return QueryResultOfDictionary((IEnumerable<IDictionary>)values);
             }
 
             return QueryResultOfType(values, type);
+        }
+
+        private IDbCommandResult QueryResultOfDynamicDataRow(IEnumerable<DynamicDataRow> values)
+        {
+            var result = new QueryResult();
+            if (values.IsEmpty())
+            {
+                return result;
+            }
+
+            var columns = values.First().Columns;
+            columns.Each(c => result.AddColumn(c, typeof(string)));
+            foreach (var record in values)
+            {
+                var theRecord = record;
+                result.AddRow(columns.Select(c => theRecord[c]));
+            }
+            return result;
         }
 
         private IDbCommandResult QueryResultOfDynamicRecord(IEnumerable<DynamicRecord> values)

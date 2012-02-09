@@ -5,6 +5,6 @@ namespace DbTool.Lib.Ui.Syntax
     public interface ISchemaObjectProvider
     {
         Schema Schema { get; set; }
-        bool IsObject(string word);
+        TagType GetTypeOf(string word);
     }
 }

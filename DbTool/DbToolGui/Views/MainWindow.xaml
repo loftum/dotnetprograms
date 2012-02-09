@@ -20,6 +20,7 @@
             <Highlighting:HighlightStyle Type="String" Foreground="DarkRed" />
             <Highlighting:HighlightStyle Type="Default" Foreground="Black" />
             <Highlighting:HighlightStyle Type="Object" Foreground="Olive" />
+            <Highlighting:HighlightStyle Type="Property" Foreground="Navy" />
             <Highlighting:HighlightStyle Type="Setting" Foreground="DarkMagenta" />
             <Highlighting:HighlightStyle Type="Operator" Foreground="Gray" />
             <Highlighting:HighlightStyle Type="SqlComment" Foreground="DarkGray" />

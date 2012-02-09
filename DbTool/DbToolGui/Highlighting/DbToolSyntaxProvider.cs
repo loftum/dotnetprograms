@@ -27,12 +27,12 @@ namespace DbToolGui.Highlighting
                 "where", "and", "or", "not", "in",
                 "group", "order", "by", "asc", "desc" });
             _functions = new HashSet<string>(new[] { "migrate", "up", "down", "show", "set", "vars", "usings", "$" });
-            _operators = new HashSet<string>(new[] {"+", "-", "*", "/", "=", "!=", "<", ">", "<>"});
-            _separators = new HashSet<char>(new[] {' ', '.', ';','=', '+', '-', '<', '>', '(', ')', '\t', '\n', '\r'});
+            _operators = new HashSet<string>(new[] {"+", "-", "*", "/", "=", "!", "<", ">", "<>"});
+            _separators = new HashSet<char>(new[] {' ', '.', ',', ';','=', '+', '-', '<', '>', '(', ')', '\t', '\n', '\r'});
             _settings = new HashSet<string>(GetSettings());
             _cSharpKeywords = new HashSet<string>(new[]{"var", "void", "string", "object", "dynamic",
                 "int", "long", "double", "float", "decimal",  "bool", "char",
-                "new", "in", "let", "orderby", "descending"});
+                "new", "in", "let", "orderby", "descending", "using"});
             
             _caseSensitiveWords = new Dictionary<string, TagType>();
             _cSharpKeywords.Each(c => _caseSensitiveWords[c] = TagType.CSharp);
@@ -53,11 +53,6 @@ namespace DbToolGui.Highlighting
         public bool IsSeparator(char value)
         {
             return _separators.Contains(value);
-        }
-
-        private bool IsObject(string word)
-        {
-            return _schemaObjectProvider.IsObject(word);
         }
 
         private bool TryGetCaseSensitive(string word, out TagType tagType)
@@ -95,11 +90,7 @@ namespace DbToolGui.Highlighting
             {
                 return tagType;
             }
-            if (IsObject(lower))
-            {
-                return TagType.Object;
-            }
-            return TagType.Nothing;
+            return _schemaObjectProvider.GetTypeOf(word);
         }
     }
 }

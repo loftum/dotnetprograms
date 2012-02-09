@@ -80,5 +80,26 @@ namespace DbTool.Lib.ExtensionMethods
             value.ShouldNotBeNull("value");
             return value.TrimEnd(null);
         }
+
+        public static string ToCamelCase(this string value)
+        {
+            if (value.IsNotNullOrEmpty())
+            {
+                return value;
+            }
+            var parts = value.Split('_').Select(v => v.InitCap());
+            return string.Join(string.Empty, parts);
+        }
+
+        public static string InitCap(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return value;
+            }
+            var firstLetter = value.Substring(0, 1).ToUpperInvariant();
+            var theRest = value.Substring(1);
+            return string.Format("{0}{1}", firstLetter, theRest);
+        }
     }
 }

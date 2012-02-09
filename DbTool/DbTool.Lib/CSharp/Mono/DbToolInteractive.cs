@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
-using DbTool.Lib.CSharp.WebMatrix;
+using DbTool.Lib.Communication.DbCommands.WebMatrix;
 using DbTool.Lib.Configuration;
 using Mono.CSharp;
 
@@ -17,6 +17,11 @@ namespace DbTool.Lib.CSharp.Mono
         {
             Output.WriteLine("Hest!");
             Output.Flush();
+        }
+
+        public static IEnumerable<dynamic> Schema(string collection)
+        {
+            return WebMatrix.Schema(collection);
         }
 
         public static IEnumerable<dynamic> Query(string sql)
