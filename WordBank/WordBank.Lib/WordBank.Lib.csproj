@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81434638-2EA3-4BCF-A5E7-F86243E7D02E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WordBank.Lib</RootNamespace>
+    <AssemblyName>WordBank.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator">
+      <HintPath>..\..\Lib\migratordotnet-0.8.0\Migrator.dll</HintPath>
+    </Reference>
+    <Reference Include="Migrator.Framework">
+      <HintPath>..\..\Lib\migratordotnet-0.8.0\Migrator.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\Lib\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\..\Lib\fluentnhibernate-NH3.1-1.2\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\IWordBankSettings.cs" />
+    <Compile Include="Config\WordBankSettings.cs" />
+    <Compile Include="Data\ISessionFactoryProvider.cs" />
+    <Compile Include="Data\IWordBankRepository.cs" />
+    <Compile Include="Data\SessionFactoryProvider.cs" />
+    <Compile Include="Data\WordBankRepository.cs" />
+    <Compile Include="DomainMapping\DomainObjectMap.cs" />
+    <Compile Include="DomainMapping\OrdMap.cs" />
+    <Compile Include="DomainMapping\ParadigmeMap.cs" />
+    <Compile Include="Domain\DomainObject.cs" />
+    <Compile Include="Domain\Ord.cs" />
+    <Compile Include="Domain\Paradigme.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="ExtensionMethods\FileExtensions.cs" />
+    <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="Logging\IWordBankLogger.cs" />
+    <Compile Include="Logging\WordBankConsoleLogger.cs" />
+    <Compile Include="Migrations\MigrationRunner.cs" />
+    <Compile Include="NinjectModules\DataModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\IImportTask.cs" />
+    <Compile Include="Tasks\ImportTask.cs" />
+    <Compile Include="Tasks\ITaskFactory.cs" />
+    <Compile Include="Tasks\IWordBankParser.cs" />
+    <Compile Include="Tasks\TaskFactory.cs" />
+    <Compile Include="Tasks\WordBankParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WordBank.Migrations\WordBank.Migrations.csproj">
+      <Project>{6021966E-6E78-4EC4-AEEF-2D5B8E370081}</Project>
+      <Name>WordBank.Migrations</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
