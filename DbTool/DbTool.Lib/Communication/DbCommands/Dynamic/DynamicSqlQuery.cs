@@ -71,7 +71,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
                 }
                 finally
                 {
-                    command.Connection.Close();
+                    DbConnection.Close();
                 }
             }
         }
