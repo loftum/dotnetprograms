@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using DbTool.Lib.Communication.DbCommands.WebMatrix;
+using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.ExtensionMethods;
 using Mono.CSharp;
 using WebMatrix.Data;
@@ -13,8 +13,11 @@ namespace DbTool.Lib.CSharp.Mono
         private static readonly string[] InitialAssemblies = new[] { "System.Core.dll"};
         private static readonly string[] InitialUsings = new[]
             {
-                "System", "System.Linq", "System.Collections.Generic",
-                "WebMatrix.Data", "DbTool.Lib.Communication.DbCommands.WebMatrix"
+                "System",
+                "System.Linq",
+                "System.Collections.Generic",
+                "WebMatrix.Data",
+                typeof(DynamicSqlQuery).Namespace
             };
 
         public IEnumerable<string> Vars
@@ -47,7 +50,7 @@ namespace DbTool.Lib.CSharp.Mono
                     InteractiveBaseClass = typeof (DbToolInteractive),
                     DescribeTypeExpressions = true,
                 };
-            ReferenceAssemblies(typeof(Database).Assembly, typeof(WebMatrixQuery).Assembly);
+            ReferenceAssemblies(typeof(Database).Assembly, typeof(DynamicSqlQuery).Assembly);
 
             Using(InitialUsings);
             DbToolInteractive.Evaluator = _evaluator;

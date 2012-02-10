@@ -75,9 +75,14 @@
     <Compile Include="Communication\DbCommands\DbSchema\SchemaExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaQuery.cs" />
     <Compile Include="Communication\DbCommands\DefaultExecutorProvider.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\ClassGenerator.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRow.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRowPropertyDescriptor.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\DynamicSqlQuery.cs" />
     <Compile Include="Communication\DbCommands\IDbCommandExecutor.cs" />
     <Compile Include="Communication\DbCommands\IExecutorProvider.cs" />
     <Compile Include="Communication\DbCommands\MigrationExecutor.cs" />
+    <Compile Include="Communication\DbCommands\Modifiers\CommandModifier.cs" />
     <Compile Include="Communication\DbCommands\NonQueryExecutor.cs" />
     <Compile Include="Communication\DbCommands\Results\ErrorResult.cs" />
     <Compile Include="Communication\DbCommands\Results\IDbCommandResult.cs" />
@@ -88,10 +93,6 @@
     <Compile Include="Communication\DbCommands\SqlExecutor.cs" />
     <Compile Include="Communication\DbCommands\SetExecutor.cs" />
     <Compile Include="Communication\DbCommands\UnknownExecutor.cs" />
-    <Compile Include="Communication\DbCommands\WebMatrix\ClassGenerator.cs" />
-    <Compile Include="Communication\DbCommands\WebMatrix\DynamicDataRow.cs" />
-    <Compile Include="Communication\DbCommands\WebMatrix\DynamicDataRowPropertyDescriptor.cs" />
-    <Compile Include="Communication\DbCommands\WebMatrix\WebMatrixQuery.cs" />
     <Compile Include="Communication\IDatabaseCommunicator.cs" />
     <Compile Include="Configuration\ConnectionData.cs" />
     <Compile Include="Configuration\DbToolConfig.cs" />

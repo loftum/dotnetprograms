@@ -4,7 +4,7 @@ using System.Reflection.Emit;
 using System.Threading;
 using WebMatrix.Data;
 
-namespace DbTool.Lib.Communication.DbCommands.WebMatrix
+namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
     public class ClassGenerator
     {

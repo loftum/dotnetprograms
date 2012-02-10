@@ -5,7 +5,7 @@ using System.Data;
 using System.Dynamic;
 using System.Linq;
 
-namespace DbTool.Lib.Communication.DbCommands.WebMatrix
+namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
     public class DynamicDataRow : DynamicObject, ICustomTypeDescriptor
     {
@@ -24,6 +24,21 @@ namespace DbTool.Lib.Communication.DbCommands.WebMatrix
                 _dictionary[columnName.ToLowerInvariant()] = dataRow[columnName];
                 _dictionary[columnName.Replace("_", string.Empty)] = dataRow[columnName];
                 _values.Add(dataRow[index]);
+                index++;
+            }
+        }
+
+        public DynamicDataRow(IEnumerable<string> columnNames, IDataRecord record)
+        {
+            Columns = columnNames.ToList();
+            _dictionary = new Dictionary<string, object>();
+            _values = new List<object>();
+            var index = 0;
+            foreach (var columnName in columnNames)
+            {
+                _dictionary[columnName.ToLowerInvariant()] = record[columnName];
+                _dictionary[columnName.Replace("_", string.Empty)] = record[columnName];
+                _values.Add(record[index]);
                 index++;
             }
         }

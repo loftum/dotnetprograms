@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Data.Common;
 using System.Text;
-using System.Text.RegularExpressions;
 using DbTool.Lib.CSharp;
 using DbTool.Lib.CSharp.Mono;
+using DbTool.Lib.Communication.DbCommands.Modifiers;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
@@ -21,6 +22,17 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             {
                 _db = value;
                 DbToolInteractive.SetDb(value);
+            }
+        }
+
+        private DbConnection _connection;
+        public DbConnection DbConnection
+        {
+            get { return _connection; }
+            set
+            {
+                _connection = value;
+                DbToolInteractive.SetConnection(value);
             }
         }
 
@@ -43,7 +55,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
                 return new MessageResult(string.Format("C# Evaluator is reset"));
             }
 
-            command = ModifySql(command);
+            command = CommandModifier.Modify(command);
             var builder = new StringBuilder();
             builder.AppendFormat("Running: {0}", command).AppendLine();
 
@@ -66,20 +78,6 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
                 builder.AppendLine(result.Report);
             }
             return new MessageResult(builder.ToString());
-        }
-
-        private string ModifySql(string command)
-        {
-            const string pattern = @"\${1}(<[^\s]+>)?\({1}[^\(^\)]+\){1}";
-            if (command.Matches(pattern))
-            {
-                var rawSql = Regex.Match(command, pattern).Value;
-                var query = rawSql.Replace("$", "Query")
-                    .Replace("(", "(\"")
-                    .Replace(")", "\")");
-                command = command.Replace(rawSql, query);
-            }
-            return command;
         }
     }
 }

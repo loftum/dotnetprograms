@@ -50,6 +50,7 @@ namespace DbTool.Lib.Communication.DbCommands
                 return new BackupExecutor();
             }
             _cSharpExecutor.Db = Database;
+            _cSharpExecutor.DbConnection = DbConnection;
             return _cSharpExecutor;
         }
     }

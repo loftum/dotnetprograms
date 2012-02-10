@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace DbTool.Lib.Communication.DbCommands.WebMatrix
+namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
     public class DynamicDataRowPropertyDescriptor : PropertyDescriptor
     {

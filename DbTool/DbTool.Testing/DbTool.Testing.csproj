@@ -55,6 +55,7 @@
     <Compile Include="Assertions\CollectionAsserter.cs" />
     <Compile Include="Assertions\MakeSure.cs" />
     <Compile Include="Commands\CommandArgsTest.cs" />
+    <Compile Include="Commands\CommandModifierTest.cs" />
     <Compile Include="Models\PropertyExpressionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\Some.cs" />
