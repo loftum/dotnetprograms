@@ -10,8 +10,16 @@ namespace Wordbank.Commands
 
         public CommandArgs(IList<string> args)
         {
-            Command = args[0].ToLowerInvariant();
-            Arguments = new List<string>(args.Skip(1));
+            if (args.Any())
+            {
+                Command = args[0].ToLowerInvariant();
+                Arguments = new List<string>(args.Skip(1));
+            }
+            else
+            {
+                Command = string.Empty;
+                Arguments = new List<string>();
+            }
         }
     }
 }

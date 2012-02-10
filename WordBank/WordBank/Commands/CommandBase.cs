@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Wordbank.Lib.Config;
 using Wordbank.Lib.Exceptions;
 using Wordbank.Lib.Logging;
@@ -22,14 +23,30 @@ namespace Wordbank.Commands
         {
             if (!IsValid(args))
             {
-                throw new UserException(string.Format("Invalid arguments: {0}", string.Join(",", args.Arguments)));
+                throw new UserException(string.Format("Usage: {0}", GetUsageAndExamples()));
             }
             DoExecute(args);
         }
 
+        public string GetUsageAndExamples()
+        {
+            var builder = new StringBuilder()
+                .AppendLine("Usage:");
+            foreach (var usage in GetUsages())
+            {
+                builder.AppendLine(usage);
+            }
+            builder.AppendLine("Examples:");
+            foreach (var example in GetExamples())
+            {
+                builder.AppendLine(example);
+            }
+            return builder.ToString();
+        }
+
         protected abstract void DoExecute(CommandArgs args);
         protected abstract bool IsValid(CommandArgs args);
-        protected abstract IEnumerable<string> GetUsages();
+        public abstract IEnumerable<string> GetUsages();
         protected abstract IEnumerable<string> GetExamples();
     }
 }

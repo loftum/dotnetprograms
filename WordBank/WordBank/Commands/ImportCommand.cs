@@ -20,17 +20,24 @@ namespace Wordbank.Commands
         protected override void DoExecute(CommandArgs args)
         {
             var task = _taskFactory.CreateImportTask();
-            task.Import(args.Arguments[0].ToFullPath(), args.Arguments[1].ToFullPath());
+            if (args.Arguments.Count == 1)
+            {
+                task.ImportParadigme(args.Arguments[0]);
+            }
+            else
+            {
+                task.Import(args.Arguments[0].ToFullPath(), args.Arguments[1].ToFullPath());    
+            }
         }
 
         protected override bool IsValid(CommandArgs args)
         {
-            return args.Arguments.Count >= 2 && args.Arguments.All(f => f.ToFullPath().Exists());
+            return args.Arguments.Count >= 1 && args.Arguments.All(f => f.ToFullPath().Exists());
         }
 
-        protected override IEnumerable<string> GetUsages()
+        public override IEnumerable<string> GetUsages()
         {
-            return "".AsArray();
+            return string.Format("{0} paradigmeFile fullFormFile", Name).AsArray();
         }
 
         protected override IEnumerable<string> GetExamples()

@@ -17,7 +17,6 @@ namespace WordBank.Lib.Tasks
 
         public T Parse<T>(IList<string> values) where T : class, new()
         {
-            _logger.Info("Parsing: {0}", string.Join(",", values));
             var paradigme = new T();
             var type = typeof(T);
             var properties = type.GetProperties()

@@ -7,7 +7,7 @@ namespace Wordbank.Commands
     {
         public string Name
         {
-            get { return "Usage"; }
+            get { return "usage"; }
         }
 
         private readonly IWordBankLogger _logger;
@@ -23,10 +23,13 @@ namespace Wordbank.Commands
         {
             foreach (var command in _commands)
             {
-                
-
-                
+                _logger.Info(command.GetUsageAndExamples());
             }
+        }
+
+        public string GetUsageAndExamples()
+        {
+            return Name;
         }
     }
 }

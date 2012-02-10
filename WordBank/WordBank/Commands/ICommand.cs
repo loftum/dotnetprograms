@@ -4,5 +4,6 @@
     {
         string Name { get; }
         void Execute(CommandArgs args);
+        string GetUsageAndExamples();
     }
 }
