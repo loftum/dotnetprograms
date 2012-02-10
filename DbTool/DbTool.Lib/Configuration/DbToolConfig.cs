@@ -1,28 +1,27 @@
 using System.Configuration;
 using System.IO;
+using DbTool.Lib.Serializing;
 
 namespace DbTool.Lib.Configuration
 {
     public class DbToolConfig : IDbToolConfig
     {
+        private readonly string _initialSerializedSettings;
         private static DbToolSettings _settings;
         public DbToolSettings Settings
         {
             get
             {
-                if (_settings == null)
-                {
-                    if (File.Exists(SettingsPath))
-                    {
-                        _settings = DbToolSettings.From(SettingsPath);    
-                    }
-                    else
-                    {
-                        _settings = DbToolSettings.Default;
-                    }
-                }
-                return _settings;
+                return _settings ?? (_settings = File.Exists(SettingsPath)
+                                                     ? Read()
+                                                     : DbToolSettings.Default);
             }
+        }
+
+        public DbToolConfig()
+        {
+            var settings = Settings;
+            _initialSerializedSettings = DbToolSettingsSerializer.Serialize(settings);
         }
 
         public string SettingsPath
@@ -43,7 +42,27 @@ namespace DbTool.Lib.Configuration
                 {
                 }
             }
-            Settings.Save(SettingsPath);
+            var serialized = DbToolSettingsSerializer.Serialize(Settings);
+            if (!serialized.Equals(_initialSerializedSettings))
+            {
+                DoSave(serialized);
+
+            }
+        }
+
+        private DbToolSettings Read()
+        {
+            return DbToolSettingsSerializer.From(SettingsPath);
+        }
+
+        private void DoSave(string serializedSettings)
+        {
+            using (var writer = new StreamWriter(File.Create(SettingsPath)))
+            {
+                writer.Write(serializedSettings);
+                writer.Flush();
+                writer.Close();
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace DbToolGui.ViewModels
             get { return _communicator.IsConnected ? "/Images/dbplus.ico" : "/Images/db.ico"; }
         }
 
-        private MemoryMeter _memoryMeter;
+        private readonly MemoryMeter _memoryMeter;
         private string _memoryUsage;
         public string MemoryUsage
         {

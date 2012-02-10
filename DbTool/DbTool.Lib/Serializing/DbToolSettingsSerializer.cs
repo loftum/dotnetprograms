@@ -29,18 +29,7 @@ namespace DbTool.Lib.Serializing
             }
         }
 
-        public static void Save(DbToolSettings settings, string path)
-        {
-            using (var writer = new StreamWriter(File.Create(path)))
-            {
-                var serialized = Serialize(settings);
-                writer.Write(serialized);
-                writer.Flush();
-                writer.Close();
-            }
-        }
-
-        private static string Serialize(DbToolSettings settings)
+        public static string Serialize(DbToolSettings settings)
         {
             return JsonConvert.SerializeObject(settings, Formatting.Indented);
         }

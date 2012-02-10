@@ -25,6 +25,7 @@ namespace DbToolGui.ViewModels
             set
             {
                 _selectedContext = value;
+                _settings.CurrentContextName = value;
                 OnPropertyChanged(() => SelectedContext);
                 PopulateConnectionsFor(value);
             }

@@ -109,24 +109,9 @@ namespace DbTool.Lib.Configuration
             return database;
         }
 
-        public static DbToolSettings From(string path)
-        {
-            return DbToolSettingsSerializer.From(path);
-        }
-
-        public void Save(string path)
-        {
-            DbToolSettingsSerializer.Save(this, path);
-        }
-
-        private string Serialize()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
         public override string ToString()
         {
-            return Serialize();
+            return DbToolSettingsSerializer.Serialize(this);
         }
     }
 }
