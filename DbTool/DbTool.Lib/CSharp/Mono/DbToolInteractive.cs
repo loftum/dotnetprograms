@@ -12,12 +12,6 @@ namespace DbTool.Lib.CSharp.Mono
 
         public static Evaluator Evaluator;
         public static TextWriter Output = new StringWriter();
-        
-        public static void Hest()
-        {
-            Output.WriteLine("Hest!");
-            Output.Flush();
-        }
 
         public static IEnumerable<dynamic> Schema(string collection)
         {
