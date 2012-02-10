@@ -67,6 +67,7 @@
     <Compile Include="AssemblyLoading\IAssemblyLoader.cs" />
     <Compile Include="Collections\IChild.cs" />
     <Compile Include="Collections\ParentChildList.cs" />
+    <Compile Include="Common\Guard.cs" />
     <Compile Include="Communication\DatabaseCommunicator.cs" />
     <Compile Include="Communication\DbCommands\BackupExecutor.cs" />
     <Compile Include="Communication\DbCommands\CSharp\CollectionConverter.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ExtensionMethods\LongExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
+    <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
     <Compile Include="ExtensionMethods\RegexExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="ExtensionMethods\TypeExtensions.cs" />

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Documents;
-using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Common;
 
 namespace DbToolGui.ExtensionMethods
 {
@@ -8,7 +8,7 @@ namespace DbToolGui.ExtensionMethods
     {
         public static string GetAllText(this RichTextBox textBox)
         {
-            textBox.ShouldNotBeNull("textBox");
+            Guard.NotNull(() => textBox);
             var document = textBox.Document;
             var textRange = new TextRange(document.ContentStart, document.ContentEnd);
             return textRange.Text;
@@ -16,7 +16,7 @@ namespace DbToolGui.ExtensionMethods
 
         public static string GetSelectedOrAllText(this RichTextBox textBox)
         {
-            textBox.ShouldNotBeNull("textBox");
+            Guard.NotNull(() => textBox);
             return textBox.Selection.IsEmpty
                 ? textBox.GetAllText()
                 : textBox.Selection.Text;
@@ -29,7 +29,7 @@ namespace DbToolGui.ExtensionMethods
 
         public static void SetText(this RichTextBox textBox, string value)
         {
-            textBox.ShouldNotBeNull("textBox");
+            Guard.NotNull(() => textBox);
             var document = textBox.Document;
             var textRange = new TextRange(document.ContentStart, document.ContentEnd);
             textRange.Text = value;

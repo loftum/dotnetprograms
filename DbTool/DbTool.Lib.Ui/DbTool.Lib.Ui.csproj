@@ -42,7 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods\ModelExpressionExtensions.cs" />
     <Compile Include="Highlighting\ISyntaxParser.cs" />
     <Compile Include="ModelBinding\ModelBinder.cs" />
     <Compile Include="Models\IViewModel.cs" />
@@ -59,7 +58,9 @@
     <Compile Include="Worksheet\IWorksheetManager.cs" />
     <Compile Include="Worksheet\WorksheetManager.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ExtensionMethods\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
       <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>

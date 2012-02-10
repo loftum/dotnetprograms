@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
-using DbTool.Lib.ExtensionMethods;
 
-namespace DbTool.Lib.Ui.ExtensionMethods
+namespace DbTool.Lib.ExtensionMethods
 {
-    public static class ModelExpressionExtensions
+    public static class PropertyExpressionExtensions
     {
         public static string GetPropertyId<TModel, TProperty>(this Expression<Func<TModel, TProperty>> expression)
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using DbTool.Lib.Ui.ExtensionMethods;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {
