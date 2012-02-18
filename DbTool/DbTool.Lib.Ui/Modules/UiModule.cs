@@ -7,7 +7,7 @@ namespace DbTool.Lib.Ui.Modules
     {
         public override void Load()
         {
-            Bind<ISchemaObjectProvider>().To<SchemaObjectProvider>().InSingletonScope();
+            Bind<IMetaInfoProvider>().To<MetaInfoProvider>().InSingletonScope();
         }
     }
 }

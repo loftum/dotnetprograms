@@ -7,5 +7,6 @@ namespace DbTool.Lib.Ui.Highlighting
     {
         IEnumerable<Tag> Tags { get; }
         void Parse(string text, int start, int end);
+        IEnumerable<Suggestion> GetSuggestions(string text, int cursor);
     }
 }

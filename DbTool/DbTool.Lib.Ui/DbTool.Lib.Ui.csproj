@@ -48,9 +48,10 @@
     <Compile Include="Models\ModelChangeEventArgs.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Syntax\ISchemaObjectProvider.cs" />
+    <Compile Include="Syntax\IMetaInfoProvider.cs" />
     <Compile Include="Syntax\ISyntaxProvider.cs" />
-    <Compile Include="Syntax\SchemaObjectProvider.cs" />
+    <Compile Include="Syntax\MetaInfoProvider.cs" />
+    <Compile Include="Syntax\Suggestion.cs" />
     <Compile Include="Syntax\Tag.cs" />
     <Compile Include="Syntax\TagType.cs" />
     <Compile Include="Modules\UiModule.cs" />

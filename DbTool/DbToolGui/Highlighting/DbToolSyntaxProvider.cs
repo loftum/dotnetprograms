@@ -2,6 +2,7 @@
 using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Objects;
 using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
@@ -17,11 +18,11 @@ namespace DbToolGui.Highlighting
         private readonly ISet<char> _separators;
         private readonly ISet<string> _settings;
 
-        private readonly ISchemaObjectProvider _schemaObjectProvider;
+        private readonly IMetaInfoProvider _metaInfoProvider;
 
-        public DbToolSyntaxProvider(ISchemaObjectProvider schemaObjectProvider)
+        public DbToolSyntaxProvider(IMetaInfoProvider metaInfoProvider)
         {
-            _schemaObjectProvider = schemaObjectProvider;
+            _metaInfoProvider = metaInfoProvider;
             _sqlKeywords = new HashSet<string>(new[]{ "select", "insert", "update", "delete", "drop", "distinct",
                 "from", "left", "outer", "join", "on",
                 "where", "and", "or", "not", "in",
@@ -48,6 +49,11 @@ namespace DbToolGui.Highlighting
         {
             var type = typeof (IDbToolSettings);
             return type.GetProperties().Select(property => property.Name.ToLowerInvariant());
+        }
+
+        public DbToolObject GetObject(string word)
+        {
+            return _metaInfoProvider.GetObject(word);
         }
 
         public bool IsSeparator(char value)
@@ -90,7 +96,7 @@ namespace DbToolGui.Highlighting
             {
                 return tagType;
             }
-            return _schemaObjectProvider.GetTypeOf(word);
+            return _metaInfoProvider.GetTypeOf(word);
         }
     }
 }

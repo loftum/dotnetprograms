@@ -1,6 +1,8 @@
 using System.Data;
 using System.Data.Common;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Objects;
+using DbTool.Lib.Objects.Database;
 
 namespace DbTool.Lib.Data
 {
@@ -16,27 +18,26 @@ namespace DbTool.Lib.Data
             _dbConnection = dbConnection;
         }
 
-        public Schema Load()
+        public SchemaObjectContainer Load()
         {
-            var schema = new Schema();
-
             try
             {
                 _dbConnection.Open();
                 var schemaTable = _dbConnection.GetSchema("Columns");
+                var container = new SchemaObjectContainer();
 
+                var schema = container.GetOrCreateNameSpace(schemaTable.Namespace);
                 foreach (DataRow row in schemaTable.Rows)
                 {
                     var table = schema.GetOrCreateTable(row.Get<string>(TableName));
-                    table.Add(new SchemaColumn(table, row.Get<string>(ColumnName)));
+                    table.AddProperty(new DbToolProperty(row.Get<string>(ColumnName)));
                 }
+                return container;
             }
             finally
             {
                 _dbConnection.Close();
             }
-            schema.RefreshObjectNameCache();
-            return schema;
         }
     }
 }

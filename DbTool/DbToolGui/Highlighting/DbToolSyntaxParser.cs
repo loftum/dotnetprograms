@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
@@ -19,6 +20,36 @@ namespace DbToolGui.Highlighting
             _tags = new List<Tag>();
             _syntaxProvider = syntaxProvider;
             _logger = DebugLogger.Instance;
+        }
+
+        public IEnumerable<Suggestion> GetSuggestions(string text, int cursor)
+        {
+            var suggestions = new List<Suggestion>();
+            if (text.IsNotNullOrEmpty())
+            {
+                return suggestions;
+            }
+            var word = GetWord(text, cursor);
+            var obj = _syntaxProvider.GetObject(word);
+            suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
+            return suggestions;
+        }
+
+        private string GetWord(string text, int cursor)
+        {
+            var start = cursor;
+            while(!_syntaxProvider.IsSeparator(text[start]) && start > 0)
+            {
+                start--;
+            }
+            var lastIndex = text.Length;
+            var end = cursor;
+            while(!_syntaxProvider.IsSeparator(text[end]) && end < lastIndex)
+            {
+                end++;
+            }
+
+            return text.Substring(start, end - start);
         }
 
         public void Parse(string text, int start, int end)

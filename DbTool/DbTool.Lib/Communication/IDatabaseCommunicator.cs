@@ -2,6 +2,8 @@ using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Data;
+using DbTool.Lib.Objects;
+using DbTool.Lib.Objects.Database;
 
 namespace DbTool.Lib.Communication
 {
@@ -13,6 +15,6 @@ namespace DbTool.Lib.Communication
         void ConnectTo(DbToolDatabase connectionData);
         void Disconnect();
         IDbCommandResult Execute(string statement);
-        Schema LoadSchema();
+        SchemaObjectContainer LoadSchema();
     }
 }
