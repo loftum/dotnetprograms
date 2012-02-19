@@ -31,6 +31,13 @@ namespace DbTool.Lib.Configuration
             set { _host = value; }
         }
 
+        private int _port;
+        public int Port
+        {
+            get { return _port > 0 ? _port : FromParentOrDefault(p => p.Port); }
+            set { _port = value; }
+        }
+
         private DbToolCredentials _credentials;
         public DbToolCredentials Credentials
         {

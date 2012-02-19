@@ -3,8 +3,9 @@ using MigSharp;
 
 namespace DbTool.Lib
 {
-    public class DatabaseType
+    public class DbType
     {
+        public const string RavenDB = "ravendb";
         public const string SqlServer = "sqlserver";
         public const string SqlServer2005 = "sqlserver2005";
         public const string SqlServer2008 = "sqlserver2008";

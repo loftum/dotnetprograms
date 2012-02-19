@@ -11,7 +11,6 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
     {
         public ConnectionData ConnectionData { get; set; }
         public DbConnection DbConnection { get; set; }
-        
 
         public IEnumerable<dynamic> Schema(string collection)
         {

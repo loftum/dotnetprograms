@@ -11,6 +11,7 @@ namespace DbTool.Lib.Configuration
         public string Name { get; set; }
         public string DatabaseType { get; set; }
         public string Host { get; set; }
+        public int Port { get; set; }
         public DbToolCredentials Credentials { get; set; }
         public IList<DbToolDatabase> Databases { get; set; }
         [JsonIgnore]

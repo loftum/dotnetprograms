@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AsyncCtpLibrary">
+      <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\AsyncCtpLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Migrator">
       <HintPath>..\BuildAssets\Migrator\Migrator.dll</HintPath>
     </Reference>
@@ -50,6 +53,18 @@
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Debug">
+      <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\Raven.Client.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -79,6 +94,7 @@
     <Compile Include="Communication\DbCommands\Dynamic\ClassGenerator.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRow.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRowPropertyDescriptor.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\DynamicQuery.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicSqlQuery.cs" />
     <Compile Include="Communication\DbCommands\IDbCommandExecutor.cs" />
     <Compile Include="Communication\DbCommands\IExecutorProvider.cs" />
@@ -113,7 +129,7 @@
     <Compile Include="CSharp\ICSharpEvaluator.cs" />
     <Compile Include="CSharp\Mono\DbToolInteractive.cs" />
     <Compile Include="CSharp\Mono\MonoCSharpEvaluator.cs" />
-    <Compile Include="DatabaseType.cs" />
+    <Compile Include="DbType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Record.cs" />

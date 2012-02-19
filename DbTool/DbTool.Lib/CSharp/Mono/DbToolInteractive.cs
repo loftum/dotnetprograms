@@ -9,29 +9,29 @@ namespace DbTool.Lib.CSharp.Mono
 {
     public class DbToolInteractive
     {
-        private static readonly DynamicSqlQuery DynamicSql = new DynamicSqlQuery();
+        private static readonly DynamicQuery DynamicQuery = new DynamicQuery();
 
         public static Evaluator Evaluator;
         public static TextWriter Output = new StringWriter();
 
         public static IEnumerable<dynamic> Schema(string collection)
         {
-            return DynamicSql.Schema(collection);
+            return DynamicQuery.Schema(collection);
         }
 
         public static IEnumerable<dynamic> Query(string sql)
         {
-            return DynamicSql.Query(sql);
+            return DynamicQuery.Query(sql);
         }
 
         public static void SetDb(DbToolDatabase db)
         {
-            DynamicSql.ConnectionData = db.GetConnectionData();
+            DynamicQuery.ConnectionData = db.GetConnectionData();
         }
 
         public static void SetConnection(DbConnection connection)
         {
-            DynamicSql.DbConnection = connection;
+            DynamicQuery.DbConnection = connection;
         }
 
         public static string vars

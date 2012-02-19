@@ -197,14 +197,16 @@ namespace DbToolGui.Controls.Syntax
                 if (SelectedText != string.Empty)
                 {
                     string[] lines = SelectedText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    for (int i = 0; i < lines.Length; i++)
+                    for (int ii = 0; ii < lines.Length; ii++)
                     {
-                        if (lines[i].StartsWith(Tab))
+                        if (lines[ii].StartsWith(Tab))
                         {
-                            lines[i] = lines[i].Substring(Tab.Length);
+                            lines[ii] = lines[ii].Substring(Tab.Length);
                         }
                         else
-                            lines[i] = lines[i].TrimStart(' ');
+                        {
+                            lines[ii] = lines[ii].TrimStart(' ');
+                        }
                     }
                     SelectedText = String.Join(Environment.NewLine, lines);
                 }
@@ -221,9 +223,13 @@ namespace DbToolGui.Controls.Syntax
                     var startLine = Text.IndexOf(Environment.NewLine, lastLine, StringComparison.Ordinal);
 
                     if (startLine != -1)
+                    {
                         startLine += Environment.NewLine.Length;
+                    }
                     else
+                    {
                         startLine = 0;
+                    }
 
                     // find empty spaces
                     var spaces = 0;

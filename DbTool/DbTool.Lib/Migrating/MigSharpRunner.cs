@@ -27,7 +27,7 @@ namespace DbTool.Lib.Migrating
 
         private MigSharp.Migrator CreateMigrator()
         {
-            var providerName = DatabaseType.ToMigSharpProvider(_database.DatabaseType);
+            var providerName = DbType.ToMigSharpProvider(_database.DatabaseType);
             var connection = _database.GetConnectionData();
             var options = new MigrationOptions();
             options.SupportedProviders.Set(providerName.AsArray());
