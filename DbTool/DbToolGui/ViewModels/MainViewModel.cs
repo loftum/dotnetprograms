@@ -9,6 +9,7 @@ using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Memory;
 using DbTool.Lib.Objects;
+using DbTool.Lib.Objects.Database;
 using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Commands;
 

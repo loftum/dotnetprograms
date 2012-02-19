@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Highlighting;
@@ -170,6 +171,11 @@ namespace DbToolGui.Controls.Syntax
             InvalidateVisual();
         }
 
+        private static bool ShouldShowSuggestionList(KeyEventArgs e)
+        {
+            return e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.Control;
+        }
+
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -178,8 +184,9 @@ namespace DbToolGui.Controls.Syntax
                 e.Handled = true;
             }
 
-            if (e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            if (ShouldShowSuggestionList(e))
             {
+                _parser.FindSuggestions(Text, SelectionStart);
                 ShowSuggestionList();
                 e.Handled = true;
             }
@@ -265,9 +272,16 @@ namespace DbToolGui.Controls.Syntax
                     {
                         SelectedText = Tab + SelectedText.Replace(Environment.NewLine, Environment.NewLine + Tab);
                     }
-                    
                 }
                 e.Handled = true;
+            }
+
+            if (_suggestionList.IsVisible && e.Key.In(Key.Return, Key.Tab))
+            {
+                var value = _suggestionList.SelectedItem.ToString();
+                SelectedText = value;
+                SelectionLength = 0;
+                HideSuggestionList();
             }
 
             // enter respects indenting
@@ -482,11 +496,11 @@ namespace DbToolGui.Controls.Syntax
             {
                 var border = VisualTreeHelper.GetChild(this, 0); // Border
                 var grid = VisualTreeHelper.GetChild(border, 0); // Grid
-                var scrollViewer = VisualTreeHelper.GetChild(grid, 0) as ScrollViewer; // Scrollbar
+                var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(grid, 0); // Scrollbar
                 scrollViewer.ScrollChanged += (s2, e2) => InvalidateVisual();
 
-                _suggestionCanvas = VisualTreeHelper.GetChild(grid, 2) as Canvas; // canvas
-                _suggestionList = VisualTreeHelper.GetChild(_suggestionCanvas, 0) as ListBox; // listbox
+                _suggestionCanvas = (Canvas)VisualTreeHelper.GetChild(grid, 2); // canvas
+                _suggestionList = (ListBox)VisualTreeHelper.GetChild(_suggestionCanvas, 0); // listbox
 
                 HideSuggestionList();
 
@@ -497,9 +511,14 @@ namespace DbToolGui.Controls.Syntax
 
         private void ShowSuggestionList()
         {
-            Point position = GetRectFromCharacterIndex(CaretIndex).BottomRight;
-
+            _suggestionList.Items.Clear();
+            if (!_parser.Suggestions.Any())
+            {
+                return;
+            }
+            _suggestionList.Items.AddRange(_parser.Suggestions);
             _suggestionCanvas.IsHitTestVisible = true;
+            Point position = GetRectFromCharacterIndex(CaretIndex).BottomRight;
 
             double left = position.X - LineNumberWidthOffset - LineNumberMarginWidth;
             double top = position.Y;

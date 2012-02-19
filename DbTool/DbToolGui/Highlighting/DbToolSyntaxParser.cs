@@ -13,38 +13,53 @@ namespace DbToolGui.Highlighting
         private readonly IDebugLogger _logger;
         private readonly List<Tag> _tags;
         public IEnumerable<Tag> Tags { get { return _tags.AsReadOnly(); } }
+
+        private readonly List<Suggestion> _suggestions;
+        public IEnumerable<Suggestion> Suggestions
+        {
+            get { return _suggestions.AsReadOnly(); }
+        }
+
         private readonly ISyntaxProvider _syntaxProvider;
 
         public DbToolSyntaxParser(ISyntaxProvider syntaxProvider)
         {
             _tags = new List<Tag>();
+            _suggestions = new List<Suggestion>();
             _syntaxProvider = syntaxProvider;
             _logger = DebugLogger.Instance;
         }
 
-        public IEnumerable<Suggestion> GetSuggestions(string text, int cursor)
+        public void FindSuggestions(string text, int cursor)
         {
-            var suggestions = new List<Suggestion>();
-            if (text.IsNotNullOrEmpty())
+            if (text.IsNullOrEmpty())
             {
-                return suggestions;
+                return;
             }
+            _suggestions.Clear();
             var word = GetWord(text, cursor);
             var obj = _syntaxProvider.GetObject(word);
-            suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
-            return suggestions;
+            if (obj != null)
+            {
+                _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
+            }
         }
 
         private string GetWord(string text, int cursor)
         {
+            var lastIndex = text.Length;
             var start = cursor;
-            while(!_syntaxProvider.IsSeparator(text[start]) && start > 0)
+            while(start > 0)
             {
+                if (_syntaxProvider.IsSeparator(text[start-1]))
+                {
+                    break;
+                }
                 start--;
             }
-            var lastIndex = text.Length;
+            
             var end = cursor;
-            while(!_syntaxProvider.IsSeparator(text[end]) && end < lastIndex)
+            while(end < lastIndex && !_syntaxProvider.IsSeparator(text[end]))
             {
                 end++;
             }

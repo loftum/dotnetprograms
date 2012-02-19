@@ -7,13 +7,12 @@ namespace DbTool.Lib.Objects.TypeCaching
     public abstract class TypeCache
     {
         private readonly bool _caseSensitive;
+        protected readonly IDictionary<Type, ISet<string>> Names = new Dictionary<Type, ISet<string>>();
 
         protected TypeCache(bool caseSensitive)
         {
             _caseSensitive = caseSensitive;
         }
-
-        protected readonly IDictionary<Type, ISet<string>> Names = new Dictionary<Type, ISet<string>>();
         
         public void Add(DbToolObject obj)
         {

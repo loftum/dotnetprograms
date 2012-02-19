@@ -66,6 +66,15 @@ namespace DbTool.Lib.ExtensionMethods
             }
         }
 
+        public static void AddRange<T>(this IList collection, IEnumerable<T> items)
+        {
+            collection.ShouldNotBeNull("collection");
+            foreach (var item in items)
+            {
+                collection.Add(item);
+            }
+        }
+
         public static List<T> ToListWith<T>(this T item, params T[] others)
         {
             return item.ToListWith(others.ToList());
