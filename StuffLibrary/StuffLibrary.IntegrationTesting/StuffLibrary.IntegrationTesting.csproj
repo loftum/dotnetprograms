@@ -80,9 +80,12 @@
     <Compile Include="MigrationTest.cs" />
     <Compile Include="NinjectModules\CommonSingletonModule.cs" />
     <Compile Include="NinjectModules\ConfigSingletonModule.cs" />
+    <Compile Include="NinjectModules\DisposableObject.cs" />
     <Compile Include="NinjectModules\RepoSingletonModule.cs" />
+    <Compile Include="NinjectModules\UnitOfWorkTestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\StuffLibraryRepoTest.cs" />
+    <Compile Include="UnitOfWork\RollbackUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StuffLibrary.Common\StuffLibrary.Common.csproj">
@@ -92,6 +95,10 @@
     <ProjectReference Include="..\StuffLibrary.Domain\StuffLibrary.Domain.csproj">
       <Project>{58D0C953-B7CC-48E0-8731-ADD07BEA7058}</Project>
       <Name>StuffLibrary.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.Lib\StuffLibrary.Lib.csproj">
+      <Project>{6CB37615-A1C9-4668-8752-7AAEC94D106F}</Project>
+      <Name>StuffLibrary.Lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\StuffLibrary.Migrations\StuffLibrary.Migrations.csproj">
       <Project>{E9677D32-6C80-43E4-B9AE-373926A6B2F9}</Project>

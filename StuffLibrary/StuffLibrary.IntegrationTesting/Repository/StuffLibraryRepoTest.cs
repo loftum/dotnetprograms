@@ -1,7 +1,10 @@
 ﻿using NUnit.Framework;
 using Ninject;
+using StuffLibrary.Common.Scoping;
 using StuffLibrary.Domain;
 using StuffLibrary.IntegrationTesting.NinjectModules;
+using StuffLibrary.IntegrationTesting.UnitOfWork;
+using StuffLibrary.NinjectModules;
 using StuffLibrary.Repository;
 using StuffLibrary.UnitTesting;
 using StuffLibrary.UnitTesting.Asserting;
@@ -13,11 +16,13 @@ namespace StuffLibrary.IntegrationTesting.Repository
     {
         private IKernel _kernel;
         private StuffLibraryRepo _repo;
+        private RollbackUnitOfWork _unitOfWork;
+        private DisposableObject _scope;
 
         [TestFixtureSetUp]
         public void SetUpTestFixture()
         {
-            _kernel = new StandardKernel(new CommonSingletonModule(), new ConfigSingletonModule(), new RepoSingletonModule());
+            _kernel = new StandardKernel(new CommonModule(), new ConfigModule(), new RepoModule(), new UnitOfWorkModule());
         }
 
         [TestFixtureTearDown]
@@ -29,13 +34,18 @@ namespace StuffLibrary.IntegrationTesting.Repository
         [SetUp]
         public void Setup()
         {
+            _scope = new DisposableObject();
+            InjectionContext.Current = _scope;
             _repo = _kernel.Get<StuffLibraryRepo>();
+            _unitOfWork = _kernel.Get<RollbackUnitOfWork>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _repo.Rollback();
+            _unitOfWork.Rollback();
+            _scope.Dispose();
+            _scope = null;
         }
 
         [Test]

@@ -55,6 +55,11 @@
     <Compile Include="BusinessLogic\IMovieLogic.cs" />
     <Compile Include="BusinessLogic\MovieLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IWork.cs" />
+    <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\Work.cs" />
+    <Compile Include="UnitOfWork\WorkEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

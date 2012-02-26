@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using NHibernate.Criterion;
-using NHibernate.Linq;
 using StuffLibrary.Common.ExtensionMethods;
 using StuffLibrary.Common.Logging;
 using StuffLibrary.Domain;
+using StuffLibrary.Lib.UnitOfWork;
 using StuffLibrary.Repository;
 
 namespace StuffLibrary.Lib.BusinessLogic
@@ -14,11 +11,13 @@ namespace StuffLibrary.Lib.BusinessLogic
     public class MovieLogic : IMovieLogic
     {
         private readonly IStuffLibraryRepo _repo;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IStuffLibraryLogger _logger;
 
-        public MovieLogic(IStuffLibraryRepo repo, IStuffLibraryLogger logger)
+        public MovieLogic(IStuffLibraryRepo repo, IStuffLibraryLogger logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
             _repo = repo;
         }
 
@@ -39,16 +38,19 @@ namespace StuffLibrary.Lib.BusinessLogic
 
         public long Save(Movie movie)
         {
-            if (movie.IsNew())
+            using (var work = _unitOfWork.Begin())
             {
-                CreateNew(movie);
+                if (movie.IsNew())
+                {
+                    CreateNew(movie);
+                }
+                else
+                {
+                    Update(movie);
+                }
+                work.Complete();
+                return movie.Id;    
             }
-            else
-            {
-                Update(movie);
-            }
-            _repo.SaveChanges();
-            return movie.Id;
         }
 
         private void Update(Movie movie)

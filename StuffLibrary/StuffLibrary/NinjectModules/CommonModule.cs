@@ -10,8 +10,8 @@ namespace StuffLibrary.NinjectModules
     {
         public override void Load()
         {
-            Bind<IDateProvider>().To<DateProvider>().InRetainableRequestScope();
-            Bind(typeof (IStuffLibraryLogger)).ToMethod(CreateLogger).InRetainableRequestScope();
+            Bind<IDateProvider>().To<DateProvider>().InCurrentInjectionScope();
+            Bind(typeof (IStuffLibraryLogger)).ToMethod(CreateLogger).InCurrentInjectionScope();
         }
 
         private static object CreateLogger(IContext context)

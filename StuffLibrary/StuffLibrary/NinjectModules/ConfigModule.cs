@@ -8,7 +8,7 @@ namespace StuffLibrary.NinjectModules
     {
         public override void Load()
         {
-            Bind<IStuffLibraryConfig>().To<StuffLibraryConfig>().InRetainableRequestScope();
+            Bind<IStuffLibraryConfig>().To<StuffLibraryConfig>().InCurrentInjectionScope();
         }
     }
 }

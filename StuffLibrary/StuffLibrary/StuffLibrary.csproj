@@ -105,6 +105,7 @@
     <Compile Include="NinjectModules\ConfigModule.cs" />
     <Compile Include="NinjectModules\LogicModule.cs" />
     <Compile Include="NinjectModules\RepoModule.cs" />
+    <Compile Include="NinjectModules\UnitOfWorkModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

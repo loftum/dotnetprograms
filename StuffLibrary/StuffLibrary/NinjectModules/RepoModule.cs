@@ -12,15 +12,16 @@ namespace StuffLibrary.NinjectModules
     {
         public override void Load()
         {
-            Bind<IChangeStampUpdater>().To<ChangeStampUpdater>().InRetainableRequestScope();
-            Bind<IRepositoryConfiguration>().To<RepositoryConfiguration>().InRetainableRequestScope();
-            Bind<ISession>().ToMethod(GetSession).InRetainableRequestScope();
-            Bind<IStuffLibraryRepo>().To<StuffLibraryRepo>().InRetainableRequestScope();
+            Bind<IChangeStampUpdater>().To<ChangeStampUpdater>().InCurrentInjectionScope();
+            Bind<IRepositoryConfiguration>().To<RepositoryConfiguration>().InCurrentInjectionScope();
+            Bind<ISessionProvider>().To<SessionProvider>().InCurrentInjectionScope();
+            Bind<ISession>().ToMethod(GetSession).InCurrentInjectionScope();
+            Bind<IStuffLibraryRepo>().To<StuffLibraryRepo>().InCurrentInjectionScope();
         }
 
         private static ISession GetSession(IContext context)
         {
-            return context.Kernel.Get<IRepositoryConfiguration>().CreateSessionFactory().OpenSession();
+            return context.Kernel.Get<ISessionProvider>().GetCurrent();
         }
     }
 }

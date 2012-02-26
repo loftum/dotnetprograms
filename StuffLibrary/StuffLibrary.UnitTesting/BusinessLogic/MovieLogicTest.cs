@@ -3,6 +3,7 @@ using NUnit.Framework;
 using StuffLibrary.Common.Logging;
 using StuffLibrary.Domain;
 using StuffLibrary.Lib.BusinessLogic;
+using StuffLibrary.Lib.UnitOfWork;
 using StuffLibrary.Repository;
 using StuffLibrary.UnitTesting.Asserting;
 using StuffLibrary.UnitTesting.Builders;
@@ -16,13 +17,15 @@ namespace StuffLibrary.UnitTesting.BusinessLogic
         private MovieLogic _movieLogic;
         private Mock<IStuffLibraryRepo> _repoMock;
         private Mock<IStuffLibraryLogger> _loggerMock;
+        private Mock<IUnitOfWork> _unitOfWorkMock;
 
         [SetUp]
         public void Setup()
         {
             _repoMock = new Mock<IStuffLibraryRepo>();
             _loggerMock = new Mock<IStuffLibraryLogger>();
-            _movieLogic = new MovieLogic(_repoMock.Object, _loggerMock.Object);
+            _unitOfWorkMock = new Mock<IUnitOfWork>();
+            _movieLogic = new MovieLogic(_repoMock.Object, _loggerMock.Object, _unitOfWorkMock.Object);
         }
 
         [Test]
@@ -45,7 +48,6 @@ namespace StuffLibrary.UnitTesting.BusinessLogic
             var movie = Build.NewMovie().WithTitle(Some.Title).Item;
             _movieLogic.Save(movie);
             _repoMock.Verify(repo => repo.Add(movie));
-            _repoMock.Verify(repo => repo.SaveChanges());
         }
 
         [Test]
@@ -56,7 +58,6 @@ namespace StuffLibrary.UnitTesting.BusinessLogic
             var updated = Build.NewMovie().WithId(existing.Id).WithTitle(Some.OtherTitle).Item;
             _movieLogic.Save(updated);
             _repoMock.Verify(repo => repo.Add(updated), Times.Never());
-            _repoMock.Verify(repo => repo.SaveChanges());
         }
     }
 }
