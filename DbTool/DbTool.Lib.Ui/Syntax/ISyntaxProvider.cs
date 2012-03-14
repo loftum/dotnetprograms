@@ -7,5 +7,6 @@ namespace DbTool.Lib.Ui.Syntax
         TagType GetTypeOf(string word);
         bool IsSeparator(char value);
         DbToolObject GetObject(string word);
+        bool IsPropertyIndicator(char c);
     }
 }

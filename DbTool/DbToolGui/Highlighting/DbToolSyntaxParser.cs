@@ -37,18 +37,21 @@ namespace DbToolGui.Highlighting
                 return;
             }
             _suggestions.Clear();
-            var word = GetWord(text, cursor);
-            var obj = _syntaxProvider.GetObject(word);
-            if (obj != null)
+            if (_syntaxProvider.IsPropertyIndicator(text[cursor-1]))
             {
-                _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
+                var word = GetWord(text, cursor);
+                var obj = _syntaxProvider.GetObject(word);
+                if (obj != null)
+                {
+                    _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
+                }    
             }
         }
 
         private string GetWord(string text, int cursor)
         {
             var lastIndex = text.Length;
-            var start = cursor;
+            var start = cursor-1;
             while(start > 0)
             {
                 if (_syntaxProvider.IsSeparator(text[start-1]))
@@ -58,7 +61,7 @@ namespace DbToolGui.Highlighting
                 start--;
             }
             
-            var end = cursor;
+            var end = cursor - 1;
             while(end < lastIndex && !_syntaxProvider.IsSeparator(text[end]))
             {
                 end++;

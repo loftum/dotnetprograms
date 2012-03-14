@@ -1,0 +1,24 @@
+﻿@model VisualFarmStudio.Models.Hack.InteractiveViewModel
+
+@section header
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+        });
+
+    </script>
+}
+
+@{
+    ViewBag.Title = "Interactive";
+}
+
+<h2>Interactive</h2>
+
+@using(Html.BeginForm()){
+    @Html.TextAreaFor(m => m.Input, 15, 100, new object())
+    <input type="submit" value="Do it"/>
+}
+
+@Html.TextAreaFor(m => m.Result.Text, 15, 100, new object())

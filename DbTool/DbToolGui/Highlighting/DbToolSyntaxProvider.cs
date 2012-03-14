@@ -61,6 +61,11 @@ namespace DbToolGui.Highlighting
             return _separators.Contains(value);
         }
 
+        public bool IsPropertyIndicator(char c)
+        {
+            return c == '.';
+        }
+
         private bool TryGetCaseSensitive(string word, out TagType tagType)
         {
             if (_caseSensitiveWords.ContainsKey(word))

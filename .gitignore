@@ -8,3 +8,4 @@ _ReSharper.*
 *.pidb
 *.userprefs
 .DS_Store
+*.dev.local.config

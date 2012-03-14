@@ -1,0 +1,15 @@
+﻿@model VisualFarmStudio.Models.BondegardIndexViewModel
+
+@{
+    ViewBag.Title = "Bondegårdoversikt";
+}
+
+<h2>title</h2>
+
+<ul>
+@foreach (var bondegard in Model.Bondegards)
+{
+    <li>@bondegard.Navn</li>
+}
+
+</ul>

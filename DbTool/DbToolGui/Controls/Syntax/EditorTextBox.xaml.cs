@@ -10,6 +10,7 @@ using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Highlighting;
+using DbToolGui.Views;
 
 namespace DbToolGui.Controls.Syntax
 {
@@ -171,6 +172,25 @@ namespace DbToolGui.Controls.Syntax
             InvalidateVisual();
         }
 
+        protected override void OnPreviewKeyUp(KeyEventArgs e)
+        {
+            DebugLogger.Instance.Log("OnPreviewKeyUp: {0}", e.Key);
+            if (_suggestionList.IsVisible)
+            {
+                if (e.Key.In(Key.Tab, Key.Enter, Key.Return))
+                {
+                    var selectedItem = _suggestionList.SelectedItem.ToString();
+                    DebugLogger.Instance.Log("SelectedText: {0}", SelectedText);
+                    Text = Text.Insert(SelectionStart - SelectionLength, selectedItem);
+                }
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnPreviewKeyUp(e);
+            }
+        }
+
         private static bool ShouldShowSuggestionList(KeyEventArgs e)
         {
             return e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.Control;
@@ -178,6 +198,7 @@ namespace DbToolGui.Controls.Syntax
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            DebugLogger.Instance.Log("OnPreviewKeyDown: {0}", e.Key);
             if (e.Key == Key.Escape)
             {
                 HideSuggestionList();
@@ -280,14 +301,6 @@ namespace DbToolGui.Controls.Syntax
                     }
                 }
                 e.Handled = true;
-            }
-
-            if (_suggestionList.IsVisible && e.Key.In(Key.Return, Key.Tab))
-            {
-                var value = _suggestionList.SelectedItem.ToString();
-                SelectedText = value;
-                SelectionLength = 0;
-                HideSuggestionList();
             }
 
             // enter respects indenting
