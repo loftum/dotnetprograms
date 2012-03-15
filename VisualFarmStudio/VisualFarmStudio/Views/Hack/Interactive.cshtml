@@ -1,12 +1,44 @@
-﻿@model VisualFarmStudio.Models.Hack.InteractiveViewModel
+﻿@using VisualFarmStudio.ExtensionMethods
+@model VisualFarmStudio.Models.Hack.InteractiveViewModel
+
 
 @section header
 {
     <script type="text/javascript">
+        function getInputText() {
+            var t = '';
+            if (window.getSelection) {
+                t = window.getSelection();
+            } else if (document.getSelection) {
+                t = document.getSelection();
+            } else if (document.selection) {
+                t = document.selection.createRange().text;
+            }
+            return t;
+        }
+        
         $(document).ready(function() {
-            
+            $("#ExecuteButton").click(function() {
+                var inputField = $(@Html.Raw(Html.JQueryIdFor(m => m.Input).ToJavaScript()));
+                var resultField = $(@Html.Raw(Html.JQueryIdFor(m => m.Result.Text).ToJavaScript()));
+
+                $.ajax({
+                    url: '/Hack/Execute',
+                    type: 'POST',
+                    data: {statement: inputField.val()},
+                    success: function(data) {
+                        if (data) {
+                            resultField.html(data);
+                        }
+                        else {
+                            resultField.html('');
+                        }
+                    }
+                });
+            });
         });
 
+        
     </script>
 }
 
@@ -16,9 +48,7 @@
 
 <h2>Interactive</h2>
 
-@using(Html.BeginForm()){
-    @Html.TextAreaFor(m => m.Input, 15, 100, new object())
-    <input type="submit" value="Do it"/>
-}
+@Html.TextAreaFor(m => m.Input, 15, 100, new object())
+<input id="ExecuteButton" type="button" value="Execute"/>
 
 @Html.TextAreaFor(m => m.Result.Text, 15, 100, new object())

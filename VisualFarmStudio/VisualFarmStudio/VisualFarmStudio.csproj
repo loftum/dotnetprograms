@@ -98,6 +98,8 @@
     <Compile Include="Controllers\HackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VFSControllerBase.cs" />
+    <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
+    <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

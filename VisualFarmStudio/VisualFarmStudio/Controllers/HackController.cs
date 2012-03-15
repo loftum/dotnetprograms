@@ -49,5 +49,11 @@ namespace VisualFarmStudio.Controllers
             model.Result = _cSharpExecutor.Execute(model.Input);
             return View(model);
         }
+
+        public JsonResult Execute(string statement)
+        {
+            var result = _cSharpExecutor.Execute(statement);
+            return Json(result.Text, JsonRequestBehavior.AllowGet);
+        }
     }
 }

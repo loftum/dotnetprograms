@@ -14,7 +14,7 @@ namespace VisualFarmStudio.NinjectModules
         public override void Load()
         {
             Bind<IUnitOfWork>().To<NHibernateUnitOfWork>().InScope(c => InjectionScope.Current);
-            Bind<ISessionProvider>().To<SessionProvider>().InScope(c => InjectionScope.Current);
+            Bind<ISessionProvider>().To<SessionProvider>().InSingletonScope();
             Bind<ISession>().ToMethod(GetSession).InScope(c => InjectionScope.Current);
             Bind<IVisualFarmRepo>().To<VisualFarmRepo>().InScope(c => InjectionScope.Current);
         }
