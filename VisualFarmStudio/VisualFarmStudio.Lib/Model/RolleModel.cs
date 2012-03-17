@@ -23,5 +23,11 @@ namespace VisualFarmStudio.Lib.Model
             rolle.Navn = Navn;
             return rolle;
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as RolleModel;
+            return other != null && other.Kode.Equals(Kode);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace VisualFarmStudio.Controllers
         {
             try
             {
-                _bondeFacade.Save(model.Bonde);
+                _bondeFacade.Add(model.Bonde);
                 _userManager.LogIn(model.Bonde);
                 return RedirectToAction("Index", "Bondegard");
             }

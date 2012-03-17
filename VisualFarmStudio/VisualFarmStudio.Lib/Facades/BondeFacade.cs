@@ -3,6 +3,7 @@ using VisualFarmStudio.Common.Exceptions;
 using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Core.Repository;
 using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.UserSession;
 
 namespace VisualFarmStudio.Lib.Facades
 {
@@ -32,12 +33,15 @@ namespace VisualFarmStudio.Lib.Facades
             return new BondeModel(bonde);
         }
 
-        public void Save(BondeModel model)
+        public void Add(BondeModel model)
         {
             if (IsTaken(model.Brukernavn))
             {
                 throw new UserException(ExceptionType.BrukernavnIsTaken);
             }
+
+            var brukerRolle = _repo.GetAll<Rolle>().Single(r => r.Kode.Equals(UserRole.Bruker));
+            model.Rolles.Add(new RolleModel(brukerRolle));
             _repo.Save(model.ToEntity());
         }
     }

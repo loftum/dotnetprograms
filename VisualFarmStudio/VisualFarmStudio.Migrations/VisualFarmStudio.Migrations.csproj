@@ -56,7 +56,7 @@
     <Compile Include="Steps\V009_BondeHasManyBondegards_9.cs" />
     <Compile Include="Steps\V010_AddRolle_10.cs" />
     <Compile Include="Steps\V011_BondeHasManyRolles_11.cs" />
-    <Compile Include="Steps\V012_InsertRoles_12.cs" />
+    <Compile Include="Steps\V012_InsertRolles_12.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

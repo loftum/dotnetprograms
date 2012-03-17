@@ -3,7 +3,7 @@
 namespace VisualFarmStudio.Migrations.Steps
 {
     [MigrationExport]
-    public class V012_InsertRoles_12 : IReversibleMigration
+    public class V012_InsertRolles_12 : IReversibleMigration
     {
         public void Up(IDatabase db)
         {
@@ -13,7 +13,7 @@ namespace VisualFarmStudio.Migrations.Steps
 
         private static string InsertRolle(string kode, string navn)
         {
-            return string.Format("insert intto rolle(Kode,navn) value ('{0}', {1})", kode, navn);
+            return string.Format("insert into Rolle(Kode,navn) values ('{0}', '{1}')", kode, navn);
         }
 
         public void Down(IDatabase db)
