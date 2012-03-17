@@ -7,7 +7,7 @@ using VisualFarmStudio.Models.Hack;
 
 namespace VisualFarmStudio.Controllers
 {
-    public class HackController : VFSControllerBase
+    public class HackController : VisualFarmControllerBase
     {
         private readonly IBondegardFacade _bondegardFacade;
         private readonly IInteractiveShell _interactiveShell;

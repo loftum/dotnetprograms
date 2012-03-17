@@ -1,6 +1,6 @@
 ﻿using Ninject.Modules;
+using VisualFarmStudio.Common.Scoping;
 using VisualFarmStudio.Lib.Interactive;
-using VisualFarmStudio.Lib.Scoping;
 
 namespace VisualFarmStudio.NinjectModules
 {

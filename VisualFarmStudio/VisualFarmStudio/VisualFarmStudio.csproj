@@ -94,12 +94,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectMVC3.cs" />
+    <Compile Include="Attributes\VFSAuthorizeAttribute.cs" />
     <Compile Include="Controllers\BondegardController.cs" />
     <Compile Include="Controllers\HackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VFSControllerBase.cs" />
+    <Compile Include="Controllers\BondeController.cs" />
+    <Compile Include="Controllers\VisualFarmControllerBase.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
+    <Compile Include="ExtensionMethods\TempDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -107,9 +110,12 @@
     <Compile Include="Models\BondegardViewModel.cs" />
     <Compile Include="Models\Hack\HackIndexViewModel.cs" />
     <Compile Include="Models\Hack\InteractiveViewModel.cs" />
+    <Compile Include="Models\Bonde\LoginViewModel.cs" />
+    <Compile Include="Models\Bonde\RegisterBondeViewModel.cs" />
     <Compile Include="NinjectModules\FacadeModule.cs" />
     <Compile Include="NinjectModules\InteractiveModule.cs" />
     <Compile Include="NinjectModules\RepoModule.cs" />
+    <Compile Include="NinjectModules\UserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,7 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\vfs.css" />
     <Content Include="Content\vfs.framework.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -201,6 +208,8 @@
     <None Include="config\tools\FireT4OnBuild.targets" />
     <Content Include="Views\Hack\Index.cshtml" />
     <Content Include="Views\Hack\Interactive.cshtml" />
+    <Content Include="Views\Bonde\LogIn.cshtml" />
+    <Content Include="Views\Bonde\Register.cshtml" />
     <None Include="web.config.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

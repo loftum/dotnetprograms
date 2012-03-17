@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VisualFarmStudio.Common.ExtensionMethods
 {
@@ -15,6 +16,11 @@ namespace VisualFarmStudio.Common.ExtensionMethods
             {
                 action(item);
             }
+        }
+
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
+        {
+            return collection == null || !collection.Any();
         }
     }
 }

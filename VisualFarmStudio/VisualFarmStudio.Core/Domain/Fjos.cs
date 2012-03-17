@@ -4,16 +4,16 @@ namespace VisualFarmStudio.Core.Domain
 {
     public class Fjos : DomainObject
     {
-        public virtual IList<Ku> Kuer { get; set; }
+        public virtual IList<Ku> Kues { get; set; }
 
         public Fjos()
         {
-            Kuer = new List<Ku>();
+            Kues = new List<Ku>();
         }
 
         public virtual void AddKu(Ku ku)
         {
-            Kuer.Add(ku);
+            Kues.Add(ku);
         }
     }
 }

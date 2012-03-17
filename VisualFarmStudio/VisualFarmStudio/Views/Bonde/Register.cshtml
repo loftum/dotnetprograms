@@ -1,0 +1,20 @@
+﻿@model VisualFarmStudio.Models.Bonde.RegisterBondeViewModel
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.Bonde.Fornavn)
+    @Html.TextBoxFor(m => m.Bonde.Fornavn)
+    <div class="clearer"></div>
+    @Html.LabelFor(m => m.Bonde.Etternavn)
+    @Html.TextBoxFor(m => m.Bonde.Etternavn)
+    <div class="clearer"></div>
+    @Html.LabelFor(m => m.Bonde.Brukernavn)
+    @Html.TextBoxFor(m => m.Bonde.Brukernavn)
+    <input type="submit" value="Registrer"/>
+}
+

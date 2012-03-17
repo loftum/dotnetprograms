@@ -52,6 +52,11 @@
     <Compile Include="Steps\V005_AddFjos_5.cs" />
     <Compile Include="Steps\V006_AddHest_6.cs" />
     <Compile Include="Steps\V007_AddKu_7.cs" />
+    <Compile Include="Steps\V008_AddBonde_8.cs" />
+    <Compile Include="Steps\V009_BondeHasManyBondegards_9.cs" />
+    <Compile Include="Steps\V010_AddRolle_10.cs" />
+    <Compile Include="Steps\V011_BondeHasManyRolles_11.cs" />
+    <Compile Include="Steps\V012_InsertRoles_12.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

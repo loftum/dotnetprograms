@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace VisualFarmStudio.Lib.Scoping
+namespace VisualFarmStudio.Common.Scoping
 {
     public class InjectionScope
     {

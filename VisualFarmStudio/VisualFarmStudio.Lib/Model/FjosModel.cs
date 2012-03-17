@@ -11,7 +11,7 @@ namespace VisualFarmStudio.Lib.Model
 
         public FjosModel(Fjos fjos) : base(fjos)
         {
-            Kuer = fjos.Kuer.Select(ku => new KuModel(ku)).ToList();
+            Kuer = fjos.Kues.Select(ku => new KuModel(ku)).ToList();
         }
 
         protected override Fjos MapTo(Fjos fjos)

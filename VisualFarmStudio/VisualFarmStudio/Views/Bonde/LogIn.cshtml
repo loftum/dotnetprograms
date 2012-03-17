@@ -1,0 +1,14 @@
+﻿@model VisualFarmStudio.Models.Bonde.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>Log in</h2>
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.Username)
+    <input type="submit" value="Logg in"/>
+    @Html.ActionLink("registrer ny bonde", "Register")
+}
+

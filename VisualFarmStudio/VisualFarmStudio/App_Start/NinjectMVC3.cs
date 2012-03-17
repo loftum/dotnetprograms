@@ -1,6 +1,6 @@
 using System.Web;
+using VisualFarmStudio.Common.Scoping;
 using VisualFarmStudio.Lib.Interactive;
-using VisualFarmStudio.Lib.Scoping;
 using VisualFarmStudio.NinjectModules;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(VisualFarmStudio.App_Start.NinjectMVC3), "Start")]
@@ -33,13 +33,14 @@ namespace VisualFarmStudio.App_Start
             var kernel = new StandardKernel();
             RegisterServices(kernel);
             InteractiveStuff.Kernel = kernel;
+            InjectionContainer.Kernel = kernel;
             return kernel;
         }
 
         private static void RegisterServices(IKernel kernel)
         {
             InjectionScope.SetScope(() => HttpContext.Current);
-            kernel.Load(new RepoModule(), new FacadeModule(), new InteractiveModule());
+            kernel.Load(new RepoModule(), new FacadeModule(), new InteractiveModule(), new UserModule());
         }
     }
 }

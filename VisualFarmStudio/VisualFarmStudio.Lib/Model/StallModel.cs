@@ -11,7 +11,7 @@ namespace VisualFarmStudio.Lib.Model
 
         public StallModel(Stall stall) : base(stall)
         {
-            Hester = stall.Hester.Select(hest => new HestModel(hest)).ToList();
+            Hester = stall.Hestes.Select(hest => new HestModel(hest)).ToList();
         }
 
         protected override Stall MapTo(Stall stall)

@@ -2,10 +2,10 @@
 using Ninject;
 using Ninject.Activation;
 using Ninject.Modules;
+using VisualFarmStudio.Common.Scoping;
 using VisualFarmStudio.Core.DataAccess;
 using VisualFarmStudio.Core.Repository;
 using VisualFarmStudio.Lib.Migrating;
-using VisualFarmStudio.Lib.Scoping;
 using VisualFarmStudio.Lib.UnitOfWork;
 
 namespace VisualFarmStudio.NinjectModules

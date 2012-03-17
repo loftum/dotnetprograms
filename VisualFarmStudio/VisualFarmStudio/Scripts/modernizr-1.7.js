@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 * Note: While Microsoft is not the author of this file, Microsoft is
 * offering you a license subject to the terms of the Microsoft Software
 * License Terms for Microsoft ASP.NET Model View Controller 3.
@@ -920,7 +920,7 @@ window.Modernizr = (function(window,document,undefined){
               while ((rule = ruleRegExp.exec(cssText)) != null)
                 // Replace all html5 element references with iepp substitute classnames
                 cssTextArr.push((rule[1]+rule[2]+rule[3]).replace(elemRegExp, '$1.iepp_$2')+rule[4]);
-              // Write iepp custom print CSS
+              // Add iepp custom print CSS
               styleElem.styleSheet.cssText = cssTextArr.join('\n');
               while (++a < elemsArrLen) {
                 var nodeList = doc.getElementsByTagName(elemsArr[a]),
@@ -933,7 +933,7 @@ window.Modernizr = (function(window,document,undefined){
               }
               docFrag.appendChild(body);
               html.appendChild(bodyElem);
-              // Write iepp substitute print-safe document
+              // Add iepp substitute print-safe document
               bodyElem.className = body.className;
               // Replace HTML5 elements with <font> which is print-safe and shouldn't conflict since it isn't part of html5
               bodyElem.innerHTML = body.innerHTML.replace(tagRegExp, '<$1font');

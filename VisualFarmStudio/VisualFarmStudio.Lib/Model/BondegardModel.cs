@@ -22,9 +22,9 @@ namespace VisualFarmStudio.Lib.Model
         public BondegardModel(Bondegard bondegard) : base(bondegard)
         {
             Navn = bondegard.Navn;
-            Fjoser = bondegard.Fjoser.Select(fjos => new FjosModel(fjos)).ToList();
-            Staller = bondegard.Staller.Select(stall => new StallModel(stall)).ToList();
-            Traktorer = bondegard.Traktorer.Select(traktor => new TraktorModel(traktor)).ToList();
+            Fjoser = bondegard.Fjoses.Select(fjos => new FjosModel(fjos)).ToList();
+            Staller = bondegard.Stalls.Select(stall => new StallModel(stall)).ToList();
+            Traktorer = bondegard.Traktors.Select(traktor => new TraktorModel(traktor)).ToList();
         }
 
         protected override Bondegard MapTo(Bondegard bondegard)

@@ -6,7 +6,7 @@ namespace VisualFarmStudio.Core.Mappings
     {
         public StallMap()
         {
-            HasMany(s => s.Hester);
+            HasMany(s => s.Hestes);
         }
     }
 }

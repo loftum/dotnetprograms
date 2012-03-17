@@ -2,7 +2,7 @@
 
 namespace VisualFarmStudio.Controllers
 {
-    public class HomeController : VFSControllerBase
+    public class HomeController : VisualFarmControllerBase
     {
         public ActionResult Index()
         {

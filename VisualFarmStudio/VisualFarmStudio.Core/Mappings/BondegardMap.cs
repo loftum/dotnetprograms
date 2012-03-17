@@ -7,9 +7,9 @@ namespace VisualFarmStudio.Core.Mappings
         public BondegardMap()
         {
             Map(g => g.Navn);
-            HasMany(g => g.Fjoser).Cascade.SaveUpdate();
-            HasMany(g => g.Staller).Cascade.SaveUpdate();
-            HasMany(g => g.Traktorer).Cascade.SaveUpdate();
+            HasMany(g => g.Fjoses).Cascade.SaveUpdate();
+            HasMany(g => g.Stalls).Cascade.SaveUpdate();
+            HasMany(g => g.Traktors).Cascade.SaveUpdate();
         }
     }
 }

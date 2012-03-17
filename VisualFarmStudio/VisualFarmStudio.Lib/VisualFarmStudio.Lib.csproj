@@ -75,7 +75,9 @@
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Caching\ICacheManager.cs" />
     <Compile Include="Containers\BondegardContainer.cs" />
+    <Compile Include="Facades\BondeFacade.cs" />
     <Compile Include="Facades\BondegardFacade.cs" />
+    <Compile Include="Facades\IBondeFacade.cs" />
     <Compile Include="Facades\IBondegardFacade.cs" />
     <Compile Include="Interactive\IInteractiveShell.cs" />
     <Compile Include="Interactive\InteractiveShell.cs" />
@@ -87,18 +89,29 @@
     <Compile Include="Migrating\VisualFarmMigrator.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BondegardModel.cs" />
+    <Compile Include="Model\BondeModel.cs" />
     <Compile Include="Model\DyrBaseModel.cs" />
     <Compile Include="Model\FjosModel.cs" />
     <Compile Include="Model\HestModel.cs" />
     <Compile Include="Model\KuModel.cs" />
+    <Compile Include="Model\RolleModel.cs" />
     <Compile Include="Model\StallModel.cs" />
     <Compile Include="Model\TraktorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scoping\InjectionScope.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
     <Compile Include="UnitOfWork\WorkEventArgs.cs" />
     <Compile Include="UnitOfWork\WorkUnit.cs" />
+    <Compile Include="UserInteraction\MessageType.cs" />
+    <Compile Include="UserInteraction\UserMessage.cs" />
+    <Compile Include="UserSession\HttpSession.cs" />
+    <Compile Include="UserSession\ISession.cs" />
+    <Compile Include="UserSession\ISessionManager.cs" />
+    <Compile Include="UserSession\IUserManager.cs" />
+    <Compile Include="UserSession\SessionManager.cs" />
+    <Compile Include="UserSession\UserContext.cs" />
+    <Compile Include="UserSession\UserManager.cs" />
+    <Compile Include="UserSession\UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
