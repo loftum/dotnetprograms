@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.Containers;
 
 namespace VisualFarmStudio.Lib.Caching
 {
@@ -13,7 +12,7 @@ namespace VisualFarmStudio.Lib.Caching
             _cache = cache;
         }
 
-        public IEnumerable<BondegardModel> GetAllBondegards(Func<IEnumerable<BondegardModel>> cacheMissFunc)
+        public BondegardContainer GetAllBondegards(Func<BondegardContainer> cacheMissFunc)
         {
             return _cache.Read("AllBondegards", cacheMissFunc);
         }

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Configuration;
-using VisualFarmStudio.Lib.ExtensionMethods;
+using VisualFarmStudio.Common.ExtensionMethods;
 
-namespace VisualFarmStudio.Lib.Configuration
+namespace VisualFarmStudio.Common.Configuration
 {
     public class VFSConfig : IVFSConfig
     {

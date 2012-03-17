@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace VisualFarmStudio.Lib.ExtensionMethods
+namespace VisualFarmStudio.Common.ExtensionMethods
 {
     public static class CollectionExtensions
     {

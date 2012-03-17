@@ -1,11 +1,11 @@
-﻿using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
+using VisualFarmStudio.Common.Configuration;
 using VisualFarmStudio.Core.Mappings;
-using VisualFarmStudio.Lib.Configuration;
 
-namespace VisualFarmStudio.Lib.DataAccess
+namespace VisualFarmStudio.Core.DataAccess
 {
     public class SessionProvider : ISessionProvider
     {

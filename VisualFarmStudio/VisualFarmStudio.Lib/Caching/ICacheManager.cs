@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.Containers;
 
 namespace VisualFarmStudio.Lib.Caching
 {
     public interface ICacheManager
     {
-        IEnumerable<BondegardModel> GetAllBondegards(Func<IEnumerable<BondegardModel>> cacheMissFunc);
+        BondegardContainer GetAllBondegards(Func<BondegardContainer> cacheMissFunc);
     }
 }

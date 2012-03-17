@@ -1,4 +1,4 @@
-﻿namespace VisualFarmStudio.Lib.Configuration
+namespace VisualFarmStudio.Common.Configuration
 {
     public interface IVFSConfig
     {

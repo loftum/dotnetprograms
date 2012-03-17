@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Lib.Facades;
 using VisualFarmStudio.Lib.Interactive;
+using VisualFarmStudio.Lib.Migrating;
 using VisualFarmStudio.Lib.Model;
 using VisualFarmStudio.Models.Hack;
 
@@ -10,17 +10,22 @@ namespace VisualFarmStudio.Controllers
     public class HackController : VFSControllerBase
     {
         private readonly IBondegardFacade _bondegardFacade;
-        private readonly ICSharpExecutor _cSharpExecutor;
+        private readonly IInteractiveShell _interactiveShell;
+        private readonly IVisualFarmMigrator _migrator;
 
-        public HackController(IBondegardFacade bondegardFacade, ICSharpExecutor cSharpExecutor)
+        public HackController(IBondegardFacade bondegardFacade,
+            IInteractiveShell interactiveShell,
+            IVisualFarmMigrator migrator)
         {
             _bondegardFacade = bondegardFacade;
-            _cSharpExecutor = cSharpExecutor;
+            _interactiveShell = interactiveShell;
+            _migrator = migrator;
         }
 
         public ActionResult Index()
         {
-            return View(new HackViewModel());
+            var model = new HackIndexViewModel() {MigrationVersion = _migrator.GetVersion()};
+            return View(model);
         }
 
         public ActionResult GenerateData()
@@ -44,17 +49,23 @@ namespace VisualFarmStudio.Controllers
             return View(new InteractiveViewModel());
         }
 
-        [HttpPost]
-        public ActionResult Interactive(InteractiveViewModel model)
-        {
-            model.Result = _cSharpExecutor.Execute(model.Input);
-            return View(model);
-        }
-
+        [ValidateInput(false)]
         public JsonResult Execute(string statement)
         {
-            var result = _cSharpExecutor.Execute(statement);
+            var result = _interactiveShell.Execute(statement);
             return Json(result.Text, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MigrateUp()
+        {
+            _migrator.MigrateUp();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult MigrateDown()
+        {
+            _migrator.MigrateDown();
+            return RedirectToAction("Index");
         }
     }
 }

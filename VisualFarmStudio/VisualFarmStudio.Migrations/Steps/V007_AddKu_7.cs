@@ -13,7 +13,8 @@ namespace VisualFarmStudio.Migrations.Steps
         {
             db.CreateTable(KuTable)
                 .WithPrimaryKeyColumn("Id", DbType.Int64).AsIdentity()
-                .WithNotNullableColumn("FjosId", DbType.Int64);
+                .WithNotNullableColumn("FjosId", DbType.Int64)
+                .WithNotNullableColumn("Navn", DbType.AnsiString).OfSize(255);
             db.Tables[KuTable].AddForeignKeyTo(FjosTable).Through("FjosId", "Id");
         }
 

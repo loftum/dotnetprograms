@@ -1,6 +1,6 @@
 ﻿using Ninject.Modules;
+using VisualFarmStudio.Common.Configuration;
 using VisualFarmStudio.Lib.Caching;
-using VisualFarmStudio.Lib.Configuration;
 using VisualFarmStudio.Lib.Facades;
 using VisualFarmStudio.Lib.Scoping;
 

@@ -1,4 +1,4 @@
-﻿namespace VisualFarmStudio.Lib.ExtensionMethods
+namespace VisualFarmStudio.Common.ExtensionMethods
 {
     public static class StringExtensions
     {

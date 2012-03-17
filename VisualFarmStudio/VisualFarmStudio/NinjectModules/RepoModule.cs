@@ -2,8 +2,9 @@
 using Ninject;
 using Ninject.Activation;
 using Ninject.Modules;
+using VisualFarmStudio.Core.DataAccess;
 using VisualFarmStudio.Core.Repository;
-using VisualFarmStudio.Lib.DataAccess;
+using VisualFarmStudio.Lib.Migrating;
 using VisualFarmStudio.Lib.Scoping;
 using VisualFarmStudio.Lib.UnitOfWork;
 
@@ -13,6 +14,7 @@ namespace VisualFarmStudio.NinjectModules
     {
         public override void Load()
         {
+            Bind<IVisualFarmMigrator>().To<VisualFarmMigrator>().InScope(c => InjectionScope.Current);
             Bind<IUnitOfWork>().To<NHibernateUnitOfWork>().InScope(c => InjectionScope.Current);
             Bind<ISessionProvider>().To<SessionProvider>().InSingletonScope();
             Bind<ISession>().ToMethod(GetSession).InScope(c => InjectionScope.Current);

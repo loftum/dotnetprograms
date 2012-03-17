@@ -40,6 +40,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.1.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="MigSharp">
+      <HintPath>..\packages\MigSharp.2.0.0\lib\net40\MigSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.CSharp">
       <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.dll</HintPath>
     </Reference>
@@ -71,19 +74,17 @@
     <Compile Include="Caching\HttpCache.cs" />
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Caching\ICacheManager.cs" />
-    <Compile Include="Configuration\IVFSConfig.cs" />
-    <Compile Include="Configuration\VFSConfig.cs" />
-    <Compile Include="DataAccess\ISessionProvider.cs" />
-    <Compile Include="DataAccess\SessionProvider.cs" />
-    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
-    <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
-    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Containers\BondegardContainer.cs" />
     <Compile Include="Facades\BondegardFacade.cs" />
     <Compile Include="Facades\IBondegardFacade.cs" />
+    <Compile Include="Interactive\IInteractiveShell.cs" />
+    <Compile Include="Interactive\InteractiveShell.cs" />
     <Compile Include="Interactive\InteractiveStuff.cs" />
     <Compile Include="Interactive\MonoCSharpExecutor.cs" />
     <Compile Include="Interactive\CSharpResult.cs" />
     <Compile Include="Interactive\ICSharpExecutor.cs" />
+    <Compile Include="Migrating\IVisualFarmMigrator.cs" />
+    <Compile Include="Migrating\VisualFarmMigrator.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BondegardModel.cs" />
     <Compile Include="Model\DyrBaseModel.cs" />
@@ -103,9 +104,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VisualFarmStudio.Common\VisualFarmStudio.Common.csproj">
+      <Project>{77371895-9947-4B6C-8CE0-59067E9B7E4C}</Project>
+      <Name>VisualFarmStudio.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisualFarmStudio.Core\VisualFarmStudio.Core.csproj">
       <Project>{AA0F7D96-AE4D-49DA-9195-75953A8A6E43}</Project>
       <Name>VisualFarmStudio.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisualFarmStudio.Migrations\VisualFarmStudio.Migrations.csproj">
+      <Project>{4476C71F-09D8-4E84-B35A-DE0BE134B965}</Project>
+      <Name>VisualFarmStudio.Migrations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

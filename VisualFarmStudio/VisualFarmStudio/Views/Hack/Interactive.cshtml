@@ -8,17 +8,6 @@
 @section header
 {
     <script type="text/javascript">
-        
-        function wrapAsLink(){ 
-            var textarea = document.getElementById("myTa");
-            var len = textarea.value.length; 
-            var start = textarea.selectionStart; 
-            var end = textarea.selectionEnd; 
-            var sel = textarea.value.substring(start, end); 
-            var replace = '<a href="'+url+'">' + sel + '</a>'; 
-            textarea.value =  textarea.value.substring(0,start) + replace + 
-            textarea.value.substring(end,len); 
-        } 
 
         function isEmpty(str) {
             return (!str || 0 === str.length);

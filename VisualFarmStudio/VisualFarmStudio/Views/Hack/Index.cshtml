@@ -1,10 +1,28 @@
-﻿@model VisualFarmStudio.Models.Hack.HackViewModel
+﻿@model VisualFarmStudio.Models.Hack.HackIndexViewModel
 
 @{
     ViewBag.Title = "h4xx0rz";
 }
 
+@section header
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            
+
+        });
+
+    </script>
+}
+
 <h2>h4xx0rz</h2>
 
-@Html.ActionLink("Generate dummy data", "GenerateData");
-@Html.ActionLink("Interactive", "Interactive");
+<p>Database-version: @Model.MigrationVersion</p>
+
+<ul>
+    <li>@Html.ActionLink("Generate dummy data", "GenerateData")</li>
+    <li>@Html.ActionLink("Interactive", "Interactive")</li>
+    <li>@Html.ActionLink("Migrate up", "MigrateUp")</li>
+    <li>@Html.ActionLink("Migrate down", "MigrateDown")</li>
+</ul>

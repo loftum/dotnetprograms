@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisualFarmStudio.Common.ExtensionMethods;
 using VisualFarmStudio.Core.Domain;
-using VisualFarmStudio.Lib.ExtensionMethods;
 
 namespace VisualFarmStudio.Lib.Model
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Caching;
 
 namespace VisualFarmStudio.Lib.Caching
 {
@@ -19,23 +20,32 @@ namespace VisualFarmStudio.Lib.Caching
             return value;
         }
 
-        private static bool TryRead<T>(string key, out T value) where T : class
+        public T Read<T>(string key) where T : class
         {
-            value = null;
             try
             {
-                value = (T)HttpContext.Current.Cache[key];
-                return value != null;
+                return (T)HttpContext.Current.Cache[key];
             }
-            catch
+            catch (Exception)
             {
-                return false;
+                return null;
             }
+        }
+
+        private bool TryRead<T>(string key, out T value) where T : class
+        {
+            value = Read<T>(key);
+            return value != null;
         }
 
         public void Write(string key, object value)
         {
-            HttpContext.Current.Cache[key] = value;
+            if (value == null)
+            {
+                HttpContext.Current.Cache.Remove(key);
+                return;
+            }
+            HttpContext.Current.Cache.Insert(key, value, null, DateTime.Now.AddMinutes(90), Cache.NoSlidingExpiration);
         }
     }
 }

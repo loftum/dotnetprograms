@@ -1,9 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using MigSharp;
-using VisualFarmStudio.Lib.Configuration;
-using VisualFarmStudio.Lib.ExtensionMethods;
-using VisualFarmStudio.Migrations.Steps;
+using VisualFarmStudio.Lib.Migrating;
 
 namespace VisualFarmStudio
 {
@@ -32,16 +29,7 @@ namespace VisualFarmStudio
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-            MigrateDatabase();
-        }
-
-        private void MigrateDatabase()
-        {
-            var config = new VFSConfig();
-            var options = new MigrationOptions();
-            options.SupportedProviders.Set(ProviderNames.SqlServer2008.AsArray());
-            var migrator = new Migrator(config.ConnectionString, ProviderNames.SqlServer2008, options);
-            migrator.MigrateAll(typeof(V001_Initial_1).Assembly);
+            new VisualFarmMigrator().MigrateUp();
         }
     }
 }

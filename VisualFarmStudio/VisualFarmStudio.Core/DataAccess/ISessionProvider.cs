@@ -1,6 +1,6 @@
-﻿using NHibernate;
+using NHibernate;
 
-namespace VisualFarmStudio.Lib.DataAccess
+namespace VisualFarmStudio.Core.DataAccess
 {
     public interface ISessionProvider
     {

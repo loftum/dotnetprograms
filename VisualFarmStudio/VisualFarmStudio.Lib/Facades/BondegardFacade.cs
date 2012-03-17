@@ -3,6 +3,7 @@ using System.Linq;
 using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Core.Repository;
 using VisualFarmStudio.Lib.Caching;
+using VisualFarmStudio.Lib.Containers;
 using VisualFarmStudio.Lib.Model;
 using VisualFarmStudio.Lib.UnitOfWork;
 
@@ -30,14 +31,25 @@ namespace VisualFarmStudio.Lib.Facades
 
         public IEnumerable<BondegardModel> GetAllBondegards()
         {
-            return _cacheManager.GetAllBondegards(() => _repo.GetAll<Bondegard>().Select(b => new BondegardModel(b)).ToList());
+            return GetBondegardContainer().Bondegards;
+        }
+
+        private BondegardContainer GetBondegardContainer()
+        {
+            return _cacheManager.GetAllBondegards(LoadBondegards);
+        }
+
+        private BondegardContainer LoadBondegards()
+        {
+            return new BondegardContainer(_repo.GetAll<Bondegard>().Select(b => new BondegardModel(b)).ToList());
         }
 
         public void Save(BondegardModel bondegard)
         {
             using(var work = _unitOfWork.Begin())
             {
-                _repo.Save(bondegard.ToEntity());
+                var saved = _repo.Save(bondegard.ToEntity());
+                GetBondegardContainer().Bondegards.Add(new BondegardModel(saved));
                 work.Complete();
             }
         }

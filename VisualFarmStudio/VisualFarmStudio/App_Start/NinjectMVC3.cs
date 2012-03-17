@@ -1,4 +1,5 @@
 using System.Web;
+using VisualFarmStudio.Lib.Interactive;
 using VisualFarmStudio.Lib.Scoping;
 using VisualFarmStudio.NinjectModules;
 
@@ -31,6 +32,7 @@ namespace VisualFarmStudio.App_Start
         {
             var kernel = new StandardKernel();
             RegisterServices(kernel);
+            InteractiveStuff.Kernel = kernel;
             return kernel;
         }
 

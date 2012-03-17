@@ -13,7 +13,8 @@ namespace VisualFarmStudio.Migrations.Steps
         {
             db.CreateTable(HestTable)
                 .WithPrimaryKeyColumn("Id", DbType.Int64).AsIdentity()
-                .WithNotNullableColumn("StallId", DbType.Int64);
+                .WithNotNullableColumn("StallId", DbType.Int64)
+                .WithNotNullableColumn("Navn", DbType.AnsiString).OfSize(255);
             db.Tables[HestTable].AddForeignKeyTo(StallTable).Through("StallId", "Id");
         }
 

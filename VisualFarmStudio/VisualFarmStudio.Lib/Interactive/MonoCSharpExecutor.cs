@@ -2,8 +2,10 @@
 using System.Text;
 using System.Web;
 using Mono.CSharp;
+using VisualFarmStudio.Common.Configuration;
+using VisualFarmStudio.Common.ExtensionMethods;
 using VisualFarmStudio.Core.Repository;
-using VisualFarmStudio.Lib.ExtensionMethods;
+using VisualFarmStudio.Lib.Facades;
 
 namespace VisualFarmStudio.Lib.Interactive
 {
@@ -24,6 +26,8 @@ namespace VisualFarmStudio.Lib.Interactive
             _evaluator.InteractiveBaseClass = typeof (InteractiveStuff);
             _evaluator.ReferenceAssembly(typeof(HttpContext).Assembly);
             _evaluator.ReferenceAssembly(typeof(VisualFarmRepo).Assembly);
+            _evaluator.ReferenceAssembly(typeof(BondegardFacade).Assembly);
+            _evaluator.ReferenceAssembly(typeof(IVFSConfig).Assembly);
             Execute("using System;");
             Execute("using System.Linq;");
             Execute("using System.Web");
