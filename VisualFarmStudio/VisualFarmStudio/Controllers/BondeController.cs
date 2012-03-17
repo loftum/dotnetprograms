@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using VisualFarmStudio.Common.Exceptions;
 using VisualFarmStudio.Lib.Facades;
+using VisualFarmStudio.Lib.Model;
 using VisualFarmStudio.Lib.UserSession;
 using VisualFarmStudio.Models.Bonde;
 
@@ -25,6 +26,12 @@ namespace VisualFarmStudio.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
+            var bonde = _bondeFacade.Get(model.Username);
+            if (bonde == null)
+            {
+                return View(model);
+            }
+            _userManager.LogIn(bonde);
             return RedirectToAction("Index", "Bondegard");
         }
 
@@ -47,6 +54,12 @@ namespace VisualFarmStudio.Controllers
                 AddUserMessageFor(ex);
                 return View(model);
             }
+        }
+
+        public ActionResult LogOut()
+        {
+            _userManager.LogOut();
+            return RedirectToAction("Login");
         }
     }
 }

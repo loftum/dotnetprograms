@@ -16,6 +16,10 @@
                         container.delay(2500).slideUp();
                     }
                 }
+
+                $(".flashMessageContainer").click(function() {
+                    $(this).slideUp();
+                });
             });
 
         </script>
@@ -26,7 +30,7 @@
     <body>
         
         <h1>Visual Farm Studio</h1>
-        
+        @Html.ActionLink("Logg ut", "LogOut", "Bonde")
 
         @RenderBody()
         

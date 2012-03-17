@@ -25,7 +25,7 @@ namespace VisualFarmStudio.Lib.Facades
         public BondeModel Get(string brukernavn)
         {
             var lowercase = brukernavn.ToLowerInvariant();
-            var bonde = _repo.GetAll<Bonde>().FirstOrDefault(b => b.Brukernavn.Equals(lowercase));
+            var bonde = _repo.GetAll<Bonde>().SingleOrDefault(b => b.Brukernavn.Equals(lowercase));
             if (bonde == null)
             {
                 throw new UserException(ExceptionType.InvalidCredentials);
