@@ -2,15 +2,15 @@
 
 namespace VisualFarmStudio.Models
 {
-    public class BondegardModel
+    public class BondegardViewModel
     {
         public Bondegard Bondegard { get; set; }
 
-        public BondegardModel()
+        public BondegardViewModel()
         {
         }
 
-        public BondegardModel(Bondegard bondegard)
+        public BondegardViewModel(Bondegard bondegard)
         {
             Bondegard = bondegard;
         }

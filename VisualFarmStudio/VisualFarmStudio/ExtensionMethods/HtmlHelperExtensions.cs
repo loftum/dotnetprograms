@@ -7,12 +7,17 @@ namespace VisualFarmStudio.ExtensionMethods
 {
     public static class HtmlHelperExtensions
     {
-        public static IHtmlString JQueryIdFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> property)
+        public static IHtmlString IdFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> property)
         {
             var fieldName = ExpressionHelper.GetExpressionText(property);
             var fieldId = helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(fieldName);
-            var jQueryId = string.Format("#{0}", fieldId);
-            return helper.Raw(jQueryId);
+            return helper.Raw(fieldId);
+        }
+
+        public static IHtmlString JQueryIdFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> property)
+        {
+            var id = helper.IdFor(property).ToString();
+            return helper.Raw(string.Format("#{0}", id));
         }
     }
 }

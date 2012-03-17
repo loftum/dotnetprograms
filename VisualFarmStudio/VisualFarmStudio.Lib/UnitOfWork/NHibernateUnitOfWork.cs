@@ -26,6 +26,7 @@ namespace VisualFarmStudio.Lib.UnitOfWork
 
         private void HandleEnded(WorkUnit sender, WorkEventArgs e)
         {
+            sender.Ended -= HandleEnded;
             if (_workUnits.Any(w => !w.Equals(sender) && !w.HasEnded))
             {
                 return;

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using VisualFarmStudio.Core.Domain;
+using VisualFarmStudio.Lib.Model;
 
 namespace VisualFarmStudio.Lib.Facades
 {
     public interface IBondegardFacade
     {
-        Bondegard GetDefaultBondegard();
-        IEnumerable<Bondegard> GetAllBondegards();
-        void Save(Bondegard bondegard);
+        BondegardModel GetDefaultBondegard();
+        IEnumerable<BondegardModel> GetAllBondegards();
+        void Save(BondegardModel bondegard);
     }
 }

@@ -63,6 +63,14 @@
     <Compile Include="Domain\Ku.cs" />
     <Compile Include="Domain\Stall.cs" />
     <Compile Include="Domain\Traktor.cs" />
+    <Compile Include="Mappings\BondegardMap.cs" />
+    <Compile Include="Mappings\DomainObjectMap.cs" />
+    <Compile Include="Mappings\DyrMap.cs" />
+    <Compile Include="Mappings\FjosMap.cs" />
+    <Compile Include="Mappings\HestMap.cs" />
+    <Compile Include="Mappings\KuMap.cs" />
+    <Compile Include="Mappings\StallMap.cs" />
+    <Compile Include="Mappings\TraktorMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IVisualFarmRepo.cs" />
     <Compile Include="Repository\VisualFarmRepo.cs" />

@@ -1,6 +1,8 @@
-﻿namespace VisualFarmStudio.Lib.UnitOfWork
+﻿using System;
+
+namespace VisualFarmStudio.Lib.UnitOfWork
 {
-    public class WorkUnit
+    public class WorkUnit : IDisposable
     {
         public delegate void WorkEndedEventHandler(WorkUnit sender, WorkEventArgs e);
 

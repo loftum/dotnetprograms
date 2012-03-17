@@ -1,0 +1,24 @@
+﻿.hidden
+{
+    display: none;
+}
+
+.floatLeft
+{
+    float: left;
+}
+
+.floatRight 
+{
+    float: right;
+}
+
+.clearer
+{
+    clear: both;
+}
+
+.fullWidth
+{
+    width: 100%;
+}

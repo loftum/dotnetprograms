@@ -1,6 +1,6 @@
-﻿using VisualFarmStudio.Core.Domain;
+using VisualFarmStudio.Core.Domain;
 
-namespace VisualFarmStudio.Lib.Mappings
+namespace VisualFarmStudio.Core.Mappings
 {
     public class BondegardMap : DomainObjectMap<Bondegard>
     {

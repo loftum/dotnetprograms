@@ -1,54 +1,129 @@
 ﻿@using VisualFarmStudio.ExtensionMethods
 @model VisualFarmStudio.Models.Hack.InteractiveViewModel
 
-
-@section header
-{
-    <script type="text/javascript">
-        function getInputText() {
-            var t = '';
-            if (window.getSelection) {
-                t = window.getSelection();
-            } else if (document.getSelection) {
-                t = document.getSelection();
-            } else if (document.selection) {
-                t = document.selection.createRange().text;
-            }
-            return t;
-        }
-        
-        $(document).ready(function() {
-            $("#ExecuteButton").click(function() {
-                var inputField = $(@Html.Raw(Html.JQueryIdFor(m => m.Input).ToJavaScript()));
-                var resultField = $(@Html.Raw(Html.JQueryIdFor(m => m.Result.Text).ToJavaScript()));
-
-                $.ajax({
-                    url: '/Hack/Execute',
-                    type: 'POST',
-                    data: {statement: inputField.val()},
-                    success: function(data) {
-                        if (data) {
-                            resultField.html(data);
-                        }
-                        else {
-                            resultField.html('');
-                        }
-                    }
-                });
-            });
-        });
-
-        
-    </script>
-}
-
 @{
     ViewBag.Title = "Interactive";
 }
 
+@section header
+{
+    <script type="text/javascript">
+        
+        function wrapAsLink(){ 
+            var textarea = document.getElementById("myTa");
+            var len = textarea.value.length; 
+            var start = textarea.selectionStart; 
+            var end = textarea.selectionEnd; 
+            var sel = textarea.value.substring(start, end); 
+            var replace = '<a href="'+url+'">' + sel + '</a>'; 
+            textarea.value =  textarea.value.substring(0,start) + replace + 
+            textarea.value.substring(end,len); 
+        } 
+
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+
+        function isBlank(str) {
+            return (!str || /^\s*$/.test(str));
+        }
+        
+        function isBlankOrEmpty(str) {
+            return isBlank(str) || isEmpty(str);
+        }
+        
+        function getSelectedText() {
+            var inputFieldId = @Html.Raw(Html.IdFor(m => m.Input).ToJavaScript());
+            var textarea = document.getElementById(inputFieldId);
+            var start = textarea.selectionStart; 
+            var end = textarea.selectionEnd; 
+            return textarea.value.substring(start, end);
+        }
+
+        function getSelectedTextOr(defaultValue) {
+            var value = getSelectedText();
+            if (isBlankOrEmpty(value)) {
+                return defaultValue;
+            }
+            return value;
+        }
+        
+        function showOutput(data) {
+            var outputPane = $("#OutputPane");
+            outputPane.html(data);
+            if (isBlankOrEmpty(data)) {
+                outputPane.hide();
+            }
+            else {
+                outputPane.show();
+            }
+        }
+        
+        function showError(data) {
+            var errorPane = $("#ErrorPane");
+            errorPane.html(data);
+            if (isBlankOrEmpty(data)) {
+                errorPane.hide();
+            }
+            else {
+                errorPane.show();
+            }
+        }
+
+        function clearOutput() {
+            showOutput('');
+            showError('');
+        }
+        
+        $(document).ready(function() {
+            
+            var inputField = $(@Html.Raw(Html.JQueryIdFor(m => m.Input).ToJavaScript()));
+            inputField.keyup(function(e) {
+                if (e.which == 13 && e.ctrlKey) {
+                    executeStatement();
+                    return false;
+                }
+                return true;
+            });
+        });
+        
+        function executeStatement() {
+            $("#SpinningWheel").show();
+            clearOutput();
+            var inputField = $(@Html.Raw(Html.JQueryIdFor(m => m.Input).ToJavaScript()));
+
+            var statement = getSelectedTextOr(inputField.val());
+            $.ajax({
+                url: '/Hack/Execute',
+                type: 'POST',
+                data: {statement: statement},
+                success: function(data) {
+                    if (data) {
+                        showOutput(data);
+                    }
+                    else {
+                        showOutput('');
+                    }
+                    $("#SpinningWheel").hide();
+                },
+                error:function(xhr, error){
+                    showError(xhr.responseText);
+                    $("#SpinningWheel").hide();
+                }
+            });
+            
+            $("#TempText").html(statement);
+        }
+        
+    </script>
+}
+
 <h2>Interactive</h2>
-
-@Html.TextAreaFor(m => m.Input, 15, 100, new object())
-<input id="ExecuteButton" type="button" value="Execute"/>
-
-@Html.TextAreaFor(m => m.Result.Text, 15, 100, new object())
+<div class="floatLeft">(ctrl + Enter to execute)</div>
+<div id="SpinningWheel" class="floatLeft hidden"><img src="/Content/images/wait20trans.gif" alt="executing.."/></div>
+<div class="clearer"></div>
+@Html.TextAreaFor(m => m.Input, 15, 100, new{@class="fullWidth"})
+<div id="TempText"></div>
+<div class="clearer"></div>
+<textarea id="OutputPane" class="fullWidth hidden" rows="15" cols="100"></textarea>
+<div id="ErrorPane" class="fullWidth hidden"></div>

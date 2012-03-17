@@ -1,8 +1,9 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
+using VisualFarmStudio.Core.Mappings;
 using VisualFarmStudio.Lib.Configuration;
-using VisualFarmStudio.Lib.Mappings;
 
 namespace VisualFarmStudio.Lib.DataAccess
 {
@@ -22,7 +23,11 @@ namespace VisualFarmStudio.Lib.DataAccess
         {
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(_config.ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<BondegardMap>())
+                .Mappings(m =>
+                    m.FluentMappings.AddFromAssemblyOf<BondegardMap>()
+                    .Conventions.Add(PrimaryKey.Name.Is(e => "Id"))
+                    .Conventions.Add(ForeignKey.EndsWith("Id"))
+                )
                 .BuildSessionFactory();
         }
 

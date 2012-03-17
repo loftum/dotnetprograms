@@ -2,6 +2,7 @@
 using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Lib.Facades;
 using VisualFarmStudio.Lib.Interactive;
+using VisualFarmStudio.Lib.Model;
 using VisualFarmStudio.Models.Hack;
 
 namespace VisualFarmStudio.Controllers
@@ -31,9 +32,9 @@ namespace VisualFarmStudio.Controllers
             return RedirectToAction("Index");
         }
 
-        private Bondegard CreateBondegard(int id)
+        private BondegardModel CreateBondegard(int id)
         {
-            var bondegard = new Bondegard();
+            var bondegard = new BondegardModel();
             bondegard.Navn = string.Format("Bondegård {0}", id);
             return bondegard;
         }
