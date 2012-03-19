@@ -9,7 +9,12 @@ namespace VisualFarmStudio.Lib.Model
     {
         public string Fornavn { get; set; }
         public string Etternavn { get; set; }
-        public string Brukernavn { get; set; }
+        private string _brukernavn;
+        public string Brukernavn
+        {
+            get { return _brukernavn; }
+            set { _brukernavn = value.ToLowerInvariant(); }
+        }
         public IList<RolleModel> Rolles { get; set; }
 
         public BondeModel(Bonde bonde) : base(bonde)
@@ -29,7 +34,7 @@ namespace VisualFarmStudio.Lib.Model
         {
             bonde.Fornavn = Fornavn;
             bonde.Etternavn = Etternavn;
-            bonde.Brukernavn = Brukernavn.ToLowerInvariant();
+            bonde.Brukernavn = Brukernavn;
             Rolles.Each(r => bonde.AddRolle(r.ToEntity()));
             return bonde;
         }

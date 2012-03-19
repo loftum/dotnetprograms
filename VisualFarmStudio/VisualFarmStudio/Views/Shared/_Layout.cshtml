@@ -27,9 +27,12 @@
         @RenderSection("header", false)
     </head>
 
-    <body>
+    <body class="fullWidth centered">
+        <div class="topPanel">
+            <h1><a href="/">Visual Farm Studio</a></h1>    
+
+        </div>
         
-        <h1>Visual Farm Studio</h1>
         @Html.ActionLink("Logg ut", "LogOut", "Bonde")
 
         @RenderBody()

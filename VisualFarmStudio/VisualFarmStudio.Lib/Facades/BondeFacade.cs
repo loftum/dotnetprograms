@@ -3,6 +3,7 @@ using VisualFarmStudio.Common.Exceptions;
 using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Core.Repository;
 using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.UnitOfWork;
 using VisualFarmStudio.Lib.UserSession;
 
 namespace VisualFarmStudio.Lib.Facades
@@ -10,10 +11,13 @@ namespace VisualFarmStudio.Lib.Facades
     public class BondeFacade : IBondeFacade
     {
         private readonly IVisualFarmRepo _repo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BondeFacade(IVisualFarmRepo repo)
+        public BondeFacade(IVisualFarmRepo repo,
+            IUnitOfWork unitOfWork)
         {
             _repo = repo;
+            _unitOfWork = unitOfWork;
         }
 
         public bool IsTaken(string brukernavn)
@@ -40,9 +44,13 @@ namespace VisualFarmStudio.Lib.Facades
                 throw new UserException(ExceptionType.BrukernavnIsTaken);
             }
 
-            var brukerRolle = _repo.GetAll<Rolle>().Single(r => r.Kode.Equals(UserRole.Bruker));
-            model.Rolles.Add(new RolleModel(brukerRolle));
-            _repo.Save(model.ToEntity());
+            using (var work = _unitOfWork.Begin())
+            {
+                var bonde = _repo.Save(model.ToEntity());
+                var bruker = _repo.GetAll<Rolle>().Single(r => r.Kode.Equals(UserRole.Bruker));
+                bonde.AddRolle(bruker);
+                work.Complete();
+            }
         }
     }
 }

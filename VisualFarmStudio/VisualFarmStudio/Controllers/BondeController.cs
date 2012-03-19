@@ -2,6 +2,7 @@
 using VisualFarmStudio.Common.Exceptions;
 using VisualFarmStudio.Lib.Facades;
 using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.UserInteraction;
 using VisualFarmStudio.Lib.UserSession;
 using VisualFarmStudio.Models.Bonde;
 
@@ -29,6 +30,7 @@ namespace VisualFarmStudio.Controllers
             var bonde = _bondeFacade.Get(model.Username);
             if (bonde == null)
             {
+                AddUserMessage(UserMessage.Error("Ugyldig bruker", string.Empty));
                 return View(model);
             }
             _userManager.LogIn(bonde);

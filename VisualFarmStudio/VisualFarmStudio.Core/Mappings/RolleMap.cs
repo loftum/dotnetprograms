@@ -8,6 +8,9 @@ namespace VisualFarmStudio.Core.Mappings
         {
             Map(r => r.Kode);
             Map(r => r.Navn);
+            HasManyToMany(r => r.Bondes)
+                .Cascade.All().Inverse()
+                .Table("BondeRolle");
         }
     }
 }

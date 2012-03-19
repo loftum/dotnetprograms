@@ -22,3 +22,9 @@
 {
     width: 100%;
 }
+
+.centered
+{
+    margin-left: auto;
+    margin-right: auto;
+}

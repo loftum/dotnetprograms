@@ -26,7 +26,7 @@ namespace VisualFarmStudio.Core.Repository
 
         public TEntity Save<TEntity>(TEntity entity) where TEntity : DomainObject
         {
-            _session.Save(entity);
+            _session.SaveOrUpdate(entity);
             return entity;
         }
     }
