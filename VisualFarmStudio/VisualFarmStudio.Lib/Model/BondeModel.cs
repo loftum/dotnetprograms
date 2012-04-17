@@ -9,6 +9,8 @@ namespace VisualFarmStudio.Lib.Model
     {
         public string Fornavn { get; set; }
         public string Etternavn { get; set; }
+        public string FulltNavn { get { return string.Format("{0} {1}", Fornavn, Etternavn); } }
+        
         private string _brukernavn;
         public string Brukernavn
         {

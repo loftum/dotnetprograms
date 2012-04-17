@@ -9,6 +9,11 @@ namespace VisualFarmStudio.Lib.Model
     {
         public IList<KuModel> Kuer { get; set; }
 
+        public FjosModel()
+        {
+            Kuer = new List<KuModel>();
+        }
+
         public FjosModel(Fjos fjos) : base(fjos)
         {
             Kuer = fjos.Kues.Select(ku => new KuModel(ku)).ToList();

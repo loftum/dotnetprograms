@@ -1,7 +1,18 @@
 ﻿@model VisualFarmStudio.Models.Bonde.RegisterBondeViewModel
+@using VisualFarmStudio.ExtensionMethods;
 
 @{
     ViewBag.Title = "title";
+}
+
+@section header
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var field = $(@Html.Raw(@Html.JQueryIdFor(m => m.Bonde.Fornavn).ToJavaScript()));
+            field.focus();
+        });
+    </script>
 }
 
 <h2>Register</h2>

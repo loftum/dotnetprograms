@@ -5,6 +5,12 @@ namespace VisualFarmStudio.Lib.Model
     public class TraktorModel : BaseModel<Traktor>
     {
         public string Merke { get; set; }
+        
+        public TraktorModel()
+        {
+            
+        }
+
         public TraktorModel(Traktor traktor) : base(traktor)
         {
             Merke = traktor.Merke;

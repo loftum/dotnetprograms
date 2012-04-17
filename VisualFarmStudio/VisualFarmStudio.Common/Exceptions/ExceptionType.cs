@@ -7,6 +7,10 @@ namespace VisualFarmStudio.Common.Exceptions
         [Description("Brukernavnet er tatt")]
         BrukernavnIsTaken,
         [Description("Ugyldig bruker")]
-        InvalidCredentials
+        InvalidCredentials,
+        [Description("Ugyldig input: {0}")]
+        InvalidInput,
+        [Description("Bondegård {0} finnes ikke")]
+        UnknownBondegard
     }
 }

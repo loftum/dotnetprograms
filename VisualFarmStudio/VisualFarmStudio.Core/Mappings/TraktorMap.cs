@@ -7,7 +7,7 @@ namespace VisualFarmStudio.Core.Mappings
         public TraktorMap()
         {
             Map(t => t.Merke);
-            HasOne(t => t.Bondegard);
+            References(t => t.Bondegard);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using VisualFarmStudio.ExtensionMethods
+           
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,26 +29,37 @@
     </head>
 
     <body class="fullWidth centered">
-        <div class="topPanel">
-            <h1><a href="/">Visual Farm Studio</a></h1>    
-
-        </div>
-        
-        @Html.ActionLink("Logg ut", "LogOut", "Bonde")
-
-        @RenderBody()
-        
-        <div class="flashMessageContainer hidden">
-            @{
-                foreach (var message in TempData.GetFlashMessages())
-                {
-                    <div class="flashMessage @message.TypeClass">@message.Title</div>
+        <div class="page">
+            <div class="topPanel">
+                <h1><a href="/">Visual Farm Studio</a></h1>
+                @{
+                    var user = Session.GetUser();
+                    if (user != null)
+                    {
+                        <div class="floatRight">
+                            Logget inn som @user.Bonde.FulltNavn @Html.ActionLink("Logg ut", "LogOut", "Bonde")
+                        </div>
+                    }
                 }
-            }
-        </div>
+            </div>
+
         
-        <div class="hidden">
-            <div id="flashMessageTemplate" class="flashMessage"></div>
+            
+
+            @RenderBody()
+        
+            <div class="flashMessageContainer hidden">
+                @{
+                    foreach (var message in TempData.GetFlashMessages())
+                    {
+                        <div class="flashMessage @message.TypeClass">@message.Title</div>
+                    }
+                }
+            </div>
+        
+            <div class="hidden">
+                <div id="flashMessageTemplate" class="flashMessage"></div>
+            </div>    
         </div>
     </body>
 </html>

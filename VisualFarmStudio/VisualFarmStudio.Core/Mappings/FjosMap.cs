@@ -6,6 +6,7 @@ namespace VisualFarmStudio.Core.Mappings
     {
         public FjosMap()
         {
+            References(f => f.Bondegard);
             HasMany(f => f.Kues).Cascade.All();
         }
     }

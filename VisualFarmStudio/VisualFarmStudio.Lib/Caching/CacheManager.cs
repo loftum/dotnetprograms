@@ -5,6 +5,8 @@ namespace VisualFarmStudio.Lib.Caching
 {
     public class CacheManager : ICacheManager
     {
+        private const string AllBondegardsKey = "AllBondegards";
+
         private readonly ICache _cache;
 
         public CacheManager(ICache cache)
@@ -12,9 +14,19 @@ namespace VisualFarmStudio.Lib.Caching
             _cache = cache;
         }
 
+        public BondegardContainer BondegardContainer
+        {
+            get { return _cache.Read<BondegardContainer>(AllBondegardsKey); }
+        }
+
         public BondegardContainer GetAllBondegards(Func<BondegardContainer> cacheMissFunc)
         {
-            return _cache.Read("AllBondegards", cacheMissFunc);
+            return _cache.Read(AllBondegardsKey, cacheMissFunc);
+        }
+
+        public void ClearAllBondegards()
+        {
+            _cache.Write(AllBondegardsKey, null);
         }
     }
 }

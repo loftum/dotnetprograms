@@ -1,4 +1,12 @@
-﻿.topPanel
+﻿.page
+{
+    width: 940px;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.topPanel
 {
     
 }
@@ -11,10 +19,19 @@
 
 .flashMessage
 {
-    min-height: 30px;
+    min-height: 50px;
     background: rgba(30, 30, 30, 0.5);
     color: white;
 }
+
+.info,
+.success,
+.warning,
+.error
+{
+    font-size: 2em;
+}
+
 
 .info
 {
@@ -23,16 +40,16 @@
 
 .success
 {
-    color: greenyellow;
+    color: #99ff99;
 }
 
 .warning
 {
-    color: orange;
+    color: #ffbb99;
 }
 
 .error
 {
-    color: red;
+    color: #ff8899;
 }
 

@@ -17,8 +17,10 @@ namespace VisualFarmStudio.Lib.UserSession
             get { return _sessionManager.UserContext; }
         }
 
-        public bool IsLoggedIn {get { return CurrentUser != null; }}
-        
+        public bool IsLoggedIn
+        {
+            get { return CurrentUser != null; }
+        }
 
         public void LogIn(BondeModel bonde)
         {

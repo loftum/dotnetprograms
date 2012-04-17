@@ -1,8 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using VisualFarmStudio.Lib.Facades;
 using VisualFarmStudio.Lib.Interactive;
 using VisualFarmStudio.Lib.Migrating;
 using VisualFarmStudio.Lib.Model;
+using VisualFarmStudio.Lib.UserSession;
 using VisualFarmStudio.Models.Hack;
 
 namespace VisualFarmStudio.Controllers
@@ -12,36 +15,29 @@ namespace VisualFarmStudio.Controllers
         private readonly IBondegardFacade _bondegardFacade;
         private readonly IInteractiveShell _interactiveShell;
         private readonly IVisualFarmMigrator _migrator;
+        private readonly IUserManager _userManager;
 
         public HackController(IBondegardFacade bondegardFacade,
             IInteractiveShell interactiveShell,
-            IVisualFarmMigrator migrator)
+            IVisualFarmMigrator migrator,
+            IUserManager userManager)
         {
             _bondegardFacade = bondegardFacade;
             _interactiveShell = interactiveShell;
             _migrator = migrator;
+            _userManager = userManager;
         }
 
         public ActionResult Index()
         {
-            var model = new HackIndexViewModel() {MigrationVersion = _migrator.GetVersion()};
+            var model = new HackIndexViewModel {MigrationVersion = _migrator.GetVersion()};
             return View(model);
         }
 
         public ActionResult GenerateData()
         {
-            for(var ii=0; ii<50; ii++)
-            {
-                _bondegardFacade.Save(CreateBondegard(ii));
-            }
+            _bondegardFacade.GenerateBondegards(_userManager.CurrentUser.Bonde, 16);
             return RedirectToAction("Index");
-        }
-
-        private BondegardModel CreateBondegard(int id)
-        {
-            var bondegard = new BondegardModel();
-            bondegard.Navn = string.Format("Bondegård {0}", id);
-            return bondegard;
         }
 
         public ActionResult Interactive()

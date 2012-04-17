@@ -2,7 +2,8 @@
 {
     public class SessionManager : ISessionManager
     {
-        private const string UserContextKey = "UserContext";
+        public const string UserContextKey = "UserContext";
+        
         private readonly ISession _session;
 
         public UserContext UserContext

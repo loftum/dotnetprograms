@@ -4,7 +4,7 @@ namespace VisualFarmStudio.Lib.Model
 {
     public abstract class BaseModel<TEntity> where TEntity : DomainObject, new()
     {
-        public long Id { get; private set; }
+        public long Id { get; set; }
 
         protected BaseModel()
         {

@@ -19,5 +19,6 @@ namespace VisualFarmStudio.Lib.Interactive
         public static IVFSConfig Config { get { return Get<IVFSConfig>(); } }
         public static IBondegardFacade BondegardFacade { get { return Get<IBondegardFacade>(); } }
         public static ICache Cache { get { return Get<ICache>(); } }
+        public static ICacheManager CacheManager { get { return Get<ICacheManager>(); } }
     }
 }

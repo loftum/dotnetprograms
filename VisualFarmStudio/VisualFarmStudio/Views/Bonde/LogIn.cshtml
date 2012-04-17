@@ -1,7 +1,18 @@
 ﻿@model VisualFarmStudio.Models.Bonde.LoginViewModel
+@using VisualFarmStudio.ExtensionMethods
 
 @{
     ViewBag.Title = "Log in";
+}
+
+@section header
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var inputField = $(@Html.Raw(Html.JQueryIdFor(m => m.Username).ToJavaScript()));
+            inputField.focus();
+        });
+    </script>
 }
 
 <h2>Log in</h2>

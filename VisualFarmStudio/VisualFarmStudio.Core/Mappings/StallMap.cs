@@ -6,7 +6,8 @@ namespace VisualFarmStudio.Core.Mappings
     {
         public StallMap()
         {
-            HasMany(s => s.Hestes);
+            References(s => s.Bondegard);
+            HasMany(s => s.Hestes).Cascade.All();
         }
     }
 }

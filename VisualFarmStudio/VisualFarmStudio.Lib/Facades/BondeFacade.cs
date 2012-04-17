@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using VisualFarmStudio.Common.Exceptions;
+using VisualFarmStudio.Common.Validation;
 using VisualFarmStudio.Core.Domain;
 using VisualFarmStudio.Core.Repository;
 using VisualFarmStudio.Lib.Model;
@@ -28,6 +29,8 @@ namespace VisualFarmStudio.Lib.Facades
 
         public BondeModel Get(string brukernavn)
         {
+            new InputValidator().Require(() => brukernavn).OrThrow();
+
             var lowercase = brukernavn.ToLowerInvariant();
             var bonde = _repo.GetAll<Bonde>().SingleOrDefault(b => b.Brukernavn.Equals(lowercase));
             if (bonde == null)

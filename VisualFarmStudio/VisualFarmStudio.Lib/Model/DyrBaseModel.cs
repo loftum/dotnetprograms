@@ -6,6 +6,11 @@ namespace VisualFarmStudio.Lib.Model
     {
         public string Navn { get; set; }
 
+        protected DyrBaseModel()
+        {
+            
+        }
+
         protected DyrBaseModel(TDyr dyr) : base(dyr)
         {
             Navn = dyr.Navn;

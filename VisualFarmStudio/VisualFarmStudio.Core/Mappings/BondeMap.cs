@@ -9,7 +9,7 @@ namespace VisualFarmStudio.Core.Mappings
             Map(b => b.Fornavn);
             Map(b => b.Etternavn);
             Map(b => b.Brukernavn);
-            HasMany(b => b.Bondegards);
+            HasMany(b => b.Bondegards).Cascade.All();
             HasManyToMany(b => b.Rolles)
                 .Cascade.All()
                 .Table("BondeRolle");

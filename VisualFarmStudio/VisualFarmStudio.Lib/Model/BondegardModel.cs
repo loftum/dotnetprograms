@@ -7,6 +7,7 @@ namespace VisualFarmStudio.Lib.Model
 {
     public class BondegardModel : BaseModel<Bondegard>
     {
+        public BondeModel Bonde { get; set; }
         public string Navn { get; set; }
         public IList<FjosModel> Fjoser { get; set; }
         public IList<StallModel> Staller { get; set; }
@@ -21,6 +22,7 @@ namespace VisualFarmStudio.Lib.Model
 
         public BondegardModel(Bondegard bondegard) : base(bondegard)
         {
+            Bonde = new BondeModel(bondegard.Bonde);
             Navn = bondegard.Navn;
             Fjoser = bondegard.Fjoses.Select(fjos => new FjosModel(fjos)).ToList();
             Staller = bondegard.Stalls.Select(stall => new StallModel(stall)).ToList();
@@ -29,6 +31,7 @@ namespace VisualFarmStudio.Lib.Model
 
         protected override Bondegard MapTo(Bondegard bondegard)
         {
+            bondegard.Bonde = Bonde.ToEntity();
             bondegard.Navn = Navn;
             Staller.Each(s => bondegard.AddStall(s.ToEntity()));
             Traktorer.Each(t => bondegard.AddTraktor(t.ToEntity()));

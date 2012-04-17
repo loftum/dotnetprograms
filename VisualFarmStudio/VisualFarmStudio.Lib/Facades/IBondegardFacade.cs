@@ -8,5 +8,7 @@ namespace VisualFarmStudio.Lib.Facades
         BondegardModel GetDefaultBondegard();
         IEnumerable<BondegardModel> GetAllBondegards();
         void Save(BondegardModel bondegard);
+        BondegardModel GetBondegard(long id);
+        void GenerateBondegards(BondeModel bonde, int number);
     }
 }

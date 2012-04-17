@@ -101,6 +101,7 @@
     <Compile Include="Controllers\BondeController.cs" />
     <Compile Include="Controllers\VisualFarmControllerBase.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
+    <Compile Include="ExtensionMethods\HttpSessionStateExtensions.cs" />
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
     <Compile Include="ExtensionMethods\TempDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Content Include="Views\Hack\Interactive.cshtml" />
     <Content Include="Views\Bonde\LogIn.cshtml" />
     <Content Include="Views\Bonde\Register.cshtml" />
+    <Content Include="Views\Bondegard\Edit.cshtml" />
     <None Include="web.config.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

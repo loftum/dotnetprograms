@@ -50,15 +50,20 @@
     <Compile Include="Configuration\IVFSConfig.cs" />
     <Compile Include="Configuration\VFSConfig.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
+    <Compile Include="Exceptions\InputValidationException.cs" />
+    <Compile Include="Exceptions\Kake.cs" />
     <Compile Include="Exceptions\TechnicalException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoping\InjectionContainer.cs" />
     <Compile Include="Scoping\InjectionScope.cs" />
+    <Compile Include="Validation\guard.cs" />
+    <Compile Include="Validation\InputValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,12 +4,24 @@
     ViewBag.Title = "Bondegårdoversikt";
 }
 
-<h2>title</h2>
+<h2>@ViewBag.Title</h2>
 
-<ul>
-@foreach (var bondegard in Model.Bondegards)
-{
-    <li>@bondegard.Navn</li>
-}
+<table>
+    <tr>
+        <th>Navn</th>
+        <th>Rediger</th>
+    </tr>
+    
+    @foreach (var bondegard in Model.Bondegards)
+    {
+        <tr>
+            <td>
+                @bondegard.Navn
+            </td>
+            <td>
+                @Html.ActionLink("Rediger", "Edit", new {id = @bondegard.Id})
+            </td>
+        </tr>
+    }
 
-</ul>
+</table>

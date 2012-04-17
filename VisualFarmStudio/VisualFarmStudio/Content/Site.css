@@ -6,6 +6,30 @@ body
     background-color: #fff;
 }
 
+a,
+a:visited
+{
+    color: #00aaff;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #00aaff;
+}
+
+
+h1
+{
+    color: #00aaff;
+}
+
+h1 a
+{
+    color: #00aaff;
+    text-decoration: none;
+}
+
 header,
 footer,
 nav,

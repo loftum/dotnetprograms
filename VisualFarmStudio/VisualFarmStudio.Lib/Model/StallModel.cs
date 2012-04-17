@@ -9,6 +9,11 @@ namespace VisualFarmStudio.Lib.Model
     {
         public IList<HestModel> Hester { get; set; }
 
+        public StallModel()
+        {
+            Hester = new List<HestModel>();
+        }
+
         public StallModel(Stall stall) : base(stall)
         {
             Hester = stall.Hestes.Select(hest => new HestModel(hest)).ToList();

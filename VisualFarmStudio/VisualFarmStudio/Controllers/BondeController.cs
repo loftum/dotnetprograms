@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using VisualFarmStudio.Common.Exceptions;
 using VisualFarmStudio.Lib.Facades;
-using VisualFarmStudio.Lib.Model;
 using VisualFarmStudio.Lib.UserInteraction;
 using VisualFarmStudio.Lib.UserSession;
 using VisualFarmStudio.Models.Bonde;
@@ -27,14 +26,22 @@ namespace VisualFarmStudio.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            var bonde = _bondeFacade.Get(model.Username);
-            if (bonde == null)
+            try
             {
-                AddUserMessage(UserMessage.Error("Ugyldig bruker", string.Empty));
+                var bonde = _bondeFacade.Get(model.Username);
+                if (bonde == null)
+                {
+                    AddUserMessage(UserMessage.Error("Ugyldig bruker", string.Empty));
+                    return View(model);
+                }
+                _userManager.LogIn(bonde);
+                return RedirectToAction("Index", "Bondegard");
+            }
+            catch (UserException e)
+            {
+                AddUserMessageFor(e);
                 return View(model);
             }
-            _userManager.LogIn(bonde);
-            return RedirectToAction("Index", "Bondegard");
         }
 
         public ActionResult Register()

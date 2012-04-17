@@ -1,16 +1,16 @@
-﻿using VisualFarmStudio.Core.Domain;
+﻿using VisualFarmStudio.Lib.Model;
 
 namespace VisualFarmStudio.Models
 {
     public class BondegardViewModel
     {
-        public Bondegard Bondegard { get; set; }
+        public BondegardModel Bondegard { get; set; }
 
         public BondegardViewModel()
         {
         }
 
-        public BondegardViewModel(Bondegard bondegard)
+        public BondegardViewModel(BondegardModel bondegard)
         {
             Bondegard = bondegard;
         }

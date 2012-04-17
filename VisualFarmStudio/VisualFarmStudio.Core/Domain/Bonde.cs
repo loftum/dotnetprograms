@@ -21,5 +21,11 @@ namespace VisualFarmStudio.Core.Domain
         {
             Rolles.Add(rolle);
         }
+
+        public virtual void AddBondegard(Bondegard bondegard)
+        {
+            Bondegards.Add(bondegard);
+            bondegard.Bonde = this;
+        }
     }
 }

@@ -1,0 +1,80 @@
+﻿@model VisualFarmStudio.Models.BondegardViewModel
+
+@{
+    ViewBag.Title = "Rediger bondegård";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using(Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Bondegard.Id)
+    @Html.LabelFor(m => m.Bondegard.Navn)
+    @Html.TextBoxFor(m => m.Bondegard.Navn)
+    <br/>
+    <hr/>
+
+    <div class="floatLeft fourthWidth">
+    
+    <h3>Traktorer</h3>
+        <table>
+            <tr>
+                <th>Merke</th>
+            </tr>
+            @{
+                foreach (var traktor in Model.Bondegard.Traktorer)
+                {
+                    <tr>
+                        <td>
+                            @traktor.Merke
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div class="floatLeft fourthWidth">
+        <h3>Staller</h3>
+        <table>
+            <tr>
+                <th>Stall</th>
+                <th>Hest</th>
+            </tr>
+            @{
+                foreach (var stall in Model.Bondegard.Staller)
+                {
+                    foreach (var hest in stall.Hester)
+                    {
+                        <tr>
+                            <td>@stall.Id</td>
+                            <td>@hest.Navn</td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </div>
+
+    <div class="floatLeft fourthWidth">
+        <h3>Fjøs</h3>
+        <table>
+            <tr>
+                <th>Fjøs</th>
+                <th>Ku</th>
+            </tr>
+            @foreach(var fjos in Model.Bondegard.Fjoser)
+            {
+                foreach (var ku in fjos.Kuer)
+                {
+                    <tr>
+                        <td>@fjos.Id</td>
+                        <td>@ku.Navn</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="clearer"></div>
+    <input type="submit" value="Lagre"/>
+}

@@ -18,6 +18,7 @@ namespace VisualFarmStudio.Migrations.Steps
 
         public void Down(IDatabase db)
         {
+            db.Execute("delete from bonderolle");
             db.Execute("delete from Rolle");
         }
     }

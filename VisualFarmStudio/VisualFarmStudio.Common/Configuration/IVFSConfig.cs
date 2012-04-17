@@ -2,7 +2,7 @@ namespace VisualFarmStudio.Common.Configuration
 {
     public interface IVFSConfig
     {
-        string Behave { get; }
+        string Behave { get; set; }
         string ConnectionString { get; }
     }
 }

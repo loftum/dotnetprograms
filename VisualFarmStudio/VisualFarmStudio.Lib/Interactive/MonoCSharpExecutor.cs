@@ -30,9 +30,11 @@ namespace VisualFarmStudio.Lib.Interactive
             _evaluator.ReferenceAssembly(typeof(IVFSConfig).Assembly);
             Execute("using System;");
             Execute("using System.Linq;");
-            Execute("using System.Web");
-            Execute("using VisualFarmStudio.Core.Domain");
-            Execute("using VisualFarmStudio.Core.Repository");
+            Execute("using System.Web;");
+            Execute("using VisualFarmStudio.Core.Domain;");
+            Execute("using VisualFarmStudio.Core.Repository;");
+            Execute("using VisualFarmStudio.Lib.Model;");
+            Execute("using VisualFarmStudio.Lib.Containers;");
         }
 
         public CSharpResult Execute(string statement)
