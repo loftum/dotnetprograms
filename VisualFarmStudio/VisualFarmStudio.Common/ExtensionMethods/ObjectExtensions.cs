@@ -25,7 +25,6 @@ namespace VisualFarmStudio.Common.ExtensionMethods
 
             var settings = new JsonSerializerSettings();
             settings.Error += SuppressError;
-
             return indented
                        ? JsonConvert.SerializeObject(item, Formatting.Indented, settings)
                        : JsonConvert.SerializeObject(item, Formatting.None, settings);
