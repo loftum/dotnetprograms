@@ -37,6 +37,8 @@ namespace VisualFarmStudio.Lib.Interactive
             Execute("using VisualFarmStudio.Lib.Containers;");
         }
 
+        public string Vars { get { return _evaluator.GetVars(); } }
+
         public CSharpResult Execute(string statement)
         {
             object result;
@@ -46,12 +48,22 @@ namespace VisualFarmStudio.Lib.Interactive
             var builder = new StringBuilder();
             if (resultSet)
             {
-                builder.AppendLine(result.ToJson(true));
+                builder.AppendLine(Prepare((dynamic)result));
             }
             builder.AppendLine(_reportBuilder.ToString());
             _reportBuilder.Clear();
 
             return new CSharpResult(builder.ToString());
+        }
+
+        private static string Prepare(string result)
+        {
+            return result;
+        }
+
+        private static string Prepare(object result)
+        {
+            return result.ToJson(true);
         }
     }
 }

@@ -23,6 +23,8 @@ namespace VisualFarmStudio.Lib.Facades
 
         public bool IsTaken(string brukernavn)
         {
+            new InputValidator().Require(() => brukernavn).OrThrow();
+
             var lowercase = brukernavn.ToLowerInvariant();
             return _repo.GetAll<Bonde>().Any(b => b.Brukernavn.Equals(lowercase));
         }

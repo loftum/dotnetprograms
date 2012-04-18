@@ -85,6 +85,7 @@
     <Compile Include="Interactive\MonoCSharpExecutor.cs" />
     <Compile Include="Interactive\CSharpResult.cs" />
     <Compile Include="Interactive\ICSharpExecutor.cs" />
+    <Compile Include="Meta\ObjectMeta.cs" />
     <Compile Include="Migrating\IVisualFarmMigrator.cs" />
     <Compile Include="Migrating\VisualFarmMigrator.cs" />
     <Compile Include="Model\BaseModel.cs" />
