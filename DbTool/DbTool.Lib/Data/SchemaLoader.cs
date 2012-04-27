@@ -24,7 +24,7 @@ namespace DbTool.Lib.Data
             {
                 _dbConnection.Open();
                 var schemaTable = _dbConnection.GetSchema("Columns");
-                var typeContainer = new TypeContainer(schemaTable.Namespace);
+                var typeContainer = new TypeContainer(schemaTable.Namespace, schemaTable.CaseSensitive);
 
                 foreach (DataRow row in schemaTable.Rows)
                 {

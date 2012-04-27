@@ -172,25 +172,6 @@ namespace DbToolGui.Controls.Syntax
             InvalidateVisual();
         }
 
-        protected override void OnPreviewKeyUp(KeyEventArgs e)
-        {
-            DebugLogger.Instance.Log("OnPreviewKeyUp: {0}", e.Key);
-            if (_suggestionList.IsVisible)
-            {
-                if (e.Key.In(Key.Tab, Key.Enter, Key.Return))
-                {
-                    var selectedItem = _suggestionList.SelectedItem.ToString();
-                    DebugLogger.Instance.Log("SelectedText: {0}", SelectedText);
-                    Text = Text.Insert(SelectionStart - SelectionLength, selectedItem);
-                }
-                e.Handled = true;
-            }
-            else
-            {
-                base.OnPreviewKeyUp(e);
-            }
-        }
-
         private static bool ShouldShowSuggestionList(KeyEventArgs e)
         {
             return e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.Control;
@@ -199,6 +180,23 @@ namespace DbToolGui.Controls.Syntax
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             DebugLogger.Instance.Log("OnPreviewKeyDown: {0}", e.Key);
+
+            if (_suggestionList.IsVisible && e.Key.In(Key.Tab, Key.Enter, Key.Return))
+            {
+                var selectedItem = _suggestionList.SelectedItem;
+                if (selectedItem != null)
+                {
+                    var selectedText = selectedItem.ToString();
+                    DebugLogger.Instance.Log("SelectedItem: >{0}<", selectedText);
+                    var index = CaretIndex;
+                    Text = Text.Insert(CaretIndex, selectedText);
+                    CaretIndex = index + selectedText.Length;
+                }
+                HideSuggestionList();
+                e.Handled = true;
+                return;
+            }
+
             if (e.Key == Key.Escape)
             {
                 HideSuggestionList();
