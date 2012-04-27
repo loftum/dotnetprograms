@@ -1,4 +1,4 @@
-﻿using DbTool.Lib.Objects;
+﻿using DbTool.Lib.Meta;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Syntax;
 using DbToolGui.Highlighting;
@@ -10,7 +10,7 @@ namespace DbToolGui.Modules
     {
         public override void Load()
         {
-            Bind<IObjectCache>().To<DbToolObjectCache>().InSingletonScope();
+            Bind<ITypeCache>().To<DbToolTypeCache>().InSingletonScope();
             Bind<ISyntaxProvider>().To<DbToolSyntaxProvider>().InSingletonScope();
             Bind<ISyntaxParser>().To<DbToolSyntaxParser>().InSingletonScope();
             Bind<IMetaInfoProvider>().To<MetaInfoProvider>().InSingletonScope();

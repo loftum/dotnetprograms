@@ -1,25 +1,26 @@
-using DbTool.Lib.Objects;
+using DbTool.Lib.Meta;
+using DbTool.Lib.Meta.Types;
 
 namespace DbTool.Lib.Ui.Syntax
 {
     public class MetaInfoProvider : IMetaInfoProvider
     {
-        private readonly IObjectCache _objectCache;
+        private readonly ITypeCache _typeCache;
 
-        public MetaInfoProvider(IObjectCache objectCache)
+        public MetaInfoProvider(ITypeCache typeCache)
         {
-            _objectCache = objectCache;
+            _typeCache = typeCache;
         }
 
         public TagType GetTypeOf(string word)
         {
-            var o = _objectCache.GetObjectType(word);
-            return o == null ? TagType.Nothing : TagType.Object;
+            var type = _typeCache.GetType(word);
+            return type == null ? TagType.Nothing : TagType.Object;
         }
 
-        public DbToolObject GetObject(string word)
+        public TypeMeta GetType(string word)
         {
-            return _objectCache.GetObject(word);
+            return _typeCache.GetType(word);
         }
     }
 }

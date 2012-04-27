@@ -40,10 +40,10 @@ namespace DbToolGui.Highlighting
             if (_syntaxProvider.IsPropertyIndicator(text[cursor-1]))
             {
                 var word = GetWord(text, cursor);
-                var obj = _syntaxProvider.GetObject(word);
+                var obj = _syntaxProvider.GetType(word);
                 if (obj != null)
                 {
-                    _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.Name)));
+                    _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.MemberName)));
                 }    
             }
         }

@@ -1,4 +1,5 @@
-using DbTool.Lib.Objects;
+using DbTool.Lib.Meta;
+using DbTool.Lib.Meta.Types;
 
 namespace DbTool.Lib.Ui.Syntax
 {
@@ -6,7 +7,7 @@ namespace DbTool.Lib.Ui.Syntax
     {
         TagType GetTypeOf(string word);
         bool IsSeparator(char value);
-        DbToolObject GetObject(string word);
+        TypeMeta GetType(string word);
         bool IsPropertyIndicator(char c);
     }
 }

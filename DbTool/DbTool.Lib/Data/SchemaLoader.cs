@@ -1,8 +1,7 @@
 using System.Data;
 using System.Data.Common;
 using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Objects;
-using DbTool.Lib.Objects.Database;
+using DbTool.Lib.Meta.Types;
 
 namespace DbTool.Lib.Data
 {
@@ -10,6 +9,7 @@ namespace DbTool.Lib.Data
     {
         private const string TableName = "TABLE_NAME";
         private const string ColumnName = "COLUMN_NAME";
+        private const string ColumnType = "DATA_TYPE";
 
         private readonly DbConnection _dbConnection;
 
@@ -18,21 +18,20 @@ namespace DbTool.Lib.Data
             _dbConnection = dbConnection;
         }
 
-        public SchemaObjectContainer Load()
+        public TypeContainer Load()
         {
             try
             {
                 _dbConnection.Open();
                 var schemaTable = _dbConnection.GetSchema("Columns");
-                var container = new SchemaObjectContainer();
+                var typeContainer = new TypeContainer(schemaTable.Namespace);
 
-                var schema = container.GetOrCreateNameSpace(schemaTable.Namespace);
                 foreach (DataRow row in schemaTable.Rows)
                 {
-                    var table = schema.GetOrCreateTable(row.Get<string>(TableName));
-                    table.AddProperty(new DbToolProperty(row.Get<string>(ColumnName)));
+                    var tableMeta = (TableMeta) typeContainer.GetOrAdd(new TableMeta(row.Get<string>(TableName)));
+                    tableMeta.AddColumn(new ColumnMeta(row.Get<string>(ColumnType), row.Get<string>(ColumnName)));
                 }
-                return container;
+                return typeContainer;
             }
             finally
             {

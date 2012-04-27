@@ -8,9 +8,7 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Memory;
-using DbTool.Lib.Objects;
-using DbTool.Lib.Objects.Database;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Meta;
 using DbToolGui.Commands;
 
 namespace DbToolGui.ViewModels
@@ -63,16 +61,16 @@ namespace DbToolGui.ViewModels
 
         private readonly Dispatcher _dispatcher;
         private readonly IDbToolSettings _settings;
-        private readonly IObjectCache _objectCache;
+        private readonly ITypeCache _typeCache;
 
         public MainViewModel(IDatabaseCommunicator communicator,
             IDbToolSettings settings,
-            IObjectCache objectCache)
+            ITypeCache typeCache)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             _communicator = communicator;
             _settings = settings;
-            _objectCache = objectCache;
+            _typeCache = typeCache;
 
             ConnectCommand = new DelegateCommand(ToggleConnect);
             ExecuteCommand = new DelegateCommand(ExecuteStatement);
@@ -131,7 +129,7 @@ namespace DbToolGui.ViewModels
             if (_settings.LoadSchema)
             {
                 StatusText = "Loading schema objects";
-                _objectCache.Schema = _communicator.LoadSchema();
+                _typeCache.Schema = _communicator.LoadSchema();
             }
             StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);
         }

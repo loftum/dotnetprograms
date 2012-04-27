@@ -1,10 +1,11 @@
-using DbTool.Lib.Objects;
+using DbTool.Lib.Meta;
+using DbTool.Lib.Meta.Types;
 
 namespace DbTool.Lib.Ui.Syntax
 {
     public interface IMetaInfoProvider
     {
         TagType GetTypeOf(string word);
-        DbToolObject GetObject(string word);
+        TypeMeta GetType(string word);
     }
 }

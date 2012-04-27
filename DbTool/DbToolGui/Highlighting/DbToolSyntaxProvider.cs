@@ -2,7 +2,8 @@
 using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Objects;
+using DbTool.Lib.Meta;
+using DbTool.Lib.Meta.Types;
 using DbTool.Lib.Ui.Syntax;
 
 namespace DbToolGui.Highlighting
@@ -51,9 +52,9 @@ namespace DbToolGui.Highlighting
             return type.GetProperties().Select(property => property.Name.ToLowerInvariant());
         }
 
-        public DbToolObject GetObject(string word)
+        public TypeMeta GetType(string word)
         {
-            return _metaInfoProvider.GetObject(word);
+            return _metaInfoProvider.GetType(word);
         }
 
         public bool IsSeparator(char value)

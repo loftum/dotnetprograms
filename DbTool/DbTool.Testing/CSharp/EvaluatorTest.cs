@@ -47,7 +47,7 @@ namespace DbTool.Testing.CSharp
 
         private static void Print(object obj)
         {
-            Console.WriteLine(string.Format("Value: {0}", obj));
+            Console.WriteLine(string.Format("Object: {0}", obj));
         }
     }
 }
