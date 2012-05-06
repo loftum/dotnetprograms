@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Data;
 using DbTool.Lib.ExtensionMethods;
@@ -44,7 +42,7 @@ namespace DbToolGui.ViewModels
                 Columns.Add(new CustomBoundColumn(column));
             }
             Records.AddRange(queryResult.Rows);
-            ResultText = string.Format("Rowcount: {0}", queryResult.Rowcount);
+            ResultText = string.Format("Rowcount: {0:0,0}", queryResult.Rowcount);
         }
 
         public void Show(IDbCommandResult result)

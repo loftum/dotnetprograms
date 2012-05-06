@@ -62,6 +62,8 @@
     <Compile Include="Commands\CommandModifierTest.cs" />
     <Compile Include="Common\GuardTest.cs" />
     <Compile Include="CSharp\EvaluatorTest.cs" />
+    <Compile Include="CSharp\Hest.cs" />
+    <Compile Include="Formatting\NumberFormatTest.cs" />
     <Compile Include="Gui\Highlighting\DbToolSyntaxParserTest.cs" />
     <Compile Include="Models\PropertyExpressionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
