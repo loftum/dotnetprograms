@@ -2,7 +2,6 @@
 using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
 using DbTool.Lib.Ui.Syntax;
 
@@ -33,8 +32,9 @@ namespace DbToolGui.Highlighting
             _separators = new HashSet<char>(new[] {' ', '.', ',', ';','=', '+', '-', '<', '>', '(', ')', '\t', '\n', '\r'});
             _settings = new HashSet<string>(GetSettings());
             _cSharpKeywords = new HashSet<string>(new[]{"var", "void", "string", "object", "dynamic",
-                "int", "long", "double", "float", "decimal",  "bool", "char",
-                "new", "in", "let", "orderby", "descending", "using"});
+                "const", "int", "long", "double", "float", "decimal",  "bool", "true", "false", "char",
+                "public", "protected", "private", "virtual", "override", "static", "class",
+                "switch", "case", "default", "new", "in", "let", "orderby", "descending", "using"});
             
             _caseSensitiveWords = new Dictionary<string, TagType>();
             _cSharpKeywords.Each(c => _caseSensitiveWords[c] = TagType.CSharp);

@@ -14,8 +14,7 @@ namespace VisualFarmStudio.Lib.Facades
         private readonly IVisualFarmRepo _repo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public BondeFacade(IVisualFarmRepo repo,
-            IUnitOfWork unitOfWork)
+        public BondeFacade(IVisualFarmRepo repo, IUnitOfWork unitOfWork)
         {
             _repo = repo;
             _unitOfWork = unitOfWork;
