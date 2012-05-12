@@ -1,0 +1,33 @@
+﻿.statusRow
+{
+    background: #2b2b2b;
+    height: 16px;
+    border: 1px solid peru;
+    cursor: pointer;
+}
+
+.highlightedRow
+{
+    color: yellow;
+    background: #ffffff;
+}
+
+.success
+{
+    
+}
+
+.error
+{
+    color: red;
+}
+
+.failure
+{
+    color: salmon;
+}
+
+.unknown
+{
+    color: cornflowerblue;
+}

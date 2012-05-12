@@ -1,0 +1,90 @@
+﻿@model BuildMonitor.Models.Monitor.MonitorIndexViewModel
+
+@{
+    ViewBag.Title = "Monitor";
+}
+
+@section Header
+{
+<script type="text/javascript">
+    var statuses = ['success', 'error', 'failure', 'unknown'];
+
+    $(document).ready(function () {
+
+        updateStatuses();
+        setInterval(updateStatuses, 30000);
+
+        $(".statusRow").click(function () {
+            
+            $(this).effect('highlight', { color: '#575757',  mode:'show' }, 1000);
+            getStatus($(this));
+        });
+    });
+        
+    function updateStatuses() {
+        $(".statusRow").each(function () {
+            getStatus($(this));
+        });
+    }
+        
+    function getStatus(row) {
+        var buildTypeId = row.attr('id');
+        showOutput('');
+        $.ajax({
+            url: '/Monitor/GetLatestBuild/' + buildTypeId,
+            type: 'GET',
+            cache: false,
+            accepts: 'application/json',
+            success: function (data) {
+                if (data) {
+                    setStatus(row, data.Status);
+                    $("#status_" + buildTypeId).html(data.Status);
+                }
+                else {
+                    showOutput('Hmm. No data for ' + buildTypeId + ' ?');
+                }
+            },
+            error: function (xhr, error) {
+                showOutput(error);
+            }
+        });
+    }
+        
+    function setStatus(row, status) {
+        if (!row.hasClass(status)) {
+            $(statuses).each(function () { row.removeClass(this); });
+            row.addClass(status);
+            if (status !== 'success') {
+                row.effect('highlight', { color: '#575757',  mode:'show' }, 7000);
+            }
+        }
+    }
+
+    function showOutput(data) {
+        $("#output").html(data);
+    }
+</script>
+}
+
+<div id="output" class="error"></div>
+
+@foreach(var project in Model.Monitor.Projects)
+{
+    <div class="floatLeft spacingAround">
+        <h3>@project.Name</h3>
+        <table>
+            @foreach(var buildType in project.BuildTypes)
+            {
+                <tr class="statusRow" id="@buildType.Id">
+                    <td>
+                        @buildType.Name
+                    </td>
+                    <td id="@string.Format("status_{0}", buildType.Id)">
+                        @buildType.Status
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+

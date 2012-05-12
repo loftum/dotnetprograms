@@ -1,0 +1,33 @@
+﻿
+
+.clearBoth {
+    clear: both;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.spacingAround,
+.spacingAbove {
+    margin-top: 10px;
+}
+
+.spacingAround,
+.spacingBelow {
+    margin-bottom: 10px;
+}
+
+.spacingAround,
+.spacingLeft {
+    margin-left: 10px;
+}
+
+.spacingAround,
+.spacingRight {
+    margin-right: 10px;
+}
