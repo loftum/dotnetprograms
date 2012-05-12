@@ -1,6 +1,6 @@
 ﻿namespace BuildMonitor.Lib.Api.TeamCity
 {
-    public class KjempemongisDusteTeamCityBuildTypes
+    public class KjempemongisTeamCityBuildTypes
     {
         public TeamCityBuildType[] buildType { get; set; }
     }

@@ -12,12 +12,13 @@
     @RenderSection("Header", false)
 </head>
     <body>
-        <div>
+        <div class="underlined">
             @{var activeMenu = ViewData.GetTopModel().CurrentMenu; }
             @Html.TopMenuLink("Monitor", "Index", "Monitor", "Monitor".Equals(activeMenu))
             &nbsp;
             @Html.TopMenuLink("Admin", "Index", "Admin", "Admin".Equals(activeMenu))
         </div>
+        <div class="borderBottom"></div>
         @RenderBody()
     </body>
 </html>

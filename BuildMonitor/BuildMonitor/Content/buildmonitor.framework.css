@@ -30,6 +30,10 @@
     width: 100%;
 }
 
+.borderBottom
+{
+    border-bottom: 1px solid darkslategray;
+}
 
 .spacingAround,
 .spacingAbove {

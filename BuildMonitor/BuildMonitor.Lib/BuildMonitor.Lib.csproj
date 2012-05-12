@@ -49,11 +49,13 @@
     <Compile Include="Api\IMonitorFacade.cs" />
     <Compile Include="Api\IBuildServerFacade.cs" />
     <Compile Include="Api\ProjectResponse.cs" />
-    <Compile Include="Api\TeamCity\KjempemongisDusteTeamCityBuilds.cs" />
+    <Compile Include="Api\TeamCity\KjempemongisTeamCityBuilds.cs" />
+    <Compile Include="Api\TeamCity\KjempemongisTeamCityProjects.cs" />
     <Compile Include="Api\TeamCity\TeamCityBuild.cs" />
     <Compile Include="Api\TeamCity\TeamCityBuildType.cs" />
-    <Compile Include="Api\TeamCity\KjempemongisDusteTeamCityBuildTypes.cs" />
+    <Compile Include="Api\TeamCity\KjempemongisTeamCityBuildTypes.cs" />
     <Compile Include="Api\TeamCity\TeamCityProject.cs" />
+    <Compile Include="Api\TeamCity\TeamCityRestUrls.cs" />
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
     <Compile Include="Configuration\BuildServerConfig.cs" />
     <Compile Include="Configuration\IBuildMonitorSettings.cs" />
@@ -69,7 +71,6 @@
     <Compile Include="Model\BuildTypeModel.cs" />
     <Compile Include="Model\MonitorModel.cs" />
     <Compile Include="Model\BuildStatus.cs" />
-    <Compile Include="Model\MonitorInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ModelValidator.cs" />
   </ItemGroup>

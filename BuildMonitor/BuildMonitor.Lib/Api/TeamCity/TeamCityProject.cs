@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BuildMonitor.Lib.Model;
 
 namespace BuildMonitor.Lib.Api.TeamCity
@@ -13,11 +14,11 @@ namespace BuildMonitor.Lib.Api.TeamCity
         public string projectName { get; set; }
         public string webUrl { get; set; }
 
-        public KjempemongisDusteTeamCityBuildTypes buildTypes { get; set; }
+        public KjempemongisTeamCityBuildTypes buildTypes { get; set; }
 
         public TeamCityProject()
         {
-            buildTypes = new KjempemongisDusteTeamCityBuildTypes();
+            buildTypes = new KjempemongisTeamCityBuildTypes();
         }
 
         public ProjectModel ToProjectModel()
@@ -27,8 +28,16 @@ namespace BuildMonitor.Lib.Api.TeamCity
                     Id = id,
                     Description = description,
                     Name = name,
-                    BuildTypes = buildTypes.buildType.Select(t => t.ToBuildType()).ToList()
+                    BuildTypes = GetBuildTypes()
                 };
+        }
+
+        private IList<BuildTypeModel> GetBuildTypes()
+        {
+            return buildTypes == null || buildTypes.buildType == null
+                       ? new List<BuildTypeModel>()
+                       : buildTypes.buildType.Select(t => t.ToBuildType()).ToList();
+
         }
     }
 }

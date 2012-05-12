@@ -1,4 +1,5 @@
-﻿using BuildMonitor.Lib.Configuration;
+﻿using System.Collections.Generic;
+using BuildMonitor.Lib.Configuration;
 using BuildMonitor.Lib.Model;
 
 namespace BuildMonitor.Lib.Api
@@ -9,5 +10,6 @@ namespace BuildMonitor.Lib.Api
         BuildModel GetLatestBuild(string buildTypeId);
         MonitorConfiguration GetConfiguration();
         void SaveConfiguration(MonitorConfiguration config);
+        IEnumerable<ProjectModel> GetAvailableProjectsFor(BuildServerConfig buildServer);
     }
 }

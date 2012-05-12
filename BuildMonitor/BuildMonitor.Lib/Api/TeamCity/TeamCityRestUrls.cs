@@ -1,8 +1,8 @@
-﻿using BuildMonitor.Common.Urls;
+using BuildMonitor.Common.Urls;
 
-namespace BuildMonitor.Lib.Model
+namespace BuildMonitor.Lib.Api.TeamCity
 {
-    public class MonitorInfo
+    public class TeamCityRestUrls
     {
         public string BuildHost { get; private set; }
         public string BuildPath
@@ -15,7 +15,7 @@ namespace BuildMonitor.Lib.Model
             get { return VirtualPath.Combine(BuildHost, "httpAuth/app/rest/projects"); }
         }
 
-        public MonitorInfo(string buildHost)
+        public TeamCityRestUrls(string buildHost)
         {
             BuildHost = buildHost;
         }

@@ -70,6 +70,12 @@
 
 @{var buildServer = Model.Monitor.BuildServer; }
 <h2>@buildServer.Name</h2>
+@{if (!buildServer.HasAnyProjects)
+{
+    <span>(Ingen prosjekter)</span>
+}
+}
+
 @foreach (var project in buildServer.Projects)
 {
     <div class="floatLeft spacingAround">

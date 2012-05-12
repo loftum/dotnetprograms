@@ -1,10 +1,10 @@
 ﻿namespace BuildMonitor.Lib.Api.TeamCity
 {
-    public class KjempemongisDusteTeamCityBuilds
+    public class KjempemongisTeamCityBuilds
     {
         public TeamCityBuild[] build { get; set; }
 
-        public KjempemongisDusteTeamCityBuilds()
+        public KjempemongisTeamCityBuilds()
         {
             build = new TeamCityBuild[0];
         }

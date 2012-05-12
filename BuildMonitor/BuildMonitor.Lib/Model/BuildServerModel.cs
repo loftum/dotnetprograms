@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BuildMonitor.Common.ExtensionMethods;
 using BuildMonitor.Lib.Configuration;
 
@@ -8,6 +9,7 @@ namespace BuildMonitor.Lib.Model
     {
         public string Name { get; set; }
         public string Host { get; set; }
+        public bool HasAnyProjects { get { return Projects.Any(); } }
 
         public IList<ProjectModel> Projects { get; set; }
 

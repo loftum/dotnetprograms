@@ -1,4 +1,5 @@
-﻿@model BuildMonitor.Models.Admin.EditSettingsViewModel
+﻿@using BuildMonitor.ExtensionMethods
+@model BuildMonitor.Models.Admin.EditSettingsViewModel
 
 @{
     ViewBag.Title = "Edit settings";
@@ -6,13 +7,58 @@
 
 @section Header
 {
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#buildServer").click(function () {
-                $("#buildServerSettings").toggle('slow');
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var dropDown = $('@Html.JQueryIdFor(m => m.Config.BuildServerConfig.ProjectIds)');
+        var dirty = false;
+            
+        $("#buildServer").click(function () {
+            $("#buildServerSettings").toggle('slow');
         });
-    </script>
+
+        $("input:text").keyup(function() {
+            dirty = true;
+        });
+        
+        dropDown.click(function () {
+            if (dirty) {
+                dirty = false;
+                populateProjects(dropDown);
+            }
+        });
+        
+        function populateProjects() {
+            dropDown.attr('disabled', 'disabled');
+            var data = $("form").serialize();
+            $.ajax({
+                url: '/Admin/GetProjects',
+                type: 'POST',
+                cache: false,
+                data: data,
+                accepts: 'application/json',
+                success: function (projects) {
+                    if (projects) {
+                        dirty = false;
+                        dropDown.children('option').remove();
+
+                        for (var ii = 0; ii < projects.length; ii++) {
+                            var project = projects[ii];
+
+                            dropDown.append($('<option></option>').attr('value', project.Id).html(project.Name));
+                        }
+
+                    }
+                    dropDown.removeAttr('disabled');
+                },
+                error: function (xhr, error) {
+                    dropDown.removeAttr('disabled');
+                }
+            });
+        }
+    });
+    
+</script>
 }
 
 <div class="thirdWidth">
@@ -40,13 +86,16 @@
                 @Html.PasswordFor(m => m.Config.BuildServerConfig.Password, new {@class="twoThirdsWidth floatRight"})
             </div>
             <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.BuildServerConfig.ProjectIds, "Project ids (piped)")
-                @Html.TextBoxFor(m => m.Config.BuildServerConfig.ProjectIdsPiped, new {@class="twoThirdsWidth floatRight"})
+                @Html.LabelFor(m => m.Config.BuildServerConfig.ProjectIds, "Projects")
+                @Html.DropDownListFor(m => m.Config.BuildServerConfig.ProjectIds, Model.AvailableProjects,
+                            new {@class="twoThirdsWidth floatRight", multiple="multiple"} )
             </div>
             <div class="spacingAround clearBoth"></div>
-            <input type="submit" value="Save"/>
+            <input type="submit" value="Save" class="save"/>
         </div>
     }
 </div>
+
+<div id="output"></div>
 
 

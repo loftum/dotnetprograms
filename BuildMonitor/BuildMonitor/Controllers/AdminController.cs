@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using BuildMonitor.Lib.Api;
+using BuildMonitor.Lib.Configuration;
 using BuildMonitor.Models.Admin;
 
 namespace BuildMonitor.Controllers
@@ -22,6 +24,11 @@ namespace BuildMonitor.Controllers
         {
             var config = _monitorFacade.GetConfiguration();
             var model = new EditSettingsViewModel(config);
+            var availableProjects = _monitorFacade
+                .GetAvailableProjectsFor(config.BuildServerConfig)
+                .Select(project =>
+                    new SelectListItem{Text = project.Name, Value = project.Id, Selected = config.BuildServerConfig.ProjectIds.Contains(project.Id)});
+            model.AvailableProjects = availableProjects;
             return View(model);
         }
 
@@ -30,6 +37,13 @@ namespace BuildMonitor.Controllers
         {
             _monitorFacade.SaveConfiguration(model.Config);
             return RedirectToAction("EditSettings");
+        }
+
+        [HttpPost]
+        public ActionResult GetProjects(EditSettingsViewModel model)
+        {
+            var projects = _monitorFacade.GetAvailableProjectsFor(model.Config.BuildServerConfig);
+            return Json(projects, JsonRequestBehavior.AllowGet);
         }
     }
 }
