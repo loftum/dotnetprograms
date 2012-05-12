@@ -1,0 +1,52 @@
+﻿@model BuildMonitor.Models.Admin.EditSettingsViewModel
+
+@{
+    ViewBag.Title = "Edit settings";
+}
+
+@section Header
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#buildServer").click(function () {
+                $("#buildServerSettings").toggle('slow');
+            });
+        });
+    </script>
+}
+
+<div class="thirdWidth">
+    <h2>Build server</h2>
+
+    <div id="buildServer" class="statusRow spacingBelow">@Model.Config.BuildServerConfig.Name</div>
+    @using (Html.BeginForm())
+    {
+        <div id="buildServerSettings" class="hidden detailPane spacingLeft">
+        
+            <div class="clearBoth">
+                @Html.LabelFor(m => m.Config.BuildServerConfig.Name)
+                @Html.TextBoxFor(m => m.Config.BuildServerConfig.Name, new {@class="twoThirdsWidth floatRight"})
+            </div>
+            <div class="clearBoth">
+                @Html.LabelFor(m => m.Config.BuildServerConfig.Host)
+                @Html.TextBoxFor(m => m.Config.BuildServerConfig.Host, new {@class="twoThirdsWidth floatRight"})
+            </div>
+            <div class="clearBoth">
+                @Html.LabelFor(m => m.Config.BuildServerConfig.Username)
+                @Html.TextBoxFor(m => m.Config.BuildServerConfig.Username, new {@class="twoThirdsWidth floatRight"})
+            </div>
+            <div class="clearBoth">
+                @Html.LabelFor(m => m.Config.BuildServerConfig.Password)
+                @Html.PasswordFor(m => m.Config.BuildServerConfig.Password, new {@class="twoThirdsWidth floatRight"})
+            </div>
+            <div class="clearBoth">
+                @Html.LabelFor(m => m.Config.BuildServerConfig.ProjectIds, "Project ids (piped)")
+                @Html.TextBoxFor(m => m.Config.BuildServerConfig.ProjectIdsPiped, new {@class="twoThirdsWidth floatRight"})
+            </div>
+            <div class="spacingAround clearBoth"></div>
+            <input type="submit" value="Save"/>
+        </div>
+    }
+</div>
+
+

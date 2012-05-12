@@ -2,8 +2,13 @@
 {
     background: #2b2b2b;
     height: 16px;
-    border: 1px solid peru;
+    border: 1px solid darkslategray;
     cursor: pointer;
+}
+
+.detailPane
+{
+    
 }
 
 .highlightedRow
@@ -31,3 +36,18 @@
 {
     color: cornflowerblue;
 }
+
+a.inactiveTopMenu
+{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+a.activeTopMenu
+{
+    font-weight: bold;
+    color: cadetblue;
+    font-size: 30px;
+}
+
+

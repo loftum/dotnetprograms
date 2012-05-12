@@ -5,11 +5,6 @@ namespace BuildMonitor.Lib.Configuration
 {
     public class BuildMonitorSettings : IBuildMonitorSettings
     {
-        public string BuildHost
-        {
-            get { return GetAppSetting<string>("BuildHost"); }
-        }
-
         private static T GetAppSetting<T>(string name)
         {
             return ConvertTo<T>(ConfigurationManager.AppSettings[name]);
@@ -20,9 +15,9 @@ namespace BuildMonitor.Lib.Configuration
             return (T) Convert.ChangeType(value, typeof (T));
         }
 
-        public IBuildServerSettings BuildServer
+        public string ConfigFile
         {
-            get { return (IBuildServerSettings)ConfigurationManager.GetSection("buildServers/teamCity"); }
+            get { return GetAppSetting<string>("ConfigFile"); }
         }
     }
 }

@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace BuildMonitor.Lib.Model
+﻿namespace BuildMonitor.Lib.Model
 {
     public class MonitorModel
     {
-        public string BuildHost { get; private set; }
+        public BuildServerModel BuildServer { get; set; }
 
-        public IEnumerable<ProjectModel> Projects { get; set; }
+        public bool CanBeDisplayed
+        {
+            get { return BuildServer.IsValid; }
+        }
 
         public MonitorModel()
         {
-            Projects = Enumerable.Empty<ProjectModel>();
+            BuildServer = new BuildServerModel();
         }
 
-        public MonitorModel(IEnumerable<ProjectModel> groups, string buildHost)
+        public MonitorModel(BuildServerModel buildServer)
         {
-            BuildHost = buildHost;
-            Projects = groups;
+            BuildServer = buildServer;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BuildMonitor.Common.ExtensionMethods;
 using BuildMonitor.Lib.Api;
+using BuildMonitor.Lib.Data;
 using Ninject.Modules;
 
 namespace BuildMonitor.InjectionModules
@@ -8,7 +9,10 @@ namespace BuildMonitor.InjectionModules
     {
         public override void Load()
         {
-            Bind<IBuildFacade>().To<BuildFacade>().InCurrentScope();
+            Bind<IMonitorFacade>().To<MonitorFacade>().InCurrentScope();
+            Bind<IBuildServerFacade>().To<BuildServerFacade>().InCurrentScope();
+            Bind<IBuildMonitorRepo>().To<BuildMonitorFileRepo>().InCurrentScope();
+            Bind<IFileManager>().To<FileManager>().InCurrentScope();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿
+﻿.hidden
+{
+    display: none;
+}
 
 .clearBoth {
     clear: both;
@@ -11,6 +14,22 @@
 .floatRight {
     float: right;
 }
+
+.thirdWidth
+{
+    width: 33%;
+}
+
+.twoThirdsWidth
+{
+    width: 66%;
+}
+
+.fullWidth
+{
+    width: 100%;
+}
+
 
 .spacingAround,
 .spacingAbove {

@@ -68,23 +68,25 @@
 
 <div id="output" class="error"></div>
 
-@foreach(var project in Model.Monitor.Projects)
+@{var buildServer = Model.Monitor.BuildServer; }
+<h2>@buildServer.Name</h2>
+@foreach (var project in buildServer.Projects)
 {
     <div class="floatLeft spacingAround">
-        <h3>@project.Name</h3>
-        <table>
-            @foreach(var buildType in project.BuildTypes)
-            {
-                <tr class="statusRow" id="@buildType.Id">
-                    <td>
-                        @buildType.Name
-                    </td>
-                    <td id="@string.Format("status_{0}", buildType.Id)">
-                        @buildType.Status
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+    <h3>@project.Name</h3>
+    <table>
+        @foreach (var buildType in project.BuildTypes)
+        {
+            <tr class="statusRow" id="@buildType.Id">
+                <td>
+                    @buildType.Name
+                </td>
+                <td id="@string.Format("status_{0}", buildType.Id)">
+                    @buildType.Status
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 }
 

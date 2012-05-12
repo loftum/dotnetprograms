@@ -95,13 +95,16 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BuildMonitorControllerBase.cs" />
     <Compile Include="Controllers\MonitorController.cs" />
+    <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
+    <Compile Include="ExtensionMethods\ViewDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="InjectionModules\ConfigModule.cs" />
     <Compile Include="InjectionModules\LogicModule.cs" />
-    <Compile Include="Models\Admin\AdminIndexViewModel.cs" />
+    <Compile Include="Models\Admin\EditSettingsViewModel.cs" />
     <Compile Include="Models\Monitor\MonitorIndexViewModel.cs" />
+    <Compile Include="Models\Shared\TopModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +193,7 @@
   <ItemGroup>
     <Content Include="Views\Monitor\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\EditSettings.cshtml" />
     <None Include="web.config.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

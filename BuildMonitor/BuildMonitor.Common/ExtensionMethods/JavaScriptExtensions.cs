@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BuildMonitor.Common.ExtensionMethods
 {
@@ -12,6 +14,26 @@ namespace BuildMonitor.Common.ExtensionMethods
         public static string ToJs(this object value)
         {
             return string.Format("\"{0}\"", value);
+        }
+
+        public static string ToJson(this object value, bool indented = false, bool suppressError = false)
+        {
+            var settings = new JsonSerializerSettings
+                {
+                    Error = SuppressError,
+                    Formatting = indented ? Formatting.Indented : Formatting.None
+                };
+            return JsonConvert.SerializeObject(value, settings);
+        }
+
+        public static T FromJsonTo<T>(this string value)
+        {
+            return JsonConvert.DeserializeObject<T>(value);
+        }
+
+        private static void SuppressError(object sender, ErrorEventArgs e)
+        {
+            e.ErrorContext.Handled = true;
         }
     }
 }

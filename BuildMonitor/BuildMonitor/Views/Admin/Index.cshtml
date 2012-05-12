@@ -1,7 +1,15 @@
-﻿@model BuildMonitor.Models.Admin.AdminIndexViewModel
+﻿@model BuildMonitor.Models.Admin.EditSettingsViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Admin";
 }
 
-<h2>Admin</h2>
+<h3>Build servers</h3>
+<ul>
+@{
+    foreach (var buildServer in Model.BuildServers)
+    {
+        <li>@buildServer.Name</li>
+    }
+}
+</ul>

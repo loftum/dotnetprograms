@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\BuildFacade.cs" />
-    <Compile Include="Api\IBuildFacade.cs" />
+    <Compile Include="Api\MonitorFacade.cs" />
+    <Compile Include="Api\BuildServerFacade.cs" />
+    <Compile Include="Api\IMonitorFacade.cs" />
+    <Compile Include="Api\IBuildServerFacade.cs" />
     <Compile Include="Api\ProjectResponse.cs" />
     <Compile Include="Api\TeamCity\KjempemongisDusteTeamCityBuilds.cs" />
     <Compile Include="Api\TeamCity\TeamCityBuild.cs" />
@@ -53,16 +55,24 @@
     <Compile Include="Api\TeamCity\KjempemongisDusteTeamCityBuildTypes.cs" />
     <Compile Include="Api\TeamCity\TeamCityProject.cs" />
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
-    <Compile Include="Configuration\BuildServerSettings.cs" />
+    <Compile Include="Configuration\BuildServerConfig.cs" />
     <Compile Include="Configuration\IBuildMonitorSettings.cs" />
     <Compile Include="Configuration\IBuildServerSettings.cs" />
+    <Compile Include="Configuration\MonitorConfiguration.cs" />
+    <Compile Include="Data\BuildMonitorFileRepo.cs" />
+    <Compile Include="Data\FileManager.cs" />
+    <Compile Include="Data\IBuildMonitorRepo.cs" />
+    <Compile Include="Data\IFileManager.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Model\BuildModel.cs" />
+    <Compile Include="Model\BuildServerModel.cs" />
     <Compile Include="Model\ProjectModel.cs" />
     <Compile Include="Model\BuildTypeModel.cs" />
     <Compile Include="Model\MonitorModel.cs" />
     <Compile Include="Model\BuildStatus.cs" />
     <Compile Include="Model\MonitorInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BuildMonitor.Common\BuildMonitor.Common.csproj">

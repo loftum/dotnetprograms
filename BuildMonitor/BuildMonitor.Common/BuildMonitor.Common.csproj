@@ -52,6 +52,7 @@
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
     <Compile Include="ExtensionMethods\NinjectExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Urls\VirtualPath.cs" />

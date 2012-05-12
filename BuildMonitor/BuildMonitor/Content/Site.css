@@ -29,10 +29,13 @@ a:hover
     color: lightseagreen;
 }
 
-table
+table,
+tr,
+td
 {
-    border: 0px solid transparent;
+    border: none;
 }
+
 
 fieldset 
 {
