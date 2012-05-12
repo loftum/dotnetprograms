@@ -57,7 +57,6 @@
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
     <Compile Include="Configuration\BuildServerConfig.cs" />
     <Compile Include="Configuration\IBuildMonitorSettings.cs" />
-    <Compile Include="Configuration\IBuildServerSettings.cs" />
     <Compile Include="Configuration\MonitorConfiguration.cs" />
     <Compile Include="Data\BuildMonitorFileRepo.cs" />
     <Compile Include="Data\FileManager.cs" />
