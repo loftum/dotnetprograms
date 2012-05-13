@@ -50,3 +50,10 @@ a.activeTopMenu
     font-size: 30px;
 }
 
+.saveButton
+{
+    cursor: pointer;
+    background: darkslategray;
+    border-radius: 3px;
+}
+

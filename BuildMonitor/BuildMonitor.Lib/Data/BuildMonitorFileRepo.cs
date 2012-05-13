@@ -5,7 +5,7 @@ namespace BuildMonitor.Lib.Data
 {
     public class BuildMonitorFileRepo : IBuildMonitorRepo
     {
-        private static MonitorConfiguration _config;
+        private static MonitorConfig _config;
 
         private readonly IBuildMonitorSettings _settings;
         private readonly IFileManager _fileManager;
@@ -17,7 +17,7 @@ namespace BuildMonitor.Lib.Data
             _settings = settings;
         }
 
-        public MonitorConfiguration GetConfig()
+        public MonitorConfig GetConfig()
         {
             return _config ?? (_config = ReadConfig());
         }
@@ -27,13 +27,13 @@ namespace BuildMonitor.Lib.Data
             return GetConfig().BuildServerConfig;
         }
 
-        private MonitorConfiguration ReadConfig()
+        private MonitorConfig ReadConfig()
         {
             if (!_fileManager.Exists(_settings.ConfigFile))
             {
-                return new MonitorConfiguration();
+                return new MonitorConfig();
             }
-            return _fileManager.Read(_settings.ConfigFile).FromJsonTo<MonitorConfiguration>();
+            return _fileManager.Read(_settings.ConfigFile).FromJsonTo<MonitorConfig>();
         }
 
         public void Save()

@@ -1,10 +1,10 @@
 ﻿namespace BuildMonitor.Lib.Configuration
 {
-    public class MonitorConfiguration
+    public class MonitorConfig
     {
         public BuildServerConfig BuildServerConfig { get; set; }
 
-        public MonitorConfiguration()
+        public MonitorConfig()
         {
             BuildServerConfig = new BuildServerConfig();
         }

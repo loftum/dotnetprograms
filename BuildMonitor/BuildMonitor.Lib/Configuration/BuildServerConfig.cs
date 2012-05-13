@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using BuildMonitor.Common.ExtensionMethods;
 using BuildMonitor.Lib.Validation;
 
@@ -37,21 +36,10 @@ namespace BuildMonitor.Lib.Configuration
 
         public BuildServerConfig()
         {
-            ProjectIdsPiped = string.Empty;
+            ProjectIds = new List<string>();
         }
 
-        public IEnumerable<string> ProjectIds
-        {
-            get { return ProjectIdsPiped.IsNullOrWhiteSpace() ? Enumerable.Empty<string>() : ProjectIdsPiped.Split('|'); }
-            set { ProjectIdsPiped = value.IsNullOrEmpty() ? string.Empty : string.Join("|", value); }
-        }
-
-        private string _projectIdsPiped;
-        public string ProjectIdsPiped
-        {
-            get { return _projectIdsPiped.IsNullOrWhiteSpace() ? string.Empty : _projectIdsPiped; }
-            set { _projectIdsPiped = value.IsNullOrWhiteSpace() ? string.Empty : value; }
-        }
+        public IList<string> ProjectIds { get; set; }
 
         public ModelValidator<BuildServerConfig> Validate()
         {
@@ -65,6 +53,7 @@ namespace BuildMonitor.Lib.Configuration
             Host = config.Host;
             Username = config.Username;
             Password = config.Password;
+            ProjectIds = config.ProjectIds;
         }
     }
 }

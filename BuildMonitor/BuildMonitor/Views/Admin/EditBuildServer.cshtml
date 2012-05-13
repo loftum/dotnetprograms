@@ -1,12 +1,7 @@
 ﻿@using BuildMonitor.ExtensionMethods
 @model BuildMonitor.Models.Admin.EditBuildServerViewModel
 
-@{
-    ViewBag.Title = "Edit settings";
-}
 
-@section Header
-{
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -28,9 +23,30 @@
             }
         });
         
+        $("#saveBuildServer").click(function () {
+            $("#output").html('');
+            var data = $("#saveBuildServerForm").serialize();
+            $.ajax({
+                url: '/Admin/SaveBuildServer',
+                type: 'POST',
+                cache: false,
+                data: data,
+                accepts: 'application/json',
+                success: function (result) {
+                    $("#output").html(result.Message);
+                    $("#output").fadeIn().delay(1000).fadeOut(function() {
+                        $("#output").html('');
+                    });
+                },
+                error: function (xhr, error) {
+                    $("#output").html(xhr);
+                }
+            });
+        });
+        
         function populateProjects() {
             dropDown.attr('disabled', 'disabled');
-            var data = $("form").serialize();
+            var data = $("saveBuildServerForm").serialize();
             $.ajax({
                 url: '/Admin/GetProjects',
                 type: 'POST',
@@ -55,44 +71,36 @@
             });
         }
     });
-    
 </script>
-}
 
-<div class="thirdWidth">
-    <h2>Build server</h2>
-    <div id="buildServer" class="statusRow spacingBelow">@Model.Config.Name</div>
-    @using (Html.BeginForm("EditBuildServer","Admin", FormMethod.Post))
-    {
-        <div id="buildServerSettings" class="hidden detailPane spacingLeft">
-        
-            <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.Name)
-                @Html.TextBoxFor(m => m.Config.Name, new {@class="twoThirdsWidth floatRight"})
-            </div>
-            <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.Host)
-                @Html.TextBoxFor(m => m.Config.Host, new {@class="twoThirdsWidth floatRight"})
-            </div>
-            <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.Username)
-                @Html.TextBoxFor(m => m.Config.Username, new {@class="twoThirdsWidth floatRight"})
-            </div>
-            <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.Password)
-                @Html.PasswordFor(m => m.Config.Password, new {@class="twoThirdsWidth floatRight"})
-            </div>
-            <div class="clearBoth">
-                @Html.LabelFor(m => m.Config.ProjectIds, "Projects")
-                @Html.DropDownListFor(m => m.Config.ProjectIds, Model.AvailableProjects,
-                            new {@class="twoThirdsWidth floatRight", multiple="multiple"} )
-            </div>
-            <div class="spacingAround clearBoth"></div>
-            <input type="submit" value="Save" />
+<h2>BuildServer</h2>
+
+<div id="buildServer" class="statusRow spacingBelow">@Model.Config.Name</div>
+@using (Html.BeginForm("SaveBuildServer","Admin", FormMethod.Post, new {id="saveBuildServerForm"}))
+{
+    <div id="buildServerSettings" class="hidden detailPane spacingLeft">
+        <div class="clearBoth">
+            @Html.LabelFor(m => m.Config.Name)
+            @Html.TextBoxFor(m => m.Config.Name, new {@class="twoThirdsWidth floatRight"})
         </div>
-    }
-</div>
-
-<div id="output"></div>
-
-
+        <div class="clearBoth">
+            @Html.LabelFor(m => m.Config.Host)
+            @Html.TextBoxFor(m => m.Config.Host, new {@class="twoThirdsWidth floatRight"})
+        </div>
+        <div class="clearBoth">
+            @Html.LabelFor(m => m.Config.Username)
+            @Html.TextBoxFor(m => m.Config.Username, new {@class="twoThirdsWidth floatRight"})
+        </div>
+        <div class="clearBoth">
+            @Html.LabelFor(m => m.Config.Password)
+            @Html.PasswordFor(m => m.Config.Password, new {@class="twoThirdsWidth floatRight"})
+        </div>
+        <div class="clearBoth">
+            @Html.LabelFor(m => m.Config.ProjectIds, "Projects")
+            @Html.DropDownListFor(m => m.Config.ProjectIds, Model.AvailableProjects,
+                        new {@class="twoThirdsWidth floatRight", multiple="multiple"} )
+        </div>
+        <div class="spacingAround clearBoth"></div>
+        <span id="saveBuildServer" class="saveButton">Save</span>&nbsp;<span id="output"></span>
+    </div>
+}

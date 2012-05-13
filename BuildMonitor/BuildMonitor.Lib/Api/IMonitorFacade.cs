@@ -11,5 +11,6 @@ namespace BuildMonitor.Lib.Api
         BuildServerConfig GetBuildServerConfig();
         void SaveBuildServer(BuildServerConfig config);
         IEnumerable<ProjectModel> GetAvailableProjectsFor(BuildServerConfig buildServer);
+        MonitorConfig GetConfig();
     }
 }

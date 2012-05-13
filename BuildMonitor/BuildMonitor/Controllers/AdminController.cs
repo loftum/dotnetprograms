@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using BuildMonitor.Lib.Api;
 using BuildMonitor.Lib.Configuration;
+using BuildMonitor.Lib.Exceptions;
+using BuildMonitor.Lib.UserInteraction;
 using BuildMonitor.Models.Admin;
 
 namespace BuildMonitor.Controllers
@@ -17,26 +20,35 @@ namespace BuildMonitor.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("EditBuildServer");
+            return RedirectToAction("EditSettings");
         }
 
-        public ActionResult EditBuildServer()
+        public ActionResult EditSettings()
         {
-            var config = _monitorFacade.GetBuildServerConfig();
-            var model = new EditBuildServerViewModel(config);
+            var config = _monitorFacade.GetConfig();
+            var model = new EditSettingsViewModel(config);
             var availableProjects = _monitorFacade
-                .GetAvailableProjectsFor(config)
+                .GetAvailableProjectsFor(config.BuildServerConfig)
                 .Select(project =>
-                    new SelectListItem{Text = project.Name, Value = project.Id, Selected = config.ProjectIds.Contains(project.Id)});
-            model.AvailableProjects = availableProjects;
+                    new SelectListItem { Text = project.Name, Value = project.Id, Selected = config.BuildServerConfig.ProjectIds.Contains(project.Id) });
+            model.BuildServer.AvailableProjects = availableProjects;
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditBuildServer(EditBuildServerViewModel model)
+        public ActionResult SaveBuildServer(EditBuildServerViewModel model)
         {
-            _monitorFacade.SaveBuildServer(model.Config);
-            return RedirectToAction("EditBuildServer");
+            try
+            {
+                _monitorFacade.SaveBuildServer(model.Config);
+                var message = UserMessage.Success("Success", "Build server saved");
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (FriendlyException ex)
+            {
+                var message = UserMessage.Error("Failure", ex.Message);
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]

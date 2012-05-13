@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildMonitor.Lib", "BuildMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildMonitor.Common", "BuildMonitor.Common\BuildMonitor.Common.csproj", "{E7C21EC0-CEBC-47A4-97C2-4572699CDF28}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Applications", "01. Applications", "{8F4641BE-A9A3-4676-97B1-97BFBEB71FDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Librarires", "02. Librarires", "{6D417434-7BDB-4343-BED8-5DC7FADB40BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADADCEE5-ABDB-47B2-901E-26606F3E7663} = {8F4641BE-A9A3-4676-97B1-97BFBEB71FDD}
+		{E7C21EC0-CEBC-47A4-97C2-4572699CDF28} = {6D417434-7BDB-4343-BED8-5DC7FADB40BE}
+		{EC6C4A27-2631-48DB-B924-F9CF1C305FED} = {6D417434-7BDB-4343-BED8-5DC7FADB40BE}
 	EndGlobalSection
 EndGlobal

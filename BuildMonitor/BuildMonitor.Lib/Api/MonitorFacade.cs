@@ -24,6 +24,11 @@ namespace BuildMonitor.Lib.Api
             return _repo.GetBuildServerConfig();
         }
 
+        public MonitorConfig GetConfig()
+        {
+            return _repo.GetConfig();
+        }
+
         public void SaveBuildServer(BuildServerConfig config)
         {
             SetPasswordFor(config);

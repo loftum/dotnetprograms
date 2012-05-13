@@ -59,7 +59,7 @@
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
     <Compile Include="Configuration\BuildServerConfig.cs" />
     <Compile Include="Configuration\IBuildMonitorSettings.cs" />
-    <Compile Include="Configuration\MonitorConfiguration.cs" />
+    <Compile Include="Configuration\MonitorConfig.cs" />
     <Compile Include="Data\BuildMonitorFileRepo.cs" />
     <Compile Include="Data\FileManager.cs" />
     <Compile Include="Data\IBuildMonitorRepo.cs" />
@@ -72,6 +72,8 @@
     <Compile Include="Model\MonitorModel.cs" />
     <Compile Include="Model\BuildStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInteraction\MessageType.cs" />
+    <Compile Include="UserInteraction\UserMessage.cs" />
     <Compile Include="Validation\ModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
