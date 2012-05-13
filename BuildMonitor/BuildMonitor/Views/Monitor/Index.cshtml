@@ -19,50 +19,50 @@
             $(this).effect('highlight', { color: '#575757',  mode:'show' }, 1000);
             getStatus($(this));
         });
-    });
         
-    function updateStatuses() {
-        $(".statusRow").each(function () {
-            getStatus($(this));
-        });
-    }
-        
-    function getStatus(row) {
-        var buildTypeId = row.attr('id');
-        showOutput('');
-        $.ajax({
-            url: '/Monitor/GetLatestBuild/' + buildTypeId,
-            type: 'GET',
-            cache: false,
-            accepts: 'application/json',
-            success: function (data) {
-                if (data) {
-                    setStatus(row, data.Status);
-                    $("#status_" + buildTypeId).html(data.Status);
+        function updateStatuses() {
+            $(".statusRow").each(function () {
+                getStatus($(this));
+            });
+        }
+
+        function getStatus(row) {
+            var buildTypeId = row.attr('id');
+            showOutput('');
+            $.ajax({
+                url: '/Monitor/GetLatestBuild/' + buildTypeId,
+                type: 'GET',
+                cache: false,
+                accepts: 'application/json',
+                success: function (data) {
+                    if (data) {
+                        setStatus(row, data.Status);
+                        $("#status_" + buildTypeId).html(data.Status);
+                    }
+                    else {
+                        showOutput('Hmm. No data for ' + buildTypeId + ' ?');
+                    }
+                },
+                error: function (xhr, error) {
+                    showOutput(error);
                 }
-                else {
-                    showOutput('Hmm. No data for ' + buildTypeId + ' ?');
+            });
+        }
+
+        function setStatus(row, status) {
+            if (!row.hasClass(status)) {
+                $(statuses).each(function () { row.removeClass(this); });
+                row.addClass(status);
+                if (status !== 'success') {
+                    row.effect('highlight', { color: '#575757', mode: 'show' }, 7000);
                 }
-            },
-            error: function (xhr, error) {
-                showOutput(error);
-            }
-        });
-    }
-        
-    function setStatus(row, status) {
-        if (!row.hasClass(status)) {
-            $(statuses).each(function () { row.removeClass(this); });
-            row.addClass(status);
-            if (status !== 'success') {
-                row.effect('highlight', { color: '#575757',  mode:'show' }, 7000);
             }
         }
-    }
 
-    function showOutput(data) {
-        $("#output").html(data);
-    }
+        function showOutput(data) {
+            $("#output").html(data);
+        }
+    });
 </script>
 }
 
@@ -83,7 +83,7 @@
     <table>
         @foreach (var buildType in project.BuildTypes)
         {
-            <tr class="statusRow" id="@buildType.Id">
+            <tr class="statusRow" title="Click to update status" id="@buildType.Id">
                 <td>
                     @buildType.Name
                 </td>
