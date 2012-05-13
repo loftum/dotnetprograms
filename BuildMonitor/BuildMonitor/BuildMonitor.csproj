@@ -102,7 +102,7 @@
     </Compile>
     <Compile Include="InjectionModules\ConfigModule.cs" />
     <Compile Include="InjectionModules\LogicModule.cs" />
-    <Compile Include="Models\Admin\EditSettingsViewModel.cs" />
+    <Compile Include="Models\Admin\EditBuildServerViewModel.cs" />
     <Compile Include="Models\Monitor\MonitorIndexViewModel.cs" />
     <Compile Include="Models\Shared\TopModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,7 +193,7 @@
   <ItemGroup>
     <Content Include="Views\Monitor\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\EditSettings.cshtml" />
+    <Content Include="Views\Admin\EditBuildServer.cshtml" />
     <None Include="web.config.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

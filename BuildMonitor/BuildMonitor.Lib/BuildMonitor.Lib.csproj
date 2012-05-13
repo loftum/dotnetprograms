@@ -64,7 +64,7 @@
     <Compile Include="Data\FileManager.cs" />
     <Compile Include="Data\IBuildMonitorRepo.cs" />
     <Compile Include="Data\IFileManager.cs" />
-    <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="Exceptions\FriendlyException.cs" />
     <Compile Include="Model\BuildModel.cs" />
     <Compile Include="Model\BuildServerModel.cs" />
     <Compile Include="Model\ProjectModel.cs" />

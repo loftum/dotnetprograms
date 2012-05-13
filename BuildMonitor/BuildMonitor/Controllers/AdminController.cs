@@ -17,32 +17,32 @@ namespace BuildMonitor.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("EditSettings");
+            return RedirectToAction("EditBuildServer");
         }
 
-        public ActionResult EditSettings()
+        public ActionResult EditBuildServer()
         {
-            var config = _monitorFacade.GetConfiguration();
-            var model = new EditSettingsViewModel(config);
+            var config = _monitorFacade.GetBuildServerConfig();
+            var model = new EditBuildServerViewModel(config);
             var availableProjects = _monitorFacade
-                .GetAvailableProjectsFor(config.BuildServerConfig)
+                .GetAvailableProjectsFor(config)
                 .Select(project =>
-                    new SelectListItem{Text = project.Name, Value = project.Id, Selected = config.BuildServerConfig.ProjectIds.Contains(project.Id)});
+                    new SelectListItem{Text = project.Name, Value = project.Id, Selected = config.ProjectIds.Contains(project.Id)});
             model.AvailableProjects = availableProjects;
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditSettings(EditSettingsViewModel model)
+        public ActionResult EditBuildServer(EditBuildServerViewModel model)
         {
-            _monitorFacade.SaveConfiguration(model.Config);
-            return RedirectToAction("EditSettings");
+            _monitorFacade.SaveBuildServer(model.Config);
+            return RedirectToAction("EditBuildServer");
         }
 
         [HttpPost]
-        public ActionResult GetProjects(EditSettingsViewModel model)
+        public ActionResult GetProjects(EditBuildServerViewModel model)
         {
-            var projects = _monitorFacade.GetAvailableProjectsFor(model.Config.BuildServerConfig);
+            var projects = _monitorFacade.GetAvailableProjectsFor(model.Config);
             return Json(projects, JsonRequestBehavior.AllowGet);
         }
     }

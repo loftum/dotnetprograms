@@ -21,9 +21,7 @@ namespace BuildMonitor.Lib.Configuration
         {
             get
             {
-                return new ModelValidator<BuildServerConfig>(this)
-                    .Require(m => m.Name, m => m.Host, m => m.Username, m => m.Password)
-                    .IsValid;
+                return Validate().IsValid;
             }
         }
 
@@ -53,6 +51,20 @@ namespace BuildMonitor.Lib.Configuration
         {
             get { return _projectIdsPiped.IsNullOrWhiteSpace() ? string.Empty : _projectIdsPiped; }
             set { _projectIdsPiped = value.IsNullOrWhiteSpace() ? string.Empty : value; }
+        }
+
+        public ModelValidator<BuildServerConfig> Validate()
+        {
+            return new ModelValidator<BuildServerConfig>(this)
+                .Require(m => m.Name, m => m.Host, m => m.Username, m => m.Password);
+        }
+
+        public void UpdateFrom(BuildServerConfig config)
+        {
+            Name = config.Name;
+            Host = config.Host;
+            Username = config.Username;
+            Password = config.Password;
         }
     }
 }

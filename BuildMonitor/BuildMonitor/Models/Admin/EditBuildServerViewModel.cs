@@ -5,19 +5,19 @@ using BuildMonitor.Lib.Configuration;
 
 namespace BuildMonitor.Models.Admin
 {
-    public class EditSettingsViewModel
+    public class EditBuildServerViewModel
     {
-        public MonitorConfiguration Config { get; set; }
+        public BuildServerConfig Config { get; set; }
 
         public IEnumerable<SelectListItem> AvailableProjects { get; set; }
 
-        public EditSettingsViewModel()
+        public EditBuildServerViewModel()
         {
-            Config = new MonitorConfiguration();
+            Config = new BuildServerConfig();
             AvailableProjects = Enumerable.Empty<SelectListItem>();
         }
 
-        public EditSettingsViewModel(MonitorConfiguration config)
+        public EditBuildServerViewModel(BuildServerConfig config)
         {
             Config = config;
             AvailableProjects = Enumerable.Empty<SelectListItem>();

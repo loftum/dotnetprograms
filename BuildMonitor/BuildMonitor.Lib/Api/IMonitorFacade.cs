@@ -8,8 +8,8 @@ namespace BuildMonitor.Lib.Api
     {
         MonitorModel GetMonitor();
         BuildModel GetLatestBuild(string buildTypeId);
-        MonitorConfiguration GetConfiguration();
-        void SaveConfiguration(MonitorConfiguration config);
+        BuildServerConfig GetBuildServerConfig();
+        void SaveBuildServer(BuildServerConfig config);
         IEnumerable<ProjectModel> GetAvailableProjectsFor(BuildServerConfig buildServer);
     }
 }

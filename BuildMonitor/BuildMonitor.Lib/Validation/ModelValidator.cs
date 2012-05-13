@@ -72,7 +72,7 @@ namespace BuildMonitor.Lib.Validation
         {
             if (_errors.Any())
             {
-                throw new ValidationException("Validation failed: {0}", string.Join(", ", _errors));
+                throw new FriendlyException("Validation failed: {0}", string.Join(", ", _errors));
             }
         }
     }

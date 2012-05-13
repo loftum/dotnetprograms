@@ -5,6 +5,8 @@ namespace BuildMonitor.Lib.Data
     public interface IBuildMonitorRepo
     {
         MonitorConfiguration GetConfig();
-        void Save(MonitorConfiguration monitor);
+        BuildServerConfig GetBuildServerConfig();
+        void Save();
+        void Revert();
     }
 }

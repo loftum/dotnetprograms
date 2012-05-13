@@ -19,20 +19,23 @@ namespace BuildMonitor.Lib.Api
             _repo = repo;
         }
 
-        public MonitorConfiguration GetConfiguration()
+        public BuildServerConfig GetBuildServerConfig()
         {
-            return _repo.GetConfig();
+            return _repo.GetBuildServerConfig();
         }
 
-        public void SaveConfiguration(MonitorConfiguration config)
+        public void SaveBuildServer(BuildServerConfig config)
         {
-            SetPasswordFor(config.BuildServerConfig);
-            _repo.Save(config);
+            SetPasswordFor(config);
+            config.Validate().OrThrow();
+            var existing = _repo.GetBuildServerConfig();
+            existing.UpdateFrom(config);
+            _repo.Save();
         }
 
         public MonitorModel GetMonitor()
         {
-            var config = _repo.GetConfig().BuildServerConfig;
+            var config = _repo.GetBuildServerConfig();
 
             return config.IsValid
                        ? new MonitorModel { BuildServer = GetBuildServer(config) }
@@ -82,8 +85,8 @@ namespace BuildMonitor.Lib.Api
 
         private ProjectModel GetProject(string projectId)
         {
-            var config = GetConfiguration();
-            var info = new TeamCityRestUrls(config.BuildServerConfig.Host);
+            var config = GetBuildServerConfig();
+            var info = new TeamCityRestUrls(config.Host);
             var json = ReadJson(info.ProjectPathTo(projectId));
             var response = json.FromJsonTo<TeamCityProject>();
             return response.ToProjectModel();
@@ -91,7 +94,7 @@ namespace BuildMonitor.Lib.Api
 
         private string ReadJson(string url)
         {
-            var config = GetConfiguration().BuildServerConfig;
+            var config = GetBuildServerConfig();
             return ReadJson(url, config.Username, config.Password);
         }
 
