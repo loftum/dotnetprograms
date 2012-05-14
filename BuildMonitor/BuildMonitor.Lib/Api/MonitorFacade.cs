@@ -7,6 +7,7 @@ using BuildMonitor.Lib.Api.TeamCity;
 using BuildMonitor.Lib.Configuration;
 using BuildMonitor.Lib.Data;
 using BuildMonitor.Lib.Model;
+using BuildMonitor.Lib.Model.Build;
 
 namespace BuildMonitor.Lib.Api
 {
@@ -50,12 +51,31 @@ namespace BuildMonitor.Lib.Api
         private BuildServerModel GetBuildServer(BuildServerConfig config)
         {
             var buildServer = new BuildServerModel(config);
+            var vcsRoots = GetVcsRoots(config);
             foreach (var projectId in config.ProjectIds)
             {
-                buildServer.Projects.Add(GetProject(projectId));
+                var project = GetProject(projectId);
+                project.VcsRoot = vcsRoots.FirstOrDefault(r => projectId.Equals(r.ProjectId));
+                buildServer.Projects.Add(project);
             }
             return buildServer;
         }
+
+        private IList<VcsRootModel> GetVcsRoots(BuildServerConfig config)
+        {
+            var url = new TeamCityRestUrls(config.Host);
+
+            var roots = new List<VcsRootModel>();
+            var json = ReadJson(url.VcsRootsPath);
+            var rootIds = json.FromJsonTo<KjempemongisTeamCityVcsRoots>();
+            foreach (var rootId in rootIds.vcsRoot.Select(r => r.id))
+            {
+                var root = ReadJson(url.VcsRootPathTo(rootId)).FromJsonTo<TeamCityVcsRoot>();
+                roots.Add(root.ToVcsRootModel());
+            }
+            return roots;
+        }
+
 
         public BuildModel GetLatestBuild(string buildTypeId)
         {
@@ -97,7 +117,7 @@ namespace BuildMonitor.Lib.Api
             return response.ToProjectModel();
         }
 
-        private string ReadJson(string url)
+        public string ReadJson(string url)
         {
             var config = GetBuildServerConfig();
             return ReadJson(url, config.Username, config.Password);

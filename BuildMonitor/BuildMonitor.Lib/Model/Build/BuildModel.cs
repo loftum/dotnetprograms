@@ -1,6 +1,6 @@
-﻿using BuildMonitor.Common.ExtensionMethods;
+using BuildMonitor.Common.ExtensionMethods;
 
-namespace BuildMonitor.Lib.Model
+namespace BuildMonitor.Lib.Model.Build
 {
     public class BuildModel
     {

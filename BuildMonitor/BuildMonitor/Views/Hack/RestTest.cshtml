@@ -1,0 +1,42 @@
+﻿@model BuildMonitor.Models.Hack.RestTestViewModel
+
+@{
+    ViewBag.Title = "RestTest";
+}
+
+@section Header
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#getResponseButton").click(function () {
+                var url = $("#url").val();
+                var data = { url: url };
+                $.ajax({
+                    url: '/Hack/GetJson',
+                    method: 'POST',
+                    data: data,
+                    cache: false,
+                    success: function (result) {
+                        if (result) {
+                            $("#resultArea").val(result);
+                        }
+                    },
+                    error: function (xhr, error) {
+                        $("#output").html(xhr);
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+<h2>RestTest</h2>
+
+<input type="text" id="url" style="width:500px;" placeholder="http://blabla" />
+
+<input type="button" id="getResponseButton" value="Get response" style="float:right;"/>
+<div id="status"></div>
+
+<textarea id="resultArea" cols="100" rows="20"></textarea>
+

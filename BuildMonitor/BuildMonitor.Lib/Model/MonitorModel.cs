@@ -1,4 +1,6 @@
-﻿namespace BuildMonitor.Lib.Model
+﻿using BuildMonitor.Lib.Model.Build;
+
+namespace BuildMonitor.Lib.Model
 {
     public class MonitorModel
     {

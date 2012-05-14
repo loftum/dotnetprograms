@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using BuildMonitor.Common.ExtensionMethods;
 using BuildMonitor.Lib.Configuration;
 
-namespace BuildMonitor.Lib.Model
+namespace BuildMonitor.Lib.Model.Build
 {
     public class BuildServerModel
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BuildMonitor.Lib.Model;
+using BuildMonitor.Lib.Model.Build;
 
 namespace BuildMonitor.Lib.Api.TeamCity
 {
@@ -37,7 +38,6 @@ namespace BuildMonitor.Lib.Api.TeamCity
             return buildTypes == null || buildTypes.buildType == null
                        ? new List<BuildTypeModel>()
                        : buildTypes.buildType.Select(t => t.ToBuildType()).ToList();
-
         }
     }
 }

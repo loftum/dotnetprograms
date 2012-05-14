@@ -1,4 +1,4 @@
-﻿namespace BuildMonitor.Lib.Model
+namespace BuildMonitor.Lib.Model.Build
 {
     public static class BuildStatus
     {

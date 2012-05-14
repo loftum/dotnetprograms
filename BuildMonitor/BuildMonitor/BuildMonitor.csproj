@@ -94,6 +94,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BuildMonitorControllerBase.cs" />
+    <Compile Include="Controllers\HackController.cs" />
     <Compile Include="Controllers\MonitorController.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
     <Compile Include="ExtensionMethods\ViewDataExtensions.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="InjectionModules\LogicModule.cs" />
     <Compile Include="Models\Admin\EditBuildServerViewModel.cs" />
     <Compile Include="Models\Admin\EditSettingsViewModel.cs" />
+    <Compile Include="Models\Hack\RestTestViewModel.cs" />
     <Compile Include="Models\Monitor\MonitorIndexViewModel.cs" />
     <Compile Include="Models\Shared\TopModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +198,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\EditBuildServer.cshtml" />
     <Content Include="Views\Admin\EditSettings.cshtml" />
+    <Content Include="Views\Hack\RestTest.cshtml" />
     <None Include="web.config.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

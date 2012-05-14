@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace BuildMonitor.Lib.Model
+namespace BuildMonitor.Lib.Model.Build
 {
     public class ProjectModel
     {
@@ -15,6 +15,13 @@ namespace BuildMonitor.Lib.Model
         public string Description { get; set; }
         
         public IList<BuildTypeModel> BuildTypes { get; set;}
+        public bool HasVcsRoot { get { return VcsRoot != null; } }
+        public VcsRootModel VcsRoot { get; set; }
+
+        public string NameDisplay
+        {
+            get { return HasVcsRoot ? string.Format("{0} ({1})", Name, VcsRoot.BranchNameDisplay) : Name; }
+        }
 
         public ProjectModel()
         {
