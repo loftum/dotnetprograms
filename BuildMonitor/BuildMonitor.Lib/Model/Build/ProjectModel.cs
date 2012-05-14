@@ -20,7 +20,12 @@ namespace BuildMonitor.Lib.Model.Build
 
         public string NameDisplay
         {
-            get { return HasVcsRoot ? string.Format("{0} ({1})", Name, VcsRoot.BranchNameDisplay) : Name; }
+            get { return HasVcsRoot ? string.Format("{0} [{1}]", Name, VcsRoot.BranchNameDisplay) : Name; }
+        }
+
+        public string VcsRootName
+        {
+            get { return HasVcsRoot ? VcsRoot.BranchNameDisplay : string.Empty; }
         }
 
         public ProjectModel()

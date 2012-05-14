@@ -1,4 +1,9 @@
-﻿.statusRow
+﻿.monitorOverview
+{
+    font-size: 1.75em;
+}
+
+.statusRow
 {
     background: #2b2b2b;
     height: 16px;
@@ -19,7 +24,7 @@
 
 .success
 {
-    
+    color: #aaaa99;
 }
 
 .error
@@ -29,7 +34,7 @@
 
 .failure
 {
-    color: salmon;
+    color: red;
 }
 
 .unknown
@@ -55,5 +60,11 @@ a.activeTopMenu
     cursor: pointer;
     background: darkslategray;
     border-radius: 3px;
+}
+
+.branchName
+{
+    color: seagreen;
+    font-style: italic;
 }
 

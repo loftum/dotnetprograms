@@ -66,6 +66,7 @@
 </script>
 }
 
+<div class="monitorOverview">
 <div id="output" class="error"></div>
 
 @{var buildServer = Model.Monitor.BuildServer; }
@@ -78,20 +79,23 @@
 @foreach (var project in buildServer.Projects)
 {
     <div class="floatLeft spacingAround">
-    <h3>@project.NameDisplay</h3>
-    <table>
-        @foreach (var buildType in project.BuildTypes)
-        {
-            <tr class="statusRow" title="Click to update status" id="@buildType.Id">
-                <td>
-                    @buildType.Name
-                </td>
-                <td id="@string.Format("status_{0}", buildType.Id)">
-                    @buildType.Status
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+        <strong>@project.Name</strong><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="branchName">@project.VcsRootName</span>
+        <br/>
+        <br/>
+        <table>
+            @foreach (var buildType in project.BuildTypes)
+            {
+                <tr class="statusRow" title="Click to update status" id="@buildType.Id">
+                    <td>
+                        @buildType.Name
+                    </td>
+                    <td id="@string.Format("status_{0}", buildType.Id)">
+                        @buildType.Status
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
-
+</div>

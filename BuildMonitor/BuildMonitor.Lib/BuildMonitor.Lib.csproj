@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\HttpReader.cs" />
+    <Compile Include="Api\IHttpReader.cs" />
     <Compile Include="Api\MonitorFacade.cs" />
     <Compile Include="Api\BuildServerFacade.cs" />
     <Compile Include="Api\IMonitorFacade.cs" />
     <Compile Include="Api\IBuildServerFacade.cs" />
     <Compile Include="Api\ProjectResponse.cs" />
+    <Compile Include="Api\TeamCity\ITeamCityService.cs" />
     <Compile Include="Api\TeamCity\KjempemongisTeamCityBuilds.cs" />
     <Compile Include="Api\TeamCity\KjempemongisTeamCityProjects.cs" />
     <Compile Include="Api\TeamCity\KjempemongisTeamCityVcsRoots.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Api\TeamCity\KjempemongisTeamCityProperties.cs" />
     <Compile Include="Api\TeamCity\TeamCityProperty.cs" />
     <Compile Include="Api\TeamCity\TeamCityRestUrls.cs" />
+    <Compile Include="Api\TeamCity\TeamCityService.cs" />
     <Compile Include="Api\TeamCity\TeamCityVcsRoot.cs" />
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
     <Compile Include="Configuration\BuildServerConfig.cs" />
