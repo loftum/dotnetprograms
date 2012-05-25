@@ -23,9 +23,18 @@ namespace BuildMonitor.Lib.Api.TeamCity
         public BuildModel GetLatestBuild(string buildTypeId)
         {
             var rest = new TeamCityRestUrls(_buildServerConfig.Host);
+            var buildId = GetLatestBuildIdFor(buildTypeId);
+            var latestBuild = ReadJson(rest.BuildPathTo(buildId)).FromJsonTo<TeamCityBuild>();
+            return latestBuild.ToBuildModel();
+        }
+
+        private string GetLatestBuildIdFor(string buildTypeId)
+        {
+            var rest = new TeamCityRestUrls(_buildServerConfig.Host);
             var json = ReadJson(rest.LatestBuildOf(buildTypeId));
+
             var builds = json.FromJsonTo<KjempemongisTeamCityBuilds>();
-            return builds.build.First().ToBuildModel();
+            return builds.build.First().ToBuildModel().Id;
         }
 
         public BuildServerModel GetBuildServer()

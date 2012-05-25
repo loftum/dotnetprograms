@@ -39,5 +39,10 @@ namespace BuildMonitor.Lib.Api.TeamCity
         {
             return VirtualPath.Combine(VcsRootsPath, string.Format("id:{0}", rootId));
         }
+
+        public string BuildPathTo(string buildId)
+        {
+            return VirtualPath.Combine(BuildPath, string.Format("id:{0}", buildId));
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using BuildMonitor.Common.ExtensionMethods;
 
 namespace BuildMonitor.Lib.Model.Build
@@ -13,5 +14,10 @@ namespace BuildMonitor.Lib.Model.Build
             set { _status = value.IsNullOrWhiteSpace() ? "unknown" : value.ToLowerInvariant(); }
         }
         public string BuildTypeId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime FinishDate { get; set; }
+
+        public DateTime TriggeredDate { get; set; }
+        public BuildUser TriggeredBy { get; set; }
     }
 }

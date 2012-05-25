@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E7C21EC0-CEBC-47A4-97C2-4572699CDF28}</ProjectGuid>
+    <ProjectGuid>{E147C83B-9E1F-41B6-9472-CF491FC05997}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuildMonitor.Common</RootNamespace>
-    <AssemblyName>BuildMonitor.Common</AssemblyName>
+    <RootNamespace>BuildMonitor.UnitTesting</RootNamespace>
+    <AssemblyName>BuildMonitor.UnitTesting</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.0.0.15\lib\net40\Ninject.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,18 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateAndTime\DateTimeProvider.cs" />
-    <Compile Include="DependencyInjection\InjectionScope.cs" />
-    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
-    <Compile Include="ExtensionMethods\DateTimeExtensions.cs" />
-    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
-    <Compile Include="ExtensionMethods\NinjectExtensions.cs" />
-    <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
-    <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
-    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="DateAndTime\DateTimeParsingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Urls\VirtualPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

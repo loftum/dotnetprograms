@@ -15,11 +15,11 @@
         setInterval(updateStatuses, 30000);
 
         $(".statusRow").click(function () {
-            
-            $(this).effect('highlight', { color: '#575757',  mode:'show' }, 1000);
+
+            $(this).effect('highlight', { color: '#575757', mode: 'show' }, 1000);
             getStatus($(this));
         });
-        
+
         function updateStatuses() {
             $(".statusRow").each(function () {
                 getStatus($(this));
@@ -38,6 +38,7 @@
                     if (data) {
                         setStatus(row, data.Status);
                         $("#status_" + buildTypeId).html(data.Status);
+                        $("#trigger_" + buildTypeId).html(data.TriggeredBy);
                     }
                     else {
                         showOutput('Hmm. No data for ' + buildTypeId + ' ?');
@@ -76,7 +77,9 @@
     }
 }
 
-@foreach (var project in buildServer.Projects)
+Pølse
+
+    @foreach (var project in buildServer.Projects)
 {
     <div class="floatLeft spacingAround">
         <strong>@project.Name</strong><br/>
@@ -89,6 +92,9 @@
                 <tr class="statusRow" title="Click to update status" id="@buildType.Id">
                     <td>
                         @buildType.Name
+                    </td>
+                    <td id="@string.Format("trigger_{0}", buildType.Id)">
+                        Lala
                     </td>
                     <td id="@string.Format("status_{0}", buildType.Id)">
                         @buildType.Status

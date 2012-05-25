@@ -64,6 +64,8 @@
     <Compile Include="Api\TeamCity\TeamCityProperty.cs" />
     <Compile Include="Api\TeamCity\TeamCityRestUrls.cs" />
     <Compile Include="Api\TeamCity\TeamCityService.cs" />
+    <Compile Include="Api\TeamCity\TeamCityTriggered.cs" />
+    <Compile Include="Api\TeamCity\TeamCityUser.cs" />
     <Compile Include="Api\TeamCity\TeamCityVcsRoot.cs" />
     <Compile Include="Configuration\BuildMonitorSettings.cs" />
     <Compile Include="Configuration\BuildServerConfig.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Model\Build\BuildServerModel.cs" />
     <Compile Include="Model\Build\BuildStatus.cs" />
     <Compile Include="Model\Build\BuildTypeModel.cs" />
+    <Compile Include="Model\Build\BuildUser.cs" />
     <Compile Include="Model\Build\ProjectModel.cs" />
     <Compile Include="Model\Build\VcsRootModel.cs" />
     <Compile Include="Model\MonitorModel.cs" />

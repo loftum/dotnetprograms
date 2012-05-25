@@ -43,7 +43,10 @@ namespace DbToolGui.Highlighting
                 var obj = _syntaxProvider.GetType(word);
                 if (obj != null)
                 {
-                    _suggestions.AddRange(obj.Properties.Select(property => new Suggestion(property.MemberName)));
+                    var suggestions = obj.Properties
+                        .OrderBy(p => p.MemberName)
+                        .Select(property => new Suggestion(property.MemberName));
+                    _suggestions.AddRange(suggestions);
                 }    
             }
         }
