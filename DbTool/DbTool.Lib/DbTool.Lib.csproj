@@ -42,9 +42,6 @@
     <Reference Include="MigSharp">
       <HintPath>..\..\Lib\3rdParty\MigSharp\MigSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.CSharp">
-      <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\BuildAssets\Newtonsoft\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -71,6 +68,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="Mono.CSharp">
+      <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.2.11.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLoading\AssemblyHandler.cs" />

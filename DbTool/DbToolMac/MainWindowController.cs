@@ -16,7 +16,7 @@ using DbTool.Lib.Communication.DbCommands.Results;
 
 namespace DbToolMac
 {
-    public partial class MainWindowController : MonoMac.AppKit.NSWindowController
+    public partial class MainWindowController : NSWindowController
     {
         public new MainWindow Window { get { return (MainWindow)base.Window; } }
 

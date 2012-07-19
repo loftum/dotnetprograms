@@ -29,7 +29,7 @@ namespace DbToolMac
 
         private IKernel CreateKernel()
         {
-            return new StandardKernel(new ConfigModule(), new TaskModule(), new DatabaseModule(), new UiModule(), new ApplicationModule());
+            return new StandardKernel(new ConfigModule(), new TaskModule(), new DatabaseModule(), new UiModule(), new MetaModule(), new ApplicationModule());
         }
 
         public override void WillTerminate(NSNotification notification)

@@ -16,7 +16,6 @@ namespace DbTool.Lib.CSharp.Mono
                 "System.Linq",
                 "System.Linq.Expressions",
                 "System.Collections.Generic",
-                "WebMatrix.Data",
                 typeof(DynamicSqlQuery).Namespace
             };
 
