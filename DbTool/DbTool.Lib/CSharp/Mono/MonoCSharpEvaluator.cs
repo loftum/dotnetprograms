@@ -4,6 +4,7 @@ using System.Reflection;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.ExtensionMethods;
 using Mono.CSharp;
+using System;
 
 namespace DbTool.Lib.CSharp.Mono
 {
@@ -51,7 +52,7 @@ namespace DbTool.Lib.CSharp.Mono
                 };
             ReferenceAssemblies(typeof(DynamicSqlQuery).Assembly);
 
-            Using(InitialUsings);
+            TryUsing(InitialUsings);
             DbToolInteractive.Evaluator = _evaluator;
             DbToolInteractive.Output = _stringWriter;
         }
@@ -61,9 +62,16 @@ namespace DbTool.Lib.CSharp.Mono
             assemblies.Each(a => _evaluator.ReferenceAssembly(a));
         }
 
-        private void Using(params string[] nameSpaces)
+        private void TryUsing(params string[] nameSpaces)
         {
-            nameSpaces.Each(nameSpace => _evaluator.Run(string.Format("using {0};", nameSpace)));
+			try
+			{
+				nameSpaces.Each(nameSpace => _evaluator.Run(string.Format("using {0};", nameSpace)));
+			}
+			catch (NotSupportedException)
+			{
+				// Mono's Reflection.Emit does not currently support this for some reason.
+			}
         }
 
         public CSharpResult Run(string code)

@@ -76,21 +76,24 @@ namespace DbToolMac
                 .Bind(model => model.StatusText, () => StatusField.StringValue = Model.StatusText)
                 .Bind(model => model.Title, () => Window.Title = Model.Title);
             new ModelBinder<ConnectionViewModel>(Connection)
-                .Bind(model => model.ConnectionButtonText, () => ConnectionButton.Title = Connection.ConnectionButtonText);
+				.Bind(model => model.ConnectionButtonText, () => ConnectionButton.Title = Connection.ConnectionButtonText);
+
 
         }
 
         public override void KeyUp(NSEvent e)
         {
-            if (e.KeyCode == 0x60)
+            if (e.KeyCode == 96)
             {
-                _communicator.StartExecute(EditorBox.GetSelectedOrAllText(), QueryFinished);
+				var command = EditorBox.GetSelectedOrAllText();
+				Model.StatusText = command;
+                _communicator.StartExecute(command, QueryFinished);
             }
         }
 
         private void QueryFinished(IDbCommandResult result)
         {
-            Model.StatusText = "Done";
+            Model.StatusText = result.ToString ();
         }
 
         partial void Connection_Click(NSObject sender)
