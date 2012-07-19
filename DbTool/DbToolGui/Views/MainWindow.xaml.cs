@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Modules;
 using DbTool.Lib.Ui.Highlighting;
 using DbTool.Lib.Ui.Worksheet;
 using DbToolGui.Controls;
@@ -11,6 +12,7 @@ using DbToolGui.ExtensionMethods;
 using DbToolGui.Modules;
 using DbToolGui.ViewModels;
 using Ninject;
+using DatabaseModule = DbToolGui.Modules.DatabaseModule;
 
 namespace DbToolGui.Views
 {
@@ -24,7 +26,7 @@ namespace DbToolGui.Views
         {
             InitializeComponent();
             DebugLogger.Instance.TextBox = DebugBox;
-            var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule());
+            var kernel = new StandardKernel(new SettingsModule(), new ViewModelModule(), new DatabaseModule(), new MetaModule());
             _viewModel = kernel.Get<MainViewModel>();
             DataContext = _viewModel;
             EditorBox.SyntaxParser = kernel.Get<ISyntaxParser>();
