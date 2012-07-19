@@ -1,12 +1,11 @@
-﻿using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
 using DbTool.Lib.Ui.Syntax;
 using DbTool.Testing.TestData;
 using DbToolGui.Highlighting;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
-namespace DbTool.Testing.Gui.Highlighting
+namespace DbTool.Wpf.Testing.Highlighting
 {
     [TestFixture]
     public class DbToolSyntaxParserTest
