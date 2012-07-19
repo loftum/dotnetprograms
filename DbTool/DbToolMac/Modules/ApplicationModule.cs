@@ -5,6 +5,7 @@ using DbTool.Lib.Communication;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Ui.Syntax;
 using Ninject;
+using DbTool.Lib.Meta;
 
 namespace DbToolMac.Modules
 {
@@ -18,10 +19,9 @@ namespace DbToolMac.Modules
         private static MainWindowController CreateController(IContext context)
         {
             var kernel = context.Kernel;
-            return new MainWindowController(kernel.Get<IConnectionDataProvider>(),
-                kernel.Get<IDatabaseCommunicator>(),
+            return new MainWindowController(kernel.Get<IDatabaseCommunicator>(),
                 kernel.Get<IDbToolSettings>(),
-                kernel.Get<ISchemaObjectProvider>());
+                kernel.Get<ITypeCache>());
         }
     }
 }

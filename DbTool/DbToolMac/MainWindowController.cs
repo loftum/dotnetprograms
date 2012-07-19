@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DbTool.Lib.Communication;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
@@ -9,7 +10,9 @@ using DbToolMac.Models;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using DbTool.Lib.Ui.ModelBinding;
-using DbTool.Lib.Communication.Commands;
+using DbTool.Lib.Communication.DbCommands;
+using DbTool.Lib.Meta;
+using DbTool.Lib.Communication.DbCommands.Results;
 
 namespace DbToolMac
 {
@@ -24,10 +27,9 @@ namespace DbToolMac
         [Export("query")]
         public QueryResultViewModel Query { get; private set; }
 
-        private readonly IConnectionDataProvider _connectionDataProvider;
         private readonly IDatabaseCommunicator _communicator;
         private readonly IDbToolSettings _settings;
-        private readonly ISchemaObjectProvider _schemaObjectProvider;
+        private readonly ITypeCache _typeCache;
 
         // Called when created from unmanaged code
         public MainWindowController(IntPtr handle) : base (handle)
@@ -48,23 +50,21 @@ namespace DbToolMac
             Initialize();
         }
 
-        public MainWindowController(IConnectionDataProvider connectionDataProvider,
-            IDatabaseCommunicator communicator,
+        public MainWindowController(IDatabaseCommunicator communicator,
             IDbToolSettings settings,
-            ISchemaObjectProvider schemaObjectProvider)
+            ITypeCache typeCache)
             : base("MainWindow")
         {
-            _connectionDataProvider = connectionDataProvider;
             _communicator = communicator;
             _settings = settings;
-            _schemaObjectProvider = schemaObjectProvider;
+            _typeCache = typeCache;
             Initialize();
         }
 
         void Initialize()
         {
             Model = new MainWindowViewModel();
-            Connection = new ConnectionViewModel(_connectionDataProvider);
+            Connection = new ConnectionViewModel(_settings);
             Query = new QueryResultViewModel();
         }
 
@@ -134,16 +134,18 @@ namespace DbToolMac
                 Model.StatusText = string.Format("Already connected to {0}", _communicator.ConnectedTo);
                 return;
             }
-            var connection = _connectionDataProvider.GetConnection(Connection.SelectedConnection);
-            if (connection == null)
+
+			var database = _settings.CurrentContext.GetDatabase(Connection.SelectedConnection);
+            if (database == null)
             {
                 Model.StatusText = string.Format("Invalid connection {0}", Connection.SelectedConnection);
             }
-            _communicator.ConnectTo(connection);
+
+            _communicator.ConnectTo(database);
             if (_settings.LoadSchema)
             {
                 Model.StatusText = "Loading schema objects";
-                _schemaObjectProvider.Schema = _communicator.LoadSchema();
+                _typeCache.Schema = _communicator.LoadSchema();
             }
             Model.Title = string.Format("DbTool - {0}", _communicator.ConnectedTo);
             Model.StatusText = string.Format("Connected to {0}", _communicator.ConnectedTo);

@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using DbTool.Lib.Configuration;
-using WebMatrix.Data;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
@@ -18,19 +17,16 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
             {
                 return Enumerable.Empty<dynamic>();
             }
-            using (var db = Database.OpenConnectionString(ConnectionData.GetConnectionString(), ConnectionData.ProviderName))
-            {
-                try
-                {
-                    db.Connection.Open();
-                    var dataTable = db.Connection.GetSchema(collection);
-                    return DoGetSchema(dataTable).ToList().AsReadOnly();    
-                }
-                finally
-                {
-                    db.Connection.Close();
-                }
-            }
+
+			try
+			{
+				DbConnection.Open();
+				return DoGetSchema(DbConnection.GetSchema());
+			}
+			finally
+			{
+				DbConnection.Close();
+			}
         }
 
         private static IEnumerable<dynamic> DoGetSchema(DataTable dataTable)
@@ -80,19 +76,6 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
             for (var ii=0; ii<reader.FieldCount; ii++)
             {
                 yield return reader.GetName(ii);
-            }
-        }
-
-        public IEnumerable<dynamic> QueryOld(string sql)
-        {
-            if (ConnectionData == null)
-            {
-                return Enumerable.Empty<dynamic>();
-            }
-            using (var db = Database.OpenConnectionString(ConnectionData.GetConnectionString(), ConnectionData.ProviderName))
-            {
-                var result = db.Query(sql);
-                return result;
             }
         }
     }

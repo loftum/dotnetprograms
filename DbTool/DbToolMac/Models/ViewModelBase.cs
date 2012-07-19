@@ -2,7 +2,7 @@ using System;
 using DbTool.Lib.Ui.Models;
 using MonoMac.Foundation;
 using System.Linq.Expressions;
-using DbTool.Lib.Ui.ExtensionMethods;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbToolMac
 {

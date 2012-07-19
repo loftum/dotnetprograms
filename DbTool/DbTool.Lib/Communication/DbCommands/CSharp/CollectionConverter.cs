@@ -5,7 +5,6 @@ using System.Linq;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.ExtensionMethods;
-using WebMatrix.Data;
 
 namespace DbTool.Lib.Communication.DbCommands.CSharp
 {
@@ -23,9 +22,9 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             {
                 return QueryResultOfValues(values, type);
             }
-            if (type == typeof(DynamicRecord))
+            if (type == typeof(DynamicDataRow))
             {
-                return QueryResultOfDynamicRecord(values.Cast<DynamicRecord>());
+                return QueryResultOfDynamicRecord(values.Cast<DynamicDataRow>());
             }
             if (type == typeof(DynamicDataRow))
             {
@@ -57,7 +56,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             return result;
         }
 
-        private IDbCommandResult QueryResultOfDynamicRecord(IEnumerable<DynamicRecord> values)
+        private IDbCommandResult QueryResultOfDynamicRecord(IEnumerable<DynamicDataRow> values)
         {
             var result = new QueryResult();
             if (values.IsEmpty())

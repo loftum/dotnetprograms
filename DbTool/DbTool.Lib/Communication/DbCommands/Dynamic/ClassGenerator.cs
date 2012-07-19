@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
-using WebMatrix.Data;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
@@ -10,7 +9,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
     {
         private const MethodAttributes GetSetAttr = MethodAttributes.Public | MethodAttributes.HideBySig;
 
-        public static Type CreateType(string name, DynamicRecord record)
+        public static Type CreateType(string name, DynamicDataRow record)
         {
             // create a dynamic assembly and module 
             var assemblyName = new AssemblyName("tmpAssembly");
@@ -65,7 +64,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
             return typeBuilder.CreateType();
         }
 
-        public static object Cast(DynamicRecord record, Type type)
+        public static object Cast(DynamicDataRow record, Type type)
         {
             // Now we have our type. Let's create an instance from it:
             var generetedObject = Activator.CreateInstance(type);

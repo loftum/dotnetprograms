@@ -34,7 +34,12 @@ namespace DbTool.Lib.AssemblyLoading
             var superType = typeof(T);
             try
             {
-                return GetSubTypesOf<T>().FirstOrDefault();
+				foreach(var type in GetSubTypesOf<T>())
+				{
+					return type;
+				}
+                throw new DbToolException("Could not find any {0} for databasetype {1} in assembly {2}",
+                    superType.Name, _databaseType, _assembly.GetName());
             }
             catch (ReflectionTypeLoadException)
             {
@@ -45,12 +50,16 @@ namespace DbTool.Lib.AssemblyLoading
 
         public bool HasType<T>()
         {
-            return GetSubTypesOf<T>().Any();
+			foreach (var type in GetSubTypesOf<T>())
+			{
+				return true;
+			}
+			return false;
         }
 
-        private IEnumerable<Type> GetSubTypesOf<T>()
+        private Type[] GetSubTypesOf<T>()
         {
-            return _assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface);
+            return _assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t) && !t.IsInterface).ToArray();
         }
     }
 }

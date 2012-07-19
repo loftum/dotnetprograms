@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\..\Lib\3rdParty\Moq.4.0.10827\NET40\Moq.dll</HintPath>
     </Reference>
@@ -54,6 +53,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Mono.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assertions\CollectionAsserter.cs" />
@@ -77,10 +77,6 @@
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
       <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
       <Name>DbTool.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DbToolGui\DbToolGui.csproj">
-      <Project>{9EEB12EF-8DDD-455B-B757-D4445991ECF1}</Project>
-      <Name>DbToolGui</Name>
     </ProjectReference>
     <ProjectReference Include="..\DbTool\DbTool.csproj">
       <Project>{74E31DD3-0DA6-4529-82CA-82D46F8A994E}</Project>

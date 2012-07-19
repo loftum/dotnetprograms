@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using MonoMac.Foundation;
 using System.Linq;
 using DbTool.Lib.Connections;
+using DbTool.Lib.Configuration;
 
 namespace DbToolMac.Models
 {
     public class ConnectionViewModel : ViewModelBase
     {
+		[Export("availableContexts")]
+		public string[] AvailableContexts { get; set; }
+
+		[Export("selectedContext")]
+		public string SelectedContext { get; set; }
+
         [Export("availableConnections")]
         public string[] AvailableConnections { get; set; }
         [Export("selectedConnection")]
@@ -21,17 +28,16 @@ namespace DbToolMac.Models
             set { _connectionButtonText = value; OnPropertyChange(() => ConnectionButtonText);}
         }
 
-        private readonly IConnectionDataProvider _connectionDataProvider;
-
-        public ConnectionViewModel(IConnectionDataProvider connectionDataProvider)
+        public ConnectionViewModel(IDbToolSettings settings)
         {
-            if (connectionDataProvider != null)
+            if (settings != null)
             {
-                _connectionDataProvider = connectionDataProvider;
-                AvailableConnections = _connectionDataProvider
-                    .GetConnectionNames()
-                    .ToArray();
-                SelectedConnection = _connectionDataProvider.GetDefaultConnectionName();
+                AvailableContexts = settings.Contexts.Select(c => c.Name).ToArray();
+				var currentContext = settings.CurrentContext;
+				SelectedContext = currentContext.Name;
+
+				AvailableConnections = currentContext.Connections.Select(c => c.Name).ToArray();
+                SelectedConnection = currentContext.Connections.First().Name;
             }
             ConnectionButtonText = "Connect";
         }

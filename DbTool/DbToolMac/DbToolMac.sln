@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.MySql", "..\DbTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Testing", "..\DbTool.Testing\DbTool.Testing.csproj", "{E31297FE-5C9A-4477-84CA-D57BE213E70C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "..\DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +23,10 @@ Global
 		{74004709-197C-41CC-BF76-1339B1460120}.Debug|x86.Build.0 = Debug|Any CPU
 		{74004709-197C-41CC-BF76-1339B1460120}.Release|x86.ActiveCfg = Release|Any CPU
 		{74004709-197C-41CC-BF76-1339B1460120}.Release|x86.Build.0 = Release|Any CPU
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Debug|x86.ActiveCfg = Debug|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Debug|x86.Build.0 = Debug|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.ActiveCfg = Release|x86
+		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.Build.0 = Release|x86
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.Build.0 = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.ActiveCfg = Release|Any CPU

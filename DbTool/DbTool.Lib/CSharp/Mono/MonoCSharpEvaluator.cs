@@ -4,7 +4,6 @@ using System.Reflection;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.ExtensionMethods;
 using Mono.CSharp;
-using WebMatrix.Data;
 
 namespace DbTool.Lib.CSharp.Mono
 {
@@ -51,7 +50,7 @@ namespace DbTool.Lib.CSharp.Mono
                     InteractiveBaseClass = typeof (DbToolInteractive),
                     DescribeTypeExpressions = true,
                 };
-            ReferenceAssemblies(typeof(Database).Assembly, typeof(DynamicSqlQuery).Assembly);
+            ReferenceAssemblies(typeof(DynamicSqlQuery).Assembly);
 
             Using(InitialUsings);
             DbToolInteractive.Evaluator = _evaluator;
