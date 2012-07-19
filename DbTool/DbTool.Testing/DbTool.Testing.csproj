@@ -53,7 +53,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Mono.CSharp" />
+    <Reference Include="Mono.CSharp">
+      <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.2.11.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assertions\CollectionAsserter.cs" />
