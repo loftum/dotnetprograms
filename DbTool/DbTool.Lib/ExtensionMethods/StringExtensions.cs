@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DbTool.Lib.ExtensionMethods
 {
     public static class StringExtensions
     {
-        public static IEnumerable<string> SplitLines(this string value)
+        public static string[] SplitLines(this string value)
         {
             return value.IsNullOrEmpty()
-                ? Enumerable.Empty<string>()
+                ? new string[0]
                 : value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
         }
 
@@ -100,6 +99,29 @@ namespace DbTool.Lib.ExtensionMethods
             var firstLetter = value.Substring(0, 1).ToUpperInvariant();
             var theRest = value.Substring(1);
             return string.Format("{0}{1}", firstLetter, theRest);
+        }
+
+        public static string GetBlock(this string value, int endIndex)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return value;
+            }
+
+            var chars = value.ToCharArray(0, endIndex + 1);
+            var foundNewLine = false;
+            for(var ii = endIndex; ii > 0; ii--)
+            {
+                if (chars[ii] == '\n')
+                {
+                    if (foundNewLine)
+                    {
+                        return value.Substring(ii, endIndex - ii).TrimStart();
+                    }
+                    foundNewLine = true;
+                }
+            }
+            return value.Substring(0, endIndex);
         }
     }
 }

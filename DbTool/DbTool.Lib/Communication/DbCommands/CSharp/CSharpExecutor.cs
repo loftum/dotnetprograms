@@ -10,7 +10,7 @@ using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands.CSharp
 {
-    public class CSharpExecutor : IDbCommandExecutor
+    public class CSharpExecutor : ICSharpExecutor
     {
         private readonly ICSharpEvaluator _cSharpEvaluator;
         private readonly CollectionConverter _collectionConverter;
@@ -36,10 +36,10 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             }
         }
 
-        public CSharpExecutor()
+        public CSharpExecutor(ICSharpEvaluator cSharpEvaluator)
         {
             _collectionConverter = new CollectionConverter();
-            _cSharpEvaluator = new MonoCSharpEvaluator();
+            _cSharpEvaluator = cSharpEvaluator;
         }
 
         public IDbCommandResult Execute(string command)

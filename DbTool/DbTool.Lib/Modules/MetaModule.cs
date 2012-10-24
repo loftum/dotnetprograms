@@ -1,4 +1,7 @@
-﻿using DbTool.Lib.Meta;
+﻿using DbTool.Lib.CSharp;
+using DbTool.Lib.CSharp.Mono;
+using DbTool.Lib.Communication.DbCommands.CSharp;
+using DbTool.Lib.Meta;
 using Ninject.Modules;
 
 namespace DbTool.Lib.Modules
@@ -8,6 +11,8 @@ namespace DbTool.Lib.Modules
         public override void Load()
         {
             Bind<ITypeCache>().To<DbToolTypeCache>().InSingletonScope();
+            Bind<ICSharpEvaluator>().To<MonoCSharpEvaluator>().InSingletonScope();
+            Bind<ICSharpExecutor>().To<CSharpExecutor>().InSingletonScope();
         }
     }
 }

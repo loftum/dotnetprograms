@@ -1,7 +1,6 @@
-using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
 
-namespace DbTool.Lib.Ui.Syntax
+namespace DbTool.Lib.Syntax
 {
     public interface ISyntaxProvider
     {

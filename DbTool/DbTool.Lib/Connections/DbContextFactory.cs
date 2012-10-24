@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using DbTool.Lib.AssemblyLoading;
 using DbTool.Lib.Communication.DbCommands;
+using DbTool.Lib.Communication.DbCommands.CSharp;
 using DbTool.Lib.Configuration;
 
 namespace DbTool.Lib.Connections
@@ -9,11 +10,13 @@ namespace DbTool.Lib.Connections
     {
         private readonly IDbToolConfig _config;
         private readonly IAssemblyLoader _assemblyLoader;
+        private readonly ICSharpExecutor _cSharpExecutor;
 
-        public DbContextFactory(IDbToolConfig config, IAssemblyLoader assemblyLoader)
+        public DbContextFactory(IDbToolConfig config, IAssemblyLoader assemblyLoader, ICSharpExecutor cSharpExecutor)
         {
             _config = config;
             _assemblyLoader = assemblyLoader;
+            _cSharpExecutor = cSharpExecutor;
         }
 
         public DbContext CreateDbContext(DbToolDatabase database)
@@ -31,9 +34,9 @@ namespace DbTool.Lib.Connections
         {
             if (handler.HasType<IExecutorProvider>())
             {
-                return handler.CreateInstance<IExecutorProvider>(_config, database, connection);
+                return handler.CreateInstance<IExecutorProvider>(_config, database, connection, _cSharpExecutor);
             }
-            return new DefaultExecutorProvider(_config, database, connection);
+            return new DefaultExecutorProvider(_config, database, connection, _cSharpExecutor);
         }
     }
 }

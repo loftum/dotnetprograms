@@ -12,15 +12,15 @@ namespace DbTool.Lib.Communication.DbCommands
         protected readonly IDbToolSettings Settings;
         protected readonly DbToolDatabase Database;
         protected readonly DbConnection DbConnection;
-        private readonly CSharpExecutor _cSharpExecutor;
+        private readonly ICSharpExecutor _cSharpExecutor;
 
-        public DefaultExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection)
+        public DefaultExecutorProvider(IDbToolConfig config, DbToolDatabase database, DbConnection dbConnection, ICSharpExecutor cSharpExecutor)
         {
             _config = config;
             Settings = _config.Settings;
             Database = database;
             DbConnection = dbConnection;
-            _cSharpExecutor = new CSharpExecutor();
+            _cSharpExecutor = cSharpExecutor;
         }
 
         public virtual IDbCommandExecutor GetExecutorFor(string statement)

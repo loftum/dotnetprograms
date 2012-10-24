@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using DbTool.Lib.CSharp;
 using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Ui.Highlighting;
-using DbTool.Lib.Ui.Syntax;
-using DbToolGui.Views;
 
-namespace DbToolGui.Highlighting
+namespace DbTool.Lib.Syntax
 {
     public class DbToolSyntaxParser : ISyntaxParser
     {
-        private readonly IDebugLogger _logger;
         private readonly List<Tag> _tags;
         public IEnumerable<Tag> Tags { get { return _tags.AsReadOnly(); } }
 
@@ -21,13 +18,14 @@ namespace DbToolGui.Highlighting
         }
 
         private readonly ISyntaxProvider _syntaxProvider;
+        private readonly ICSharpEvaluator _cSharpEvaluator;
 
-        public DbToolSyntaxParser(ISyntaxProvider syntaxProvider)
+        public DbToolSyntaxParser(ISyntaxProvider syntaxProvider, ICSharpEvaluator cSharpEvaluator)
         {
             _tags = new List<Tag>();
             _suggestions = new List<Suggestion>();
             _syntaxProvider = syntaxProvider;
-            _logger = DebugLogger.Instance;
+            _cSharpEvaluator = cSharpEvaluator;
         }
 
         public void FindSuggestions(string text, int cursor)
@@ -37,24 +35,36 @@ namespace DbToolGui.Highlighting
                 return;
             }
             _suggestions.Clear();
-            if (_syntaxProvider.IsPropertyIndicator(text[cursor-1]))
+            _suggestions.AddRange(GetCompletions(text));
+        }
+
+        private IEnumerable<Suggestion> GetCompletions(string text)
+        {
+            var completions = _cSharpEvaluator.GetCompletions(text).OrderBy(c => c.Text);
+            if (completions.Any())
             {
-                var word = GetWord(text, cursor);
+                return completions;
+            }
+
+            if (_syntaxProvider.IsPropertyIndicator(text.Last()))
+            {
+                var word = GetWord(text);
                 var obj = _syntaxProvider.GetType(word);
                 if (obj != null)
                 {
                     var suggestions = obj.Properties
                         .OrderBy(p => p.MemberName)
                         .Select(property => new Suggestion(property.MemberName));
-                    _suggestions.AddRange(suggestions);
-                }    
+                    return suggestions;
+                }
             }
+            return Enumerable.Empty<Suggestion>();
         }
 
-        private string GetWord(string text, int cursor)
+        private string GetWord(string text)
         {
             var lastIndex = text.Length;
-            var start = cursor-1;
+            var start = lastIndex - 1;
             while(start > 0)
             {
                 if (_syntaxProvider.IsSeparator(text[start-1]))
@@ -64,7 +74,7 @@ namespace DbToolGui.Highlighting
                 start--;
             }
             
-            var end = cursor - 1;
+            var end = lastIndex - 1;
             while(end < lastIndex && !_syntaxProvider.IsSeparator(text[end]))
             {
                 end++;

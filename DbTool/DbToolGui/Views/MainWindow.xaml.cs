@@ -5,7 +5,7 @@ using System.Windows.Input;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Modules;
-using DbTool.Lib.Ui.Highlighting;
+using DbTool.Lib.Syntax;
 using DbTool.Lib.Ui.Worksheet;
 using DbToolGui.Controls;
 using DbToolGui.ExtensionMethods;

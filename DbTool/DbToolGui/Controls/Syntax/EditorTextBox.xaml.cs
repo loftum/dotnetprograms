@@ -7,8 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Ui.Highlighting;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Syntax;
 using DbToolGui.Highlighting;
 using DbToolGui.Views;
 
@@ -183,10 +182,10 @@ namespace DbToolGui.Controls.Syntax
 
             if (_suggestionList.IsVisible && e.Key.In(Key.Tab, Key.Enter, Key.Return))
             {
-                var selectedItem = _suggestionList.SelectedItem;
+                var selectedItem = (Suggestion) _suggestionList.SelectedItem;
                 if (selectedItem != null)
                 {
-                    var selectedText = selectedItem.ToString();
+                    var selectedText = selectedItem.Completion;
                     DebugLogger.Instance.Log("SelectedItem: >{0}<", selectedText);
                     var index = CaretIndex;
                     Text = Text.Insert(CaretIndex, selectedText);
@@ -205,7 +204,7 @@ namespace DbToolGui.Controls.Syntax
 
             if (ShouldShowSuggestionList(e))
             {
-                _parser.FindSuggestions(Text, SelectionStart);
+                _parser.FindSuggestions(Text.GetBlock(SelectionStart), SelectionStart);
                 ShowSuggestionList();
                 e.Handled = true;
             }
@@ -215,7 +214,7 @@ namespace DbToolGui.Controls.Syntax
                 // with selected text
                 if (SelectedText != string.Empty)
                 {
-                    string[] lines = SelectedText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] lines = SelectedText.SplitLines();
                     for (int ii = 0; ii < lines.Length; ii++)
                     {
                         if (lines[ii].StartsWith(Tab))
@@ -236,9 +235,9 @@ namespace DbToolGui.Controls.Syntax
 
                     if (lastLine == -1)
                     {
-                        lastLine = Text.Length - 1;   
+                        lastLine = Text.Length - 1;
                     }
-                        
+
                     var startLine = Text.IndexOf(Environment.NewLine, lastLine, StringComparison.Ordinal);
 
                     if (startLine != -1)
@@ -261,18 +260,27 @@ namespace DbToolGui.Controls.Syntax
                     }
 
                     if (spaces > TabSize)
+                    {
                         spaces = TabSize;
+                    }
+
 
                     Text = Text.Remove(startLine, spaces);
 
                     // set position of caret
                     if (index >= startLine + spaces)
+                    {
                         CaretIndex = index - spaces;
-                    else if (index >= startLine && index < startLine + spaces)
-                        CaretIndex = startLine;
-                    else
-                        CaretIndex = index;
+                    }
 
+                    else if (index >= startLine && index < startLine + spaces)
+                    {
+                        CaretIndex = startLine;
+                    }
+                    else
+                    {
+                        CaretIndex = index;
+                    }
                 }
 
                 e.Handled = true;

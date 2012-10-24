@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Meta.Types;
-using DbTool.Lib.Ui.Syntax;
 
-namespace DbToolGui.Highlighting
+namespace DbTool.Lib.Syntax
 {
     public class DbToolSyntaxProvider : ISyntaxProvider
     {

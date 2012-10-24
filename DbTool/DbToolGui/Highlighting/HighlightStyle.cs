@@ -1,5 +1,5 @@
 ﻿using System.Windows.Media;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Syntax;
 
 namespace DbToolGui.Highlighting
 {

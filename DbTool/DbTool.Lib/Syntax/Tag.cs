@@ -1,4 +1,4 @@
-namespace DbTool.Lib.Ui.Syntax
+namespace DbTool.Lib.Syntax
 {
     public struct Tag
     {

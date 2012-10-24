@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DbTool.Lib.Ui.Syntax;
 
-namespace DbTool.Lib.Ui.Highlighting
+namespace DbTool.Lib.Syntax
 {
     public interface ISyntaxParser
     {

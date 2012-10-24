@@ -1,5 +1,5 @@
+using DbTool.Lib.Syntax;
 using Ninject.Modules;
-using DbTool.Lib.Ui.Syntax;
 
 namespace DbTool.Lib.Ui.Modules
 {

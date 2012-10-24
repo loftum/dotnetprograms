@@ -1,7 +1,7 @@
+using DbTool.Lib.CSharp;
 using DbTool.Lib.Meta.Types;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Syntax;
 using DbTool.Testing.TestData;
-using DbToolGui.Highlighting;
 using Moq;
 using NUnit.Framework;
 
@@ -11,6 +11,7 @@ namespace DbTool.Wpf.Testing.Highlighting
     public class DbToolSyntaxParserTest
     {
         private Mock<ISyntaxProvider> _syntaxProviderMock;
+        private Mock<ICSharpEvaluator> _evaluator;
         private DbToolSyntaxParser _parser;
         private TableMeta _object;
 
@@ -21,7 +22,8 @@ namespace DbTool.Wpf.Testing.Highlighting
             _syntaxProviderMock = new Mock<ISyntaxProvider>();
             _syntaxProviderMock.Setup(p => p.IsSeparator('.')).Returns(true);
             _syntaxProviderMock.Setup(p => p.IsSeparator(' ')).Returns(true);
-            _parser = new DbToolSyntaxParser(_syntaxProviderMock.Object);
+            _evaluator = new Mock<ICSharpEvaluator>();
+            _parser = new DbToolSyntaxParser(_syntaxProviderMock.Object, _evaluator.Object);
         }
 
         [Test]

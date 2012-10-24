@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.ExtensionMethods;
+using DbTool.Lib.Syntax;
 using Mono.CSharp;
 using System;
 
@@ -50,6 +52,7 @@ namespace DbTool.Lib.CSharp.Mono
                     InteractiveBaseClass = typeof (DbToolInteractive),
                     DescribeTypeExpressions = true,
                 };
+
             ReferenceAssemblies(typeof(DynamicSqlQuery).Assembly);
 
             TryUsing(InitialUsings);
@@ -72,6 +75,15 @@ namespace DbTool.Lib.CSharp.Mono
 			{
 				// Mono's Reflection.Emit does not currently support this for some reason.
 			}
+        }
+
+        public IEnumerable<Suggestion> GetCompletions(string code)
+        {
+            string prefix;
+            var completions = _evaluator.GetCompletions(code, out prefix);
+            return completions == null
+                ? Enumerable.Empty<Suggestion>()
+                : completions.Select(c => new Suggestion(prefix, c));
         }
 
         public CSharpResult Run(string code)

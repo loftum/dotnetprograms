@@ -84,6 +84,7 @@
     <Compile Include="Communication\DbCommands\BackupExecutor.cs" />
     <Compile Include="Communication\DbCommands\CSharp\CollectionConverter.cs" />
     <Compile Include="Communication\DbCommands\CSharp\CSharpExecutor.cs" />
+    <Compile Include="Communication\DbCommands\CSharp\ICSharpExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbCommandResultBase.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaQuery.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Logging\MemoryLogger.cs" />
     <Compile Include="Memory\IMemoryMeter.cs" />
     <Compile Include="Memory\MemoryMeter.cs" />
+    <Compile Include="MetaInfoProvider.cs" />
     <Compile Include="Meta\DbToolTypeCache.cs" />
     <Compile Include="Meta\ITypeCache.cs" />
     <Compile Include="Meta\Objects\CSharpObjectMeta.cs" />
@@ -171,6 +173,14 @@
     <Compile Include="Modules\TaskModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializing\DbToolSettingsSerializer.cs" />
+    <Compile Include="Syntax\DbToolSyntaxParser.cs" />
+    <Compile Include="Syntax\DbToolSyntaxProvider.cs" />
+    <Compile Include="Syntax\IMetaInfoProvider.cs" />
+    <Compile Include="Syntax\ISyntaxParser.cs" />
+    <Compile Include="Syntax\ISyntaxProvider.cs" />
+    <Compile Include="Syntax\Suggestion.cs" />
+    <Compile Include="Syntax\Tag.cs" />
+    <Compile Include="Syntax\TagType.cs" />
     <Compile Include="Tasks\BackupParameters.cs" />
     <Compile Include="Tasks\IBackupTask.cs" />
     <Compile Include="Tasks\ICreateDbTask.cs" />
@@ -192,6 +202,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

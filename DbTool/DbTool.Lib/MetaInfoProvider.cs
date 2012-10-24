@@ -1,7 +1,8 @@
 using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
+using DbTool.Lib.Syntax;
 
-namespace DbTool.Lib.Ui.Syntax
+namespace DbTool.Lib
 {
     public class MetaInfoProvider : IMetaInfoProvider
     {

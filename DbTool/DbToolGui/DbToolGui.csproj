@@ -76,8 +76,6 @@
     <Compile Include="ExtensionMethods\RichTextBoxExtensions.cs" />
     <Compile Include="ExtensionMethods\TextBoxExtensions.cs" />
     <Compile Include="Highlighting\HighlightStyle.cs" />
-    <Compile Include="Highlighting\DbToolSyntaxParser.cs" />
-    <Compile Include="Highlighting\DbToolSyntaxProvider.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
     <Compile Include="Modules\SettingsModule.cs" />
     <Compile Include="Modules\ViewModelModule.cs" />
