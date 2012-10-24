@@ -1,23 +1,23 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio", "VisualFarmStudio\VisualFarmStudio.csproj", "{02B696F1-1C77-4888-9B30-29C890DA999D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.Lib", "VisualFarmStudio.Lib\VisualFarmStudio.Lib.csproj", "{310EEE52-AA50-44F7-BCFA-514AF2AF081A}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Applications", "01. Applications", "{89CE11C5-243E-429E-90CD-81F77D471585}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Libraries", "02. Libraries", "{AE56F58C-8ED7-4BCF-BAC1-99304A32B3B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09. Testing", "09. Testing", "{B96FED55-130B-47A1-A3C0-632583DED38B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Migrations", "10. Migrations", "{02FF5FCB-0F5A-4E36-9056-EE443944D810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio", "VisualFarmStudio\VisualFarmStudio.csproj", "{02B696F1-1C77-4888-9B30-29C890DA999D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.Lib", "VisualFarmStudio.Lib\VisualFarmStudio.Lib.csproj", "{310EEE52-AA50-44F7-BCFA-514AF2AF081A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.UnitTests", "VisualFarmStudio.UnitTests\VisualFarmStudio.UnitTests.csproj", "{833FAD18-1B2D-4193-8BB8-FE79DDAD7C62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.Core", "VisualFarmStudio.Core\VisualFarmStudio.Core.csproj", "{AA0F7D96-AE4D-49DA-9195-75953A8A6E43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.Migrations", "VisualFarmStudio.Migrations\VisualFarmStudio.Migrations.csproj", "{4476C71F-09D8-4E84-B35A-DE0BE134B965}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Migrations", "10. Migrations", "{02FF5FCB-0F5A-4E36-9056-EE443944D810}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFarmStudio.Common", "VisualFarmStudio.Common\VisualFarmStudio.Common.csproj", "{77371895-9947-4B6C-8CE0-59067E9B7E4C}"
 EndProject

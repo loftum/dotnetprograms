@@ -16,7 +16,7 @@ namespace RegexTester.RegexOperations
                 for (var jj=0; jj<groups.Count; jj++)
                 {
                     var group = groups[jj];
-                    regexMatches.Add(new RegexMatch(group.Value, group.Index, group.Length));
+                    regexMatches.Add(new RegexMatch(ii, jj, group.Value, group.Index, group.Length));
                 }
             }
 
