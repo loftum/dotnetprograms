@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Mono.CSharp.4.0\lib\net40\Mono.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\Lib\3rdParty\Moq.4.0.10827\NET40\Moq.dll</HintPath>
     </Reference>
@@ -53,9 +57,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Mono.CSharp">
-      <HintPath>..\..\Lib\3rdParty\Mono\Mono.CSharp.2.11.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assertions\CollectionAsserter.cs" />
@@ -86,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gui\Highlighting\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

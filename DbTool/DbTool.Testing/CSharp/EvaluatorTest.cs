@@ -23,8 +23,8 @@ namespace DbTool.Testing.CSharp
             var settings = new CompilerSettings();
             settings.AssemblyReferences.Add("DbTool.Testing");
             
-            var context = new CompilerContext(settings, printer);
-            _evaluator = new Evaluator(context);
+            var report = new Report(printer);
+            _evaluator = new Evaluator(settings, report);
         }
 
         [Test]
@@ -56,12 +56,12 @@ namespace DbTool.Testing.CSharp
 
         private static void Print(string s)
         {
-            Console.WriteLine(string.Format("string: {0}", s));
+            Console.WriteLine("string: {0}", s);
         }
 
         private static void Print(object obj)
         {
-            Console.WriteLine(string.Format("{0}: {1}", obj.GetType(), obj));
+            Console.WriteLine("{0}: {1}", obj.GetType(), obj);
         }
     }
 }

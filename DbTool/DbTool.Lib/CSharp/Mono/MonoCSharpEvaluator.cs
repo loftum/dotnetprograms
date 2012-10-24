@@ -44,8 +44,8 @@ namespace DbTool.Lib.CSharp.Mono
             var printer = new StreamReportPrinter(_stringWriter);
             var settings = new CompilerSettings();
             settings.AssemblyReferences.AddRange(InitialAssemblies);
-            var context = new CompilerContext(settings, printer);
-            _evaluator = new Evaluator(context)
+            var report = new Report(printer);
+            _evaluator = new Evaluator(settings, report)
                 {
                     InteractiveBaseClass = typeof (DbToolInteractive),
                     DescribeTypeExpressions = true,

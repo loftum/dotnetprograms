@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mono.CSharp</id>
+    <version>4.0</version>
+    <authors>Mono development team</authors>
+    <owners>Mono development team</owners>
+    <licenseUrl>https://github.com/mono/mono/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://www.mono-project.com/CSharp_Compiler</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Mono CSharp compiler</description>
+    <tags>mono csharp</tags>
+  </metadata>
+</package>
