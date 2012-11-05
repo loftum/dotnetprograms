@@ -1,0 +1,46 @@
+﻿@model StuffLibrary.Web.Models.MovieSearchViewModel
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+@section header
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#searchButton").click(function() {
+                search();
+                return false;
+            });
+            
+            function search() {
+                var input = $("#searchForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: "/Movie/Search",
+                    data: input,
+                    success: function (data) {
+                        debugger;
+                        $("#movieList").html(data);
+                    }
+                });
+            }
+        });
+
+    </script>
+}
+
+<h2>Movies</h2>
+
+<div class="centered">
+    <h3>Search</h3>
+    @using(Html.BeginForm("Search", "Movie", FormMethod.Post, new {id = "searchForm"}))
+    {
+        @Html.TextBoxFor(m => m.Query)
+        <input id="searchButton" type="submit" value="Search"/>
+    }
+    <div id="movieList">
+    </div>
+
+</div>

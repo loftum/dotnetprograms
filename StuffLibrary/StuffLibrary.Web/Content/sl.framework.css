@@ -1,0 +1,35 @@
+﻿.hidden
+{
+    display: none;
+}
+
+.floatLeft
+{
+    float: left;
+}
+
+.floatRight 
+{
+    float: right;
+}
+
+.clearer
+{
+    clear: both;
+}
+
+.fullWidth
+{
+    width: 100%;
+}
+
+.fourthWidth
+{
+    width: 24%;
+}
+
+.centered
+{
+    margin-left: auto;
+    margin-right: auto;
+}

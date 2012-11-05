@@ -1,0 +1,8 @@
+﻿@model DotNetPrograms.Common.Paging.PagedListModel<StuffLibrary.Core.Domain.Movie>
+
+@foreach(var movie in Model)
+{
+    <div>
+        @movie.Title
+    </div>
+}
