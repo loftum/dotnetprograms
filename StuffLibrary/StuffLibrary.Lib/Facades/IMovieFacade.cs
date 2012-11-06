@@ -1,8 +1,8 @@
 using DotNetPrograms.Common.Paging;
 using StuffLibrary.Core.Domain;
-using StuffLibrary.Core.RottenTomatoes;
+using StuffLibrary.Lib.RottenTomatoes;
 
-namespace StuffLibrary.Core.Facades
+namespace StuffLibrary.Lib.Facades
 {
     public interface IMovieFacade
     {

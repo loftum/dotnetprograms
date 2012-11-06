@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using StuffLibrary.Core.Facades;
-using StuffLibrary.Core.RottenTomatoes;
+using StuffLibrary.Lib.Facades;
+using StuffLibrary.Lib.RottenTomatoes;
 using StuffLibrary.Web.Models;
 
 namespace StuffLibrary.Web.Controllers

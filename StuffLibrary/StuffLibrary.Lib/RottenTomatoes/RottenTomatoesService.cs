@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using DotNetPrograms.Common.Web.Reading;
+using Newtonsoft.Json;
 using StuffLibrary.Common.Configuration;
 using StuffLibrary.Common.ExtensionMethods;
-using StuffLibrary.Core.RottenTomatoes.Model;
+using StuffLibrary.Lib.RottenTomatoes.Model;
 
-namespace StuffLibrary.Core.RottenTomatoes
+namespace StuffLibrary.Lib.RottenTomatoes
 {
     public class RottenTomatoesService : IRottenTomatoesService
     {
@@ -22,7 +24,12 @@ namespace StuffLibrary.Core.RottenTomatoes
 
         public IEnumerable<RTMovie> SearchMovies(SearchParamters parameters)
         {
-            var result = _reader.Get(_urls.Movies(parameters).ToString());
+            if (!parameters.HasQuery)
+            {
+                return Enumerable.Empty<RTMovie>();
+            }
+            var url = _urls.Movies(parameters);
+            var result = _reader.Get(url.ToString());
             var movieList = result.FromJsonTo<RTMovieList>();
             return movieList.movies;
         }

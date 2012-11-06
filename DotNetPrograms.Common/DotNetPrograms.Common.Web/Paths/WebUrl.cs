@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using DotNetPrograms.Common.ExtensionMethods;
 
-namespace DotNetPrograms.Common.Web
+namespace DotNetPrograms.Common.Web.Paths
 {
     public class WebUrl
     {
@@ -47,9 +47,29 @@ namespace DotNetPrograms.Common.Web
             }
         }
 
-        public string Path { get; set; }
-        public bool HasPath { get { return !Path.IsNullOrWhiteSpace(); } }
-        public string Extension { get; set; }
+        private readonly IList<string> _pathParts = new List<string>();
+        public string Path
+        {
+            get { return string.Join("/", _pathParts); }
+            set
+            { 
+                _pathParts.Clear();
+                if (!value.IsNullOrWhiteSpace())
+                {
+                    _pathParts.AddRange(VirtualPath.Split(value));
+                }
+            }
+        }
+        public bool HasPath { get { return _pathParts.Any(); } }
+        private string _extension;
+        public string Extension
+        {
+            get { return _extension; }
+            set
+            {
+                _extension = value.IsNullOrEmpty() ? value : value.Replace(".", string.Empty).Trim();
+            }
+        }
         public bool HasExtension { get { return !Extension.IsNullOrWhiteSpace(); } }
 
         public IDictionary<string, string> Parameters { get; private set; }
@@ -173,6 +193,18 @@ namespace DotNetPrograms.Common.Web
         public WebUrl WithPath(string path)
         {
             Path = path;
+            return this;
+        }
+
+        public WebUrl AppendToPath(string path)
+        {
+            _pathParts.AddRange(VirtualPath.Split(path));
+            return this;
+        }
+
+        public WebUrl WithExtension(string extension)
+        {
+            Extension = extension;
             return this;
         }
 

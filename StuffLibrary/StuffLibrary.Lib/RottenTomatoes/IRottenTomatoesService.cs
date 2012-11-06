@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using StuffLibrary.Core.RottenTomatoes.Model;
+using StuffLibrary.Lib.RottenTomatoes.Model;
 
-namespace StuffLibrary.Core.RottenTomatoes
+namespace StuffLibrary.Lib.RottenTomatoes
 {
     public interface IRottenTomatoesService
     {

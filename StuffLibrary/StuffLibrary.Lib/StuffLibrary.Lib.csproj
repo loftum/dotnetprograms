@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70530D6B-7CD3-4C8C-B8D8-81F567C4B05C}</ProjectGuid>
+    <ProjectGuid>{D3CFA670-F071-4445-AD15-BF4564E640AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StuffLibrary.UnitTesting</RootNamespace>
-    <AssemblyName>StuffLibrary.UnitTesting</AssemblyName>
+    <RootNamespace>StuffLibrary.Lib</RootNamespace>
+    <AssemblyName>StuffLibrary.Lib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,26 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.1.0\lib\net35\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FakeItEasy">
-      <HintPath>..\packages\FakeItEasy.1.7.4626.65\lib\NET40\FakeItEasy.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\packages\AutoFixture.2.13.4\lib\net35\Ploeh.AutoFixture.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoFakeItEasy">
-      <HintPath>..\packages\AutoFixture.AutoFakeItEasy.2.13.4\lib\net35\Ploeh.AutoFixture.AutoFakeItEasy.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.SemanticComparison">
-      <HintPath>..\packages\AutoFixture.2.13.4\lib\net35\Ploeh.SemanticComparison.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,18 +44,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\RottenTomatoes\ApiUrlsTest.cs" />
+    <Compile Include="Caching\IStuffLibraryCache.cs" />
+    <Compile Include="Caching\StuffLibraryCache.cs" />
+    <Compile Include="Facades\IMovieFacade.cs" />
+    <Compile Include="Facades\MovieFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestData\Some.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <Compile Include="RottenTomatoes\ApiUrls.cs" />
+    <Compile Include="RottenTomatoes\IRottenTomatoesService.cs" />
+    <Compile Include="RottenTomatoes\Model\RTAlternateIds.cs" />
+    <Compile Include="RottenTomatoes\Model\RTCast.cs" />
+    <Compile Include="RottenTomatoes\Model\RTMovie.cs" />
+    <Compile Include="RottenTomatoes\Model\RTMovieLinks.cs" />
+    <Compile Include="RottenTomatoes\Model\RTMovieList.cs" />
+    <Compile Include="RottenTomatoes\Model\RTPosters.cs" />
+    <Compile Include="RottenTomatoes\Model\RTRatings.cs" />
+    <Compile Include="RottenTomatoes\Model\RTReleaseDates.cs" />
+    <Compile Include="RottenTomatoes\RottenTomatoesService.cs" />
+    <Compile Include="RottenTomatoes\SearchParamters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common.Web\DotNetPrograms.Common.Web.csproj">
       <Project>{66ED882C-2A12-4B9A-8049-E701E86CDFA0}</Project>
       <Name>DotNetPrograms.Common.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\StuffLibrary.Common\StuffLibrary.Common.csproj">
       <Project>{897FEFB9-37BC-4136-A030-134E7B7176D7}</Project>
@@ -78,10 +79,9 @@
       <Project>{335C3486-2CE8-401D-AEAB-8743DDAECA67}</Project>
       <Name>StuffLibrary.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StuffLibrary.Lib\StuffLibrary.Lib.csproj">
-      <Project>{D3CFA670-F071-4445-AD15-BF4564E640AC}</Project>
-      <Name>StuffLibrary.Lib</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -260,6 +260,10 @@
       <Project>{335C3486-2CE8-401D-AEAB-8743DDAECA67}</Project>
       <Name>StuffLibrary.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StuffLibrary.Lib\StuffLibrary.Lib.csproj">
+      <Project>{D3CFA670-F071-4445-AD15-BF4564E640AC}</Project>
+      <Name>StuffLibrary.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

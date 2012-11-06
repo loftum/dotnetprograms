@@ -61,5 +61,10 @@ namespace DotNetPrograms.Common.Paging
         {
             return GetEnumerator();
         }
+
+        public static PagedListModel<TSomething> Empty<TSomething>()
+        {
+            return new PagedListModel<TSomething>(Enumerable.Empty<TSomething>(), 1, 20);
+        }
     }
 }

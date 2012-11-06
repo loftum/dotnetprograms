@@ -1,8 +1,10 @@
 ﻿@model DotNetPrograms.Common.Paging.PagedListModel<StuffLibrary.Core.Domain.Movie>
 
+<ul>
 @foreach(var movie in Model)
 {
-    <div>
-        @movie.Title
-    </div>
+    <li>
+        <a href="@movie.Links.Self" title="@movie.Title" target="_blank">@movie.Title</a>
+    </li>
 }
+</ul>

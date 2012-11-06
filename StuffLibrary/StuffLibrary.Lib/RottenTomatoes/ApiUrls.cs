@@ -1,9 +1,9 @@
-﻿using DotNetPrograms.Common.Web;
+using DotNetPrograms.Common.Web.Paths;
 using StuffLibrary.Common.Configuration;
 
-namespace StuffLibrary.Core.RottenTomatoes
+namespace StuffLibrary.Lib.RottenTomatoes
 {
-    public class ApiUrls : IApiUrls
+    public class ApiUrls
     {
         private readonly IStuffLibrarySettings _settings;
 
@@ -17,14 +17,16 @@ namespace StuffLibrary.Core.RottenTomatoes
             get
             {
                 return new WebUrl("http://api.rottentomatoes.com/api/public/v1.0")
-                    .WithParameter("apikey", _settings.RottenTomatoesApiKey);
+                    .WithParameter("apikey", _settings.RottenTomatoesApiKey)
+                    .WithExtension("json");
             }
         }
 
-
         public WebUrl Movies(SearchParamters paramters)
         {
-            return BaseUrl.WithParameter("q", paramters.Query)
+            return BaseUrl
+                .WithParameter("q", paramters.Query)
+                .AppendToPath("movies")
                 .WithParameter("page", paramters.PageNumber)
                 .WithParameter("page_limit", paramters.PageSize);
         }

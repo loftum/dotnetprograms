@@ -8,21 +8,29 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#searchButton").click(function() {
+            var statusPane = $("#statusPane");
+            $("#searchButton").click(function () {
                 search();
                 return false;
             });
             
             function search() {
                 var input = $("#searchForm").serialize();
+                statusPane.html('');
                 $.ajax({
                     type: "POST",
                     cache: false,
                     url: "/Movie/Search",
                     data: input,
                     success: function (data) {
-                        debugger;
                         $("#movieList").html(data);
+                    },
+                    error: function (xhr) {
+                        for(var key in xhr) {
+                            console.debug(key + ': ' + xhr[key]);
+                        }
+                        
+                        statusPane.html(xhr);
                     }
                 });
             }
@@ -40,6 +48,7 @@
         @Html.TextBoxFor(m => m.Query)
         <input id="searchButton" type="submit" value="Search"/>
     }
+    <div id="statusPane"></div>
     <div id="movieList">
     </div>
 

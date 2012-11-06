@@ -41,10 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\FriendlyWebException.cs" />
+    <Compile Include="Paths\VirtualPath.cs" />
+    <Compile Include="Paths\WebUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reading\HttpReader.cs" />
     <Compile Include="Reading\IHttpReader.cs" />
-    <Compile Include="WebUrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetPrograms.Common\DotNetPrograms.Common.csproj">

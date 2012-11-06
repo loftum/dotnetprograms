@@ -2,8 +2,9 @@
 using Ninject.Modules;
 using StuffLibrary.Common.Configuration;
 using StuffLibrary.Common.ExtensionMethods;
-using StuffLibrary.Core.Facades;
-using StuffLibrary.Core.RottenTomatoes;
+using StuffLibrary.Lib.Caching;
+using StuffLibrary.Lib.Facades;
+using StuffLibrary.Lib.RottenTomatoes;
 
 namespace StuffLibrary.Web.NinjectModules
 {
@@ -15,6 +16,7 @@ namespace StuffLibrary.Web.NinjectModules
             Bind<IRottenTomatoesService>().To<RottenTomatoesService>().InCurrentScope();
             Bind<IMovieFacade>().To<MovieFacade>().InCurrentScope();
             Bind<IHttpReader>().To<HttpReader>().InCurrentScope();
+            Bind<IStuffLibraryCache>().To<StuffLibraryCache>().InCurrentScope();
         }
     }
 }

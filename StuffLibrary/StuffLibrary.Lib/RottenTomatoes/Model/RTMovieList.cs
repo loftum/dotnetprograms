@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace StuffLibrary.Core.RottenTomatoes.Model
+namespace StuffLibrary.Lib.RottenTomatoes.Model
 {
     public class RTMovieList
     {
