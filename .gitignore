@@ -15,3 +15,4 @@ _ReSharper.*
 */_UpgradeReport_Files
 */[Uu]pgrade[Ll]og*.[Hh][Tt][Mm]
 *.[Pp]ublish.xml
+packages/
