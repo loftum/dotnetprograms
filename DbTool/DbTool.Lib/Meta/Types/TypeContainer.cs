@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DbTool.Lib.Meta.Types
 {
@@ -7,6 +8,8 @@ namespace DbTool.Lib.Meta.Types
         private readonly bool _caseSensitive;
         public string Name { get; private set; }
         private readonly IDictionary<string, TypeMeta> _types = new Dictionary<string, TypeMeta>();
+
+        public IEnumerable<TypeMeta> Types { get { return _types.Values.ToList(); } }
 
         public TypeContainer(string name, bool caseSensitive = false)
         {

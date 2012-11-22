@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. BuildAssets", "00. BuildAssets", "{6DE944F4-AA71-4274-802D-5ADB231ADB39}"
@@ -42,6 +42,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Database libraries", "03. Database libraries", "{0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Wpf.Testing", "DbTool.Wpf.Testing\DbTool.Wpf.Testing.csproj", "{1C1158F6-719A-4719-817B-EC1F44A5B72D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.IntegrationTests", "DbTool.IntegrationTests\DbTool.IntegrationTests.csproj", "{CA1D1E74-9154-41CB-87CA-26C15B6220F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +138,16 @@ Global
 		{1C1158F6-719A-4719-817B-EC1F44A5B72D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1C1158F6-719A-4719-817B-EC1F44A5B72D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1C1158F6-719A-4719-817B-EC1F44A5B72D}.Release|x86.ActiveCfg = Release|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,5 +163,6 @@ Global
 		{00833AC0-4139-45FF-929A-60450E0A67F2} = {0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}
 		{E31297FE-5C9A-4477-84CA-D57BE213E70C} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
 		{1C1158F6-719A-4719-817B-EC1F44A5B72D} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
+		{CA1D1E74-9154-41CB-87CA-26C15B6220F9} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
 	EndGlobalSection
 EndGlobal

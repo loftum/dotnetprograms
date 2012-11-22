@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Meta.Types;
 
@@ -24,7 +25,9 @@ namespace DbTool.Lib.Data
             {
                 _dbConnection.Open();
                 var schemaTable = _dbConnection.GetSchema("Columns");
-                var typeContainer = new TypeContainer(schemaTable.Namespace, schemaTable.CaseSensitive);
+
+
+                var typeContainer = new TypeContainer(GetNamespaceFrom(schemaTable), schemaTable.CaseSensitive);
 
                 foreach (DataRow row in schemaTable.Rows)
                 {
@@ -37,6 +40,12 @@ namespace DbTool.Lib.Data
             {
                 _dbConnection.Close();
             }
+        }
+
+        private string GetNamespaceFrom(DataTable schemaTable)
+        {
+            var row = schemaTable.Rows[0];
+            return string.Format("{0}.{1}", row.Get<string>("TABLE_SCHEMA"), row.Get<string>("TABLE_CATALOG"));
         }
     }
 }

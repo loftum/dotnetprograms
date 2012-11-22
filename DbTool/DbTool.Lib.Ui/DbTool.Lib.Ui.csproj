@@ -37,9 +37,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Ninject">
-      <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelBinding\ModelBinder.cs" />
@@ -47,7 +44,6 @@
     <Compile Include="Models\ModelChangeEventArgs.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modules\UiModule.cs" />
     <Compile Include="Models\IQueryResultViewModel.cs" />
     <Compile Include="Worksheet\IWorksheetManager.cs" />
     <Compile Include="Worksheet\WorksheetManager.cs" />

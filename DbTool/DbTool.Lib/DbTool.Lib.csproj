@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Migrator">
       <HintPath>..\BuildAssets\Migrator\Migrator.dll</HintPath>
     </Reference>
@@ -46,11 +49,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mono.CSharp.4.0\lib\net40\Mono.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\BuildAssets\Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\Lib\3rdParty\Ninject-2.2.0.0-release-net-4.0\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\NLog.dll</HintPath>
@@ -89,7 +94,6 @@
     <Compile Include="Communication\DbCommands\DbSchema\SchemaExecutor.cs" />
     <Compile Include="Communication\DbCommands\DbSchema\SchemaQuery.cs" />
     <Compile Include="Communication\DbCommands\DefaultExecutorProvider.cs" />
-    <Compile Include="Communication\DbCommands\Dynamic\ClassGenerator.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRow.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRowPropertyDescriptor.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicQuery.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="CSharp\ICSharpEvaluator.cs" />
     <Compile Include="CSharp\Mono\DbToolInteractive.cs" />
     <Compile Include="CSharp\Mono\MonoCSharpEvaluator.cs" />
+    <Compile Include="Data\TableBase.cs" />
     <Compile Include="DbType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
@@ -155,14 +160,10 @@
     <Compile Include="Memory\IMemoryMeter.cs" />
     <Compile Include="Memory\MemoryMeter.cs" />
     <Compile Include="MetaInfoProvider.cs" />
+    <Compile Include="Meta\TableTypeGenerator.cs" />
     <Compile Include="Meta\DbToolTypeCache.cs" />
     <Compile Include="Meta\ITypeCache.cs" />
-    <Compile Include="Meta\Objects\CSharpObjectMeta.cs" />
-    <Compile Include="Meta\Objects\CSharpTypeMeta.cs" />
-    <Compile Include="Meta\Objects\NullObjectMeta.cs" />
-    <Compile Include="Meta\Objects\ObjectMeta.cs" />
     <Compile Include="Meta\Types\ColumnMeta.cs" />
-    <Compile Include="Meta\Types\NullTypeMeta.cs" />
     <Compile Include="Meta\Types\TableMeta.cs" />
     <Compile Include="Meta\Types\TypeContainer.cs" />
     <Compile Include="Meta\Types\TypeMeta.cs" />

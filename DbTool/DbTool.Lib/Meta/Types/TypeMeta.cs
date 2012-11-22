@@ -16,9 +16,9 @@ namespace DbTool.Lib.Meta.Types
         public abstract IEnumerable<TypeMeta> Members { get; }
         public abstract IEnumerable<TypeMeta> Properties { get; }
 
-        public static TypeMeta Null
+        public override string ToString()
         {
-            get { return new NullTypeMeta(); }
+            return string.Format("{0} {1}", TypeName, MemberName);
         }
     }
 }

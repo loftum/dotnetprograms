@@ -16,3 +16,5 @@ _ReSharper.*
 */[Uu]pgrade[Ll]og*.[Hh][Tt][Mm]
 *.[Pp]ublish.xml
 packages/
+DbTool/DbTool.IntegrationTests/App.config
+DbTool/DbTool.IntegrationTests/Config.input/App.dev.local.config

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DbTool.Lib.Meta.Types
 {
@@ -23,6 +24,11 @@ namespace DbTool.Lib.Meta.Types
         public override IEnumerable<TypeMeta> Properties
         {
             get { return _columns; }
+        }
+
+        public IEnumerable<ColumnMeta> Columns
+        {
+            get { return Properties.Cast<ColumnMeta>(); }
         }
     }
 }
