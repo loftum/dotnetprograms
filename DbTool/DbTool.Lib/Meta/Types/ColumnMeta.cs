@@ -11,7 +11,7 @@ namespace DbTool.Lib.Meta.Types
         public Type CSharpType { get; private set; }
 
         public ColumnMeta(DataRow row)
-            : base(row.Get<string>("COLUMN_TYPE"), row.Get<string>("COLUMN_NAME"))
+            : base(row.Get<string>("DATA_TYPE"), row.Get<string>("COLUMN_NAME"))
         {
             CSharpType = GetCSharpType();
         }

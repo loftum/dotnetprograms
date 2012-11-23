@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.Meta.Types;
 
@@ -18,18 +17,20 @@ namespace DbTool.Lib.Meta
         {
             _nameSpace = nameSpace;
             var assemblyName = new AssemblyName(nameSpace);
-            _assembly = Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
+            _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
             _module = _assembly.DefineDynamicModule(nameSpace);
         }
 
-        public void Save()
+        public string Save()
         {
-            _assembly.Save(string.Format("{0}.dll", _nameSpace));
+            var path = string.Format("{0}.dll", _nameSpace);
+            _assembly.Save(path);
+            return path;
         }
 
         public Type CreateType(TableMeta tableType)
         {
-            var typeBuilder = _module.DefineType(string.Format("{0}.{1}", _nameSpace, tableType.TypeName), TypeAttributes.Public | TypeAttributes.Class);
+            var typeBuilder = _module.DefineType(tableType.TypeName, TypeAttributes.Public | TypeAttributes.Class);
 
             foreach (var column in tableType.Columns)
             {
@@ -63,29 +64,21 @@ namespace DbTool.Lib.Meta
                 property.SetGetMethod(getter);
                 property.SetSetMethod(setter);
             }
-
             return typeBuilder.CreateType();
         }
 
         public static object Cast(DynamicDataRow record, Type type)
         {
-            // Now we have our type. Let's create an instance from it:
             var generetedObject = Activator.CreateInstance(type);
-
-            // Loop over all the generated properties, and assign the values from our XML:
             var properties = type.GetProperties();
-
             var propertiesCounter = 0;
 
-            // Loop over the values that we will assign to the properties
             foreach (var column in record.Columns)
             {
                 var value = record[column];
                 properties[propertiesCounter].SetValue(generetedObject, value, null);
                 propertiesCounter++;
             }
-
-            //Yoopy ! Return our new genereted object.
             return generetedObject;
         }
     }
