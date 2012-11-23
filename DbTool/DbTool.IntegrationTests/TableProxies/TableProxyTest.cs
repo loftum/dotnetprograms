@@ -34,6 +34,7 @@ namespace DbTool.IntegrationTests.TableProxies
         {
             var table = (TableMeta) _container.Types.First(t => t.TypeName == "OrderHead");
             var type = _generator.CreateType(table);
+            _generator.Save();
 
             using (var factory = BuildSessionFactoryFor(type))
             {

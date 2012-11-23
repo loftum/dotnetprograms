@@ -1,5 +1,5 @@
 using System;
-using DbTool.Lib.Common;
+using DotNetPrograms.Common.Validation;
 using NUnit.Framework;
 
 namespace DbTool.Testing.Common

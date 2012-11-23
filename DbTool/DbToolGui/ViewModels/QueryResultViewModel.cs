@@ -3,8 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Data;
-using DbTool.Lib.ExtensionMethods;
 using DbToolGui.Controls;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {

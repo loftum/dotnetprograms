@@ -2,6 +2,7 @@
 using System.Reflection;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.Validation;
 
 namespace DbTool.Lib.FileSystem
 {
@@ -19,8 +20,7 @@ namespace DbTool.Lib.FileSystem
 
         public string GetFullPathOf(string filename)
         {
-            filename.ShouldNotBeNullOrWhitespace("filename");
-
+            Guard.NotNullOrWhiteSpace(() => filename);
             if (filename.IsFullPath())
             {
                 return filename;

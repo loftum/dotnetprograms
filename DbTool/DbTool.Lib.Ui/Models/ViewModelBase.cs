@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Ui.Models
 {
@@ -12,7 +12,7 @@ namespace DbTool.Lib.Ui.Models
         {
             if (ModelChange != null && expression != null)
             {
-                ModelChange(this, new ModelChangeEventArgs(expression.GetPropertyId()));
+                ModelChange(this, new ModelChangeEventArgs(expression.GetPropertyName()));
             }
         }
     }

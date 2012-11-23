@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Tasks;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Commands
 {

@@ -2,6 +2,7 @@
 using System.Linq;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {

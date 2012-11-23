@@ -2,6 +2,7 @@ using System.Reflection;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Tasks;
+using DotNetPrograms.Common.ExtensionMethods;
 using MigSharp;
 
 namespace DbTool.Lib.Migrating

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
@@ -28,11 +29,13 @@ namespace DbTool.Lib.Data
 
 
                 var typeContainer = new TypeContainer(GetNamespaceFrom(schemaTable), schemaTable.CaseSensitive);
-
+                var columns = GetColumns(schemaTable);
                 foreach (DataRow row in schemaTable.Rows)
                 {
-                    var tableMeta = (TableMeta) typeContainer.GetOrAdd(new TableMeta(row.Get<string>(TableName)));
-                    tableMeta.AddColumn(new ColumnMeta(row.Get<string>(ColumnType), row.Get<string>(ColumnName)));
+
+                    var dictionary = row.ToDictionary();
+                    var tableMeta = (TableMeta) typeContainer.GetOrAdd(new TableMeta(dictionary));
+                    tableMeta.AddColumn(new ColumnMeta(row));
                 }
                 return typeContainer;
             }
@@ -40,6 +43,11 @@ namespace DbTool.Lib.Data
             {
                 _dbConnection.Close();
             }
+        }
+
+        private IEnumerable<string> GetColumns(DataTable schemaTable)
+        {
+            return (from DataColumn column in schemaTable.Columns select column.ColumnName).ToList();
         }
 
         private string GetNamespaceFrom(DataTable schemaTable)

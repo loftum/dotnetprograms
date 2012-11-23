@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Configuration
 {

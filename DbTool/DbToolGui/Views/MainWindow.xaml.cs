@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Modules;
 using DbTool.Lib.Syntax;
 using DbTool.Lib.Ui.Worksheet;
@@ -11,6 +10,7 @@ using DbToolGui.Controls;
 using DbToolGui.ExtensionMethods;
 using DbToolGui.Modules;
 using DbToolGui.ViewModels;
+using DotNetPrograms.Common.ExtensionMethods;
 using Ninject;
 using DatabaseModule = DbToolGui.Modules.DatabaseModule;
 

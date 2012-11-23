@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Meta.Types
 {
     public class TableMeta : TypeMeta
     {
         private readonly IList<ColumnMeta> _columns = new List<ColumnMeta>();
+
+        public TableMeta(IDictionary<string, object> row) : this(row.Get<string>("TABLE_NAME"))
+        {
+        }
 
         public TableMeta(string tableName) : base(tableName, tableName)
         {

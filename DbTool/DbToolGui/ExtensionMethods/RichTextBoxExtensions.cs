@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Documents;
-using DbTool.Lib.Common;
+using DotNetPrograms.Common.Validation;
 
 namespace DbToolGui.ExtensionMethods
 {

@@ -6,10 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Syntax;
 using DbToolGui.Highlighting;
 using DbToolGui.Views;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.Controls.Syntax
 {

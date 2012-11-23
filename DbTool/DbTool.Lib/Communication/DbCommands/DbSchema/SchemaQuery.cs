@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands.DbSchema
 {

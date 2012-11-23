@@ -44,6 +44,7 @@
     <Compile Include="DateAndTime\DateTimeProvider.cs" />
     <Compile Include="Exceptions\PropertyErrorException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="ExtensionMethods\DictionaryExtensions.cs" />
     <Compile Include="ExtensionMethods\IntExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />

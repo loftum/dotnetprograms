@@ -8,6 +8,7 @@ using DbTool.Lib.Exceptions;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication
 {

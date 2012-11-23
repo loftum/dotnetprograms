@@ -2,7 +2,7 @@
 using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Communication.DbCommands.CSharp;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.MySql.Commands
 {

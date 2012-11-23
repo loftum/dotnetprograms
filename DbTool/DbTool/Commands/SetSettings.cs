@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Commands
 {

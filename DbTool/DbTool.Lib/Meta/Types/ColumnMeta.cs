@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Meta.Types
 {
@@ -8,10 +10,14 @@ namespace DbTool.Lib.Meta.Types
     {
         public Type CSharpType { get; private set; }
 
-        public ColumnMeta(string typeName, string columnName)
-            : base(typeName, columnName)
+        public ColumnMeta(DataRow row)
+            : base(row.Get<string>("COLUMN_TYPE"), row.Get<string>("COLUMN_NAME"))
         {
             CSharpType = GetCSharpType();
+        }
+
+        public ColumnMeta(string typeName, string memberName) : base(typeName, memberName)
+        {
         }
 
         public override IEnumerable<TypeMeta> Members

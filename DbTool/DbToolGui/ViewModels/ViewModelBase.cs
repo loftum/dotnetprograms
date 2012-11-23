@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {
@@ -27,7 +27,7 @@ namespace DbToolGui.ViewModels
 
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
         {
-            OnPropertyChanged(property.GetPropertyId());
+            OnPropertyChanged(property.GetPropertyName());
         }
 
         protected void OnPropertyChanged(string propertyName)

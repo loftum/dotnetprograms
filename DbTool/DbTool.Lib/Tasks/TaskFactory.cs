@@ -1,9 +1,9 @@
 ﻿using DbTool.Lib.AssemblyLoading;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
+using DotNetPrograms.Common.Validation;
 
 namespace DbTool.Lib.Tasks
 {
@@ -22,43 +22,43 @@ namespace DbTool.Lib.Tasks
 
         public IBackupTask CreateBackupTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<IBackupTask>(connection.DatabaseType);
         }
 
         public IRestoreTask CreateRestoreTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<IRestoreTask>(connection.DatabaseType);
         }
 
         public ICreateDbTask CreateCreateDbTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<ICreateDbTask>(connection.DatabaseType);
         }
 
         public IDeleteDbTask CreateDeleteDbTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<IDeleteDbTask>(connection.DatabaseType);
         }
 
         public IListDbTask CreateListDbTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<IListDbTask>(connection.DatabaseType);
         }
 
         public IPopulateContextTask CreatePopulateContextTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             return CreateInstance<IPopulateContextTask>(connection.DatabaseType);
         }
 
         public IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database)
         {
-            database.ShouldNotBeNull("database");
+            Guard.NotNull(() => database);
             if (!database.CanMigrate)
             {
                 throw new UserException(ExceptionType.MissingMigrationInfo, database.Name);
@@ -76,7 +76,7 @@ namespace DbTool.Lib.Tasks
 
         public IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection)
         {
-            connection.ShouldNotBeNull("connection");
+            Guard.NotNull(() => connection);
             if (!connection.HasConnectionString)
             {
                 throw new DbToolException("No connection for {0} is defined.", connection.Name);

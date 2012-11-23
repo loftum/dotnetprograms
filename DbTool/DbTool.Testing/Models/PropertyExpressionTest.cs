@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 using NUnit.Framework;
 
 namespace DbTool.Testing.Models
@@ -14,7 +14,7 @@ namespace DbTool.Testing.Models
         public void GetPropertyId_ShouldReturnNameOfPropertyForModel()
         {
             Expression<Func<PropertyExpressionTest, string>> modelPrperty = m => m.SomeProperty;
-            var propertyId = modelPrperty.GetPropertyId();
+            var propertyId = modelPrperty.GetPropertyName();
             Assert.That(propertyId, Is.EqualTo("SomeProperty"));
         }
 
@@ -22,7 +22,7 @@ namespace DbTool.Testing.Models
         public void GetPropertyId_ShouldReturnNameOfPropertyForSelf()
         {
             Expression<Func<string>> myProperty = () => SomeProperty;
-            var propertyId = myProperty.GetPropertyId();
+            var propertyId = myProperty.GetPropertyName();
             Assert.That(propertyId, Is.EqualTo("SomeProperty"));
         }
    

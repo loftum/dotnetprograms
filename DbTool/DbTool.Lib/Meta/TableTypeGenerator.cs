@@ -11,14 +11,20 @@ namespace DbTool.Lib.Meta
     {
         private const MethodAttributes GetSetAttr = MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig;
         private readonly ModuleBuilder _module;
+        private readonly AssemblyBuilder _assembly;
         private readonly string _nameSpace;
 
         public TableTypeGenerator(string nameSpace)
         {
             _nameSpace = nameSpace;
             var assemblyName = new AssemblyName(nameSpace);
-            var assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            _module = assemblyBuilder.DefineDynamicModule(nameSpace);
+            _assembly = Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
+            _module = _assembly.DefineDynamicModule(nameSpace);
+        }
+
+        public void Save()
+        {
+            _assembly.Save(string.Format("{0}.dll", _nameSpace));
         }
 
         public Type CreateType(TableMeta tableType)

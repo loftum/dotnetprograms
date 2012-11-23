@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Ui.Models;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Ui.ModelBinding
 {
@@ -19,7 +19,7 @@ namespace DbTool.Lib.Ui.ModelBinding
 
         public ModelBinder<TModel> Bind<TProperty>(Expression<Func<TModel, TProperty>> property, Action action)
         {
-            _actions[property.GetPropertyId()] = action;
+            _actions[property.GetPropertyName()] = action;
             return this;
         }
 

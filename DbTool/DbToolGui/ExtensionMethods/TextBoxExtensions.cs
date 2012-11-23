@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.ExtensionMethods
 {

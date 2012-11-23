@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using DbTool.Commands;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Testing.Assertions;
 using DbTool.Testing.TestData;
+using DotNetPrograms.Common.ExtensionMethods;
 using NUnit.Framework;
 
 namespace DbTool.Testing.Commands

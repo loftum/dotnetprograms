@@ -2,7 +2,7 @@ using System.Data.Common;
 using DbTool.Lib.Communication.DbCommands.CSharp;
 using DbTool.Lib.Communication.DbCommands.DbSchema;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands
 {

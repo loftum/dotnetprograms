@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DbTool.Lib.SqlServer</RootNamespace>
     <AssemblyName>DbTool.Lib.SqlServer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -77,6 +80,10 @@
     <Compile Include="Tasks\SqlServerUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbTool.Lib\DbTool.Lib.csproj">
       <Project>{BA6E0230-D231-4F44-8820-88D159334D65}</Project>
       <Name>DbTool.Lib</Name>

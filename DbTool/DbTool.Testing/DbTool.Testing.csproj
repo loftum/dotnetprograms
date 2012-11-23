@@ -11,6 +11,8 @@
     <RootNamespace>DbTool.Testing</RootNamespace>
     <AssemblyName>DbTool.Testing</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMoq">
@@ -86,6 +90,10 @@
     <Compile Include="TestData\Some.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{b5d58c4e-f84e-49e2-9f15-5f91e1c73c55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj">
       <Project>{74004709-197C-41CC-BF76-1339B1460120}</Project>
       <Name>DbTool.Lib.Ui</Name>

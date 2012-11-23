@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 using Newtonsoft.Json;
 
 namespace DbTool.Lib.Configuration

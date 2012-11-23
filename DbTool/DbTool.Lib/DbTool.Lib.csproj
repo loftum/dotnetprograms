@@ -11,6 +11,8 @@
     <RootNamespace>DbTool.Lib</RootNamespace>
     <AssemblyName>DbTool.Lib</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
@@ -84,7 +88,6 @@
     <Compile Include="AssemblyLoading\IAssemblyLoader.cs" />
     <Compile Include="Collections\IChild.cs" />
     <Compile Include="Collections\ParentChildList.cs" />
-    <Compile Include="Common\Guard.cs" />
     <Compile Include="Communication\DatabaseCommunicator.cs" />
     <Compile Include="Communication\DbCommands\BackupExecutor.cs" />
     <Compile Include="Communication\DbCommands\CSharp\CollectionConverter.cs" />
@@ -140,18 +143,13 @@
     <Compile Include="Exceptions\DbToolException.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
-    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
-    <Compile Include="ExtensionMethods\ComparisonExtensions.cs" />
+    <Compile Include="ExtensionMethods\DataColumnExtensions.cs" />
     <Compile Include="ExtensionMethods\DataRowExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\JavaScriptExtensions.cs" />
     <Compile Include="ExtensionMethods\LongExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
-    <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
-    <Compile Include="ExtensionMethods\RegexExtensions.cs" />
-    <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="ExtensionMethods\TypeExtensions.cs" />
     <Compile Include="FileSystem\IPathResolver.cs" />
     <Compile Include="FileSystem\PathResolver.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
@@ -203,7 +201,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{b5d58c4e-f84e-49e2-9f15-5f91e1c73c55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

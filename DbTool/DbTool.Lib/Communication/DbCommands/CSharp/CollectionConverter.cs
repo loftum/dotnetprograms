@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.Communication.DbCommands.Results;
-using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands.CSharp
 {

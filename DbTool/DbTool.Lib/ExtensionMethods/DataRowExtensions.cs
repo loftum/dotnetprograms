@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 
 namespace DbTool.Lib.ExtensionMethods
@@ -7,6 +8,17 @@ namespace DbTool.Lib.ExtensionMethods
         public static T Get<T>(this DataRow row, string column)
         {
             return (T) row[column];
+        }
+
+        public static IDictionary<string, object> ToDictionary(this DataRow row)
+        {
+            var dictionary = new Dictionary<string, object>();
+            var columns = row.Table.Columns.GetNames();
+            foreach (var column in columns)
+            {
+                dictionary[column] = row[column];
+            }
+            return dictionary;
         }
     }
 }

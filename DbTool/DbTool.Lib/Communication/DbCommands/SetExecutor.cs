@@ -2,6 +2,7 @@ using System;
 using DbTool.Lib.Communication.DbCommands.Results;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands
 {

@@ -4,6 +4,7 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Logging;
 using DbTool.Lib.Migrating;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Communication.DbCommands
 {

@@ -3,8 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
-using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Syntax;
+using DotNetPrograms.Common.ExtensionMethods;
 using Mono.CSharp;
 using System;
 

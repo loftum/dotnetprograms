@@ -10,6 +10,7 @@ using DbTool.Lib.ExtensionMethods;
 using DbTool.Lib.Memory;
 using DbTool.Lib.Meta;
 using DbToolGui.Commands;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolGui.ViewModels
 {
