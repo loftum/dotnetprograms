@@ -74,7 +74,9 @@
       <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -152,6 +154,8 @@
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="FileSystem\IPathResolver.cs" />
     <Compile Include="FileSystem\PathResolver.cs" />
+    <Compile Include="Linq\Queryable.cs" />
+    <Compile Include="Linq\QueryProvider.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Modules\DatabaseModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +212,7 @@
       <Name>DotNetPrograms.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

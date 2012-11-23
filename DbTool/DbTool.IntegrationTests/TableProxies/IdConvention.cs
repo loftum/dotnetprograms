@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System.Linq;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 
 namespace DbTool.IntegrationTests.TableProxies
@@ -7,7 +8,8 @@ namespace DbTool.IntegrationTests.TableProxies
     {
         public void Apply(IIdentityInstance instance)
         {
-            instance.Column("OrderId");
+            var column = instance.EntityType.GetProperties().First().Name;
+            instance.Column(column);
         }
     }
 }

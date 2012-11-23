@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Data;
 using DbTool.Lib.Meta;
@@ -33,11 +32,13 @@ namespace DbTool.IntegrationTests.TableProxies
         [Test]
         public void Should()
         {
-            var table = (TableMeta) _container.Types.First(t => t.TypeName == "OrderHead");
-            var type = _generator.CreateType(table);
+            foreach (var table in _container.TableTypes)
+            {
+                _generator.CreateType(table);
+            }
             _generator.Save();
 
-            using (var factory = BuildSessionFactoryFor(type))
+            using (var factory = BuildSessionFactoryFor(_generator.Assembly))
             {
                 using (var session = factory.OpenSession())
                 {
@@ -46,15 +47,22 @@ namespace DbTool.IntegrationTests.TableProxies
             }
         }
 
-        private ISessionFactory BuildSessionFactoryFor(Type type)
+        private static void Show(Type type)
+        {
+            foreach (var property in type.GetProperties())
+            {
+                Console.WriteLine("{0} {1}", property.PropertyType, property.Name);
+            }
+        }
+
+        private static ISessionFactory BuildSessionFactoryFor(Assembly assembly)
         {
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c =>
                     c.FromConnectionStringWithKey("Database")).ShowSql())
                 .Mappings(m => m.AutoMappings
-                    .Add(AutoMap.Assembly(type.Assembly).Conventions.Setup(f => f.Add<IdConvention>()))
+                    .Add(AutoMap.Assembly(assembly).Conventions.Setup(f => f.Add<IdConvention>()))
                 )
-                .Diagnostics(d => d.OutputToConsole())
                 .BuildSessionFactory();
         }
     }

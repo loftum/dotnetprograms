@@ -12,14 +12,18 @@ namespace DbTool.Lib.Meta
         private readonly ModuleBuilder _module;
         private readonly AssemblyBuilder _assembly;
         private readonly string _nameSpace;
+        private readonly string _fileName;
 
         public TableTypeGenerator(string nameSpace)
         {
             _nameSpace = nameSpace;
+            _fileName = string.Format("{0}.dll", _nameSpace);
             var assemblyName = new AssemblyName(nameSpace);
             _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
-            _module = _assembly.DefineDynamicModule(nameSpace);
+            _module = _assembly.DefineDynamicModule(nameSpace, _fileName);
         }
+
+        public Assembly Assembly { get; private set; }
 
         public string Save()
         {
@@ -30,7 +34,8 @@ namespace DbTool.Lib.Meta
 
         public Type CreateType(TableMeta tableType)
         {
-            var typeBuilder = _module.DefineType(tableType.TypeName, TypeAttributes.Public | TypeAttributes.Class);
+            var typeName = string.Format("{0}.{1}", _nameSpace, tableType.TypeName);
+            var typeBuilder = _module.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
 
             foreach (var column in tableType.Columns)
             {
@@ -64,7 +69,9 @@ namespace DbTool.Lib.Meta
                 property.SetGetMethod(getter);
                 property.SetSetMethod(setter);
             }
-            return typeBuilder.CreateType();
+            var type = typeBuilder.CreateType();
+            Assembly = type.Assembly;
+            return type;
         }
 
         public static object Cast(DynamicDataRow record, Type type)

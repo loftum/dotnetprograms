@@ -11,6 +11,11 @@ namespace DbTool.Lib.Meta.Types
 
         public IEnumerable<TypeMeta> Types { get { return _types.Values.ToList(); } }
 
+        public IEnumerable<TableMeta> TableTypes
+        {
+            get { return Types.Where(t => t is TableMeta).Cast<TableMeta>(); }
+        }
+
         public TypeContainer(string name, bool caseSensitive = false)
         {
             Name = name;
