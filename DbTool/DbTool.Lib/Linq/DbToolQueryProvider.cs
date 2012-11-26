@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -10,14 +11,17 @@ namespace DbTool.Lib.Linq
     public class DbToolQueryProvider : IQueryProvider
     {
         private readonly IQueryableToSqlTranslator _translator;
-        private readonly Func<Type, string, object[], IEnumerable> _executor;
+        private readonly IQueryExecutor _executor;
+        private readonly DbConnection _dbConnection;
 
         public DbToolQueryProvider(
             IQueryableToSqlTranslator translator,
-            Func<Type, string, object[], IEnumerable> executor)
+            IQueryExecutor executor,
+            DbConnection dbConnection)
         {
             _translator = translator;
             _executor = executor;
+            _dbConnection = dbConnection;
         }
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
@@ -38,22 +42,34 @@ namespace DbTool.Lib.Linq
                 : typeof(TResult);
             var queryable = (IQueryable) Activator.CreateInstance(typeof(DbToolQueryable<>).MakeGenericType(itemType), this, expression);
 
-            IEnumerable queryResult;
+            //IEnumerable queryResult;
 
-            using (var command = _translator.Translate(queryable))
+            var sql = _translator.Translate(queryable);
+
+            using (var command = _dbConnection.CreateCommand())
             {
-                queryResult = _executor(
-                    itemType,
-                    command.CommandText,
-                    command.Parameters.OfType<DbParameter>()
-                                      .Select(parameter => parameter.Value)
-                                      .ToArray());
+                command.CommandText = sql.CommandText;
+                foreach (var parameter in sql.Parameters)
+                {
+                    command.Parameters.Add(new SqlParameter(parameter.Name, parameter.Value));
+                }
+                return (TResult) _executor.Execute(command);
+//                return isCollection
+//                           ? (IEnumerable<TResult>) result
+//                           : (TResult) result;
+
+//                queryResult = _executor(
+//                    itemType,
+//                    command.CommandText,
+//                    command.Parameters.OfType<DbParameter>()
+//                                      .Select(parameter => parameter.Value)
+//                                      .ToArray());
             }
 
-            return isCollection
-                ? (TResult)queryResult
-                : queryResult.OfType<TResult>()
-                             .SingleOrDefault();
+//            return isCollection
+//                ? (TResult)queryResult
+//                : queryResult.OfType<TResult>()
+//                             .SingleOrDefault();
         }
 
         public object Execute(Expression expression)

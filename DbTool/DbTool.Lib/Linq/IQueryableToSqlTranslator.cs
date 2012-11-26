@@ -1,10 +1,9 @@
-﻿using System.Data.Common;
-using System.Linq;
+﻿using System.Linq;
 
 namespace DbTool.Lib.Linq
 {
     public interface IQueryableToSqlTranslator
     {
-        DbCommand Translate(IQueryable queryable);
+        DbToolSql Translate(IQueryable queryable);
     }
 }

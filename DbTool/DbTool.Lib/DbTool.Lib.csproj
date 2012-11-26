@@ -154,11 +154,17 @@
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="FileSystem\IPathResolver.cs" />
     <Compile Include="FileSystem\PathResolver.cs" />
+    <Compile Include="Linq\DbToolSqlParameter.cs" />
     <Compile Include="Linq\IDbCommandExecutor.cs" />
     <Compile Include="Linq\IQueryableToSqlTranslator.cs" />
     <Compile Include="Linq\DbToolQueryable.cs" />
     <Compile Include="Linq\DbToolQueryProvider.cs" />
+    <Compile Include="Linq\IQueryExecutor.cs" />
     <Compile Include="Linq\LinqExtensions.cs" />
+    <Compile Include="Linq\QueryableToSqlTranslator.cs" />
+    <Compile Include="Linq\DbToolSql.cs" />
+    <Compile Include="Linq\Selector.cs" />
+    <Compile Include="Linq\Wherer.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
