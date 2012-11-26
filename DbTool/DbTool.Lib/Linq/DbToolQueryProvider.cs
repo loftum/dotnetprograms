@@ -2,19 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace DbTool.Lib.Linq
 {
-    public class QueryProvider : IQueryProvider
+    public class DbToolQueryProvider : IQueryProvider
     {
-        private readonly Func<IQueryable, DbCommand> _translator;
+        private readonly IQueryableToSqlTranslator _translator;
         private readonly Func<Type, string, object[], IEnumerable> _executor;
 
-        public QueryProvider(
-            Func<IQueryable, SqlCommand> translator,
+        public DbToolQueryProvider(
+            IQueryableToSqlTranslator translator,
             Func<Type, string, object[], IEnumerable> executor)
         {
             _translator = translator;
@@ -23,7 +22,7 @@ namespace DbTool.Lib.Linq
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return new Queryable<TElement>(this, expression);
+            return new DbToolQueryable<TElement>(this, expression);
         }
 
         public IQueryable CreateQuery(Expression expression)
@@ -33,15 +32,15 @@ namespace DbTool.Lib.Linq
 
         public TResult Execute<TResult>(Expression expression)
         {
-            var isCollection = typeof(TResult).IsGenericType &&typeof(TResult).GetGenericTypeDefinition() == typeof(IEnumerable<>);
+            var isCollection = typeof(TResult).IsGenericType && typeof(TResult).GetGenericTypeDefinition() == typeof(IEnumerable<>);
             var itemType = isCollection
                 ? typeof(TResult).GetGenericArguments().Single()
                 : typeof(TResult);
-            var queryable = Activator.CreateInstance(typeof(Queryable<>).MakeGenericType(itemType), this, expression) as IQueryable;
+            var queryable = (IQueryable) Activator.CreateInstance(typeof(DbToolQueryable<>).MakeGenericType(itemType), this, expression);
 
             IEnumerable queryResult;
 
-            using (var command = _translator(queryable))
+            using (var command = _translator.Translate(queryable))
             {
                 queryResult = _executor(
                     itemType,

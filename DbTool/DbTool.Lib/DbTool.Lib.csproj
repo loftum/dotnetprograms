@@ -154,8 +154,11 @@
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="FileSystem\IPathResolver.cs" />
     <Compile Include="FileSystem\PathResolver.cs" />
-    <Compile Include="Linq\Queryable.cs" />
-    <Compile Include="Linq\QueryProvider.cs" />
+    <Compile Include="Linq\IDbCommandExecutor.cs" />
+    <Compile Include="Linq\IQueryableToSqlTranslator.cs" />
+    <Compile Include="Linq\DbToolQueryable.cs" />
+    <Compile Include="Linq\DbToolQueryProvider.cs" />
+    <Compile Include="Linq\LinqExtensions.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />

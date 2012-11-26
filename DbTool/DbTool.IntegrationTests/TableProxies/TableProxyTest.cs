@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Reflection;
 using DbTool.Lib.Data;
 using DbTool.Lib.Meta;
@@ -9,6 +10,7 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Linq;
 using NUnit.Framework;
 
 namespace DbTool.IntegrationTests.TableProxies
@@ -42,7 +44,7 @@ namespace DbTool.IntegrationTests.TableProxies
             {
                 using (var session = factory.OpenSession())
                 {
-                    
+                    session.Query<SchemaLoader>().Where(l => l.GetType() == typeof(object));
                 }
             }
         }
