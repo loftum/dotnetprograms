@@ -87,7 +87,7 @@
     <Compile Include="Formatting\NumberFormatTest.cs" />
     <Compile Include="Linq\Child.cs" />
     <Compile Include="Linq\DbToolQueryableTest.cs" />
-    <Compile Include="Linq\Parent.cs" />
+    <Compile Include="Linq\Hest.cs" />
     <Compile Include="Linq\QueryableToSqlTranslatorTest.cs" />
     <Compile Include="Models\PropertyExpressionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

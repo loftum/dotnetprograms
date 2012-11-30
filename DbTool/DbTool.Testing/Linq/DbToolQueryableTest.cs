@@ -16,7 +16,7 @@ namespace DbTool.Testing.Linq
         [Test]
         public void Should()
         {
-            var expression = Expression.Constant(new Parent());
+            var expression = Expression.Constant(new Hest());
             Console.WriteLine(expression.Value);
         }
 
@@ -25,7 +25,7 @@ namespace DbTool.Testing.Linq
         {
             var mocker = new AutoMoqer();
             var provider = mocker.Create<DbToolQueryProvider>();
-            var expression = new DbToolQueryable<Parent>(provider)
+            var expression = new DbToolQueryable<Hest>(provider)
                 .Where(p => p.Name == "Per")
 //                .OrderBy(h => h.Age)
 //                .Select(h => h)

@@ -26,15 +26,17 @@ namespace DbTool.Lib.Linq
             return builder.ToString();
         }
 
-        public void Append(string text)
+        public DbToolSql Append(string text)
         {
             _builder.Append(text);
+            return this;
         }
 
-        public void Append(DbToolSql sql)
+        public DbToolSql Append(DbToolSql sql)
         {
             _builder.Append(sql.CommandText);
             Parameters.AddRange(sql.Parameters);
+            return this;
         }
     }
 }

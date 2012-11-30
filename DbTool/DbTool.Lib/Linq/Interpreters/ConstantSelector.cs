@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 
-namespace DbTool.Lib.Linq
+namespace DbTool.Lib.Linq.Interpreters
 {
-    public class Selector
+    public class ConstantSelector
     {
-        private readonly MethodCallExpression _expression;
+        private readonly ConstantExpression _constant;
         private readonly Type _tableType;
 
-        public Selector(MethodCallExpression expression)
+        public ConstantSelector(ConstantExpression constant)
         {
-            _expression = expression;
-            _tableType = expression.Type.GenericTypeArguments[0];
+            _constant = constant;
+            _tableType = _constant.Type.GenericTypeArguments[0];
         }
 
         public DbToolSql GetSql()
