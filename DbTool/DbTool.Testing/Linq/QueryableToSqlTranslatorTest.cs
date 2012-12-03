@@ -36,8 +36,7 @@ namespace DbTool.Testing.Linq
         public void Translate_GetsSimpleSelectWithWhere()
         {
             var query = Linq<Hest>()
-                .Where(h => h.Name == "Per")
-                .Select(h => h);
+                .Where(h => h.Name == "Per");
             var result = _translator.Translate(query);
             Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (Name = @p1)"));
         }
@@ -46,8 +45,7 @@ namespace DbTool.Testing.Linq
         public void Translate_GetsWhereWithAndClause()
         {
             var query = Linq<Hest>()
-                .Where(h => h.Name == "Per" && h.Age == 21)
-                .Select(p => p);
+                .Where(h => h.Name == "Per" && h.Age == 21);
             var result = _translator.Translate(query);
             Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = @p1) and (Age = @p2))"));
             Assert.That(result.Parameters["@p1"].Value, Is.EqualTo("Per"));
@@ -58,8 +56,7 @@ namespace DbTool.Testing.Linq
         public void Translate_GetsWhereWithOrClause()
         {
             var query = Linq<Hest>()
-                .Where(h => h.Name == "Per" || h.Age == 21)
-                .Select(p => p);
+                .Where(h => h.Name == "Per" || h.Age == 21);
             var result = _translator.Translate(query);
             Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = @p1) or (Age = @p2))"));
         }
@@ -68,8 +65,7 @@ namespace DbTool.Testing.Linq
         public void Translate_GetsWhereWithAndOrClause()
         {
             var query = Linq<Hest>()
-                .Where(h => (h.Name == "Per" && h.Age == 21) || h.Age == 22)
-                .Select(p => p);
+                .Where(h => (h.Name == "Per" && h.Age == 21) || h.Age == 22);
             var result = _translator.Translate(query);
             Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (((Name = @p1) and (Age = @p2)) or (Age = @p3))"));
         }
