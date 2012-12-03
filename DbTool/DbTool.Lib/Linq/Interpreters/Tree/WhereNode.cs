@@ -8,15 +8,16 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         private readonly ITreeNode _condition;
         private readonly ITreeNode _previousNode;
 
-        public WhereNode(ITreeNode parent, MethodCallExpression expression) : base(parent, expression)
+        public WhereNode(DbToolSql sql, MethodCallExpression expression) : base(sql, expression)
         {
-            _condition = For(this, Expression.Arguments[1].StripQuotes());
-            _previousNode = For(this, Expression.Arguments[0]);
+            _previousNode = For(sql, Expression.Arguments[0]);
+            _condition = For(sql, Expression.Arguments[1].StripQuotes());
+            sql.AppendWhere(_condition.Translate());
         }
 
         public override string Translate()
         {
-            return string.Format("{0} where {1}", _previousNode.Translate(), _condition.Translate());
+            return _condition.Translate();
         }
     }
 }

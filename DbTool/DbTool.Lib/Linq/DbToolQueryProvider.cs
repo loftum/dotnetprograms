@@ -49,7 +49,7 @@ namespace DbTool.Lib.Linq
             using (var command = _dbConnection.CreateCommand())
             {
                 command.CommandText = sql.CommandText;
-                foreach (var parameter in sql.Parameters)
+                foreach (var parameter in sql.Parameters.Values)
                 {
                     command.Parameters.Add(new SqlParameter(parameter.Name, parameter.Value));
                 }

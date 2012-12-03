@@ -8,10 +8,10 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         protected readonly string MethodName;
         protected readonly IList<ITreeNode> Arguments;
 
-        public MethodCallNode(ITreeNode parent, MethodCallExpression expression) : base(parent, expression)
+        public MethodCallNode(DbToolSql sql, MethodCallExpression expression) : base(sql, expression)
         {
             MethodName = Expression.Method.Name;
-            Arguments = For(this, Expression.Arguments);
+            Arguments = For(sql, Expression.Arguments);
         }
 
         public override string Translate()

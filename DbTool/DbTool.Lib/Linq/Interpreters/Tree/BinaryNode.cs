@@ -8,10 +8,10 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         private readonly ITreeNode _right;
         private readonly string _operator;
 
-        public BinaryNode(ITreeNode parent, BinaryExpression expression) : base(parent, expression)
+        public BinaryNode(DbToolSql sql, BinaryExpression expression) : base(sql, expression)
         {
-            _left = For(this, expression.Left);
-            _right = For(this, expression.Right);
+            _left = For(sql, expression.Left);
+            _right = For(sql, expression.Right);
             _operator = new SqlOperatorTranslator().Translate(Expression.NodeType);
         }
 

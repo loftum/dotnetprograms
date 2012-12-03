@@ -7,21 +7,16 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
     {
         private readonly IList<ITreeNode> _parameters;
         private readonly ITreeNode _body;
-        public LambdaNode(ITreeNode parent, LambdaExpression expression) : base(parent, expression)
+        public LambdaNode(DbToolSql sql, LambdaExpression expression)
+            : base(sql, expression)
         {
-            _parameters = For(this, expression.Parameters);
-            _body = For(this, expression.Body);
+            _parameters = For(sql, expression.Parameters);
+            _body = For(sql, expression.Body);
         }
 
         public override string Translate()
         {
             return _body.Translate();
-        }
-
-        public IList<string> GetProperties()
-        {
-
-            return null;
         }
     }
 }

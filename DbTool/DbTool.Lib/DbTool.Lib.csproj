@@ -157,7 +157,6 @@
     <Compile Include="Linq\DbToolSqlParameter.cs" />
     <Compile Include="Linq\ExtensionMethods\ExpressionExtensions.cs" />
     <Compile Include="Linq\IDbCommandExecutor.cs" />
-    <Compile Include="Linq\Interpreters\ConstantSelector.cs" />
     <Compile Include="Linq\Interpreters\ExpressionVisitor.cs" />
     <Compile Include="Linq\Interpreters\Tree\BinaryNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\ConstantNode.cs" />

@@ -7,10 +7,8 @@ namespace DbTool.Lib.Linq
     {
         public DbToolSql Translate(IQueryable queryable)
         {
-            var result = new DbToolSql();
-            var node = TreeNode.For(null, queryable.Expression);
-            result.Append(node.Translate());
-            return result;
+            var node = TreeNode.For(new DbToolSql(), queryable.Expression);
+            return node.Sql;
         }
     }
 }

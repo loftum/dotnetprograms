@@ -5,30 +5,25 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
 {
     public class ConstantNode : SqlTreeNode<ConstantExpression>
     {
-        public ConstantNode(ITreeNode parent, ConstantExpression expression) : base(parent, expression)
+        private readonly object _value;
+        public ConstantNode(DbToolSql sql, ConstantExpression expression) : base(sql, expression)
         {
+            if (typeof (IQueryable).IsAssignableFrom(Expression.Type))
+            {
+                sql.Table = Expression.Type.GenericTypeArguments[0].Name;
+                _value = string.Empty;
+            }
+            else
+            {
+                var parameter = sql.NewParameter();
+                parameter.Value = Expression.Value;
+                _value = parameter.Name;
+            }
         }
 
         public override string Translate()
         {
-            if (typeof(IQueryable).IsAssignableFrom(Expression.Type))
-            {
-                var table = Expression.Type.GenericTypeArguments[0].Name;
-                return HasParent
-                    ? string.Format("from {0}", table)
-                    : string.Format("select * from {0}", table);
-            }
-            return Stringify((dynamic)Expression.Value);
-        }
-
-        private static string Stringify(string value)
-        {
-            return string.Format("'{0}'", value);
-        }
-
-        private static string Stringify(object value)
-        {
-            return value.ToString();
+            return _value.ToString();
         }
     }
 }

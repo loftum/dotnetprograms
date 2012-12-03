@@ -4,13 +4,15 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
 {
     public class ParameterNode : SqlTreeNode<ParameterExpression>
     {
-        public ParameterNode(ITreeNode parent, ParameterExpression expression) : base(parent, expression)
+        private readonly string _name;
+        public ParameterNode(DbToolSql sql, ParameterExpression expression) : base(sql, expression)
         {
+            _name = Expression.Name;
         }
 
         public override string Translate()
         {
-            return Expression.Name;
+            return _name;
         }
     }
 }

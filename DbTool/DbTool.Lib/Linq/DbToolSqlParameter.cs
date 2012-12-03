@@ -2,7 +2,13 @@
 {
     public class DbToolSqlParameter
     {
-        public string Name { get; set; }
+        public int Number { get; private set; }
+        public string Name { get { return string.Format("@p{0}", Number); } }
         public object Value { get; set; }
+
+        public DbToolSqlParameter(int number)
+        {
+            Number = number;
+        }
     }
 }

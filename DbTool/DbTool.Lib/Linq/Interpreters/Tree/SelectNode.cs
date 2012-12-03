@@ -4,22 +4,23 @@ using DbTool.Lib.Linq.ExtensionMethods;
 
 namespace DbTool.Lib.Linq.Interpreters.Tree
 {
-    public class SelectNode : MethodCallNode
+    public class SelectNode : SqlTreeNode<MethodCallExpression>
     {
         private readonly IList<string> _columns;
         private readonly LambdaSelector _lambda;
         private readonly ITreeNode _nextNode;
 
-        public SelectNode(ITreeNode parent, MethodCallExpression expression) : base(parent, expression)
+        public SelectNode(DbToolSql sql, MethodCallExpression expression) : base(sql, expression)
         {
             _lambda = new LambdaSelector(Expression.Arguments[1].GetLambda());
             _columns = _lambda.Properties;
-            _nextNode = For(this, expression.Arguments[0]);
+            sql.Statement = Translate();
+            _nextNode = For(sql, expression.Arguments[0]);
         }
 
         public override string Translate()
         {
-            return string.Format("select {0} {1}", string.Join(", ", _columns), _nextNode.Translate());
+            return string.Format("select {0}", string.Join(", ", _columns));
         }
     }
 }

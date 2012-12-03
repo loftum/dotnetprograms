@@ -7,7 +7,7 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         protected readonly ExpressionType NodeType;
         protected readonly TExpression Expression;
 
-        protected SqlTreeNode(ITreeNode parent, TExpression expression) : base(parent)
+        protected SqlTreeNode(DbToolSql sql, TExpression expression) : base(sql)
         {
             Expression = expression;
             NodeType = Expression.NodeType;

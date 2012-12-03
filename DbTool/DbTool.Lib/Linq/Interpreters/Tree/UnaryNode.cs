@@ -7,9 +7,9 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
     {
         private readonly ITreeNode _operand;
         private readonly string _operator;
-        public UnaryNode(ITreeNode parent, UnaryExpression expression) : base(parent, expression)
+        public UnaryNode(DbToolSql sql, UnaryExpression expression) : base(sql, expression)
         {
-            _operand = For(this, expression.Operand.StripQuotes());
+            _operand = For(sql, expression.Operand.StripQuotes());
             _operator = new SqlOperatorTranslator().Translate(NodeType);
         }
 

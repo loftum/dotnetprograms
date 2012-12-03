@@ -39,7 +39,7 @@ namespace DbTool.Testing.Linq
                 .Where(h => h.Name == "Per")
                 .Select(h => h);
             var result = _translator.Translate(query);
-            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (Name = 'Per')"));
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (Name = @p1)"));
         }
 
         [Test]
@@ -49,7 +49,9 @@ namespace DbTool.Testing.Linq
                 .Where(h => h.Name == "Per" && h.Age == 21)
                 .Select(p => p);
             var result = _translator.Translate(query);
-            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = 'Per') and (Age = 21))"));
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = @p1) and (Age = @p2))"));
+            Assert.That(result.Parameters["@p1"].Value, Is.EqualTo("Per"));
+            Assert.That(result.Parameters["@p2"].Value, Is.EqualTo(21));
         }
 
         [Test]
@@ -59,17 +61,17 @@ namespace DbTool.Testing.Linq
                 .Where(h => h.Name == "Per" || h.Age == 21)
                 .Select(p => p);
             var result = _translator.Translate(query);
-            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = 'Per') or (Age = 21))"));
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where ((Name = @p1) or (Age = @p2))"));
         }
 
         [Test]
-        public void ShouldDoSomething()
+        public void Translate_GetsWhereWithAndOrClause()
         {
             var query = Linq<Hest>()
                 .Where(h => (h.Name == "Per" && h.Age == 21) || h.Age == 22)
                 .Select(p => p);
             var result = _translator.Translate(query);
-            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (((Name = 'Per') and (Age = 21)) or (Age = 22))"));
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where (((Name = @p1) and (Age = @p2)) or (Age = @p3))"));
         }
 
 
