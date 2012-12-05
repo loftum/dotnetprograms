@@ -169,6 +169,7 @@
     <Compile Include="Linq\Interpreters\Tree\LambdaSelector.cs" />
     <Compile Include="Linq\Interpreters\Tree\SqlOperatorTranslator.cs" />
     <Compile Include="Linq\Interpreters\Tree\SqlTreeNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\TakeNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\TreeNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\UnaryNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\WhereNode.cs" />

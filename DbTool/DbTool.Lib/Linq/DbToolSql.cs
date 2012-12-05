@@ -6,7 +6,10 @@ namespace DbTool.Lib.Linq
 {
     public class DbToolSql
     {
-        public string Statement { get; set; }
+        public string Verb { get; set; }
+        public string Statement { get { return GetStatement(); } }
+        public int Count { get; set; }
+        public string What { get; set; }
         public string Table { get; set; }
         private readonly IList<string> _wheres = new List<string>();
         public string Where { get { return string.Join(" and ", _wheres); } }
@@ -14,10 +17,24 @@ namespace DbTool.Lib.Linq
         public string CommandText { get { return BuildCommandText(); } }
         public IDictionary<string, DbToolSqlParameter> Parameters { get; set; }
 
+        
+
         public DbToolSql()
         {
-            Statement = "select *";
+            Verb = "select";
+            What = "*";
             Parameters = new Dictionary<string, DbToolSqlParameter>();
+        }
+
+        private string GetStatement()
+        {
+            var builder = new StringBuilder(Verb);
+            if (Verb.Equals("select") && Count > 0)
+            {
+                builder.AppendFormat(" top {0}", Count);
+            }
+            builder.AppendFormat(" {0}", What);
+            return builder.ToString();
         }
 
         private string BuildCommandText()

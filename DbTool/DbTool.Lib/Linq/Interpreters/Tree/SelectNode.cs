@@ -14,7 +14,8 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         {
             _lambda = new LambdaSelector(Expression.Arguments[1].GetLambda());
             _columns = _lambda.Properties;
-            sql.Statement = Translate();
+            sql.Verb = "select";
+            sql.What = string.Join(", ", _columns);
             _nextNode = For(sql, expression.Arguments[0]);
         }
 

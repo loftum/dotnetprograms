@@ -55,7 +55,7 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         {
             return new UnaryNode(sql, unary);
         }
-
+        
         private static MemberNode TreeNodeFor(DbToolSql sql, MemberExpression member)
         {
             return new MemberNode(sql, member);
@@ -69,6 +69,8 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
                     return new SelectNode(sql, method);
                 case("Where"):
                     return new WhereNode(sql, method);
+                case("Take"):
+                    return new TakeNode(sql, method);
                 default:
                 throw new InvalidOperationException(string.Format("Method not supported: {0}", method.Method.Name));
             }
