@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
 using DbTool.Lib.Data;
 using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
-using FluentNHibernate.Automapping;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Linq;
 using NUnit.Framework;
 
 namespace DbTool.IntegrationTests.TableProxies
@@ -38,34 +31,21 @@ namespace DbTool.IntegrationTests.TableProxies
             {
                 _generator.CreateType(table);
             }
-            _generator.Save();
+            //_generator.Save();
 
-            using (var factory = BuildSessionFactoryFor(_generator.Assembly))
+            foreach (var type in _generator.Assembly.GetTypes())
             {
-                using (var session = factory.OpenSession())
-                {
-                    session.Query<SchemaLoader>().Where(l => l.GetType() == typeof(object));
-                }
+                Show(type);
             }
         }
 
-        private static void Show(Type type)
+        private void Show(Type type)
         {
+            Console.WriteLine(type.Name);
             foreach (var property in type.GetProperties())
             {
-                Console.WriteLine("{0} {1}", property.PropertyType, property.Name);
+                Console.WriteLine(property);
             }
-        }
-
-        private static ISessionFactory BuildSessionFactoryFor(Assembly assembly)
-        {
-            return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c =>
-                    c.FromConnectionStringWithKey("Database")).ShowSql())
-                .Mappings(m => m.AutoMappings
-                    .Add(AutoMap.Assembly(assembly).Conventions.Setup(f => f.Add<IdConvention>()))
-                )
-                .BuildSessionFactory();
         }
     }
 }
