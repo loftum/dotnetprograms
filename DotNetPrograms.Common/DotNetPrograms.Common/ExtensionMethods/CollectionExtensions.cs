@@ -16,6 +16,25 @@ namespace DotNetPrograms.Common.ExtensionMethods
             }
         }
 
+        public static IEnumerable<IEnumerable<T>> InChunksOf<T>(this IEnumerable<T> collection, int chunkSize)
+        {
+            var chunk = new List<T>();
+            foreach (var item in collection)
+            {
+                chunk.Add(item);
+                if (chunk.Count < chunkSize)
+                {
+                    continue;
+                }
+                yield return chunk;
+                chunk.Clear();
+            }
+            if (chunk.Any())
+            {
+                yield return chunk;
+            }
+        }
+
         public static string StringJoin<T>(this IEnumerable<T> collection, string separator, string defaultValue = null)
         {
             return collection.Any() ? string.Join(separator, collection) : defaultValue;
