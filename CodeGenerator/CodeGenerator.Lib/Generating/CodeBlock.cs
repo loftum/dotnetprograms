@@ -18,5 +18,10 @@
             EndTag = new TemplateElement(EndTagValue, endTagStartIndex);
             Code = new TemplateElement(rawText.Substring(StartTag.Length, rawText.Length - StartTag.Length - EndTag.Length), Bias(StartTag.Length));
         }
+
+        public bool SpansIndex(int cursor)
+        {
+            return StartIndex <= cursor && cursor < EndIndex;
+        }
     }
 }

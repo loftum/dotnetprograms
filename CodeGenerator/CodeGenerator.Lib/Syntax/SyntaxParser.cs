@@ -37,12 +37,17 @@ namespace CodeGenerator.Lib.Syntax
                 return;
             }
             _suggestions.Clear();
-            _suggestions.AddRange(GetCompletions(text));
+            _suggestions.AddRange(GetCompletions(text, cursor));
         }
 
-        private IEnumerable<Suggestion> GetCompletions(string text)
+        private IEnumerable<Suggestion> GetCompletions(string text, int cursor)
         {
-            return _cSharpEvaluator.GetCompletions(text).OrderBy(c => c.Text);
+            var codeBlock = GetCodeBlocksIn(text).FirstOrDefault(c => c.SpansIndex(cursor));
+            if (codeBlock == null)
+            {
+                return Enumerable.Empty<Suggestion>();
+            }
+            return _cSharpEvaluator.GetCompletions(codeBlock.Code.RawText).OrderBy(c => c.Text);
         }
 
         public void Parse(string text, int start, int end)

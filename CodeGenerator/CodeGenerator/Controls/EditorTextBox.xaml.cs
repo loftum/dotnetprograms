@@ -197,7 +197,7 @@ namespace CodeGenerator.Controls
 
             if (ShouldShowSuggestionList(e))
             {
-                SyntaxParser.FindSuggestions(Text.GetBlock(SelectionStart), SelectionStart);
+                SyntaxParser.FindSuggestions(Text, SelectionStart);
                 ShowSuggestionList();
                 e.Handled = true;
             }
