@@ -1,6 +1,7 @@
 ﻿using AutoMoq;
 using CodeGenerator.Lib.CSharp;
 using CodeGenerator.Lib.Generating;
+using CodeGenerator.Lib.Text;
 using DotNetPrograms.Common.Collections.Chunking;
 using Moq;
 using NUnit.Framework;
@@ -61,8 +62,8 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
 
         private static Record GetRecord(params string[] values)
         {
-            var chunk = new Chunk<string>(new []{string.Join(",", values)}, 1);
-            return new Record(chunk, ",");
+            var block = new TextBlock(0, string.Join(",", values), 0);
+            return new Record(block, ",");
         }
     }
 }

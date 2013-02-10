@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using DotNetPrograms.Common.Collections.Chunking;
+using CodeGenerator.Lib.Text;
 using DotNetPrograms.Common.ExtensionMethods;
 
 namespace CodeGenerator.Lib.Generating
 {
     public class Record
     {
-        public int Number { get; private set; }
-        public string Text { get; private set; }
+        public TextBlock Block { get; private set; }
         private static readonly string Default = string.Empty;
         private readonly IList<string> _values = new List<string>();
 
-        public Record(Chunk<string> lines, string delimiter)
+        public Record(TextBlock block, string delimiter)
         {
-            Number = lines.Number;
-            Text = string.Join(Environment.NewLine, lines);
-            foreach (var values in lines.Select(line => Regex.Split(line, delimiter)))
+            Block = block;
+            foreach (var values in block.Lines.Select(line => Regex.Split(line, delimiter)))
             {
                 _values.AddRange(values);
             }

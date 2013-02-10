@@ -441,6 +441,8 @@ namespace CodeGenerator.Controls
             }
         }
 
+        
+
         private static void OnBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var sh = (EditorTextBox)d;

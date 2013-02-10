@@ -64,6 +64,8 @@
     <Compile Include="Syntax\SyntaxProvider.cs" />
     <Compile Include="Syntax\Tag.cs" />
     <Compile Include="Syntax\TagType.cs" />
+    <Compile Include="Text\TextBlock.cs" />
+    <Compile Include="Text\TextTraverser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

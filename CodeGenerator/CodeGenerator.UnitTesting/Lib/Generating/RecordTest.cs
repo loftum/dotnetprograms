@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeGenerator.Lib.Generating;
-using CodeGenerator.UnitTesting.TestData;
-using DotNetPrograms.Common.Collections.Chunking;
+using CodeGenerator.Lib.Text;
 using NUnit.Framework;
 
 namespace CodeGenerator.UnitTesting.Lib.Generating
@@ -10,28 +9,10 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
     public class RecordTest
     {
         [Test]
-        public void RecordNumber_IsSameAsChunkNumber()
-        {
-            var chunk = new Chunk<string>(new[] {"a;b;c", "d;e;f"}, Some.Number);
-            var record = new Record(chunk, ";");
-
-            Assert.That(record.Number, Is.EqualTo(Some.Number));
-        }
-
-        [Test]
-        public void RecordText_IsStringJoinedByNewLine()
-        {
-            var chunk = new Chunk<string>(new[] { "a;b;c", "d;e;f" }, Some.Number);
-            var record = new Record(chunk, ";");
-
-            Assert.That(record.Text, Is.EqualTo("a;b;c" + Environment.NewLine + "d;e;f"));
-        }
-
-        [Test]
         public void Record_IndexesParameters()
         {
-            var chunk = new Chunk<string>(new[] { "a;b;c", "d;e;f" }, Some.Number);
-            var record = new Record(chunk, ";");
+            var block = new TextBlock(0, "a;b;c" + Environment.NewLine + "d;e;f", 0);
+            var record = new Record(block, ";");
 
             Assert.That(record[2], Is.EqualTo("c"));
         }
@@ -39,8 +20,8 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         [Test]
         public void Record_ReturnsEmptyString_IfParameterNumberDoesNotExist()
         {
-            var chunk = new Chunk<string>(new[] { "a;b;c", "d;e;f" }, Some.Number);
-            var record = new Record(chunk, ";");
+            var block = new TextBlock(0, "a;b;c" + Environment.NewLine + "d;e;f", 0);
+            var record = new Record(block, ";");
 
             Assert.That(record[50], Is.EqualTo(""));
         }

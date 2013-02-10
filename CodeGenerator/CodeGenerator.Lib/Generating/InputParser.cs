@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetPrograms.Common.Collections.Chunking;
-using DotNetPrograms.Common.ExtensionMethods;
+using CodeGenerator.Lib.Text;
 
 namespace CodeGenerator.Lib.Generating
 {
@@ -9,14 +8,8 @@ namespace CodeGenerator.Lib.Generating
     {
         public IEnumerable<Record> Parse(string input, int linesPerRecord, string delimiter)
         {
-            var chunks = GetChunks(input, linesPerRecord);
-            return chunks.Select(c => new Record(c, delimiter));
-        }
-
-        private static IEnumerable<Chunk<string>> GetChunks(string text, int linesPerRecord)
-        {
-            var lines = text.SplitLines(true);
-            return lines.InChunksOf(linesPerRecord);
+            var blocks = new TextTraverser(input).ReadBlocksOfLines(linesPerRecord);
+            return blocks.Select(b => new Record(b, delimiter));
         }
     }
 }
