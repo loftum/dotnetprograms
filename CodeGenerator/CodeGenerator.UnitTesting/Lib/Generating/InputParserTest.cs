@@ -2,6 +2,7 @@
 using System.Text;
 using AutoMoq;
 using CodeGenerator.Lib.Generating;
+using DotNetPrograms.Common.ExtensionMethods;
 using NUnit.Framework;
 
 namespace CodeGenerator.UnitTesting.Lib.Generating
@@ -60,6 +61,25 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
 
             var records = _parser.Parse(input, 2, " ");
             Assert.That(records.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void Should()
+        {
+            var input = new StringBuilder()
+                .AppendLine("a b c")
+                .AppendLine()
+                .AppendLine("d e f")
+                .AppendLine()
+                .AppendLine("g h i").ToString();
+
+            var lines = input.SplitLines(true);
+            var chunks = lines.InChunksOf(2);
+            
+
+            var list = chunks.ToList();
+            Assert.That(list.Count, Is.EqualTo(3));
+
         }
     }
 }

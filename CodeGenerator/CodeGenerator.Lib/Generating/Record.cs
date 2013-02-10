@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using DotNetPrograms.Common.Collections.Chunking;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace CodeGenerator.Lib.Generating
 {
     public class Record
     {
+        public int Number { get; private set; }
+        public string Text { get; private set; }
         private static readonly string Default = string.Empty;
-        private readonly IList<string> _values;
+        private readonly IList<string> _values = new List<string>();
 
-        public Record(params string[] values) : this(values.ToList())
+        public Record(Chunk<string> lines, string delimiter)
         {
-            
-        }
-
-        public Record(IList<string> values)
-        {
-            _values = values;
+            Number = lines.Number;
+            Text = string.Join(Environment.NewLine, lines);
+            foreach (var values in lines.Select(line => Regex.Split(line, delimiter)))
+            {
+                _values.AddRange(values);
+            }
         }
 
         public string this[int index]

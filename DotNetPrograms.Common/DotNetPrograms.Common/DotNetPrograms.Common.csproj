@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Chunking\Chunk.cs" />
+    <Compile Include="Collections\Chunking\ChunkCollection.cs" />
+    <Compile Include="Collections\Chunking\ChunkEnumerator.cs" />
+    <Compile Include="Collections\Chunking\ListChunkEnumerator.cs" />
     <Compile Include="Configuration\SettingsBase.cs" />
     <Compile Include="DateAndTime\DateTimeProvider.cs" />
     <Compile Include="Exceptions\PropertyErrorException.cs" />

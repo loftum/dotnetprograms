@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lib\Generating\InputParserTest.cs" />
+    <Compile Include="Lib\Generating\RecordTest.cs" />
     <Compile Include="Lib\Generating\TemplateParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestData\Some.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

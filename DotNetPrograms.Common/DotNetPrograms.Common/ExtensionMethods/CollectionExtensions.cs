@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DotNetPrograms.Common.Collections.Chunking;
 
 namespace DotNetPrograms.Common.ExtensionMethods
 {
@@ -16,23 +17,9 @@ namespace DotNetPrograms.Common.ExtensionMethods
             }
         }
 
-        public static IEnumerable<IEnumerable<T>> InChunksOf<T>(this IEnumerable<T> collection, int chunkSize)
+        public static ChunkCollection<T> InChunksOf<T>(this IEnumerable<T> collection, int chunkSize)
         {
-            var chunk = new List<T>();
-            foreach (var item in collection)
-            {
-                chunk.Add(item);
-                if (chunk.Count < chunkSize)
-                {
-                    continue;
-                }
-                yield return chunk;
-                chunk = new List<T>();
-            }
-            if (chunk.Any())
-            {
-                yield return chunk;
-            }
+            return new ChunkCollection<T>(collection, chunkSize);
         }
 
         public static string StringJoin<T>(this IEnumerable<T> collection, string separator, string defaultValue = null)

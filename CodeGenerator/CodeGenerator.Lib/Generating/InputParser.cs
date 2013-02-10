@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+using DotNetPrograms.Common.Collections.Chunking;
 using DotNetPrograms.Common.ExtensionMethods;
 
 namespace CodeGenerator.Lib.Generating
@@ -9,27 +9,14 @@ namespace CodeGenerator.Lib.Generating
     {
         public IEnumerable<Record> Parse(string input, int linesPerRecord, string delimiter)
         {
-            return GetRecords(input, linesPerRecord)
-                .Select(t => Split(t, delimiter))
-                .Select(values => new Record(values));
+            var chunks = GetChunks(input, linesPerRecord);
+            return chunks.Select(c => new Record(c, delimiter));
         }
 
-        private static IList<string> Split(string recordText, string delimiter)
-        {
-            return Regex.Split(recordText, delimiter);
-        }
-
-        private static IEnumerable<string> GetRecords(string text, int linesPerRecord)
+        private static IEnumerable<Chunk<string>> GetChunks(string text, int linesPerRecord)
         {
             var lines = text.SplitLines(true);
-            var chunks = lines.InChunksOf(linesPerRecord);
-
-            return chunks.Select(GetRecord);
-        }
-
-        private static string GetRecord(IEnumerable<string> chunk)
-        {
-            return string.Join(" ", chunk);
+            return lines.InChunksOf(linesPerRecord);
         }
     }
 }

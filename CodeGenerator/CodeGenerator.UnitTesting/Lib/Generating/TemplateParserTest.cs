@@ -1,6 +1,8 @@
-﻿using AutoMoq;
+﻿using System.Collections.Generic;
+using AutoMoq;
 using CodeGenerator.Lib.CSharp;
 using CodeGenerator.Lib.Generating;
+using DotNetPrograms.Common.Collections.Chunking;
 using Moq;
 using NUnit.Framework;
 
@@ -30,7 +32,7 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         public void Parse_ReplacesWildcards()
         {
             const string input = "insert into #0 (name) values ('#1')";
-            var record = new Record("Person", "Jens");
+            var record = GetRecord("Person", "Jens");
             var code = _parser.Parse(input, record);
 
             Assert.That(code, Is.EqualTo("insert into Person (name) values ('Jens')"));
@@ -41,7 +43,7 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         {
             
             const string input = "insert into @{\"#0\".ToUpper()} (name) values ('#1')";
-            var record = new Record("Person", "Jens");
+            var record = GetRecord("Person", "Jens");
             _parser.Parse(input, record);
 
             _evaluator.Verify(e => e.Run("\"Person\".ToUpper()"));
@@ -52,11 +54,16 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         {
             const string input = "insert into @{\"#0\".ToUpper()} (name) values ('#1')";
             _evaluator.Setup(e => e.Run("\"Person\".ToUpper()")).Returns(new CSharpResult(true, "PERSON", "", ""));
-            var record = new Record("Person", "Jens");
+            var record = GetRecord("Person", "Jens");
             var result = _parser.Parse(input, record);
 
             Assert.That(result, Is.EqualTo("insert into PERSON (name) values ('Jens')"));
+        }
 
+        private static Record GetRecord(params string[] values)
+        {
+            var chunk = new Chunk<string>(new []{string.Join(",", values)}, 1);
+            return new Record(chunk, ",");
         }
     }
 }
