@@ -47,7 +47,6 @@ namespace CodeGenerator.Lib.Syntax
             tagType = TagType.Nothing;
             return false;
         }
-
         
         public TagType GetTypeOf(string word)
         {

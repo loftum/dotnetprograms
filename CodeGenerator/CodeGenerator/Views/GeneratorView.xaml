@@ -8,11 +8,11 @@
              Height="Auto" Width="Auto">
     <UserControl.Resources>
         <controls:HighlightStyleCollection x:Key="DefaultSyntaxStyle">
-            <controls:HighlightStyle Type="CSharp" Foreground="DodgerBlue" />
+            <controls:HighlightStyle Type="CSharp" Foreground="Blue" />
             <controls:HighlightStyle Type="CodeBlock" Foreground="Crimson" />
             <controls:HighlightStyle Type="String" Foreground="DarkRed" />
             <controls:HighlightStyle Type="Operator" Foreground="Gray" />
-            <controls:HighlightStyle Type="Parameter" Foreground="Green" />
+            <controls:HighlightStyle Type="Parameter" Foreground="DarkCyan" />
         </controls:HighlightStyleCollection>
 
         <Style x:Key="DefaultStyle" TargetType="controls:EditorTextBox">

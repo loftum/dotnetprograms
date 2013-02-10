@@ -2,9 +2,9 @@
 {
     public class CodeBlock : TemplateElement
     {
-        public const string Pattern = @"¤\{{1}[^\}]*\}{1}";
+        public const string Pattern = @"¤\{{1}[\w\W]*\}¤{1}";
         private const string StartTagValue = "¤{";
-        private const string EndTagValue = "}";
+        private const string EndTagValue = "}¤";
 
         public TemplateElement StartTag { get; private set; }
         public TemplateElement Code { get; private set; }
