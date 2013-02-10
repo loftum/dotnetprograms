@@ -410,7 +410,6 @@ namespace CodeGenerator.Controls
             {
                 foreach (var tag in SyntaxParser.Tags)
                 {
-
                     var style = GetHighlightStyleFor(tag.Type);
                     if (style != null)
                     {

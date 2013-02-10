@@ -6,6 +6,7 @@ namespace CodeGenerator.Lib.Syntax
         String,
         CSharp,
         Operator,
-        CodeBlock
+        CodeBlock,
+        Parameter
     }
 }

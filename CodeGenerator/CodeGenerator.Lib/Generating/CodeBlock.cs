@@ -2,8 +2,8 @@
 {
     public class CodeBlock : TemplateElement
     {
-        public const string Pattern = @"@\{{1}[\w\W]*\}{1}";
-        private const string StartTagValue = "@{";
+        public const string Pattern = @"¤\{{1}[^\}]*\}{1}";
+        private const string StartTagValue = "¤{";
         private const string EndTagValue = "}";
 
         public TemplateElement StartTag { get; private set; }
@@ -13,11 +13,10 @@
 
         public CodeBlock(string rawText, int startIndex) : base(rawText, startIndex)
         {
-            StartTag = new TemplateElement(rawText.Substring(0, StartTagValue.Length), startIndex);
-            var endTagStartIndex = rawText.Length - EndTagValue.Length;
-            EndTag = new TemplateElement(rawText.Substring(endTagStartIndex), endTagStartIndex);
-            Code = new TemplateElement(rawText.Substring(StartTag.Length, rawText.Length - StartTag.Length - EndTag.Length), StartTag.Length);
-            
+            StartTag = new TemplateElement(StartTagValue, startIndex);
+            var endTagStartIndex = Bias(rawText.Length - EndTagValue.Length);
+            EndTag = new TemplateElement(EndTagValue, endTagStartIndex);
+            Code = new TemplateElement(rawText.Substring(StartTag.Length, rawText.Length - StartTag.Length - EndTag.Length), Bias(StartTag.Length));
         }
     }
 }

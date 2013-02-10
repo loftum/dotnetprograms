@@ -52,7 +52,7 @@ namespace CodeGenerator.Lib.Syntax
             {
                 return;
             }
-            _tags.AddRange(GetCodeBlockTagsIn(text));
+            
 
             var wordStart = 0;
             for (var ii = start; ii < end; ii++)
@@ -73,7 +73,7 @@ namespace CodeGenerator.Lib.Syntax
                         {
                             Type = type,
                             StartPosition = wordStart,
-                            EndPosition = wordEnd
+                            Length = word.Length,
                         };
                         _tags.Add(tag);
                     }
@@ -81,7 +81,19 @@ namespace CodeGenerator.Lib.Syntax
                 wordStart = ii + 1;
             }
 
+            _tags.AddRange(GetCodeBlockTagsIn(text));
             _tags.AddRange(GetStringsTagsIn(text));
+            _tags.AddRange(GetParameterTagsIn(text));
+        }
+
+        private IEnumerable<Tag> GetParameterTagsIn(string text)
+        {
+            var parameters = new List<Tag>();
+            foreach (var parameter in GetParametersIn(text))
+            {
+                parameters.Add(new Tag{Type = TagType.Parameter, StartPosition = parameter.StartIndex, Length = parameter.Length});
+            }
+            return parameters;
         }
 
         private IEnumerable<Tag> GetCodeBlockTagsIn(string text)
@@ -89,8 +101,8 @@ namespace CodeGenerator.Lib.Syntax
             var blocks = new List<Tag>();
             foreach (var block in GetCodeBlocksIn(text))
             {
-                blocks.Add(new Tag{Type = TagType.CodeBlock, StartPosition = block.StartTag.StartIndex, EndPosition = block.StartTag.EndIndex });
-                blocks.Add(new Tag{Type = TagType.CodeBlock, StartPosition = block.EndTag.StartIndex, EndPosition = block.EndTag.EndIndex});
+                blocks.Add(new Tag{Type = TagType.CodeBlock, StartPosition = block.StartTag.StartIndex, Length = block.StartTag.Length });
+                blocks.Add(new Tag{Type = TagType.CodeBlock, StartPosition = block.EndTag.StartIndex, Length = block.EndTag.Length });
             }
             return blocks;
         }
@@ -134,7 +146,7 @@ namespace CodeGenerator.Lib.Syntax
             for (var ii = 0; ii < matches.Count; ii++)
             {
                 var group = matches[ii].Groups[0];
-                strings.Add(new Tag { StartPosition = group.Index, EndPosition = group.Index + group.Length, Type = tagType });
+                strings.Add(new Tag { StartPosition = group.Index, Length = group.Length, Type = tagType });
             }
             return strings;
         }

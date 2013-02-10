@@ -13,5 +13,10 @@
             StartIndex = startIndex;
             Length = rawText.Length;
         }
+
+        protected int Bias(int value)
+        {
+            return StartIndex + value;
+        }
     }
 }

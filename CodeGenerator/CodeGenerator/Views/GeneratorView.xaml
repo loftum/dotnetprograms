@@ -12,6 +12,7 @@
             <controls:HighlightStyle Type="CodeBlock" Foreground="Crimson" />
             <controls:HighlightStyle Type="String" Foreground="DarkRed" />
             <controls:HighlightStyle Type="Operator" Foreground="Gray" />
+            <controls:HighlightStyle Type="Parameter" Foreground="Green" />
         </controls:HighlightStyleCollection>
 
         <Style x:Key="DefaultStyle" TargetType="controls:EditorTextBox">
