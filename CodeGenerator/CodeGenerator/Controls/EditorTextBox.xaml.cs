@@ -384,7 +384,7 @@ namespace CodeGenerator.Controls
             // left from first char boundary
 
             var leftBorder = GetRectFromCharacterIndex(0).Left;
-            if (!Double.IsInfinity(leftBorder))
+            if (!double.IsInfinity(leftBorder))
             {
                 _leftTextBorder = leftBorder;
             }
