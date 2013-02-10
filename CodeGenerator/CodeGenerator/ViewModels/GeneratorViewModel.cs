@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using CodeGenerator.Lib.Generating;
+using CodeGenerator.Lib.Syntax;
 
 namespace CodeGenerator.ViewModels
 {
@@ -42,9 +43,14 @@ namespace CodeGenerator.ViewModels
             set { _linesPerRecord = value; NotifyOfPropertyChange(() => LinesPerRecord); }
         }
 
-        public GeneratorViewModel(IOutputGenerator generator)
+        public ISyntaxParser SyntaxParser { get; private set; }
+        
+
+        public GeneratorViewModel(IOutputGenerator generator,
+            ISyntaxParser syntaxParser)
         {
             _generator = generator;
+            SyntaxParser = syntaxParser;
             LinesPerRecord = 1;
             Delimiter = @"[\s]+";
         }

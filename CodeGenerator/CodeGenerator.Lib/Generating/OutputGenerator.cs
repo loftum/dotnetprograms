@@ -6,13 +6,13 @@ namespace CodeGenerator.Lib.Generating
     public class OutputGenerator : IOutputGenerator
     {
         private readonly IInputParser _inputParser;
-        private readonly ITemplateParser _templateParser;
+        private readonly ITemplateEvaluator _templateEvaluator;
 
         public OutputGenerator(IInputParser inputParser,
-            ITemplateParser templateParser)
+            ITemplateEvaluator templateEvaluator)
         {
             _inputParser = inputParser;
-            _templateParser = templateParser;
+            _templateEvaluator = templateEvaluator;
         }
 
         public string Generate(string input, string template, int linesPerRecord, string delimiter)
@@ -20,7 +20,7 @@ namespace CodeGenerator.Lib.Generating
             var records = _inputParser.Parse(input, linesPerRecord, delimiter);
             var builder = new StringBuilder();
             
-            foreach (var output in records.Select(record => _templateParser.Parse(template, record)))
+            foreach (var output in records.Select(record => _templateEvaluator.Evaluate(template, record)))
             {
                 builder.AppendLine(output);
             }

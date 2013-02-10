@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using Caliburn.Micro;
+using Ninject.Modules;
 using Ninject.Extensions.Conventions;
 
 namespace CodeGenerator.Ioc
@@ -16,7 +17,7 @@ namespace CodeGenerator.Ioc
                 .From("CodeGenerator.Lib")
                 .SelectAllClasses().BindAllInterfaces()
                 .Configure(b => b.InTransientScope()));
-
+            Bind<IWindowManager>().To<CodeGeneratorWindowManager>();
         }
     }
 }

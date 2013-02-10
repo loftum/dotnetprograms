@@ -47,6 +47,7 @@
       <HintPath>..\packages\ninject.extensions.conventions.3.0.0.11\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\Caliburn.Micro.1.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -72,6 +73,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CodeGeneratorWindowManager.cs" />
+    <Compile Include="Controls\EditorTextBox.xaml.cs">
+      <DependentUpon>EditorTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HighlightStyle.cs" />
+    <Compile Include="Controls\HighlightStyleCollection.cs" />
+    <Compile Include="Controls\NotifyableWordCollection.cs" />
     <Compile Include="GeneratorBootstrapper.cs" />
     <Compile Include="Ioc\CodeGeneratorModule.cs" />
     <Compile Include="Views\GeneratorView.xaml.cs">
@@ -108,12 +116,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\EditorTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\GeneratorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeGenerator.Lib\CodeGenerator.Lib.csproj">
       <Project>{5cff0b09-74f3-495a-96ed-757c9beff428}</Project>
       <Name>CodeGenerator.Lib</Name>

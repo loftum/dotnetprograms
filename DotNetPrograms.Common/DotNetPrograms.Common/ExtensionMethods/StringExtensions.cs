@@ -165,9 +165,9 @@ namespace DotNetPrograms.Common.ExtensionMethods
                 return value;
             }
 
-            var chars = value.ToCharArray(0, endIndex + 1);
+            var chars = value.ToCharArray(0, endIndex);
             var foundNewLine = false;
-            for (var ii = endIndex; ii > 0; ii--)
+            for (var ii = endIndex - 1; ii > 0; ii--)
             {
                 if (chars[ii] == '\n')
                 {

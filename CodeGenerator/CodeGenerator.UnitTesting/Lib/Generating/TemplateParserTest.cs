@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMoq;
+﻿using AutoMoq;
 using CodeGenerator.Lib.CSharp;
 using CodeGenerator.Lib.Generating;
 using DotNetPrograms.Common.Collections.Chunking;
@@ -11,14 +10,14 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
     [TestFixture]
     public class TemplateParserTest
     {
-        private TemplateParser _parser;
+        private TemplateEvaluator _templateEvaluator;
         private Mock<ICSharpEvaluator> _evaluator;
 
         [SetUp]
         public void Setup()
         {
             var mocker = new AutoMoqer();
-            _parser = mocker.Create<TemplateParser>();
+            _templateEvaluator = mocker.Create<TemplateEvaluator>();
             _evaluator = mocker.GetMock<ICSharpEvaluator>();
             _evaluator.Setup(e => e.Run(It.IsAny<string>())).Returns(EmptyResult);
         }
@@ -33,7 +32,7 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         {
             const string input = "insert into #0 (name) values ('#1')";
             var record = GetRecord("Person", "Jens");
-            var code = _parser.Parse(input, record);
+            var code = _templateEvaluator.Evaluate(input, record);
 
             Assert.That(code, Is.EqualTo("insert into Person (name) values ('Jens')"));
         }
@@ -44,7 +43,7 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
             
             const string input = "insert into @{\"#0\".ToUpper()} (name) values ('#1')";
             var record = GetRecord("Person", "Jens");
-            _parser.Parse(input, record);
+            _templateEvaluator.Evaluate(input, record);
 
             _evaluator.Verify(e => e.Run("\"Person\".ToUpper()"));
         }
@@ -55,7 +54,7 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
             const string input = "insert into @{\"#0\".ToUpper()} (name) values ('#1')";
             _evaluator.Setup(e => e.Run("\"Person\".ToUpper()")).Returns(new CSharpResult(true, "PERSON", "", ""));
             var record = GetRecord("Person", "Jens");
-            var result = _parser.Parse(input, record);
+            var result = _templateEvaluator.Evaluate(input, record);
 
             Assert.That(result, Is.EqualTo("insert into PERSON (name) values ('Jens')"));
         }

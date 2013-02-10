@@ -22,10 +22,16 @@ namespace CodeGenerator
             {
                 return _kernel.Get(service);
             }
-            catch (ActivationException)
+            catch (ActivationException ex)
             {
-
-                return base.GetInstance(service, key);
+                try
+                {
+                    return base.GetInstance(service, key);
+                }
+                catch
+                {
+                    throw new ActivationException(string.Format("Could not get instance of {0} (key='{1}')", service.Name, key), ex);
+                }
             }
         }
 
