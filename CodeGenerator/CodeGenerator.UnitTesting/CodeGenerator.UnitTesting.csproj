@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeGenerator.Lib\CodeGenerator.Lib.csproj">
       <Project>{5cff0b09-74f3-495a-96ed-757c9beff428}</Project>
       <Name>CodeGenerator.Lib</Name>

@@ -66,11 +66,12 @@ namespace DotNetPrograms.Common.ExtensionMethods
             return Convert.ToBase64String(Encoding.Default.GetBytes(value));
         }
 
-        public static string[] SplitLines(this string value)
+        public static string[] SplitLines(this string value, bool includeEmptyLines = false)
         {
+            var options = includeEmptyLines ? StringSplitOptions.None : StringSplitOptions.RemoveEmptyEntries;
             return value.IsNullOrEmpty()
                 ? new string[0]
-                : value.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                : value.Split(new[] { Environment.NewLine }, options);
         }
 
         public static bool IsSingleWord(this string value)

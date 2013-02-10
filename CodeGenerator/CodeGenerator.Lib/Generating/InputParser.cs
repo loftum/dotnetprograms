@@ -21,14 +21,15 @@ namespace CodeGenerator.Lib.Generating
 
         private static IEnumerable<string> GetRecords(string text, int linesPerRecord)
         {
-            return text.SplitLines()
-                .InChunksOf(linesPerRecord)
-                .Select(GetRecord);
+            var lines = text.SplitLines(true);
+            var chunks = lines.InChunksOf(linesPerRecord);
+
+            return chunks.Select(GetRecord);
         }
 
         private static string GetRecord(IEnumerable<string> chunk)
         {
-            return string.Join("", chunk);
+            return string.Join(" ", chunk);
         }
     }
 }

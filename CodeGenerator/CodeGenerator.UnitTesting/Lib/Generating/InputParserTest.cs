@@ -37,14 +37,29 @@ namespace CodeGenerator.UnitTesting.Lib.Generating
         }
 
         [Test]
-        public void Parse_ReturnsOneRecordPerLine()
+        public void Parse_ReturnsOneRecordPerChunksOfLines()
         {
-            var input = new StringBuilder("a b c")
-                .AppendLine("c d e")
-                .AppendLine("f g h").ToString();
+            var input = new StringBuilder()
+                .AppendLine("a b c")
+                .AppendLine("d e f")
+                .Append("g h i").ToString();
 
             var records = _parser.Parse(input, 2, " ");
             Assert.That(records.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Parse_IncludesEmptyLines()
+        {
+            var input = new StringBuilder()
+                .AppendLine("a b c")
+                .AppendLine()
+                .AppendLine("d e f")
+                .AppendLine()
+                .AppendLine("g h i").ToString();
+
+            var records = _parser.Parse(input, 2, " ");
+            Assert.That(records.Count(), Is.EqualTo(3));
         }
     }
 }

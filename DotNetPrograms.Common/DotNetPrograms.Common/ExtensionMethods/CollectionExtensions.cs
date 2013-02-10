@@ -27,7 +27,7 @@ namespace DotNetPrograms.Common.ExtensionMethods
                     continue;
                 }
                 yield return chunk;
-                chunk.Clear();
+                chunk = new List<T>();
             }
             if (chunk.Any())
             {
