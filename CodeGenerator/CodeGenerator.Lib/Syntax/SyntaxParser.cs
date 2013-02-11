@@ -112,14 +112,14 @@ namespace CodeGenerator.Lib.Syntax
             return blocks;
         }
 
-        public IEnumerable<Parameter> GetParametersIn(string text)
+        public IEnumerable<TemplateParameter> GetParametersIn(string text)
         {
-            var regex = new Regex(Parameter.Pattern);
+            var regex = new Regex(TemplateParameter.Pattern);
             var match = regex.Match(text);
             while (match.Success)
             {
                 var group = match.Groups[0];
-                yield return new Parameter(group.Value, group.Index);
+                yield return new TemplateParameter(group.Value, group.Index);
                 match = match.NextMatch();
             }
         }

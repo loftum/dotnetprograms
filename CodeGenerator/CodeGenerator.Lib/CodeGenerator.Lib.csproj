@@ -49,13 +49,14 @@
     <Compile Include="CSharp\Suggestion.cs" />
     <Compile Include="Generating\CodeBlock.cs" />
     <Compile Include="Generating\IInputParser.cs" />
+    <Compile Include="Generating\InputValue.cs" />
     <Compile Include="Generating\InputParser.cs" />
     <Compile Include="Generating\IOutputGenerator.cs" />
     <Compile Include="Generating\ITemplateEvaluator.cs" />
     <Compile Include="Generating\OutputGenerator.cs" />
-    <Compile Include="Generating\Parameter.cs" />
+    <Compile Include="Generating\TemplateParameter.cs" />
     <Compile Include="Generating\Record.cs" />
-    <Compile Include="Generating\TemplateElement.cs" />
+    <Compile Include="Generating\TextElement.cs" />
     <Compile Include="Generating\TemplateEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Syntax\ISyntaxParser.cs" />

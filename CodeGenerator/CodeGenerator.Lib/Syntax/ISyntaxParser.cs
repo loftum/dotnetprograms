@@ -11,6 +11,6 @@ namespace CodeGenerator.Lib.Syntax
         IEnumerable<Suggestion> Suggestions { get; }
         void FindSuggestions(string text, int cursor);
         IEnumerable<CodeBlock> GetCodeBlocksIn(string text);
-        IEnumerable<Parameter> GetParametersIn(string text);
+        IEnumerable<TemplateParameter> GetParametersIn(string text);
     }
 }

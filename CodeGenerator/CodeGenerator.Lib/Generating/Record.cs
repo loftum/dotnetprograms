@@ -3,23 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CodeGenerator.Lib.Text;
-using DotNetPrograms.Common.ExtensionMethods;
 
 namespace CodeGenerator.Lib.Generating
 {
-    public class Record
+    public class Record : TextElement
     {
-        public TextBlock Block { get; private set; }
         private static readonly string Default = string.Empty;
-        private readonly IList<string> _values = new List<string>();
+        private readonly IList<InputValue> _values = new List<InputValue>();
 
-        public Record(TextBlock block, string delimiter)
+        public Record(TextBlock block, string delimiterPattern) : base(block.Text, block.StartIndex)
         {
-            Block = block;
-            foreach (var values in block.Lines.Select(line => Regex.Split(line, delimiter)))
+            foreach (var value in GetInputValues(delimiterPattern))
             {
-                _values.AddRange(values);
+                _values.Add(value);
             }
+        }
+
+        private IEnumerable<InputValue> GetInputValues(string delimiterPattern)
+        {
+            var startIndex = 0;
+            var delimiters = GetDelimiters(delimiterPattern);
+            foreach (var delimiterMatch in delimiters)
+            {
+                yield return new InputValue(RawText.Substring(startIndex, delimiterMatch.Index - startIndex), Bias(startIndex));
+                startIndex = delimiterMatch.Index + delimiterMatch.Length;
+            }
+
+            var last = delimiters.LastOrDefault();
+            if (last != null)
+            {
+                yield return new InputValue(RawText.Substring(startIndex, RawText.Length - startIndex), Bias(startIndex));
+            }
+        }
+
+        private IList<Match> GetDelimiters(string delimiterPattern)
+        {
+            var regex = new Regex(delimiterPattern);
+            return regex.Matches(RawText).Cast<Match>().ToList();
         }
 
         public string this[int index]
@@ -28,7 +48,7 @@ namespace CodeGenerator.Lib.Generating
             {
                 try
                 {
-                    return _values[index];
+                    return _values[index].RawText;
                 }
                 catch (IndexOutOfRangeException)
                 {
