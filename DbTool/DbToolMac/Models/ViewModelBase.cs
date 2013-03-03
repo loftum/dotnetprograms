@@ -3,6 +3,7 @@ using DbTool.Lib.Ui.Models;
 using MonoMac.Foundation;
 using System.Linq.Expressions;
 using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolMac
 {
@@ -14,7 +15,7 @@ namespace DbToolMac
         {
             if (ModelChange != null && expression != null)
             {
-                ModelChange(this, new ModelChangeEventArgs(expression.GetPropertyId()));
+                ModelChange(this, new ModelChangeEventArgs(expression.GetPropertyName()));
             }
         }
     }

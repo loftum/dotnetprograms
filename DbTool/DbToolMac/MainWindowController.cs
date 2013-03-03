@@ -3,7 +3,7 @@ using System.Linq;
 using DbTool.Lib.Communication;
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Syntax;
 using DbToolMac.ExtensionMethods;
 using DbTool.Lib.ExtensionMethods;
 using DbToolMac.Models;
@@ -13,6 +13,7 @@ using DbTool.Lib.Ui.ModelBinding;
 using DbTool.Lib.Communication.DbCommands;
 using DbTool.Lib.Meta;
 using DbTool.Lib.Communication.DbCommands.Results;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolMac
 {

@@ -3,7 +3,7 @@ using Ninject.Activation;
 using DbTool.Lib.Connections;
 using DbTool.Lib.Communication;
 using DbTool.Lib.Configuration;
-using DbTool.Lib.Ui.Syntax;
+using DbTool.Lib.Syntax;
 using Ninject;
 using DbTool.Lib.Meta;
 

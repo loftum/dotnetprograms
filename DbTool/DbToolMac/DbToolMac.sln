@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Testing", "..\DbTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "..\DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPrograms.Common", "..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj", "{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -27,6 +29,10 @@ Global
 		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Debug|x86.Build.0 = Debug|x86
 		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.ActiveCfg = Release|x86
 		{74E31DD3-0DA6-4529-82CA-82D46F8A994E}.Release|x86.Build.0 = Release|x86
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|x86.Build.0 = Release|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Debug|x86.Build.0 = Debug|Any CPU
 		{BA6E0230-D231-4F44-8820-88D159334D65}.Release|x86.ActiveCfg = Release|Any CPU

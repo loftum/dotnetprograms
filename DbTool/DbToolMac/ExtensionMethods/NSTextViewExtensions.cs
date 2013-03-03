@@ -2,6 +2,7 @@ using System;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using DbTool.Lib.ExtensionMethods;
+using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbToolMac.ExtensionMethods
 {
