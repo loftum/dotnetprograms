@@ -19,9 +19,12 @@ namespace DbToolMac.Modules
         private static MainWindowController CreateController(IContext context)
         {
             var kernel = context.Kernel;
-            return new MainWindowController(kernel.Get<IDatabaseCommunicator>(),
-                kernel.Get<IDbToolSettings>(),
-                kernel.Get<ITypeCache>());
+
+			var settings = kernel.Get<IDbToolSettings>();
+			var communicator = kernel.Get<IDatabaseCommunicator>();
+			var typeCache = kernel.Get<ITypeCache>();
+
+            return new MainWindowController(communicator, settings, typeCache);
         }
     }
 }
