@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{F647FD14-D512-4DAD-81C9-EA45A950B61F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate.Lib", "Generate.Lib\Generate.Lib.csproj", "{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Common", "00. Common", "{89AF8498-A97F-49CA-BBC3-7A6C1C3C4896}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPrograms.Common", "..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj", "{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Applications", "01. Applications", "{C6DE7953-B7CE-4804-A9F1-53278BA07607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{F647FD14-D512-4DAD-81C9-EA45A950B61F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Libraries", "02. Libraries", "{0A7F7DD4-BB97-4BA4-994C-60BF06DAC8F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate.Lib", "Generate.Lib\Generate.Lib.csproj", "{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +31,11 @@ Global
 		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Debug|x86.Build.0 = Debug|x86
 		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Release|x86.ActiveCfg = Release|x86
 		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55} = {89AF8498-A97F-49CA-BBC3-7A6C1C3C4896}
+		{F647FD14-D512-4DAD-81C9-EA45A950B61F} = {C6DE7953-B7CE-4804-A9F1-53278BA07607}
+		{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1} = {0A7F7DD4-BB97-4BA4-994C-60BF06DAC8F0}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Generate\Generate.csproj
