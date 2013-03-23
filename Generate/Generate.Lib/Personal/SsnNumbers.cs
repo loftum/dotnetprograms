@@ -8,6 +8,7 @@ namespace Generate.Lib
 		public int Day { get; private set; }
 		public int Month { get; private set; }
 		public int Year { get; private set; }
+		public int Individual { get; private set; }
 
 		public int D1 { get; private set; }
 		public int M1 { get; private set; }
@@ -26,6 +27,7 @@ namespace Generate.Lib
 			Day = GetOrDefault<int> (value, 0, 2);
 			Month = GetOrDefault<int> (value, 2, 2);
 			Year = GetOrDefault<int> (value, 4, 2);
+			Individual = GetOrDefault<int> (value, 6, 3);
 			D1 = GetOrDefault<int>(value, 0);
 			D2 = GetOrDefault<int>(value, 1);
 			M1 = GetOrDefault<int>(value, 2);
