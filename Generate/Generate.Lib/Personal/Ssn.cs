@@ -3,34 +3,17 @@ using DotNetPrograms.Common.ExtensionMethods;
 
 namespace Generate.Lib
 {
-	public abstract class Ssn
+	public abstract class Ssn : LegalNumber
 	{
-		public string Value { get; private set; }
 		public SsnNumbers Numbers { get; private set; }
 		public DateTime Date { get; private set; }
 		public Gender Gender
 		{
 			get { return Numbers.I3 % 2 == 0 ? Gender.Female : Gender.Male; }
 		}
-		public bool IsValid
-		{
-			get
-			{
-				try
-				{
-					Validate();
-					return true;
-				}
-				catch
-				{
-					return false;
-				}
-			}
-		}
 
-		protected Ssn(string value)
+		protected Ssn(string value) : base(value)
 		{
-			Value = value;
 			Numbers = new SsnNumbers(value);
 			Date = ParseDateOrDefault();
 		}
@@ -49,7 +32,7 @@ namespace Generate.Lib
 
 		protected abstract DateTime ParseDate();
 
-		public void Validate()
+		public override void Validate()
 		{
 			long trash;
 			if (Value == null || Value.Length != 11)
@@ -110,11 +93,6 @@ namespace Generate.Lib
 		public override string ToString ()
 		{
 			return string.Format ("{0} ({1})", Value, IsValid ? "valid" : "invalid");
-		}
-
-		public static implicit operator string(Ssn ssn)
-		{
-			return ssn == null ? null : ssn.Value;
 		}
 	}
 }

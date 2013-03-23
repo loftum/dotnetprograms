@@ -43,10 +43,13 @@
     <Compile Include="Personal\Hnr.cs" />
     <Compile Include="Personal\ISsnGenerator.cs" />
     <Compile Include="Personal\NonDate.cs" />
+    <Compile Include="Organizational\Orgnr.cs" />
+    <Compile Include="LegalNumber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Personal\" />
+    <Folder Include="Organizational\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
