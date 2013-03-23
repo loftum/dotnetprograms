@@ -37,6 +37,10 @@
     <Compile Include="Personal\Ssn.cs" />
     <Compile Include="Personal\SsnGenerator.cs" />
     <Compile Include="Personal\Gender.cs" />
+    <Compile Include="Personal\Pnr.cs" />
+    <Compile Include="Personal\SsnNumbers.cs" />
+    <Compile Include="Personal\Dnr.cs" />
+    <Compile Include="Personal\Hnr.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

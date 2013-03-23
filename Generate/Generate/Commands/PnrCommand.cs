@@ -13,7 +13,7 @@ namespace Generate
 
 		public string Generate()
 		{
-			return new SsnGenerator().GeneratePnr().ToString();
+			return new SsnGenerator().GeneratePnr();
 		}
 	}
 }
