@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{F647FD14-D512-4DAD-81C9-EA45A950B61F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate.Lib", "Generate.Lib\Generate.Lib.csproj", "{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPrograms.Common", "..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj", "{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|x86.Build.0 = Release|Any CPU
+		{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{E62EA759-2F5D-4DCB-BC27-708EFFD5BDC1}.Release|x86.Build.0 = Release|Any CPU
+		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Debug|x86.ActiveCfg = Debug|x86
+		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Debug|x86.Build.0 = Debug|x86
+		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Release|x86.ActiveCfg = Release|x86
+		{F647FD14-D512-4DAD-81C9-EA45A950B61F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Generate\Generate.csproj
+	EndGlobalSection
+EndGlobal
