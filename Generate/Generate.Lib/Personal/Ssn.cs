@@ -51,12 +51,12 @@ namespace Generate.Lib
 
 		public void Validate()
 		{
-			int trash;
+			long trash;
 			if (Value == null || Value.Length != 11)
 			{
 				throw new Exception("Ssn must be 11 characters");
 			}
-			if (!int.TryParse (Value, out trash))
+			if (!long.TryParse (Value, out trash))
 			{
 				throw new Exception("Ssn must be a number");
 			}

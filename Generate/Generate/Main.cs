@@ -23,6 +23,10 @@ namespace Generate
 			{
 				case "pnr":
 					return new PnrCommand().Generate();
+				case "dnr":
+						return new DnrGeneratorCommand().Generate();
+				case "hnr":
+					return new HnrGeneratorCommand().Generate();
 				default:
 					return "Unknown command " + command;
 			}

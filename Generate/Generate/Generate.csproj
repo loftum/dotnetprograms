@@ -39,6 +39,8 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Commands\PnrCommand.cs" />
     <Compile Include="Commands\IGeneratorCommand.cs" />
+    <Compile Include="Commands\DnrGeneratorCommand.cs" />
+    <Compile Include="Commands\HnrGeneratorCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

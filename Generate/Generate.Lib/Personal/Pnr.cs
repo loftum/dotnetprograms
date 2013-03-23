@@ -5,7 +5,6 @@ namespace Generate.Lib
 {
 	public class Pnr : Ssn
 	{
-
 		public Pnr (string value) : base(value)
 		{
 		}
