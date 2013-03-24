@@ -45,6 +45,7 @@
     <Compile Include="Personal\NonDate.cs" />
     <Compile Include="Organizational\Orgnr.cs" />
     <Compile Include="LegalNumber.cs" />
+    <Compile Include="Organizational\OrgnrNumbers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
