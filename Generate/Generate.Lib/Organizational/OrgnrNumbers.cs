@@ -17,15 +17,15 @@ namespace Generate.Lib
 
 		public OrgnrNumbers (string value)
 		{
-			S1 = GetOrDefault<int> (value, 0);
-			S2 = GetOrDefault<int> (value, 1);
-			S3 = GetOrDefault<int> (value, 2);
-			S4 = GetOrDefault<int> (value, 3);
-			S5 = GetOrDefault<int> (value, 4);
-			S6 = GetOrDefault<int> (value, 5);
-			S7 = GetOrDefault<int> (value, 6);
-			S8 = GetOrDefault<int> (value, 7);
-			K = GetOrDefault<int> (value, 8);
+			S1 = GetOrDefault<int>(value, 0);
+			S2 = GetOrDefault<int>(value, 1);
+			S3 = GetOrDefault<int>(value, 2);
+			S4 = GetOrDefault<int>(value, 3);
+			S5 = GetOrDefault<int>(value, 4);
+			S6 = GetOrDefault<int>(value, 5);
+			S7 = GetOrDefault<int>(value, 6);
+			S8 = GetOrDefault<int>(value, 7);
+			K = GetOrDefault<int>(value, 8);
 		}
 
 		private static T GetOrDefault<T>(string value, int index, int length = 1)

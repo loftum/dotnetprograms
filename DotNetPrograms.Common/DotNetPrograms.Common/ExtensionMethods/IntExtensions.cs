@@ -14,5 +14,10 @@ namespace DotNetPrograms.Common.ExtensionMethods
         {
             return TimeSpan.FromMinutes(value);
         }
+
+		public static int UpToNearestTen(this int value)
+		{
+			return (value + 5 / 10) * 10;
+		}
     }
 }

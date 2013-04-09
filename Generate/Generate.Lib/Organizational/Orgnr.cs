@@ -2,7 +2,7 @@ using System;
 
 namespace Generate.Lib
 {
-	public class Orgnr : LegalNumber
+	public class Orgnr : NumberBase
 	{
 		public OrgnrNumbers Numbers { get; private set; }
 

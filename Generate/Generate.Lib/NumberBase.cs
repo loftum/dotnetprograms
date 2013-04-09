@@ -2,7 +2,7 @@ using System;
 
 namespace Generate.Lib
 {
-	public abstract class LegalNumber
+	public abstract class NumberBase
 	{
 		public string Value { get; private set; }
 
@@ -22,14 +22,14 @@ namespace Generate.Lib
 			}
 		}
 
-		public LegalNumber (string value)
+		public NumberBase(string value)
 		{
 			Value = value;
 		}
 
 		public abstract void Validate();
 
-		public static implicit operator string(LegalNumber legalNumber)
+		public static implicit operator string(NumberBase legalNumber)
 		{
 			return legalNumber == null ? null : legalNumber.Value;
 		}

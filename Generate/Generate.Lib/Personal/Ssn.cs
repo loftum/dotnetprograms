@@ -3,7 +3,7 @@ using DotNetPrograms.Common.ExtensionMethods;
 
 namespace Generate.Lib
 {
-	public abstract class Ssn : LegalNumber
+	public abstract class Ssn : NumberBase
 	{
 		public SsnNumbers Numbers { get; private set; }
 		public DateTime Date { get; private set; }

@@ -41,6 +41,7 @@
     <Compile Include="Commands\IGeneratorCommand.cs" />
     <Compile Include="Commands\DnrGeneratorCommand.cs" />
     <Compile Include="Commands\HnrGeneratorCommand.cs" />
+    <Compile Include="Commands\GtinGeneratorCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
