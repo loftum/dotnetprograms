@@ -1,7 +1,7 @@
 using System;
 using DotNetPrograms.Common.ExtensionMethods;
 
-namespace Generate.Lib
+namespace Generate.Lib.Personal
 {
 	public abstract class Ssn : NumberBase
 	{

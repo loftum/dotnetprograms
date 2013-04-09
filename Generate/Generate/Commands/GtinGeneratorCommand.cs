@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
 using Generate.Lib.Barcodes;
 
-
-namespace Generate
+namespace Generate.Commands
 {
 	public class GtinGeneratorCommand : IGeneratorCommand
 	{

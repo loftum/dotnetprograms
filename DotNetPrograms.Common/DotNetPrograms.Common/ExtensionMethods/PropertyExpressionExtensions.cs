@@ -11,7 +11,6 @@ namespace DotNetPrograms.Common.ExtensionMethods
             {
                 return string.Empty;
             }
-
             var parameter = expression.Parameters[0].Name;
             var pattern = string.Format("{0}.", parameter);
             var body = expression.Body.ToString();
@@ -28,6 +27,36 @@ namespace DotNetPrograms.Common.ExtensionMethods
             const string selfReference = @"value\({1}[\w\W]+\){1}\.";
             var body = expression.Body.ToString();
             return body.RemoveFirstMatch(selfReference);
-        } 
+        }
+
+        public static string GetMemberName<TModel, TProperty>(this Expression<Func<TModel, TProperty>> expression)
+        {
+            if (expression == null)
+            {
+                return string.Empty;
+            }
+            var member = GetMemberExpressionFrom(expression.Body);
+            return member.Member.Name;
+        }
+
+        private static MemberExpression GetMemberExpressionFrom(Expression expression)
+        {
+            return DoGetMemberExpressionFrom((dynamic) expression);
+        }
+
+        private static MemberExpression DoGetMemberExpressionFrom(UnaryExpression expression)
+        {
+            return GetMemberExpressionFrom((dynamic)expression.Operand);
+        }
+
+        private static MemberExpression DoGetMemberExpressionFrom(MemberExpression expression)
+        {
+            return expression;
+        }
+
+        private static MemberExpression DoGetMemberExpressionFrom(object invalid)
+        {
+            throw new InvalidOperationException(string.Format("Don't know how to get a MemberExpression from {0}", invalid.GetType().Name));
+        }
     }
 }

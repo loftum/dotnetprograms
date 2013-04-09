@@ -1,6 +1,6 @@
 using System;
 
-namespace Generate.Lib
+namespace Generate.Lib.Organizational
 {
 	public class Orgnr : NumberBase
 	{

@@ -1,6 +1,4 @@
-using System;
-
-namespace Generate.Lib
+namespace Generate.Lib.Personal
 {
 	public interface ISsnGenerator
 	{

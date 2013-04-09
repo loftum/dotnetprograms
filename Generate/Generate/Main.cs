@@ -1,6 +1,5 @@
 using System;
-using Generate.Lib;
-using System.Linq;
+using Generate.Commands;
 
 namespace Generate
 {
@@ -9,7 +8,7 @@ namespace Generate
 		public static void Main (string[] args)
 		{
 			var command = args.Length == 0 ? "unknown" : args [0];
-			Console.WriteLine (Run(command));
+			Console.WriteLine(Run(command));
 		}
 
 		private static string Usage()
@@ -22,11 +21,11 @@ namespace Generate
 			switch (command)
 			{
 				case "pnr":
-					return new PnrCommand().Generate();
+                    return new PnrCommand().Generate();
 				case "dnr":
-						return new DnrGeneratorCommand().Generate();
+                    return new DnrGeneratorCommand().Generate();
 				case "hnr":
-					return new HnrGeneratorCommand().Generate();
+                    return new HnrGeneratorCommand().Generate();
 				default:
 					return "Unknown command " + command;
 			}

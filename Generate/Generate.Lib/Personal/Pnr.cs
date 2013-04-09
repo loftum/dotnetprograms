@@ -1,7 +1,6 @@
 using System;
-using DotNetPrograms.Common.DateAndTime;
 
-namespace Generate.Lib
+namespace Generate.Lib.Personal
 {
 	public class Pnr : Ssn
 	{

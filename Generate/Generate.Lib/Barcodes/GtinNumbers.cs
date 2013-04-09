@@ -1,11 +1,8 @@
-using System;
-using Generate.Lib;
-
 namespace Generate.Lib.Barcodes
 {
 	public class GtinNumbers : AbstractValues
 	{
-		private string _paddedValues;
+		private readonly string _paddedValues;
 
 		public int N1 { get; private set; }
 		public int N2 { get; private set; }

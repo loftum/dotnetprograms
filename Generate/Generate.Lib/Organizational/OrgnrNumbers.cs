@@ -1,7 +1,6 @@
-using System;
 using DotNetPrograms.Common.ExtensionMethods;
 
-namespace Generate.Lib
+namespace Generate.Lib.Organizational
 {
 	public class OrgnrNumbers
 	{

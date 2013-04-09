@@ -1,5 +1,4 @@
 using System;
-using Generate.Lib;
 using DotNetPrograms.Common.ExtensionMethods;
 
 namespace Generate.Lib.Barcodes

@@ -2,7 +2,7 @@ using System;
 using DotNetPrograms.Common.DateAndTime;
 using System.Text;
 
-namespace Generate.Lib
+namespace Generate.Lib.Personal
 {
 	public class SsnGenerator : ISsnGenerator
 	{

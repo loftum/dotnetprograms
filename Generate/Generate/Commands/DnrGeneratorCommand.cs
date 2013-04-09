@@ -1,7 +1,6 @@
-using System;
-using Generate.Lib;
+using Generate.Lib.Personal;
 
-namespace Generate
+namespace Generate.Commands
 {
 	public class DnrGeneratorCommand : IGeneratorCommand
 	{

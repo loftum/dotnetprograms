@@ -1,8 +1,9 @@
 using System;
+using Generate.Lib.Personal;
 using NUnit.Framework;
 using Generate.Lib;
 
-namespace Generate.UnitTesting
+namespace Generate.UnitTesting.Personal
 {
 	[TestFixture]
 	public class SsnTest

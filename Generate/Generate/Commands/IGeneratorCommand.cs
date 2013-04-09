@@ -1,6 +1,4 @@
-using System;
-
-namespace Generate
+namespace Generate.Commands
 {
 	public interface IGeneratorCommand
 	{
