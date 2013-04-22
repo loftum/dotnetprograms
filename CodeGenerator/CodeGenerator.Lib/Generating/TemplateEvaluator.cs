@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using CodeGenerator.Lib.CSharp;
 using CodeGenerator.Lib.Syntax;
 
@@ -39,7 +41,10 @@ namespace CodeGenerator.Lib.Generating
             var builder = new StringBuilder(template);
             foreach (var parameter in _syntaxParser.GetParametersIn(template))
             {
-                builder.Replace(parameter.RawText, record[parameter.Number]);
+                var value = parameter.Number.HasValue
+                                ? record[parameter.Number.Value]
+                                : record.Values.ToString();
+                builder.Replace(parameter.RawText, value);
             }
             return builder.ToString();
         }

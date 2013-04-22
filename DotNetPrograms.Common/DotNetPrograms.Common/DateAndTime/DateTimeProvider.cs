@@ -16,6 +16,11 @@ namespace DotNetPrograms.Common.DateAndTime
             set { _now = () => value; }
         }
 
+        public static DateTime ReasonableMinValue
+        {
+            get { return new DateTime(1900, 1, 1); }
+        }
+
         public static void Reset()
         {
             _now = () => DateTime.Now;

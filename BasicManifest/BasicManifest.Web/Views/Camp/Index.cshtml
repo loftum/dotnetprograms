@@ -1,0 +1,20 @@
+﻿@model BasicManifest.Lib.Models.CampIndexModel
+
+@{
+    ViewBag.Title = "Camps";
+}
+
+<h2>Camps</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (var camp in Model.Camps)
+    {
+        <tr>
+            <td>@Html.ActionLink(camp.Name, "Edit", "Camp", new {id = camp.Id.ToString()})</td>
+        </tr>
+    }
+</table>
+

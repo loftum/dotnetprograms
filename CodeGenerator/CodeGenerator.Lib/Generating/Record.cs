@@ -10,6 +10,7 @@ namespace CodeGenerator.Lib.Generating
     {
         private static readonly string Default = string.Empty;
         private readonly IList<InputValue> _values = new List<InputValue>();
+        public ParameterArray Values { get { return new ParameterArray(_values.Select(v => v.RawText)); } }
 
         public Record(TextBlock block, string delimiterPattern) : base(block.Text, block.StartIndex)
         {
@@ -23,6 +24,11 @@ namespace CodeGenerator.Lib.Generating
         {
             var startIndex = 0;
             var delimiters = GetDelimiters(delimiterPattern);
+            if (!delimiters.Any())
+            {
+                yield return new InputValue(RawText, Bias(startIndex));
+                yield break;
+            }
             foreach (var delimiterMatch in delimiters)
             {
                 yield return new InputValue(RawText.Substring(startIndex, delimiterMatch.Index - startIndex), Bias(startIndex));

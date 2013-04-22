@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@string.Format("BasicManifest - {0}", @ViewBag.Title)</title>
+    @Html.Partial("CssAndStuff")
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                cache: false
+            });
+            $("body").on('keypress', '.noSubmitOnEnter', function (e) {
+                return (e.which ? e.which : e.code) != 13;
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

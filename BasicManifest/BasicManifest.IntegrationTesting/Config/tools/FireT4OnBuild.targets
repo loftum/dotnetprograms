@@ -1,0 +1,10 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="ExecuteT4Templates">
+        <ItemGroup>
+            <T4Templates Include=".\**\app.config.tt" />
+        </ItemGroup>
+         <Exec
+            WorkingDirectory="$(MSBuildProjectDirectory)\config\tools"
+            Command="TextTransform &quot;%(T4Templates.FullPath)&quot; -out &quot;%(T4Templates.RootDir)%(T4Templates.Directory)%(T4Templates.Filename).build.log&quot; " />
+    </Target>
+</Project>

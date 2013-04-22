@@ -54,6 +54,7 @@
     <Compile Include="Generating\IOutputGenerator.cs" />
     <Compile Include="Generating\ITemplateEvaluator.cs" />
     <Compile Include="Generating\OutputGenerator.cs" />
+    <Compile Include="Generating\ParameterArray.cs" />
     <Compile Include="Generating\TemplateParameter.cs" />
     <Compile Include="Generating\Record.cs" />
     <Compile Include="Generating\TextElement.cs" />
