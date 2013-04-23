@@ -24,6 +24,7 @@ namespace BasicManifest.Core.Domain
 
         public virtual void Add(Transaction transaction)
         {
+            transaction.Account = this;
             Transactions.Add(transaction);
         }
 

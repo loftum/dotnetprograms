@@ -9,7 +9,7 @@ namespace BasicManifest.Data.Mappings
             Map(t => t.Description);
             Map(t => t.Amount);
             Map(t => t.Type).CustomType<TransactionType>();
-            References(t => t.Account);
+            References(t => t.Account).Not.Nullable();
         }
     }
 }

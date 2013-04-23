@@ -8,12 +8,12 @@ namespace BasicManifest.Migrations.Steps
     {
         public void Up(IDatabase db)
         {
-            db.CreateCouplingTable(Tables.Slot, Tables.Person);
+            db.CreateCouplingTable(Tables.Slot, Tables.Skydiver);
         }
 
         public void Down(IDatabase db)
         {
-            db.DropCouplingTable(Tables.Slot, Tables.Person);
+            db.DropCouplingTable(Tables.Slot, Tables.Skydiver);
         }
     }
 }

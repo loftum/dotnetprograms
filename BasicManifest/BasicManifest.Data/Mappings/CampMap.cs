@@ -8,7 +8,7 @@ namespace BasicManifest.Data.Mappings
         {
             Map(c => c.Name);
             Map(c => c.DefaultSlotPrice);
-            HasMany(c => c.Participants).Cascade.AllDeleteOrphan();
+            HasMany(c => c.Skydivers).Cascade.AllDeleteOrphan();
             HasMany(c => c.Days).Cascade.AllDeleteOrphan();
             References(c => c.Account).Cascade.All();
         }

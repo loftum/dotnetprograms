@@ -3,14 +3,14 @@
     public class Slot : DomainObject
     {
         public virtual decimal Price { get; set; }
-        private Person _jumper;
-        public virtual Person Jumper
+        private Skydiver _skydiver;
+        public virtual Skydiver Skydiver
         {
-            get { return _jumper; }
+            get { return _skydiver; }
             set
             {
                 JumperPays = value.IsParticipant;
-                _jumper = value;
+                _skydiver = value;
             }
         }
         public virtual bool JumperPays { get; set; }
@@ -19,9 +19,9 @@
         {
         }
 
-        public Slot(Person jumper)
+        public Slot(Skydiver skydiver)
         {
-            Jumper = jumper;
+            Skydiver = skydiver;
         }
     }
 }

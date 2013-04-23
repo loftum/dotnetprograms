@@ -1,0 +1,16 @@
+﻿.fullWidth
+{
+    width: 100%;
+}
+
+.halfWidth {
+    width: 50%;
+}
+
+.thirdWidth {
+    width: 33%;
+}
+
+.twoThirdsWidth {
+    width: 67%;
+}

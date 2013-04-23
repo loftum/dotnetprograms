@@ -46,7 +46,7 @@
     <Compile Include="Domain\IAuditable.cs" />
     <Compile Include="Domain\ICanPay.cs" />
     <Compile Include="Domain\Load.cs" />
-    <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Skydiver.cs" />
     <Compile Include="Domain\LoadGroup.cs" />
     <Compile Include="Domain\PersonRole.cs" />
     <Compile Include="Domain\Slot.cs" />

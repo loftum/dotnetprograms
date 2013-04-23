@@ -9,9 +9,9 @@ namespace BasicManifest.UnitTesting.Core.Domain
     {
         private Camp _camp;
         private Day _day;
-        private Person _instructor;
-        private Person _student;
-        private Person _student2;
+        private Skydiver _instructor;
+        private Skydiver _student;
+        private Skydiver _student2;
 
         [SetUp]
         public void Setup()

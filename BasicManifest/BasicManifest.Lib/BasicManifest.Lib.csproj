@@ -49,6 +49,7 @@
     <Compile Include="Mappings\MappingConfiguration.cs" />
     <Compile Include="Models\CampIndexModel.cs" />
     <Compile Include="Models\CampModel.cs" />
+    <Compile Include="Models\SkydiverModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

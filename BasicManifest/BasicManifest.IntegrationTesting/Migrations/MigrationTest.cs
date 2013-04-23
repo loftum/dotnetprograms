@@ -1,5 +1,6 @@
 ﻿using System;
 using BasicManifest.Data.Migrating;
+using BasicManifest.IntegrationTesting.Ioc;
 using BasicManifest.Web.Ioc;
 using NUnit.Framework;
 
@@ -11,6 +12,7 @@ namespace BasicManifest.IntegrationTesting.Migrations
         [SetUp]
         public void Setup()
         {
+            Lifecycle.Current = new IntegrationTestLifecycle();
             ObjectContainer.Init(new BMRegistry());
         }
 

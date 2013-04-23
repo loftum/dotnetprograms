@@ -69,7 +69,7 @@
     <Compile Include="Builders\DayBuilder.cs" />
     <Compile Include="Builders\DomainBuilderBase.cs" />
     <Compile Include="Builders\LoadBuilder.cs" />
-    <Compile Include="Builders\PersonBuilder.cs" />
+    <Compile Include="Builders\SkydiverBuilder.cs" />
     <Compile Include="Builders\GroupBuilder.cs" />
     <Compile Include="Builders\Update.cs" />
     <Compile Include="Core\Domain\AccountTest.cs" />

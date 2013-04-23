@@ -13,7 +13,7 @@
     @foreach (var camp in Model.Camps)
     {
         <tr>
-            <td>@Html.ActionLink(camp.Name, "Edit", "Camp", new {id = camp.Id.ToString()})</td>
+            <td>@Html.ActionLink(camp.Name, "Edit", "Camp", new {id = camp.Id}, null)</td>
         </tr>
     }
 </table>

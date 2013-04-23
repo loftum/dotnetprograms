@@ -74,6 +74,10 @@
     <Content Include="Config\tools\TextTransform.exe" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BasicManifest.Core\BasicManifest.Core.csproj">
       <Project>{29DDBE25-CC47-49FF-B29A-CAAC24B076DF}</Project>
       <Name>BasicManifest.Core</Name>

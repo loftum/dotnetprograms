@@ -9,9 +9,9 @@ namespace BasicManifest.UnitTesting.Builders
             return new CampBuilder();
         }
 
-        public static PersonBuilder Person()
+        public static SkydiverBuilder Person()
         {
-            return new PersonBuilder();
+            return new SkydiverBuilder();
         }
 
         public static DayBuilder Day()
@@ -29,12 +29,12 @@ namespace BasicManifest.UnitTesting.Builders
             return new GroupBuilder();
         }
 
-        public static PersonBuilder Instructor()
+        public static SkydiverBuilder Instructor()
         {
             return Person().WithRole(PersonRole.Instructor);
         }
 
-        public static PersonBuilder Student()
+        public static SkydiverBuilder Student()
         {
             return Person().WithRole(PersonRole.Participant);
         }

@@ -7,7 +7,7 @@ namespace BasicManifest.Data.Mappings
     {
         public DomainObjectMap()
         {
-            Id(o => o.Id).GeneratedBy.Guid();
+            Id(o => o.Id).GeneratedBy.Identity();
             Map(o => o.CreatedBy);
             Map(o => o.CreatedDate);
             Map(o => o.ModifiedBy);

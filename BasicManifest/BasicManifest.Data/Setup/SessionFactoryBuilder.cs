@@ -20,7 +20,7 @@ namespace BasicManifest.Data.Setup
                     .If(config.ShowSql, c => c.ShowSql())
                 )
                 .Mappings(m =>
-                    m.FluentMappings.AddFromAssemblyOf<PersonMap>()
+                    m.FluentMappings.AddFromAssemblyOf<SkydiverMap>()
                     .Conventions.Add(PrimaryKey.Name.Is(e => "Id"))
                     .Conventions.Add(ForeignKey.EndsWith("Id"))
                 )

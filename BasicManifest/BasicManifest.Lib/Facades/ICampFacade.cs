@@ -1,11 +1,10 @@
-﻿using System;
-using BasicManifest.Lib.Models;
+﻿using BasicManifest.Lib.Models;
 
 namespace BasicManifest.Lib.Facades
 {
     public interface ICampFacade
     {
         CampIndexModel GetCamps();
-        CampModel Edit(Guid id);
+        CampModel Edit(long id);
     }
 }

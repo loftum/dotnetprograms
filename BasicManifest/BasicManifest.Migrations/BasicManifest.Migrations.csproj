@@ -52,7 +52,7 @@
     <Compile Include="Steps\M_005_AddTable_Load5.cs" />
     <Compile Include="Steps\M_006_AddTable_LoadGroup6.cs" />
     <Compile Include="Steps\M_007_AddTable_Slot7.cs" />
-    <Compile Include="Steps\M_008_AddTable_Person8.cs" />
+    <Compile Include="Steps\M_008_AddTable_Skydiver8.cs" />
     <Compile Include="Steps\M_001_AddTable_Account1.cs" />
     <Compile Include="Steps\M_009_AddTable_SlotToPerson9.cs" />
     <Compile Include="Steps\M_002_AddTable_Transaction2.cs" />

@@ -4,4 +4,30 @@
     ViewBag.Title = Model.Name;
 }
 
+@section Head
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $lala.whatever = "hoi";
+        });
+    </script>
+}
+
+<div data-ng-app="loads">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Loads</th>
+        </tr>
+        @foreach (var skydiver in Model.Skydivers)
+        {
+            <tr>
+                <td>@skydiver.FullName</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
+
+
 

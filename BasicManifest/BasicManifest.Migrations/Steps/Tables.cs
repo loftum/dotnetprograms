@@ -7,7 +7,7 @@
         public const string Load = "Load";
         public const string LoadGroup = "LoadGroup";
         public const string Slot = "Slot";
-        public const string Person = "Person";
+        public const string Skydiver = "Skydiver";
         public const string SlotToPerson = "SlotToPerson";
         public const string Account = "Account";
         public const string Transaction = "Transaction";

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -14,7 +13,7 @@ namespace BasicManifest.Data.Repositories
             _session = session;
         }
 
-        public T Get<T>(Guid id)
+        public T Get<T>(object id)
         {
             return _session.Get<T>(id);
         }

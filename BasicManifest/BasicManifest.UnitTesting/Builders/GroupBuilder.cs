@@ -13,9 +13,9 @@ namespace BasicManifest.UnitTesting.Builders
         {
         }
 
-        public GroupBuilder WithJumper(Person jumper)
+        public GroupBuilder WithJumper(Skydiver skydiver)
         {
-            return WithSlot(new Slot(jumper));
+            return WithSlot(new Slot(skydiver));
         }
 
         public GroupBuilder WithSlot(Slot slot)

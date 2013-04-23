@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BasicManifest.Core.Domain;
 using BasicManifest.Data.Repositories;
 using BasicManifest.Lib.ExtensionMethods;
@@ -21,7 +20,7 @@ namespace BasicManifest.Lib.Facades
             return new CampIndexModel(_repo.GetAll<Camp>().Select(c => c.MapTo<CampModel>()));
         }
 
-        public CampModel Edit(Guid id)
+        public CampModel Edit(long id)
         {
             var camp = _repo.GetOrThrow<Camp>(id);
             return camp.MapTo<CampModel>();

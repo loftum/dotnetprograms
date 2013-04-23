@@ -7,19 +7,20 @@ namespace BasicManifest.Core.Domain
         public virtual string Name { get; set; }
         public virtual decimal DefaultSlotPrice { get; set; }
         public virtual Account Account { get; protected set; }
-        public virtual IList<Person> Participants { get; protected set; }
+        public virtual IList<Skydiver> Skydivers { get; protected set; }
         public virtual IList<Day> Days { get; protected set; }
 
         public Camp()
         {
-            Participants = new List<Person>();
+            Skydivers = new List<Skydiver>();
             Account = new Account();
             Days = new List<Day>();
         }
 
-        public virtual void Add(Person person)
+        public virtual void Add(Skydiver skydiver)
         {
-            Participants.Add(person);
+            skydiver.Camp = this;
+            Skydivers.Add(skydiver);
         }
 
         public virtual void Add(Day day)

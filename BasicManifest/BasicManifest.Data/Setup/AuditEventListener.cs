@@ -45,6 +45,11 @@ namespace BasicManifest.Data.Setup
             }
 
             var date = DateTimeProvider.Now;
+            if (audit.CreatedBy == null)
+            {
+                Store(e.Persister, e.State, CreatedBy, CurrentUser.Name);
+                audit.CreatedBy = CurrentUser.Name;
+            }
 
             Store(e.Persister, e.State, ModifiedDate, date);
             Store(e.Persister, e.State, ModifiedBy, CurrentUser.Name);

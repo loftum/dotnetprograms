@@ -35,7 +35,7 @@ namespace BasicManifest.Core.Domain
             var payers = Slots.Where(s => s.JumperPays).ToList();
             if (payers.Any())
             {
-                return payers.Select(s => s.Jumper);
+                return payers.Select(s => s.Skydiver);
             }
             return GetCamp().AsArray();
         }

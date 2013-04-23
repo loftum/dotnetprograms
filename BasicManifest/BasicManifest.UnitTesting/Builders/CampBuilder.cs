@@ -18,9 +18,9 @@ namespace BasicManifest.UnitTesting.Builders
             return MySelf;
         }
 
-        public CampBuilder WithParticipant(Person person)
+        public CampBuilder WithParticipant(Skydiver skydiver)
         {
-            Item.Add(person);
+            Item.Add(skydiver);
             return MySelf;
         }
 

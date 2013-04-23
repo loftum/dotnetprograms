@@ -8,7 +8,7 @@ namespace BasicManifest.Data.Mappings
         {
             Map(s => s.Price);
             Map(s => s.JumperPays);
-            References(s => s.Jumper).Cascade.All();
+            References(s => s.Skydiver).Cascade.All();
         }
     }
 }

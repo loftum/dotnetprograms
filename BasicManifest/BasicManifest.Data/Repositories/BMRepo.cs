@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BasicManifest.Common.Exceptions;
 using BasicManifest.Core.Domain;
 
@@ -14,12 +13,12 @@ namespace BasicManifest.Data.Repositories
             _session = session;
         }
 
-        public T Get<T>(Guid id) where T : DomainObject
+        public T Get<T>(long id) where T : DomainObject
         {
             return _session.Get<T>(id);
         }
 
-        public T GetOrThrow<T>(Guid id) where T : DomainObject
+        public T GetOrThrow<T>(long id) where T : DomainObject
         {
             var item = Get<T>(id);
             if (item == null)

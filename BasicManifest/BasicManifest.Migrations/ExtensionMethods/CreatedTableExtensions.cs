@@ -5,9 +5,11 @@ namespace BasicManifest.Migrations.ExtensionMethods
 {
     public static class CreatedTableExtensions
     {
+        private const DbType IdType = DbType.Int64;
+
         public static ICreatedTableWithAddedColumn WithId(this ICreatedTable table)
         {
-            return table.WithPrimaryKeyColumn("Id", DbType.Guid);
+            return table.WithPrimaryKeyColumn("Id", IdType).AsIdentity();
         }
 
         public static ICreatedTableWithAddedColumn WithChangeStamp(this ICreatedTableWithAddedColumn table)
@@ -23,8 +25,8 @@ namespace BasicManifest.Migrations.ExtensionMethods
         {
             var column = ForeginKeyColumnTo(foreignTable);
             return mandatory
-                ? table.WithNotNullableColumn(column, DbType.Guid)
-                : table.WithNullableColumn(column, DbType.Guid);
+                ? table.WithNotNullableColumn(column, IdType)
+                : table.WithNullableColumn(column, IdType);
         }
 
         public static ICreatedTableWithAddedColumn WithAmountColumn<TCreatedTable>(this TCreatedTable table, string columnName, bool mandatory = true)

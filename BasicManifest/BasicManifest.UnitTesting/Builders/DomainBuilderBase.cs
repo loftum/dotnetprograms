@@ -1,5 +1,4 @@
-﻿using System;
-using BasicManifest.Core.Domain;
+﻿using BasicManifest.Core.Domain;
 
 namespace BasicManifest.UnitTesting.Builders
 {
@@ -7,14 +6,21 @@ namespace BasicManifest.UnitTesting.Builders
         where TBuilder : DomainBuilderBase<TBuilder, TItem>
         where TItem : DomainObject
     {
+        private static long _nextId;
+
         protected DomainBuilderBase(TItem item) : base(item)
         {
         }
 
         protected static TItem WithId(TItem item)
         {
-            item.Id = Guid.NewGuid();
+            item.Id = NextId();
             return item;
+        }
+
+        private static long NextId()
+        {
+            return ++_nextId;
         }
     }
 }

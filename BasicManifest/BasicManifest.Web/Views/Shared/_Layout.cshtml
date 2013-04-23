@@ -19,10 +19,11 @@
             });
         });
     </script>
-    
+    @RenderSection("Head", false)
 </head>
 <body>
-    <div>
+    <div class="fullWidth">
+        @Html.Partial("TopMenu")
         @RenderBody()
     </div>
 </body>

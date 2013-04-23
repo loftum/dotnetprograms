@@ -58,7 +58,7 @@
     <Compile Include="Mappings\DomainObjectMap.cs" />
     <Compile Include="Mappings\LoadGroupMap.cs" />
     <Compile Include="Mappings\LoadMap.cs" />
-    <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\SkydiverMap.cs" />
     <Compile Include="Mappings\SlotMap.cs" />
     <Compile Include="Mappings\TransactionMap.cs" />
     <Compile Include="Migrating\BasicManifestMigrator.cs" />
@@ -74,6 +74,10 @@
     <Compile Include="Setup\ISessionProvider.cs" />
     <Compile Include="Setup\SessionFactoryBuilder.cs" />
     <Compile Include="Setup\SessionProvider.cs" />
+    <Compile Include="Transactions\IUnitOfWork.cs" />
+    <Compile Include="Transactions\NHibernateUnitOfWork.cs" />
+    <Compile Include="Transactions\WorkEventArgs.cs" />
+    <Compile Include="Transactions\WorkUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

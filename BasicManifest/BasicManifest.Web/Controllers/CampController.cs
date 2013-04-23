@@ -19,7 +19,7 @@ namespace BasicManifest.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(long id)
         {
             var model = _facade.Edit(id);
             return View(model);
