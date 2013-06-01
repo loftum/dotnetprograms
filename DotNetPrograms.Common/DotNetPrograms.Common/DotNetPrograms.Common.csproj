@@ -56,6 +56,15 @@
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\PropertyExpressionExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Meta\CollectionMeta.cs" />
+    <Compile Include="Meta\EnumMeta.cs" />
+    <Compile Include="Meta\EventMeta.cs" />
+    <Compile Include="Meta\MemberMeta.cs" />
+    <Compile Include="Meta\MethodMeta.cs" />
+    <Compile Include="Meta\ObjectReflector.cs" />
+    <Compile Include="Meta\PropertyMeta.cs" />
+    <Compile Include="Meta\PropertyReflector.cs" />
+    <Compile Include="Meta\TypeMeta.cs" />
     <Compile Include="Meta\ValueTypeMeta.cs" />
     <Compile Include="Paging\PagedListModel.cs" />
     <Compile Include="Paging\PagerModel.cs" />

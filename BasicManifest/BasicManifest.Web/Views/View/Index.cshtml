@@ -1,0 +1,46 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Camps";
+}
+
+@section Head
+{
+    <script type="text/javascript">
+        angular.module('camps', ['ngResource'])
+            .config(function($routeProvider) {
+                $routeProvider
+                    .when('/', { controller: ListController, templateUrl: '/View/Camps' })
+                    .otherwise({ redirectTo: '/' });
+            })
+            .factory('Camp', function($resource) {
+                var Camp = $resource('/Camp/List');
+
+                Camp.prototype.update = function(cb) {
+                    return Camp.update({ id: this._id.$oid },
+                        angular.extend({}, this, { _id: undefined }), cb);
+                };
+
+                Camp.prototype.destroy = function(cb) {
+                    return Camp.remove({ id: this._id.$oid }, cb);
+                };
+
+                return Camp;
+            });
+        
+        function ListController($scope, Camp) {
+            $scope.camps = Camp.query();
+
+            $scope.add = function() {
+                
+            };
+        }
+    </script>
+}
+
+<h2>Camps</h2>
+
+<div data-ng-app="camps">
+    
+    <div data-ng-view></div>
+</div>

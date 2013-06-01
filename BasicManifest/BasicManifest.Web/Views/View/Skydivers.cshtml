@@ -1,0 +1,13 @@
+﻿<table>
+    <tr>
+        <th>Name</th>
+        <th>Loads</th>
+    </tr>
+    <tr data-ng-repeat="skydiver in skydivers">
+        <td>{{skydiver.FullName}}</td>
+        <td></td>
+    </tr>
+</table>
+<form data-ng-submit="addSkydiver()">
+    <input type="text"/>
+</form>

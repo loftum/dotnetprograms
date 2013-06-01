@@ -12,7 +12,7 @@ namespace BasicManifest.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Camp", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "View", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

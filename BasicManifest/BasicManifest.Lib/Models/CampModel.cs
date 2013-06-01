@@ -6,6 +6,7 @@ namespace BasicManifest.Lib.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public decimal DefaultSlotPrice { get; set; }
         public IList<SkydiverModel> Skydivers { get; set; }
 
         public CampModel()

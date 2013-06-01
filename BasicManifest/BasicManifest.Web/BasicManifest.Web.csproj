@@ -125,6 +125,8 @@
   <ItemGroup>
     <Compile Include="Controllers\BMControllerBase.cs" />
     <Compile Include="Controllers\CampController.cs" />
+    <Compile Include="Controllers\SkydiverController.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,6 +168,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\components\components.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -467,6 +470,10 @@
     <Content Include="Scripts\jquery-2.0.0.min.map" />
     <Content Include="Views\Shared\CssAndStuff.cshtml" />
     <Content Include="Views\Shared\TopMenu.cshtml" />
+    <Content Include="Views\View\Skydivers.cshtml" />
+    <Content Include="Views\View\Camps.cshtml" />
+    <Content Include="Views\View\Index.cshtml" />
+    <Content Include="Views\View\Camp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -487,7 +494,6 @@
     <None Include="config\input\Web.root.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Camp\Index.cshtml" />
     <Content Include="web.config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>web.config.log</LastGenOutput>
@@ -497,7 +503,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>web.config.tt</DependentUpon>
     </Content>
-    <Content Include="Views\Camp\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Web.Mvc;
+using BasicManifest.Lib.ExtensionMethods;
 using BasicManifest.Lib.Facades;
+using BasicManifest.Lib.Models;
 
 namespace BasicManifest.Web.Controllers
 {
@@ -13,16 +15,10 @@ namespace BasicManifest.Web.Controllers
             _facade = facade;
         }
 
-        public ActionResult Index()
+        public JsonResult List()
         {
-            var model = _facade.GetCamps();
-            return View(model);
-        }
-
-        public ActionResult Edit(long id)
-        {
-            var model = _facade.Edit(id);
-            return View(model);
+            var camps = _facade.GetCamps().Camps.Select(c => c.MapTo<CampModel>());
+            return Json(camps, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model BasicManifest.Lib.Models.CampModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section Head
+{
+    <script type="text/javascript">
+        angular.module('info', ['components']);
+
+        function InfoController($scope) {
+            $scope.name = "@Model.Name";
+            $scope.defaultSlotPrice = "@Model.DefaultSlotPrice";
+        }
+    </script>
+}
+
+<div data-ng-app="info">
+    <div data-ng-controller="InfoController">
+        @Html.LabelFor(m => m.Name)
+        <input type="text" data-ng-model="name"/>
+        @Html.LabelFor(m => m.DefaultSlotPrice)
+        <input type="text" data-ng-model="defaultSlotPrice"/>
+    </div>
+    
+</div>
