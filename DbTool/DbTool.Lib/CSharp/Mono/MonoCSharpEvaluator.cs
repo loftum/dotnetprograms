@@ -46,8 +46,8 @@ namespace DbTool.Lib.CSharp.Mono
             var printer = new StreamReportPrinter(_stringWriter);
             var settings = new CompilerSettings();
             settings.AssemblyReferences.AddRange(InitialAssemblies);
-            var report = new Report(printer);
-            _evaluator = new Evaluator(settings, report)
+            var context = new CompilerContext(settings, printer);
+            _evaluator = new Evaluator(context)
                 {
                     InteractiveBaseClass = typeof (DbToolInteractive),
                     DescribeTypeExpressions = true,
@@ -60,16 +60,21 @@ namespace DbTool.Lib.CSharp.Mono
             DbToolInteractive.Output = _stringWriter;
         }
 
-        private void ReferenceAssemblies(params Assembly[] assemblies)
+        public void ReferenceAssemblies(params Assembly[] assemblies)
         {
             assemblies.Each(a => _evaluator.ReferenceAssembly(a));
+        }
+
+        public void Using(string nameSpace)
+        {
+            _evaluator.Run(string.Format("using {0};", nameSpace));
         }
 
         private void TryUsing(params string[] nameSpaces)
         {
 			try
 			{
-				nameSpaces.Each(nameSpace => _evaluator.Run(string.Format("using {0};", nameSpace)));
+				nameSpaces.Each(Using);
 			}
 			catch (NotSupportedException)
 			{

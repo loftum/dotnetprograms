@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
+using System.Linq;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Linq;
 using Mono.CSharp;
 
 namespace DbTool.Lib.CSharp.Mono
@@ -22,6 +24,11 @@ namespace DbTool.Lib.CSharp.Mono
         public static IEnumerable<dynamic> Query(string sql)
         {
             return DynamicQuery.Query(sql);
+        }
+
+        public static IQueryable<T> Query<T>()
+        {
+            return new DbToolQueryable<T>(new DbToolQueryProvider(new QueryableToSqlTranslator(), DynamicQuery.DbConnection));
         }
 
         public static void SetDb(DbToolDatabase db)

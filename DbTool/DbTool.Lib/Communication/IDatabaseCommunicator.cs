@@ -13,6 +13,6 @@ namespace DbTool.Lib.Communication
         void ConnectTo(DbToolDatabase connectionData);
         void Disconnect();
         IDbCommandResult Execute(string statement);
-        TypeContainer LoadSchema();
+        DatabaseSchema LoadSchema();
     }
 }

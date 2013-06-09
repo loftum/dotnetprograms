@@ -10,6 +10,7 @@ namespace DbTool.Lib.Modules
     {
         public override void Load()
         {
+            Bind<IDatabaseToAssemblyConverter>().To<DatabaseToAssemblyConverter>().InSingletonScope();
             Bind<ITypeCache>().To<DbToolTypeCache>().InSingletonScope();
             Bind<ICSharpEvaluator>().To<MonoCSharpEvaluator>().InSingletonScope();
             Bind<ICSharpExecutor>().To<CSharpExecutor>().InSingletonScope();

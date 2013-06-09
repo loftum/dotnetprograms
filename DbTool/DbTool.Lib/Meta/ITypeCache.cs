@@ -4,7 +4,8 @@ namespace DbTool.Lib.Meta
 {
     public interface ITypeCache
     {
-        TypeContainer Schema { get; set; }
-        TypeMeta GetType(string name);
+        DatabaseSchema Schema { get; set; }
+
+        TableMeta GetType(string name);
     }
 }

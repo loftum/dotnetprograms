@@ -1,76 +1,34 @@
 using System;
 using System.Reflection;
-using System.Reflection.Emit;
 using DbTool.Lib.Communication.DbCommands.Dynamic;
+using DbTool.Lib.Meta.Emit;
 using DbTool.Lib.Meta.Types;
 
 namespace DbTool.Lib.Meta
 {
+    [Serializable]
     public class TableTypeGenerator
     {
-        private const MethodAttributes GetSetAttr = MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig;
-        private readonly ModuleBuilder _module;
-        private readonly AssemblyBuilder _assembly;
-        private readonly string _nameSpace;
-        private readonly string _fileName;
+        public DynamicAssembly DynamicAssembly { get; private set; }
+
+        public Assembly Assembly { get { return DynamicAssembly.Assembly; } }
 
         public TableTypeGenerator(string nameSpace)
         {
-            _nameSpace = nameSpace;
-            _fileName = string.Format("{0}.dll", _nameSpace);
-            var assemblyName = new AssemblyName(nameSpace);
-            _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
-            _module = _assembly.DefineDynamicModule(nameSpace, _fileName);
+            DynamicAssembly = new DynamicAssembly(nameSpace);
         }
 
-        public Assembly Assembly { get; private set; }
-
-        public string Save()
+        public Type CreateType(TableMeta table)
         {
-            var path = string.Format("{0}.dll", _nameSpace);
-            _assembly.Save(path);
-            return path;
-        }
+            var builder = DynamicAssembly.BuildClass(table.Name)
+                .WithAttribute<SerializableAttribute>();
 
-        public Type CreateType(TableMeta tableType)
-        {
-            var typeName = string.Format("{0}.{1}", _nameSpace, tableType.TypeName);
-            var typeBuilder = _module.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
-
-            foreach (var column in tableType.Columns)
+            foreach (var column in table.Columns)
             {
-                var field = typeBuilder.DefineField(string.Format("_{0}", column.MemberName), column.CSharpType, FieldAttributes.Private);
-                var property = typeBuilder.DefineProperty(column.MemberName,
-                                     PropertyAttributes.None,
-                                     column.CSharpType,
-                                     new[] { column.CSharpType });
-
-                var getter = typeBuilder.DefineMethod(string.Format("get_{0}", column.MemberName),
-                                               GetSetAttr,
-                                               column.CSharpType,
-                                               Type.EmptyTypes);
-
-                var il = getter.GetILGenerator();
-                il.Emit(OpCodes.Ldarg_0);
-                il.Emit(OpCodes.Ldfld, field);
-                il.Emit(OpCodes.Ret);
-
-                var setter = typeBuilder.DefineMethod(string.Format("set_{0}", column.MemberName),
-                                               GetSetAttr,
-                                               null,
-                                               new[] { column.CSharpType });
-
-                var currSetIL = setter.GetILGenerator();
-                currSetIL.Emit(OpCodes.Ldarg_0);
-                currSetIL.Emit(OpCodes.Ldarg_1);
-                currSetIL.Emit(OpCodes.Stfld, field);
-                currSetIL.Emit(OpCodes.Ret);
-
-                property.SetGetMethod(getter);
-                property.SetSetMethod(setter);
+                builder.AddProperty(column.Name, column.CSharpType);
             }
-            var type = typeBuilder.CreateType();
-            Assembly = type.Assembly;
+
+            var type = builder.CreateType();
             return type;
         }
 

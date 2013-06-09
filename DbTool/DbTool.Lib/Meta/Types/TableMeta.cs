@@ -1,19 +1,19 @@
 using System.Collections.Generic;
-using System.Linq;
 using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DbTool.Lib.Meta.Types
 {
-    public class TableMeta : TypeMeta
+    public class TableMeta
     {
-        private readonly IList<ColumnMeta> _columns = new List<ColumnMeta>();
+        public string Name { get; private set; }
 
         public TableMeta(IDictionary<string, object> row) : this(row.Get<string>("TABLE_NAME"))
         {
         }
 
-        public TableMeta(string tableName) : base(tableName, tableName)
+        public TableMeta(string name)
         {
+            Name = name;
         }
 
         public void AddColumn(ColumnMeta meta)
@@ -21,19 +21,7 @@ namespace DbTool.Lib.Meta.Types
             _columns.Add(meta);
         }
 
-        public override IEnumerable<TypeMeta> Members
-        {
-            get { return _columns; }
-        }
-
-        public override IEnumerable<TypeMeta> Properties
-        {
-            get { return _columns; }
-        }
-
-        public IEnumerable<ColumnMeta> Columns
-        {
-            get { return Properties.Cast<ColumnMeta>(); }
-        }
+        private readonly IList<ColumnMeta> _columns = new List<ColumnMeta>();
+        public IEnumerable<ColumnMeta> Columns { get { return _columns; } }
     }
 }

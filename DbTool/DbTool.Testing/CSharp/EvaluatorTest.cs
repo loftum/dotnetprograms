@@ -22,9 +22,8 @@ namespace DbTool.Testing.CSharp
             var printer = new StreamReportPrinter(writer);
             var settings = new CompilerSettings();
             settings.AssemblyReferences.Add("DbTool.Testing");
-            
-            var report = new Report(printer);
-            _evaluator = new Evaluator(settings, report);
+            var context = new CompilerContext(settings, printer);
+            _evaluator = new Evaluator(context);
         }
 
         [Test]

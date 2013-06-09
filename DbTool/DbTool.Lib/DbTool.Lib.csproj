@@ -12,6 +12,8 @@
     <AssemblyName>DbTool.Lib</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -48,6 +50,10 @@
     <Reference Include="MigSharp">
       <HintPath>..\..\Lib\3rdParty\MigSharp\MigSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Mono.CSharp.3.0.6\Lib\net40\Mono.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\NLog.dll</HintPath>
     </Reference>
@@ -69,9 +75,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="Mono.CSharp">
-      <HintPath>..\packages\Mono.CSharp.4.0\lib\net40\Mono.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -131,7 +134,6 @@
     <Compile Include="CSharp\ICSharpEvaluator.cs" />
     <Compile Include="CSharp\Mono\DbToolInteractive.cs" />
     <Compile Include="CSharp\Mono\MonoCSharpEvaluator.cs" />
-    <Compile Include="Data\TableBase.cs" />
     <Compile Include="DbType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
@@ -175,19 +177,23 @@
     <Compile Include="Linq\LinqExtensions.cs" />
     <Compile Include="Linq\QueryableToSqlTranslator.cs" />
     <Compile Include="Linq\DbToolSql.cs" />
+    <Compile Include="Linq\RowConverter.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
     <Compile Include="Memory\IMemoryMeter.cs" />
     <Compile Include="Memory\MemoryMeter.cs" />
     <Compile Include="MetaInfoProvider.cs" />
+    <Compile Include="Meta\DatabaseToAssemblyConverter.cs" />
+    <Compile Include="Meta\Emit\ClassBuilder.cs" />
+    <Compile Include="Meta\Emit\DynamicAssembly.cs" />
+    <Compile Include="Meta\IDatabaseToAssemblyConverter.cs" />
     <Compile Include="Meta\TableTypeGenerator.cs" />
     <Compile Include="Meta\DbToolTypeCache.cs" />
     <Compile Include="Meta\ITypeCache.cs" />
     <Compile Include="Meta\Types\ColumnMeta.cs" />
     <Compile Include="Meta\Types\TableMeta.cs" />
-    <Compile Include="Meta\Types\TypeContainer.cs" />
-    <Compile Include="Meta\Types\TypeMeta.cs" />
+    <Compile Include="Meta\Types\DatabaseSchema.cs" />
     <Compile Include="Migrating\MigratorDotNetRunner.cs" />
     <Compile Include="Migrating\MigSharpRunner.cs" />
     <Compile Include="Modules\ConfigModule.cs" />
@@ -233,6 +239,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

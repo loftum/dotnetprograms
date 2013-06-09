@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using DotNetPrograms.Common.Meta;
 
 namespace DbTool.Lib.Linq
 {
     public class DbToolQueryProvider : IQueryProvider
     {
         private readonly IQueryableToSqlTranslator _translator;
-        private readonly IQueryExecutor _executor;
         private readonly DbConnection _dbConnection;
 
         public DbToolQueryProvider(
             IQueryableToSqlTranslator translator,
-            IQueryExecutor executor,
             DbConnection dbConnection)
         {
             _translator = translator;
-            _executor = executor;
             _dbConnection = dbConnection;
         }
 
@@ -42,8 +41,6 @@ namespace DbTool.Lib.Linq
                 : typeof(TResult);
             var queryable = (IQueryable) Activator.CreateInstance(typeof(DbToolQueryable<>).MakeGenericType(itemType), this, expression);
 
-            //IEnumerable queryResult;
-
             var sql = _translator.Translate(queryable);
 
             using (var command = _dbConnection.CreateCommand())
@@ -53,23 +50,31 @@ namespace DbTool.Lib.Linq
                 {
                     command.Parameters.Add(new SqlParameter(parameter.Name, parameter.Value));
                 }
-                return (TResult) _executor.Execute(command);
-//                return isCollection
-//                           ? (IEnumerable<TResult>) result
-//                           : (TResult) result;
-
-//                queryResult = _executor(
-//                    itemType,
-//                    command.CommandText,
-//                    command.Parameters.OfType<DbParameter>()
-//                                      .Select(parameter => parameter.Value)
-//                                      .ToArray());
+                _dbConnection.Open();
+                try
+                {
+                    var result = DoExecute(command, itemType);
+                    return isCollection ? (TResult) result : result.OfType<TResult>().SingleOrDefault();
+                }
+                finally
+                {
+                    _dbConnection.Close();
+                }
             }
+        }
 
-//            return isCollection
-//                ? (TResult)queryResult
-//                : queryResult.OfType<TResult>()
-//                             .SingleOrDefault();
+        private IEnumerable DoExecute(DbCommand command, Type type)
+        {
+            var items = (IList) new TypeMeta(typeof (List<>).MakeGenericType(type)).NewUp();
+            using (var reader = command.ExecuteReader())
+            {
+                var converter = new RowConverter(type);
+                foreach (IDataRecord row in reader)
+                {
+                    items.Add(converter.Convert(row));
+                }
+            }
+            return items;
         }
 
         public object Execute(Expression expression)

@@ -5,6 +5,6 @@ namespace DbTool.Lib.Syntax
     public interface IMetaInfoProvider
     {
         TagType GetTypeOf(string word);
-        TypeMeta GetType(string word);
+        TableMeta GetType(string word);
     }
 }

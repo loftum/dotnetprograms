@@ -5,8 +5,6 @@ using DbTool.Lib.Configuration;
 using DbTool.Lib.Connections;
 using DbTool.Lib.Data;
 using DbTool.Lib.Exceptions;
-using DbTool.Lib.ExtensionMethods;
-using DbTool.Lib.Meta;
 using DbTool.Lib.Meta.Types;
 using DotNetPrograms.Common.ExtensionMethods;
 
@@ -96,7 +94,7 @@ namespace DbTool.Lib.Communication
             }
         }
 
-        public TypeContainer LoadSchema()
+        public DatabaseSchema LoadSchema()
         {
             ThrowIfNotConnected();
             return new SchemaLoader(_dbContext.DbConnection).Load();

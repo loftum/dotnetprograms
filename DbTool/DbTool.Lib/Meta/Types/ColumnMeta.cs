@@ -1,38 +1,30 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Meta.Types
 {
-    public class ColumnMeta : TypeMeta
+    public class ColumnMeta
     {
+        public string Name { get; private set; }
+        public string Type { get; private set; }
         public Type CSharpType { get; private set; }
 
         public ColumnMeta(DataRow row)
-            : base(row.Get<string>("DATA_TYPE"), row.Get<string>("COLUMN_NAME"))
+            : this(row.Get<string>("DATA_TYPE"), row.Get<string>("COLUMN_NAME"))
         {
+        }
+
+        public ColumnMeta(string type, string name)
+        {
+            Type = type;
+            Name = name;
             CSharpType = GetCSharpType();
-        }
-
-        public ColumnMeta(string typeName, string memberName) : base(typeName, memberName)
-        {
-        }
-
-        public override IEnumerable<TypeMeta> Members
-        {
-            get { return Enumerable.Empty<TypeMeta>(); }
-        }
-
-        public override IEnumerable<TypeMeta> Properties
-        {
-            get { return Enumerable.Empty<TypeMeta>(); }
         }
 
         private Type GetCSharpType()
         {
-            switch (TypeName)
+            switch (Type)
             {
                 case "datetime":
                     return typeof (DateTime);

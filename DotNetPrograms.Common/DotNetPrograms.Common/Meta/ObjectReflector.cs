@@ -24,6 +24,11 @@ namespace DotNetPrograms.Common.Meta
             get { return PropertyReflectorsFor(Meta.Properties); }
         }
 
+        public PropertyReflector GetProperty(string name)
+        {
+            return Properties.FirstOrDefault(p => p.Name == name);
+        }
+
         public IList<PropertyReflector> GetProperties<T>()
         {
             return PropertyReflectorsFor(Meta.GetProperties<T>());

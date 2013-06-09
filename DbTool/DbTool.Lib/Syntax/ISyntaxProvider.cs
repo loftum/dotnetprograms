@@ -6,7 +6,7 @@ namespace DbTool.Lib.Syntax
     {
         TagType GetTypeOf(string word);
         bool IsSeparator(char value);
-        TypeMeta GetType(string word);
+        TableMeta GetType(string word);
         bool IsPropertyIndicator(char c);
     }
 }

@@ -95,6 +95,14 @@ namespace DotNetPrograms.Common.Meta
             }
         }
 
+        public bool IsDictionary
+        {
+            get
+            {
+                return typeof(IDictionary).IsAssignableFrom(Type);
+            }
+        }
+
         public IEnumerable<PropertyMeta> GetComplexProperties()
         {
             return Properties.Where(p => p.IsComplex);

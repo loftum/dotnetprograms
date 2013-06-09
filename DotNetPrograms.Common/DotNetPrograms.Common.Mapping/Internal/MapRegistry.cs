@@ -38,6 +38,10 @@ namespace DotNetPrograms.Common.Mapping.Internal
             {
                 return new SimpleTypeMap(sourceType, targetType, this);
             }
+            if (target.IsDictionary)
+            {
+                
+            }
             if (target.IsCollection)
             {
                 return new CollectionTypeMap(sourceType, targetType, this);

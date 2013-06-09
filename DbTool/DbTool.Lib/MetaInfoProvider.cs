@@ -19,7 +19,7 @@ namespace DbTool.Lib
             return type == null ? TagType.Nothing : TagType.Object;
         }
 
-        public TypeMeta GetType(string word)
+        public TableMeta GetType(string word)
         {
             return _typeCache.GetType(word);
         }

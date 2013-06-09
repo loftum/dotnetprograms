@@ -52,9 +52,9 @@ namespace DbTool.Lib.Syntax
                 var obj = _syntaxProvider.GetType(word);
                 if (obj != null)
                 {
-                    var suggestions = obj.Properties
-                        .OrderBy(p => p.MemberName)
-                        .Select(property => new Suggestion(property.MemberName));
+                    var suggestions = obj.Columns
+                        .OrderBy(p => p.Name)
+                        .Select(property => new Suggestion(property.Name));
                     return suggestions;
                 }
             }

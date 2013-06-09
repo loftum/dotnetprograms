@@ -51,7 +51,7 @@ namespace DbTool.Lib.Syntax
             return type.GetProperties().Select(property => property.Name.ToLowerInvariant());
         }
 
-        public TypeMeta GetType(string word)
+        public TableMeta GetType(string word)
         {
             return _metaInfoProvider.GetType(word);
         }

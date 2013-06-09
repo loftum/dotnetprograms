@@ -8,10 +8,12 @@ namespace DotNetPrograms.Common.UnitTests.Common.Mapping
         public long? Number { get; set; }
         public Customer Customer { get; set; }
         public IList<OrderLine> Lines { get; set; }
+        public IDictionary<string, int> Dictionary { get; set; }
 
         public Order()
         {
             Lines = new List<OrderLine>();
+            Dictionary = new Dictionary<string, int>();
         }
     }
 }
