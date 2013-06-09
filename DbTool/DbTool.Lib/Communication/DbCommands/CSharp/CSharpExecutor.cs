@@ -67,7 +67,7 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
                 {
                     return _collectionConverter.Convert((IEnumerable)result.Result);
                 }
-                builder.AppendLine(result.Result.ToString());
+                builder.AppendLine(result.Result == null ? "null" : result.Result.ToString());
             }
             if (result.HasMessage)
             {
