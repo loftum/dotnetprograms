@@ -110,6 +110,41 @@ namespace DbTool.Testing.Linq
             Assert.That(result.CommandText, Is.EqualTo("select top 42 * from Hest where (Name = @p1)"));
         }
 
+        [Test]
+        public void Translate_TranslatesOrderBy()
+        {
+            var query = Linq<Hest>().OrderBy(h => h.Name).ThenByDescending(h => h.Age);
+            var result = _translator.Translate(query);
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest order by Name, Age desc"));
+        }
+
+        [Test]
+        public void Translate_TranslatesStringContains()
+        {
+            var query = Linq<Hest>().Where(h => h.Name.Contains("lakken"));
+            var result = _translator.Translate(query);
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where Name like '%' + @p1 + '%'"));
+            Assert.That(result.Parameters["@p1"].Value, Is.EqualTo("lakken"));
+        }
+
+        [Test]
+        public void TranslateTranslatesStringEndsWith()
+        {
+            var query = Linq<Hest>().Where(h => h.Name.EndsWith("lakken"));
+            var result = _translator.Translate(query);
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where Name like '%' + @p1"));
+            Assert.That(result.Parameters["@p1"].Value, Is.EqualTo("lakken"));
+        }
+
+        [Test]
+        public void TranslateTranslatesStringStartsWith()
+        {
+            var query = Linq<Hest>().Where(h => h.Name.StartsWith("Blakk"));
+            var result = _translator.Translate(query);
+            Assert.That(result.CommandText, Is.EqualTo("select * from Hest where Name like @p1 + '%'"));
+            Assert.That(result.Parameters["@p1"].Value, Is.EqualTo("Blakk"));
+        }
+
         private static IQueryable<T> Linq<T>()
         {
             var mocker = new AutoMoqer();

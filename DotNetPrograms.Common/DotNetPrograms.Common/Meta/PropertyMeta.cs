@@ -48,6 +48,11 @@ namespace DotNetPrograms.Common.Meta
             get { return _property.GetSetMethod() != null; }
         }
 
+        public bool HasGetter
+        {
+            get { return _property.GetGetMethod() != null; }
+        }
+
         public object GetValue(object item)
         {
             if (item == null)

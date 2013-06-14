@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using DbTool.Lib.Linq.Interpreters.Tree.Methods;
 
 namespace DbTool.Lib.Linq.Interpreters.Tree
 {
@@ -65,12 +66,24 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         {
             switch (method.Method.Name)
             {
-                case("Select"):
+                case "Select":
                     return new SelectNode(sql, method);
-                case("Where"):
+                case "Where":
                     return new WhereNode(sql, method);
-                case("Take"):
+                case "Take":
                     return new TakeNode(sql, method);
+                case "OrderBy":
+                case "ThenBy":
+                    return new OrderByNode(sql, method);
+                case "OrderByDescending":
+                case "ThenByDescending":
+                    return new OrderByNode(sql, method, false);
+                case "Contains":
+                    return new ContainsNode(sql, method);
+                case "StartsWith":
+                    return new StartsWithNode(sql, method);
+                case "EndsWith":
+                    return new EndsWithNode(sql, method);
                 default:
                 throw new InvalidOperationException(string.Format("Method not supported: {0}", method.Method.Name));
             }

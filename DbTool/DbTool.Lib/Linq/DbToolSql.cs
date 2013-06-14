@@ -17,7 +17,7 @@ namespace DbTool.Lib.Linq
         public string CommandText { get { return BuildCommandText(); } }
         public IDictionary<string, DbToolSqlParameter> Parameters { get; set; }
 
-        
+        private readonly IList<OrderColumn> _orderBys = new List<OrderColumn>();
 
         public DbToolSql()
         {
@@ -44,7 +44,11 @@ namespace DbTool.Lib.Linq
             if (_wheres.Any())
             {
                 builder.AppendFormat(" where {0}", Where);
-            }    
+            }
+            if (_orderBys.Any())
+            {
+                builder.AppendFormat(" order by {0}", string.Join(", ", _orderBys.Select(o => o.Statement)));
+            }
             return builder.ToString();
         }
 
@@ -76,6 +80,11 @@ namespace DbTool.Lib.Linq
             return Parameters.Any()
                        ? Parameters.Values.Max(p => p.Number) + 1
                        : 1;
+        }
+
+        public void OrderBy(string column, bool ascending = true)
+        {
+            _orderBys.Add(new OrderColumn(column, ascending));
         }
     }
 }

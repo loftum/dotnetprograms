@@ -7,13 +7,13 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
 {
     public class LambdaSelector
     {
-        private ParameterExpression _parameter;
+        public ParameterExpression Parameter { get; private set; }
         public IList<string> Properties { get; private set; }
 
         public LambdaSelector(LambdaExpression expression)
         {
             Properties = GetPropertiesFrom((dynamic) expression.Body);
-            _parameter = expression.Parameters.Single();
+            Parameter = expression.Parameters.Single();
         } 
 
         private static List<string> GetPropertiesFrom(ParameterExpression parameter)

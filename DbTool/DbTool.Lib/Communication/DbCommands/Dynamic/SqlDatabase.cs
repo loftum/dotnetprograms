@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using DbTool.Lib.Configuration;
+using DbTool.Lib.Linq;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
-    public class DynamicQuery
+    public class SqlDatabase
     {
         private ConnectionData _connectionData;
         public ConnectionData ConnectionData 
@@ -30,7 +33,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
 
         private readonly DynamicSqlQuery _sqlQuery;
 
-        public DynamicQuery()
+        public SqlDatabase()
         {
             _sqlQuery = new DynamicSqlQuery();
         }
@@ -43,6 +46,16 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
         public IEnumerable<dynamic> Query(string sql)
         {
             return _sqlQuery.Query(sql);
+        }
+
+        public IQueryable<T> Query<T>()
+        {
+            return new DbToolQueryable<T>(new DbToolQueryProvider(new QueryableToSqlTranslator(), DbConnection));
+        }
+
+        public void Insert<T>(T item)
+        {
+            _sqlQuery.Insert(item);
         }
     }
 }

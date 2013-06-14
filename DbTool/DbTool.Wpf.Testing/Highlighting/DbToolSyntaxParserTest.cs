@@ -36,8 +36,8 @@ namespace DbTool.Wpf.Testing.Highlighting
         [Test]
         public void FindSuggestions_ShouldAddPropertiesToSuggestionList()
         {
-            _object.AddColumn(new ColumnMeta("varchar", "FirstName"));
-            _object.AddColumn(new ColumnMeta("varchar", "LastName"));
+            _object.AddColumn(new ColumnMeta("varchar", "FirstName", true));
+            _object.AddColumn(new ColumnMeta("varchar", "LastName", true));
             _syntaxProviderMock.Setup(p => p.GetType("person")).Returns(_object);
 
             _parser.FindSuggestions("person", 4);

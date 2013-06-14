@@ -99,7 +99,7 @@
     <Compile Include="Communication\DbCommands\DefaultExecutorProvider.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRow.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicDataRowPropertyDescriptor.cs" />
-    <Compile Include="Communication\DbCommands\Dynamic\DynamicQuery.cs" />
+    <Compile Include="Communication\DbCommands\Dynamic\SqlDatabase.cs" />
     <Compile Include="Communication\DbCommands\Dynamic\DynamicSqlQuery.cs" />
     <Compile Include="Communication\DbCommands\IDbCommandExecutor.cs" />
     <Compile Include="Communication\DbCommands\IExecutorProvider.cs" />
@@ -161,6 +161,11 @@
     <Compile Include="Linq\Interpreters\Tree\LambdaNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\MemberNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\MethodCallNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\Methods\ContainsNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\Methods\EndsWithNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\Methods\StartsWithNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\Methods\StringMethodNode.cs" />
+    <Compile Include="Linq\Interpreters\Tree\OrderByNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\ParameterNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\SelectNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\LambdaSelector.cs" />
@@ -175,6 +180,7 @@
     <Compile Include="Linq\DbToolQueryProvider.cs" />
     <Compile Include="Linq\IQueryExecutor.cs" />
     <Compile Include="Linq\LinqExtensions.cs" />
+    <Compile Include="Linq\OrderColumn.cs" />
     <Compile Include="Linq\QueryableToSqlTranslator.cs" />
     <Compile Include="Linq\DbToolSql.cs" />
     <Compile Include="Linq\RowConverter.cs" />

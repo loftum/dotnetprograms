@@ -1,8 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using DbTool.Lib.Configuration;
+using DotNetPrograms.Common.ExtensionMethods;
+using DotNetPrograms.Common.Meta;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
@@ -21,7 +27,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
 			try
 			{
 				DbConnection.Open();
-				return DoGetSchema(DbConnection.GetSchema());
+				return DoGetSchema(DbConnection.GetSchema(collection));
 			}
 			finally
 			{
@@ -76,6 +82,41 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
             for (var ii=0; ii<reader.FieldCount; ii++)
             {
                 yield return reader.GetName(ii);
+            }
+        }
+
+        public void Insert<T>(T item)
+        {
+            if (ConnectionData == null)
+            {
+                return;
+            }
+            try
+            {
+                using (var command = DbConnection.CreateCommand())
+                {
+                    var meta = new TypeMeta(typeof(T));
+                    var properties = meta.Properties.Where(p => p.HasGetter).ToList();
+                    foreach (var property in properties)
+                    {
+                        var parameterName = string.Format("@{0}", property.Name);
+                        var value = property.GetValue(item) ?? DBNull.Value;
+                        command.Parameters.Add(new SqlParameter(parameterName, value));
+                    }
+                    
+                    var insert = new StringBuilder("insert into ").AppendFormat(meta.Type.Name)
+                        .AppendFormat(" ({0})", string.Join(", ", properties.Select(p => p.Name)))
+                        .Append(" values ")
+                        .AppendFormat(" ({0})", string.Join(", ", command.Parameters.Cast<SqlParameter>().Select(p => p.ParameterName)));
+                    command.CommandText = insert.ToString();
+
+                    DbConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            finally
+            {
+                DbConnection.Close();
             }
         }
     }

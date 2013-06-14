@@ -96,6 +96,16 @@ namespace DotNetPrograms.Common.ExtensionMethods
             }
         }
 
+        public static void Each<T>(this IEnumerable<T> collection, Action<int,T> action)
+        {
+            var index = 0;
+            foreach (var item in collection)
+            {
+                action(index, item);
+                index++;
+            }
+        }
+
         public static Type GetTypeOfValues(this IEnumerable collection)
         {
             if (collection.IsEmpty())
