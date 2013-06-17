@@ -21,6 +21,7 @@ namespace DbTool.Lib.Meta
         public Type CreateType(TableMeta table)
         {
             var builder = DynamicAssembly.BuildClass(table.Name)
+                .WithAttribute(() => new DbTableAttribute(table.Name))
                 .WithAttribute<SerializableAttribute>();
 
             foreach (var column in table.Columns)

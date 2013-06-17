@@ -15,7 +15,7 @@ namespace DbTool.Lib.CSharp.Mono
         public static Evaluator Evaluator;
         public static TextWriter Output = new StringWriter();
 
-        public static IEnumerable<dynamic> Schema(string collection)
+        public static IEnumerable<dynamic> Schema(string collection = null)
         {
             return Db.Schema(collection);
         }
@@ -30,7 +30,7 @@ namespace DbTool.Lib.CSharp.Mono
             return Db.Query<T>();
         }
 
-        public static void Insert<T>(T item)
+        public static void Save<T>(T item)
         {
             Db.Insert(item);
         }

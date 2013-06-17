@@ -84,6 +84,11 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
                     return new StartsWithNode(sql, method);
                 case "EndsWith":
                     return new EndsWithNode(sql, method);
+                case "Single":
+                case "SingleOrDefault":
+                case "First":
+                case "FirstOrDefault":
+                    return new FirstNode(sql, method);
                 default:
                 throw new InvalidOperationException(string.Format("Method not supported: {0}", method.Method.Name));
             }

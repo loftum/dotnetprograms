@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -15,16 +17,38 @@ namespace DbTool.Lib.Meta.Emit
             _typeBuilder = typeBuilder;
         }
 
-        public ClassBuilder WithAttribute<TAttribute>() where TAttribute : Attribute
+        public ClassBuilder WithAttribute<TAttribute>(params object[] ctorArguments) where TAttribute : Attribute
         {
-            var attribute = typeof(TAttribute).GetConstructor(new Type[0]);
+            var attribute = typeof(TAttribute).GetConstructor(ctorArguments.Select(a => a.GetType()).ToArray());
             if (attribute == null)
             {
-                throw new InvalidOperationException(string.Format("No parameterless constructor defined for {0}", typeof(TAttribute)));
+                var arguments = ctorArguments.Select((ii, a) => string.Format("{0} arg{1}", a.GetType().Name, ii));
+                throw new InvalidOperationException(string.Format("There is no ctor {0}({1})", typeof(TAttribute), string.Join(", ", arguments)));
             }
-            var builder = new CustomAttributeBuilder(attribute, new object[0]);
+            var builder = new CustomAttributeBuilder(attribute, ctorArguments);
             _typeBuilder.SetCustomAttribute(builder);
             return this;
+        }
+
+        public ClassBuilder WithAttribute<TAttribute>(Expression<Func<TAttribute>> expression)
+            where TAttribute : Attribute
+        {
+            return WithAttribute<TAttribute>(((NewExpression) expression.Body).Arguments.Select(GetValue));
+        }
+
+        private static object GetValue(Expression expression)
+        {
+            return DoGetValue((dynamic) expression);
+        }
+
+        private static object DoGetValue(MemberExpression expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static object DoGetValue(object invalid)
+        {
+            throw new InvalidOperationException(string.Format("Could not get value from {0}", invalid.GetType()));
         }
 
         public void AddProperty(string name, Type type)

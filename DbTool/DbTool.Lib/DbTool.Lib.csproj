@@ -138,7 +138,6 @@
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Record.cs" />
-    <Compile Include="Data\SchemaLoader.cs" />
     <Compile Include="Exceptions\DbToolException.cs" />
     <Compile Include="Exceptions\ExceptionType.cs" />
     <Compile Include="Exceptions\UserException.cs" />
@@ -169,6 +168,7 @@
     <Compile Include="Linq\Interpreters\Tree\ParameterNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\SelectNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\LambdaSelector.cs" />
+    <Compile Include="Linq\Interpreters\Tree\FirstNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\SqlOperatorTranslator.cs" />
     <Compile Include="Linq\Interpreters\Tree\SqlTreeNode.cs" />
     <Compile Include="Linq\Interpreters\Tree\TakeNode.cs" />
@@ -194,10 +194,15 @@
     <Compile Include="Meta\Emit\ClassBuilder.cs" />
     <Compile Include="Meta\Emit\DynamicAssembly.cs" />
     <Compile Include="Meta\IDatabaseToAssemblyConverter.cs" />
+    <Compile Include="Meta\SchemaLoader.cs" />
     <Compile Include="Meta\TableTypeGenerator.cs" />
     <Compile Include="Meta\DbToolTypeCache.cs" />
     <Compile Include="Meta\ITypeCache.cs" />
     <Compile Include="Meta\Types\ColumnMeta.cs" />
+    <Compile Include="Meta\Types\DbColumnAttribute.cs" />
+    <Compile Include="Meta\Types\DbTableAttribute.cs" />
+    <Compile Include="Meta\Types\IDatabaseSchema.cs" />
+    <Compile Include="Meta\Types\PrimaryKey.cs" />
     <Compile Include="Meta\Types\TableMeta.cs" />
     <Compile Include="Meta\Types\DatabaseSchema.cs" />
     <Compile Include="Migrating\MigratorDotNetRunner.cs" />

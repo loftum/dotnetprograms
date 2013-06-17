@@ -10,6 +10,11 @@ namespace DbTool.Lib.ExtensionMethods
             return (T) row[column];
         }
 
+        public static T Get<T>(this IDataRecord row, string column)
+        {
+            return (T)row[column];
+        }
+
         public static IDictionary<string, object> ToDictionary(this DataRow row)
         {
             var dictionary = new Dictionary<string, object>();

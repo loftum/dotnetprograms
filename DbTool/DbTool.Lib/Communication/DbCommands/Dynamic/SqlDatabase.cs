@@ -38,7 +38,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
             _sqlQuery = new DynamicSqlQuery();
         }
 
-        public IEnumerable<dynamic> Schema(string collection)
+        public IEnumerable<dynamic> Schema(string collection = null)
         {
             return _sqlQuery.Schema(collection);
         }

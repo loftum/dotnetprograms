@@ -4,10 +4,8 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using DbTool.Lib.Configuration;
-using DotNetPrograms.Common.ExtensionMethods;
 using DotNetPrograms.Common.Meta;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
@@ -17,7 +15,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
         public ConnectionData ConnectionData { get; set; }
         public DbConnection DbConnection { get; set; }
 
-        public IEnumerable<dynamic> Schema(string collection)
+        public IEnumerable<dynamic> Schema(string collection = null)
         {
             if (ConnectionData == null)
             {
@@ -27,7 +25,9 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
 			try
 			{
 				DbConnection.Open();
-				return DoGetSchema(DbConnection.GetSchema(collection));
+				return DoGetSchema(
+                    collection == null ? DbConnection.GetSchema() :
+                    DbConnection.GetSchema(collection));
 			}
 			finally
 			{

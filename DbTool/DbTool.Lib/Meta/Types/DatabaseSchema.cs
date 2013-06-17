@@ -4,7 +4,7 @@ using DbTool.Lib.ExtensionMethods;
 
 namespace DbTool.Lib.Meta.Types
 {
-    public class DatabaseSchema
+    public class DatabaseSchema : IDatabaseSchema
     {
         public bool CaseSensitive { get; private set; }
         public string TableSchema { get; private set; }

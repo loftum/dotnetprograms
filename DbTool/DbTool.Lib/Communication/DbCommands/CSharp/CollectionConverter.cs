@@ -24,10 +24,6 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
             }
             if (type == typeof(DynamicDataRow))
             {
-                return QueryResultOfDynamicRecord(values.Cast<DynamicDataRow>());
-            }
-            if (type == typeof(DynamicDataRow))
-            {
                 return QueryResultOfDynamicDataRow(values.Cast<DynamicDataRow>());
             }
             if (type.IsAssignableFrom(typeof(IDictionary)))
@@ -39,24 +35,6 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
         }
 
         private IDbCommandResult QueryResultOfDynamicDataRow(IEnumerable<DynamicDataRow> values)
-        {
-            var result = new QueryResult();
-            if (values.IsEmpty())
-            {
-                return result;
-            }
-
-            var columns = values.First().Columns;
-            columns.Each(c => result.AddColumn(c, typeof(string)));
-            foreach (var record in values)
-            {
-                var theRecord = record;
-                result.AddRow(columns.Select(c => theRecord[c]));
-            }
-            return result;
-        }
-
-        private IDbCommandResult QueryResultOfDynamicRecord(IEnumerable<DynamicDataRow> values)
         {
             var result = new QueryResult();
             if (values.IsEmpty())

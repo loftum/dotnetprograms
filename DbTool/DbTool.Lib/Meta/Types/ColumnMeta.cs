@@ -11,6 +11,8 @@ namespace DbTool.Lib.Meta.Types
         public bool IsNullable { get; private set; }
         public Type CSharpType { get; private set; }
 
+        public bool IsPrimaryKey { get; set; }
+
         public ColumnMeta(DataRow row)
             : this(row.Get<string>("DATA_TYPE"), row.Get<string>("COLUMN_NAME"), row.Get<string>("IS_NULLABLE") == "YES")
         {
@@ -49,6 +51,8 @@ namespace DbTool.Lib.Meta.Types
                     return typeof (string);
                 case "nvarchar":
                     return typeof (string);
+                case "binary":
+                    return typeof(byte[]);
             }
             return typeof (object);
         }

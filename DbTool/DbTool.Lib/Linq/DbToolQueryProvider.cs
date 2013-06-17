@@ -56,6 +56,10 @@ namespace DbTool.Lib.Linq
                     var result = DoExecute(command, itemType);
                     return isCollection ? (TResult) result : result.OfType<TResult>().SingleOrDefault();
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Could not execute SQL: {0}", command.CommandText), ex);
+                }
                 finally
                 {
                     _dbConnection.Close();
@@ -63,7 +67,7 @@ namespace DbTool.Lib.Linq
             }
         }
 
-        private IEnumerable DoExecute(DbCommand command, Type type)
+        private static IEnumerable DoExecute(DbCommand command, Type type)
         {
             var items = (IList) new TypeMeta(typeof (List<>).MakeGenericType(type)).NewUp();
             using (var reader = command.ExecuteReader())

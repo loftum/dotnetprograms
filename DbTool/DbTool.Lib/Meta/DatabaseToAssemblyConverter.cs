@@ -12,7 +12,7 @@ namespace DbTool.Lib.Meta
             foreach (var table in schema.Tables)
             {
                 var builder = assembly.BuildClass(table.Name)
-                        .WithAttribute<SerializableAttribute>();
+                                      .WithAttribute<SerializableAttribute>();  
                 foreach (var column in table.Columns)
                 {
                     builder.AddProperty(column.Name, column.CSharpType);
