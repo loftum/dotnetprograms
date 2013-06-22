@@ -191,8 +191,9 @@
     <Compile Include="Memory\MemoryMeter.cs" />
     <Compile Include="MetaInfoProvider.cs" />
     <Compile Include="Meta\DatabaseToAssemblyConverter.cs" />
-    <Compile Include="Meta\Emit\ClassBuilder.cs" />
+    <Compile Include="Meta\Emit\ClassEngineer.cs" />
     <Compile Include="Meta\Emit\DynamicAssembly.cs" />
+    <Compile Include="Meta\Emit\PropertyEngineer.cs" />
     <Compile Include="Meta\IDatabaseToAssemblyConverter.cs" />
     <Compile Include="Meta\SchemaLoader.cs" />
     <Compile Include="Meta\TableTypeGenerator.cs" />

@@ -11,15 +11,24 @@ namespace DbTool.Lib.Meta
             var assembly = new DynamicAssembly(schema.FullName);
             foreach (var table in schema.Tables)
             {
-                var builder = assembly.BuildClass(table.Name)
-                                      .WithAttribute<SerializableAttribute>();  
+                var builder = assembly.BuildClass(Typify(table.Name))
+                                      .WithAttribute<SerializableAttribute>()
+                                      .WithAttribute(() => new DbTableAttribute(table.Name));  
                 foreach (var column in table.Columns)
                 {
-                    builder.AddProperty(column.Name, column.CSharpType);
+                    builder.WithProperty(Typify(column.Name), column.CSharpType, b => b
+                        .WithGetter()
+                        .WithSetter()
+                        .WithAttribute(() => new DbColumnAttribute(column.Name, column.Type, column.IsNullable, column.IsPrimaryKey)));
                 }
                 builder.CreateType();
             }
             return assembly;
+        }
+
+        private static string Typify(string name)
+        {
+            return name.Replace(" ", "_");
         }
     }
 }

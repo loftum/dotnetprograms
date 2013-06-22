@@ -16,6 +16,7 @@ namespace DbTool.Lib.Linq
 
         public string CommandText { get { return BuildCommandText(); } }
         public IDictionary<string, DbToolSqlParameter> Parameters { get; set; }
+        public bool AllowDefault { get; set; }
 
         private readonly IList<OrderColumn> _orderBys = new List<OrderColumn>();
 

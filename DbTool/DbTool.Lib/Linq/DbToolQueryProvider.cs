@@ -54,7 +54,13 @@ namespace DbTool.Lib.Linq
                 try
                 {
                     var result = DoExecute(command, itemType);
-                    return isCollection ? (TResult) result : result.OfType<TResult>().SingleOrDefault();
+                    if (isCollection)
+                    {
+                        return (TResult) result;
+                    }
+                    return sql.AllowDefault
+                        ? result.OfType<TResult>().SingleOrDefault()
+                        : result.OfType<TResult>().Single();
                 }
                 catch (Exception ex)
                 {

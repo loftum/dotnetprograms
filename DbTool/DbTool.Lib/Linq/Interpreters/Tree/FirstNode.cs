@@ -8,6 +8,7 @@ namespace DbTool.Lib.Linq.Interpreters.Tree
         public FirstNode(DbToolSql sql, MethodCallExpression expression) : base(sql, expression)
         {
             sql.Count = 1;
+            sql.AllowDefault = expression.Method.Name.Contains("OrDefault");
             _nextNode = For(sql, expression.Arguments[0]);
         }
 

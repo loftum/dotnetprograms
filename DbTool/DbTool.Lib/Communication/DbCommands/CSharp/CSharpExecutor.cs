@@ -63,9 +63,17 @@ namespace DbTool.Lib.Communication.DbCommands.CSharp
 
             if (result.ResultSet)
             {
-                if (result.Result.ShouldBeViewedInTable())
+                if (result.Result == null)
+                {
+                    return new MessageResult("null");
+                }
+                if (result.Result.IsCollection())
                 {
                     return _collectionConverter.Convert((IEnumerable)result.Result);
+                }
+                if (result.Result.IsComplexType())
+                {
+                    return _collectionConverter.Convert(new[] {result.Result});
                 }
                 builder.AppendLine(result.Result == null ? "null" : result.Result.ToString());
             }

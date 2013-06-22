@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -6,34 +7,40 @@ using System.Reflection.Emit;
 
 namespace DbTool.Lib.Meta.Emit
 {
-    public class ClassBuilder
+    public class ClassEngineer
     {
         private const MethodAttributes GetSetAttr = MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig;
 
         private readonly TypeBuilder _typeBuilder;
 
-        public ClassBuilder(TypeBuilder typeBuilder)
+        public ClassEngineer(TypeBuilder typeBuilder)
         {
             _typeBuilder = typeBuilder;
         }
 
-        public ClassBuilder WithAttribute<TAttribute>(params object[] ctorArguments) where TAttribute : Attribute
+        public ClassEngineer WithAttribute<TAttribute>(params object[] ctorArguments) where TAttribute : Attribute
+        {
+            return WithAttribute<TAttribute>(ctorArguments.ToList());
+        }
+
+        public ClassEngineer WithAttribute<TAttribute>(Expression<Func<TAttribute>> expression)
+            where TAttribute : Attribute
+        {
+            var arguments = (((NewExpression)expression.Body)).Arguments;
+            return WithAttribute<TAttribute>(arguments.Select(GetValue).ToList());
+        }
+
+        public ClassEngineer WithAttribute<TAttribute>(IEnumerable<object> ctorArguments)
         {
             var attribute = typeof(TAttribute).GetConstructor(ctorArguments.Select(a => a.GetType()).ToArray());
             if (attribute == null)
             {
-                var arguments = ctorArguments.Select((ii, a) => string.Format("{0} arg{1}", a.GetType().Name, ii));
+                var arguments = ctorArguments.Select((a, ii) => string.Format("{0} arg{1}", a.GetType().Name, ii));
                 throw new InvalidOperationException(string.Format("There is no ctor {0}({1})", typeof(TAttribute), string.Join(", ", arguments)));
             }
-            var builder = new CustomAttributeBuilder(attribute, ctorArguments);
+            var builder = new CustomAttributeBuilder(attribute, ctorArguments.ToArray());
             _typeBuilder.SetCustomAttribute(builder);
             return this;
-        }
-
-        public ClassBuilder WithAttribute<TAttribute>(Expression<Func<TAttribute>> expression)
-            where TAttribute : Attribute
-        {
-            return WithAttribute<TAttribute>(((NewExpression) expression.Body).Arguments.Select(GetValue));
         }
 
         private static object GetValue(Expression expression)
@@ -41,14 +48,24 @@ namespace DbTool.Lib.Meta.Emit
             return DoGetValue((dynamic) expression);
         }
 
-        private static object DoGetValue(MemberExpression expression)
+        private static object DoGetValue(Expression expression)
         {
-            throw new NotImplementedException();
+            var member = Expression.Convert(expression, typeof (object));
+            var lambda = Expression.Lambda<Func<object>>(member);
+            var value = lambda.Compile()();
+            return value;
         }
 
         private static object DoGetValue(object invalid)
         {
             throw new InvalidOperationException(string.Format("Could not get value from {0}", invalid.GetType()));
+        }
+
+        public ClassEngineer WithProperty(string name, Type type, Action<PropertyEngineer> action)
+        {
+            var property = new PropertyEngineer(name, type, _typeBuilder);
+            action(property);
+            return this;
         }
 
         public void AddProperty(string name, Type type)

@@ -34,11 +34,11 @@ namespace DbTool.Lib.Meta.Emit
 
         public Assembly Assembly { get { return _assembly; } }
 
-        public ClassBuilder BuildClass(string name)
+        public ClassEngineer BuildClass(string name)
         {
             var typeName = string.Format("{0}.{1}", _nameSpace, name);
             var typeBuilder = _module.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
-            return new ClassBuilder(typeBuilder);
+            return new ClassEngineer(typeBuilder);
         }
 
         public byte[] GetBytes()
