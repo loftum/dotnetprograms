@@ -17,7 +17,7 @@ namespace DbTool.Lib.Configuration
         [JsonIgnore]
         public IEnumerable<DbToolDatabase> Connections
         {
-            get { return GetDefaultDatabase().ToListWith(Databases); }
+            get { return GetDefaultDatabase().ToListWith(Databases.OrderBy(d => d.Name)); }
         }
 
         public DbToolContext(string name) : this()
