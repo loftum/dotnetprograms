@@ -1,0 +1,49 @@
+﻿<#@ template debug="true" hostSpecific="true" language="C#" #>
+<#@ output extension=".log" #>
+<#@ include file="Config/Tools/ConfigurationMerger.ttinclude"  #><#
+var setup = new Dictionary<string, string[]>();
+string inputFilesRelativeRootPath = @"\";
+string outputFilesRelativeRootPath = @"\";
+//////////////////////////////////////////////////////////////
+/// 
+/// see here for detailed explanation: 
+/// http://ilearnable.net/2010/08/02/t4-for-complex-configuration/
+/// 
+//Configure the configuration generation process like this:
+//setup[<outputfilename>] = new []{<input1>,<input2>,<input3>,..};
+// 
+// configs are merged in the order given (input 3 overrides input 2, which overrides input1)
+//
+// make your modifications below here
+//////////////////////////////////////////////////////////////
+inputFilesRelativeRootPath = @"\config\input";
+//for utvikling
+setup[@"web.config"] = new []{"web.root.config","web.dev.config", "web.dev.local.config"};
+setup[@"\config\output\web.config"] = new []{"web.root.config", "web.dev.config"};
+
+////////////////////////////////////////////////////////////////
+//End of custom configuration, the rest is just static stuff:
+////////////////////////////////////////////////////////////////
+
+var configs = MergeConfigFiles(inputFilesRelativeRootPath, outputFilesRelativeRootPath, setup);
+var manager = CodegenManager.Create(Host, GenerationEnvironment);
+foreach(var filepath in configs.Keys){
+	var dirName = System.IO.Path.GetDirectoryName(this.Host.TemplateFile)+filepath;
+	EnsureDirectory(new System.IO.DirectoryInfo(dirName.Substring(0,dirName.LastIndexOf('\\'))));
+	manager.StartNewFile(dirName);
+	#><#= configs[filepath] #><#
+	manager.EndBlock();
+}
+manager.Process(true);
+#>
+<#+ 
+public static void EnsureDirectory(System.IO.DirectoryInfo oDirInfo) 
+{ 
+    if (oDirInfo.Parent != null) 
+        EnsureDirectory(oDirInfo.Parent); 
+    if (!oDirInfo.Exists) 
+    { 
+        oDirInfo.Create(); 
+    } 
+} 
+#>

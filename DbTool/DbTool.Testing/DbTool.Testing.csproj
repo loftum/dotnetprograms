@@ -85,7 +85,7 @@
     <Compile Include="CSharp\Hest.cs" />
     <Compile Include="Formatting\NumberFormatTest.cs" />
     <Compile Include="Linq\Child.cs" />
-    <Compile Include="Linq\DbToolQueryableTest.cs" />
+    <Compile Include="Linq\MissingLinqQueryableTest.cs" />
     <Compile Include="Linq\Hest.cs" />
     <Compile Include="Linq\QueryableToSqlTranslatorTest.cs" />
     <Compile Include="Models\PropertyExpressionTest.cs" />
@@ -96,6 +96,10 @@
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
       <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
       <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj">
+      <Project>{AD7F2C5D-05DD-4D60-925A-B82A10410413}</Project>
+      <Name>MissingLinq.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\DbTool.Lib.Ui\DbTool.Lib.Ui.csproj">
       <Project>{74004709-197C-41CC-BF76-1339B1460120}</Project>

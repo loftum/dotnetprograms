@@ -150,40 +150,6 @@
     <Compile Include="ExtensionMethods\PathExtensions.cs" />
     <Compile Include="FileSystem\IPathResolver.cs" />
     <Compile Include="FileSystem\PathResolver.cs" />
-    <Compile Include="Linq\DbToolSqlParameter.cs" />
-    <Compile Include="Linq\ExtensionMethods\ExpressionExtensions.cs" />
-    <Compile Include="Linq\IDbCommandExecutor.cs" />
-    <Compile Include="Linq\Interpreters\ExpressionVisitor.cs" />
-    <Compile Include="Linq\Interpreters\Tree\BinaryNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\ConstantNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\ITreeNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\LambdaNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\MemberNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\MethodCallNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\Methods\ContainsNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\Methods\EndsWithNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\Methods\StartsWithNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\Methods\StringMethodNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\OrderByNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\ParameterNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\SelectNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\LambdaSelector.cs" />
-    <Compile Include="Linq\Interpreters\Tree\FirstNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\SqlOperatorTranslator.cs" />
-    <Compile Include="Linq\Interpreters\Tree\SqlTreeNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\TakeNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\TreeNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\UnaryNode.cs" />
-    <Compile Include="Linq\Interpreters\Tree\WhereNode.cs" />
-    <Compile Include="Linq\IQueryableToSqlTranslator.cs" />
-    <Compile Include="Linq\DbToolQueryable.cs" />
-    <Compile Include="Linq\DbToolQueryProvider.cs" />
-    <Compile Include="Linq\IQueryExecutor.cs" />
-    <Compile Include="Linq\LinqExtensions.cs" />
-    <Compile Include="Linq\OrderColumn.cs" />
-    <Compile Include="Linq\QueryableToSqlTranslator.cs" />
-    <Compile Include="Linq\DbToolSql.cs" />
-    <Compile Include="Linq\RowConverter.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IDbToolLogger.cs" />
     <Compile Include="Logging\MemoryLogger.cs" />
@@ -247,6 +213,10 @@
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
       <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
       <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj">
+      <Project>{AD7F2C5D-05DD-4D60-925A-B82A10410413}</Project>
+      <Name>MissingLinq.Sql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
