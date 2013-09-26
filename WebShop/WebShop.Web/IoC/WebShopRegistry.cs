@@ -1,8 +1,8 @@
 ﻿using System.Data;
+using MasterData.Core.Data;
 using NHibernate;
 using StructureMap;
 using StructureMap.Configuration.DSL;
-using WebShop.Core.Data;
 
 namespace WebShop.Web.IoC
 {
@@ -14,6 +14,7 @@ namespace WebShop.Web.IoC
                 {
                     s.TheCallingAssembly();
                     s.Assembly("WebShop.Common");
+                    s.Assembly("MasterData.Core");
                     s.Assembly("WebShop.Core");
                     s.WithDefaultConventions().OnAddedPluginTypes(c => c.LifecycleIs(Lifecycle.Current));
                 });

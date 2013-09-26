@@ -13,7 +13,7 @@ namespace WebShop.IntegrationTesting
         [TestFixtureSetUp]
         public void SetUpTestFixture()
         {
-            new MigrationRunner(new ConfigSettings().MasterDataConnectionString).MigrateUp();
+            new WebShopMigrator(new ConfigSettings().MasterDataConnectionString).MigrateUp();
             Lifecycle.Current = new IntegrationTestLifecycle();
             ObjectFactory.Initialize(a => a.AddRegistry(new WebShopRegistry()));
         }

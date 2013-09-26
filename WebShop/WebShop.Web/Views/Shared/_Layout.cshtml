@@ -6,9 +6,14 @@
     @Html.Partial("CssAndStuff")
     <title>@string.Format("WebShop - {0}", ViewBag.Title)</title>
 </head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
+    <body>
+        <div class="page-header">
+            <div class="container">
+                WebShop
+            </div>
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </body>
 </html>

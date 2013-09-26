@@ -1,6 +1,8 @@
-﻿using DotNetPrograms.Common.Paging;
-using WebShop.Core.Data;
-using WebShop.Core.Domain.MasterData;
+﻿using System.Linq;
+using DotNetPrograms.Common.ExtensionMethods;
+using DotNetPrograms.Common.Paging;
+using MasterData.Core.Data;
+using MasterData.Core.Domain.MasterData;
 using WebShop.Core.Model;
 
 namespace WebShop.Core.Facade
@@ -14,10 +16,20 @@ namespace WebShop.Core.Facade
             _repo = repo;
         }
 
-        public PagedList<ProductModel> GetProducts(int pageNumber, int pageSize)
+        public PagedList<WebShopProductModel> GetProducts(string searchText, int pageNumber, int pageSize)
         {
-            return new PagedProductList(_repo.GetAll<Product>(), pageNumber, pageSize);
-            
+            var saleProducts = _repo.GetAll<SaleProduct>();
+
+            if (!searchText.IsNullOrEmpty())
+            {
+                saleProducts = saleProducts.Where(sp =>
+                    sp.Name.Contains(searchText) ||
+                    sp.Variant.Name.Contains(searchText) ||
+                    sp.Variant.Master.Name.Contains(searchText)
+                    );
+            }
+
+            return new PagedSaleProductList(saleProducts, pageNumber, pageSize);
         }
     }
 }

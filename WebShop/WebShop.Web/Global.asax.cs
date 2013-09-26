@@ -6,6 +6,7 @@ using System.Web.Routing;
 using StructureMap;
 using StructureMap.Pipeline;
 using WebShop.Common.Configuration;
+using WebShop.Common.Mapping;
 using WebShop.Core.Data;
 using WebShop.Core.Mapping;
 using WebShop.Migrations;
@@ -23,12 +24,12 @@ namespace WebShop.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            AutoMap.Initialize(new MasterDataMappingProfile());
+            AutoMap.Initialize(new WebShopMappingProfile());
         }
 
         private static void SetUpDatabase()
         {
-            new MigrationRunner(new ConfigSettings().MasterDataConnectionString).MigrateUp();
+            new WebShopMigrator(new ConfigSettings().MasterDataConnectionString).MigrateUp();
             DisableEntityFramworkMigrations();
         }
 

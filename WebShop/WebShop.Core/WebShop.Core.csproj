@@ -45,6 +45,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -60,28 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DoNotInitializeDatabase.cs" />
-    <Compile Include="Data\ISessionProvider.cs" />
-    <Compile Include="Data\ISqlDatabase.cs" />
-    <Compile Include="Data\SessionProvider.cs" />
-    <Compile Include="Data\SqlDatabase.cs" />
     <Compile Include="Data\TransactionsRepository.cs" />
-    <Compile Include="Data\IMasterDataRepository.cs" />
     <Compile Include="Data\ITransactionsRepository.cs" />
-    <Compile Include="Data\MasterDataRepository.cs" />
-    <Compile Include="Domain\Inheritance\Inheritable.cs" />
-    <Compile Include="Domain\MasterData\Mappings\MasterDataObjectMap.cs" />
-    <Compile Include="Domain\MasterData\Mappings\ProductMap.cs" />
     <Compile Include="Domain\Transactions\TransactionsObject.cs" />
-    <Compile Include="Domain\MasterData\MasterDataObject.cs" />
-    <Compile Include="Domain\MasterData\Price.cs" />
-    <Compile Include="Domain\MasterData\Product.cs" />
     <Compile Include="Facade\IProductFacade.cs" />
     <Compile Include="Facade\ProductFacade.cs" />
-    <Compile Include="Mapping\AutoMap.cs" />
-    <Compile Include="Mapping\MasterDataMappingProfile.cs" />
-    <Compile Include="Model\PagedProductList.cs" />
-    <Compile Include="Model\PriceModel.cs" />
-    <Compile Include="Model\ProductModel.cs" />
+    <Compile Include="Mapping\WebShopMappingProfile.cs" />
+    <Compile Include="Model\PagedSaleProductList.cs" />
+    <Compile Include="Model\SearchInput.cs" />
+    <Compile Include="Model\WebShopProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +86,10 @@
     <ProjectReference Include="..\..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj">
       <Project>{AD7F2C5D-05DD-4D60-925A-B82A10410413}</Project>
       <Name>MissingLinq.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MasterData.Core\MasterData.Core.csproj">
+      <Project>{EFC824E5-62C4-4814-97C0-F1B835904C91}</Project>
+      <Name>MasterData.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebShop.Common\WebShop.Common.csproj">
       <Project>{1f9a3e85-11ef-4c00-ae36-4032581c0492}</Project>

@@ -44,11 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\MigrationExtensions.cs" />
-    <Compile Include="IMigrationRunner.cs" />
-    <Compile Include="MigrationRunner.cs" />
+    <Compile Include="IWebShopMigrator.cs" />
+    <Compile Include="WebShopMigrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\M_000_Initial0.cs" />
-    <Compile Include="Steps\M_001_CreateProduct1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

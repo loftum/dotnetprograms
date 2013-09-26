@@ -5,6 +5,6 @@ namespace WebShop.Core.Facade
 {
     public interface IProductFacade
     {
-        PagedList<ProductModel> GetProducts(int pageNumber, int pageSize);
+        PagedList<WebShopProductModel> GetProducts(string searchText, int pageNumber, int pageSize);
     }
 }

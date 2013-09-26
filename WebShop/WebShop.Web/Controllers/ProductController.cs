@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using WebShop.Core.Facade;
+using WebShop.Core.Model;
 
 namespace WebShop.Web.Controllers
 {
@@ -14,7 +15,15 @@ namespace WebShop.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(_productFacade.GetProducts(1, 20));
+            var products = _productFacade.GetProducts(null, 1, 20);
+            return View(products);
+        }
+
+        [HttpPost]
+        public ActionResult Index(SearchInput searchInput)
+        {
+            var products = _productFacade.GetProducts(searchInput.Query, 1, 20);
+            return View(products);
         }
     }
 }

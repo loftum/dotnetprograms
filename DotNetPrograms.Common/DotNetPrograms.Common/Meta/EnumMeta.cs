@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DotNetPrograms.Common.Meta
 {
@@ -43,6 +45,11 @@ namespace DotNetPrograms.Common.Meta
         private static TEnum DoConvert(object value)
         {
             return DoConvert((int)value);
-        } 
+        }
+
+        public IEnumerable<TEnum> GetValues()
+        {
+            return Enum.GetValues(typeof (TEnum)).Cast<TEnum>();
+        }
     }
 }

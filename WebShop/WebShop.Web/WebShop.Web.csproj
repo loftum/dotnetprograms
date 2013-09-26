@@ -58,6 +58,10 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="MigSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6cbf6233e7d0373d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MigSharp.2.1.0\lib\net40\MigSharp.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -163,6 +167,8 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\holder.js" />
+    <Content Include="Scripts\holder.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Web.config" />
@@ -187,6 +193,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\CssAndStuff.cshtml" />
+    <Content Include="Views\Shared\ProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -214,6 +221,10 @@
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
       <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
       <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MasterData.Core\MasterData.Core.csproj">
+      <Project>{EFC824E5-62C4-4814-97C0-F1B835904C91}</Project>
+      <Name>MasterData.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebShop.Common\WebShop.Common.csproj">
       <Project>{1F9A3E85-11EF-4C00-AE36-4032581C0492}</Project>

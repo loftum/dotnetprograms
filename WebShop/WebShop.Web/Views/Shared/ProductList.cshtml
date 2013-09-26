@@ -1,0 +1,12 @@
+﻿@model DotNetPrograms.Common.Paging.PagedList<WebShop.Core.Model.WebShopProductModel>
+
+@foreach (var product in Model)
+{
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <img src="holder.js/100%x180" />
+            @product.Name
+        </div>
+    </div>    
+}
+

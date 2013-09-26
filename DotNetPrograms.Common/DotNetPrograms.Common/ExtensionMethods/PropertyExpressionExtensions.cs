@@ -29,6 +29,16 @@ namespace DotNetPrograms.Common.ExtensionMethods
             return body.RemoveFirstMatch(selfReference);
         }
 
+        public static string GetMemberName<TProperty>(this Expression<Func<TProperty>> expression)
+        {
+            if (expression == null)
+            {
+                return string.Empty;
+            }
+            var member = GetMemberExpressionFrom(expression.Body);
+            return member.Member.Name;
+        }
+
         public static string GetMemberName<TModel, TProperty>(this Expression<Func<TModel, TProperty>> expression)
         {
             if (expression == null)

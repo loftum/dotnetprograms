@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\IMissingLinqDatabase.cs" />
+    <Compile Include="Data\MissingLinqDatabase.cs" />
     <Compile Include="MissingLinqQueryable.cs" />
     <Compile Include="MissingLinqQueryProvider.cs" />
     <Compile Include="MissingLinqSql.cs" />

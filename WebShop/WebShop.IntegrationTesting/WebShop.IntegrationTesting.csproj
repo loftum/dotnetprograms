@@ -54,6 +54,10 @@
     <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="MigSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6cbf6233e7d0373d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MigSharp.2.1.0\lib\net40\MigSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
@@ -72,8 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Data\MasterDataRepositoryTest.cs" />
-    <Compile Include="Core\Data\MigrationTest.cs" />
+    <Compile Include="Core\Data\WebShopMigrationTest.cs" />
     <Compile Include="DbTestBase.cs" />
     <Compile Include="IoC\IntegrationTestLifecycle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

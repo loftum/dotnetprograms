@@ -1,4 +1,4 @@
-﻿@model DotNetPrograms.Common.Paging.PagedList<WebShop.Core.Model.ProductModel>
+﻿@model DotNetPrograms.Common.Paging.PagedList<WebShop.Core.Model.WebShopProductModel>
 
 @{
     ViewBag.Title = "Products";
@@ -6,9 +6,14 @@
 
 <h2>Products</h2>
 
-<ul>
-@foreach (var product in Model)
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
 {
-    <li>@product.Name</li>
+    <div class="input-group">
+        <input type="text" class="form-control" id="Query" placeholder="Search"/>
+        <button class="btn btn-default" type="submit">Search</button>
+    </div>
 }
-</ul>
+
+<div>
+    @Html.Partial("ProductList", Model)
+</div>

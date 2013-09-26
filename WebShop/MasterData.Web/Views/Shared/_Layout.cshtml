@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@string.Format("MasterData - {0}", ViewBag.Title)</title>
+    @Html.Partial("CssAndStuff")
+    @RenderSection("Header", false)
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

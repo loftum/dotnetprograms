@@ -48,11 +48,20 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigSettings.cs" />
     <Compile Include="Configuration\IConfigSettings.cs" />
+    <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="Mapping\AutoMap.cs" />
+    <Compile Include="Models\Pricing\PriceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

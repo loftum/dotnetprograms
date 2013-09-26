@@ -1,4 +1,4 @@
-﻿using System.Web.Http.Dependencies;
+using System.Web.Http.Dependencies;
 using StructureMap;
 
 namespace WebShop.Web.IoC

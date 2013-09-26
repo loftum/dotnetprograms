@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using StructureMap.Pipeline;
 
 namespace WebShop.Web.IoC

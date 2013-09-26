@@ -69,8 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Domain\PriceTest.cs" />
-    <Compile Include="Core\Domain\ProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\Some.cs" />
   </ItemGroup>
@@ -85,6 +83,9 @@
       <Project>{7D38DBF8-29FB-4645-A76B-3CE1C505EB8F}</Project>
       <Name>WebShop.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Domain\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

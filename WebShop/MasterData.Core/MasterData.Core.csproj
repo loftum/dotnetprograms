@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFC824E5-62C4-4814-97C0-F1B835904C91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MasterData.Core</RootNamespace>
+    <AssemblyName>MasterData.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\IMasterDataRepository.cs" />
+    <Compile Include="Data\ISessionProvider.cs" />
+    <Compile Include="Data\MasterDataRepository.cs" />
+    <Compile Include="Data\SessionProvider.cs" />
+    <Compile Include="Domain\Inheritance\Inheritable.cs" />
+    <Compile Include="Domain\Mappings\MasterDataObjectMap.cs" />
+    <Compile Include="Domain\Mappings\ProductMapBase.cs" />
+    <Compile Include="Domain\Mappings\ProductMasterMap.cs" />
+    <Compile Include="Domain\Mappings\ProductVariantMap.cs" />
+    <Compile Include="Domain\Mappings\SaleProductMap.cs" />
+    <Compile Include="Domain\MasterData\Color.cs" />
+    <Compile Include="Domain\MasterData\MasterDataObject.cs" />
+    <Compile Include="Domain\MasterData\Producer.cs" />
+    <Compile Include="Domain\MasterData\Product.cs" />
+    <Compile Include="Domain\MasterData\ProductMaster.cs" />
+    <Compile Include="Domain\MasterData\ProductVariant.cs" />
+    <Compile Include="Domain\MasterData\SaleProduct.cs" />
+    <Compile Include="Domain\MasterData\Supplier.cs" />
+    <Compile Include="Domain\Pricing\MultiplyCalculator.cs" />
+    <Compile Include="Domain\Pricing\Price.cs" />
+    <Compile Include="Domain\Pricing\PriceCalculator.cs" />
+    <Compile Include="Domain\Pricing\PriceCalculation.cs" />
+    <Compile Include="Facade\IProductMasterLogic.cs" />
+    <Compile Include="Facade\ProductMasterLogic.cs" />
+    <Compile Include="MasterDataMappingProfile.cs" />
+    <Compile Include="Model\PagedProductMasterList.cs" />
+    <Compile Include="Model\ProductMasterModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
+      <Project>{b5d58c4e-f84e-49e2-9f15-5f91e1c73c55}</Project>
+      <Name>DotNetPrograms.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj">
+      <Project>{ad7f2c5d-05dd-4d60-925a-b82a10410413}</Project>
+      <Name>MissingLinq.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebShop.Common\WebShop.Common.csproj">
+      <Project>{1F9A3E85-11EF-4C00-AE36-4032581C0492}</Project>
+      <Name>WebShop.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

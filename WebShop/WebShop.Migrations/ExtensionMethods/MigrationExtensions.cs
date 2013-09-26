@@ -24,6 +24,11 @@ namespace WebShop.Migrations.ExtensionMethods
                 : table.WithNullableColumn(ForeignKeyColumnTo(otherTable), DbType.Guid);
         }
 
+        public static IAddedForeignKey AddDefaultForeignKeyTo(this IExistingTable table, string otherTable)
+        {
+            return table.AddForeignKeyTo(otherTable).Through(ForeignKeyColumnTo(otherTable), "Id");
+        }
+
         private static string ForeignKeyColumnTo(string table)
         {
             return string.Format("{0}_Id", table);
