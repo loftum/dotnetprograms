@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DotNetPrograms.Common.Exceptions;
 using MasterData.Core.Domain.MasterData;
 using MissingLinq.Sql;
 using MissingLinq.Sql.ExtensionMethods;
@@ -22,6 +23,16 @@ namespace MasterData.Core.Data
         public T Get<T>(Guid id) where T : MasterDataObject
         {
             return _session.Get<T>(id);
+        }
+
+        public T GetOrThrow<T>(Guid id) where T : MasterDataObject
+        {
+            var item = Get<T>(id);
+            if (item == null)
+            {
+                throw UserException.Unknown<T>(() => id);
+            }
+            return item;
         }
 
         public IQueryable<T> GetAll<T>() where T : MasterDataObject

@@ -7,6 +7,7 @@ namespace MasterData.Core.Data
     public interface IMasterDataRepository
     {
         T Get<T>(Guid id) where T : MasterDataObject;
+        T GetOrThrow<T>(Guid id) where T : MasterDataObject;
         IQueryable<T> GetAll<T>() where T : MasterDataObject;
         T Save<T>(T item) where T : MasterDataObject;
         void Commit();

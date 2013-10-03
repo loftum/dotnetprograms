@@ -1,1 +1,41 @@
-﻿
+﻿.floatLeft
+{
+    float: left;
+}
+
+.clearBoth
+{
+    clear: both;
+}
+
+.centered
+{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.verticalSpacer
+{
+    height: 20px;
+}
+
+.error
+{
+    color: red;
+}
+
+.warning
+{
+    color: orange;
+}
+
+.info
+{
+    color: lightskyblue;
+}
+
+.success
+{
+    color: lime;
+}

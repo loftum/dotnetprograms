@@ -1,0 +1,52 @@
+﻿@model WebShop.Core.Users.Personalia
+
+@{
+    ViewBag.Title = "Personalia";
+}
+
+@using (Html.BeginForm())
+{
+    <h3>Personalia</h3>
+    <table class="table">
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.FirstName)</td>
+            <td>@Html.TextBoxFor(m => m.FirstName, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.LastName)</td>
+            <td>@Html.TextBoxFor(m => m.LastName, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.PhoneNumber)</td>
+            <td>@Html.TextBoxFor(m => m.PhoneNumber, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.Email)</td>
+            <td>@Html.TextBoxFor(m => m.Email, new {@class="form-control"})</td>
+        </tr>
+    </table>
+    
+    <h3>Delivery address</h3>
+    <table class="table">
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.Address.FirstLine)</td>
+            <td>@Html.TextBoxFor(m => m.Address.FirstLine, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.Address.SecondLine)</td>
+            <td>@Html.TextBoxFor(m => m.Address.SecondLine, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.Address.PostalCode)</td>
+            <td>@Html.TextBoxFor(m => m.Address.PostalCode, new {@class="form-control"})</td>
+        </tr>
+        <tr class="form-group">
+            <td>@Html.LabelFor(m => m.Address.PostalPlace)</td>
+            <td>@Html.TextBoxFor(m => m.Address.PostalPlace, new {@class="form-control"})</td>
+        </tr>
+    </table>
+    
+    <button type="submit" class="btn btn-success pull-right">Continue</button>
+}
+
+

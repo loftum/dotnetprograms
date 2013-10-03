@@ -15,7 +15,27 @@ namespace WebShop.Common.Models.Pricing
 
         public override string ToString()
         {
-            return IncVat.ToFriendlyPrice();
+            return Display(true);
+        }
+
+        public decimal GetValue(bool incVat)
+        {
+            return incVat ? IncVat : ExVat;
+        }
+
+        public string Display(bool incVat)
+        {
+            return GetValue(incVat).ToFriendlyPrice();
+        }
+
+        public static PriceModel operator +(PriceModel first, PriceModel second)
+        {
+            return new PriceModel(first.IncVat + second.IncVat, first.ExVat + second.ExVat);
+        }
+
+        public static PriceModel Zero()
+        {
+            return new PriceModel(0, 0);
         }
     }
 }

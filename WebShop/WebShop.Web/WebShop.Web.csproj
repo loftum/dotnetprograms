@@ -137,12 +137,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\WebShopControllerBase.cs" />
+    <Compile Include="ExtensionMethods\TempDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\Lifecycle.cs" />
+    <Compile Include="IoC\ServiceLocator.cs" />
     <Compile Include="IoC\StructureMapControllerFactory.cs" />
     <Compile Include="IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="IoC\StructureMapScope.cs" />
@@ -189,11 +193,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>web.config.tt</DependentUpon>
     </Content>
-    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\CssAndStuff.cshtml" />
     <Content Include="Views\Shared\ProductList.cshtml" />
+    <Content Include="Views\Product\View.cshtml" />
+    <Content Include="Views\Shared\MiniBasket.cshtml" />
+    <Content Include="Views\Basket\Show.cshtml" />
+    <Content Include="Views\Checkout\Personalia.cshtml" />
+    <Content Include="Views\Shared\UserMessages.cshtml" />
+    <Content Include="Views\Checkout\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

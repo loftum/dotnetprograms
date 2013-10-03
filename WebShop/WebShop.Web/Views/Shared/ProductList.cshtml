@@ -1,12 +1,18 @@
-﻿@model DotNetPrograms.Common.Paging.PagedList<WebShop.Core.Model.WebShopProductModel>
+﻿@using DotNetPrograms.Common.ExtensionMethods
+@model DotNetPrograms.Common.Paging.PagedList<WebShop.Core.Model.WebShopProductModel>
 
-@foreach (var product in Model)
+@foreach (var chunk in Model.Items.InChunksOf(4))
 {
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <img src="holder.js/100%x180" />
-            @product.Name
-        </div>
-    </div>    
+    <div class="row clearBoth">
+        @foreach (var product in chunk)
+        {
+            <div class="col-sm-6 col-md-3">
+                @Html.ActionLink(product.Name, "View", "Product", new {id = product.SaleProductId}, null)
+                <img src="holder.js/100%x180" />
+                Price @product.Price.Display(true)
+                @Html.ActionLink("Buy", "AddProduct", "Basket", new { id = product.SaleProductId }, new {@class="btn btn-xs btn-success"})
+            </div>
+        }
+    </div>
+    <div class="verticalSpacer"></div>
 }
-

@@ -1,0 +1,12 @@
+﻿@model WebShop.Core.Model.WebShopProductModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h3>@Model.Name</h3>
+<div class="centered">
+    <img src="holder.js/80%x300" />
+</div>
+<p>@Model.Description</p>
+@Html.ActionLink("Add to basket", "AddToBasket", "Product", new {id = Model.SaleProductId}, new {@class="btn btn-success"})

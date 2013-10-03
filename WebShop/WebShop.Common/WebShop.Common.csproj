@@ -49,6 +49,7 @@
     <Compile Include="Configuration\ConfigSettings.cs" />
     <Compile Include="Configuration\IConfigSettings.cs" />
     <Compile Include="ExtensionMethods\DecimalExtensions.cs" />
+    <Compile Include="ExtensionMethods\EnumerableExtensions.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="Mapping\AutoMap.cs" />
     <Compile Include="Models\Pricing\PriceModel.cs" />

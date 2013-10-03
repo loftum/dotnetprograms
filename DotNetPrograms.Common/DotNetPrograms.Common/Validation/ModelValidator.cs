@@ -7,7 +7,7 @@ using DotNetPrograms.Common.ExtensionMethods;
 
 namespace DotNetPrograms.Common.Validation
 {
-    public class ModelValidator<TModel>
+    public class ModelValidator<TModel> : IModelValidator
     {
         private readonly TModel _model;
 
@@ -31,7 +31,7 @@ namespace DotNetPrograms.Common.Validation
             return string.IsNullOrWhiteSpace(value);
         }
 
-        public ModelValidator<TModel> Append(ModelValidator<TModel> modelValidator)
+        public ModelValidator<TModel> Append(IModelValidator modelValidator)
         {
             Errors = Errors.Concat(modelValidator.Errors).ToList();
             return this;

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DotNetPrograms.Common.UserInteraction.UserMessage>
+
+@if (Model.Any())
+{
+    foreach (var message in Model)
+    {
+        <div class="@message.TypeDisplay">@message.Title</div>
+    }
+}

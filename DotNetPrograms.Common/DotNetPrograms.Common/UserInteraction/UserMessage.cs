@@ -6,6 +6,11 @@
         public string Title { get; private set; }
         public string Message { get; private set; }
 
+        public string TypeDisplay
+        {
+            get { return Type.ToString().ToLowerInvariant(); }
+        }
+
         private UserMessage(MessageType type, string title, string message)
         {
             Type = type;

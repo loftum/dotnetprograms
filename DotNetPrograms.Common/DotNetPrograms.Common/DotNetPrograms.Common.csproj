@@ -48,6 +48,7 @@
     <Compile Include="Collections\Chunking\ListChunkEnumerator.cs" />
     <Compile Include="Configuration\SettingsBase.cs" />
     <Compile Include="DateAndTime\DateTimeProvider.cs" />
+    <Compile Include="Describing\Description.cs" />
     <Compile Include="Exceptions\PropertyErrorException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="ExtensionMethods\DictionaryExtensions.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInteraction\MessageType.cs" />
     <Compile Include="UserInteraction\UserMessage.cs" />
+    <Compile Include="Validation\IModelValidator.cs" />
     <Compile Include="Validation\PropertyError.cs" />
     <Compile Include="Validation\Guard.cs" />
     <Compile Include="Validation\IPropertyValidator.cs" />

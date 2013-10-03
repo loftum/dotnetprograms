@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using WebShop.Web.ExtensionMethods
+@using WebShop.Web.IoC
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,10 +11,12 @@
     <body>
         <div class="page-header">
             <div class="container">
-                WebShop
+                @Html.ActionLink("WebShop", "Index", "Product")
+                @Html.Partial("MiniBasket", ServiceLocator.Basket)
             </div>
         </div>
         <div class="container">
+            @Html.Partial("UserMessages", TempData.GetMessages())
             @RenderBody()
         </div>
     </body>

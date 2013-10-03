@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DotNetPrograms.Common.ExtensionMethods;
 using DotNetPrograms.Common.Paging;
 using MasterData.Core.Data;
 using MasterData.Core.Domain.MasterData;
+using WebShop.Common.ExtensionMethods;
 using WebShop.Core.Model;
 
 namespace WebShop.Core.Facade
@@ -30,6 +32,12 @@ namespace WebShop.Core.Facade
             }
 
             return new PagedSaleProductList(saleProducts, pageNumber, pageSize);
+        }
+
+        public WebShopProductModel GetProduct(Guid id)
+        {
+            var saleProduct = _repo.GetOrThrow<SaleProduct>(id);
+            return saleProduct.MapTo<WebShopProductModel>();
         }
     }
 }
