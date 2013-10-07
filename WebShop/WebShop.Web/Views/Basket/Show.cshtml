@@ -1,5 +1,4 @@
-﻿@using WebShop.Web.IoC
-@model WebShop.Core.Users.Basket
+﻿@model WebShop.Core.Users.BasketModel
 
 @{
     ViewBag.Title = "Basket";
@@ -7,28 +6,11 @@
 
 <h2>Basket</h2>
 
-@if (Model.IsEmpty)
+@Html.Partial("BasketContent", Model)
+
+@if (!Model.IsEmpty)
 {
-    <div>No items in basket</div>
-}
-else {
-    <table class="table table-responsive">
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Product.Name</td>
-                <td class="text-right">@item.Price.Display(ServiceLocator.User.ShowPricesIncVat)</td>
-                <td>@Html.ActionLink("Remove", "RemoveItem", "Basket", new {id = @item.Number }, new {@class="btn btn-danger pull-right"})</td>
-            </tr>
-        }
-        <tr>
-            <td><strong>Total</strong></td>
-            <td class="text-right"><strong>@Model.Total.Display(ServiceLocator.User.ShowPricesIncVat)</strong></td>
-        </tr>
-    </table>
-    
     <div class="pull-right">
         @Html.ActionLink("Check out", "Start", "Checkout", null, new {@class="btn btn-success"})
     </div>
-    
 }

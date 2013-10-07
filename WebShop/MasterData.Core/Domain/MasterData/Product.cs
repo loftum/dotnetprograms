@@ -7,7 +7,6 @@ namespace MasterData.Core.Domain.MasterData
     {
         public virtual string Level { get { return GetUnproxiedType().Name; } }
         public abstract Product Parent { get; }
-
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
 

@@ -10,7 +10,7 @@ namespace WebShop.Core.Users
     {
         private static HttpSessionState Session { get { return HttpContext.Current.Session; } }
 
-        public User User
+        public UserModel User
         {
             get { return Get(() => User); }
             set { Set(() => User, value); }
@@ -20,7 +20,7 @@ namespace WebShop.Core.Users
         {
             if (User == null)
             {
-                User = new User();
+                User = new UserModel();
             }
         }
 

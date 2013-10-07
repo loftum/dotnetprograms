@@ -117,6 +117,10 @@
       <Project>{A3EEB60F-6B5B-42E1-8978-F0B58D02AEC4}</Project>
       <Name>MasterData.Migrations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MasterData.UnitTesting\MasterData.UnitTesting.csproj">
+      <Project>{DC312696-1871-4210-B1FB-BA33810E20DB}</Project>
+      <Name>MasterData.UnitTesting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MasterData.Web\MasterData.Web.csproj">
       <Project>{4F43EB90-5645-4E8A-9A9B-12165B874167}</Project>
       <Name>MasterData.Web</Name>

@@ -1,4 +1,4 @@
-﻿@model WebShop.Core.Users.Payment
+﻿@model WebShop.Core.Users.PaymentModel
 
 @{
     ViewBag.Title = "Payment";
@@ -6,3 +6,28 @@
 
 <h2>Payment</h2>
 
+@using (Html.BeginForm("Payment", "Checkout", FormMethod.Post, new {@class=""}))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Type)
+        @Html.DropDownListFor(m => m.Type, Model.AvailablePaymentTypes, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardNumber)
+        @Html.TextBoxFor(m => m.CardNumber, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardHolder)
+        @Html.TextBoxFor(m => m.CardHolder, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExpireMonth)
+        @Html.TextBoxFor(m => m.ExpireMonth, new {@class="form-control", maxlength="2", style="width:40px;"})
+        @Html.LabelFor(m => m.ExpireYear)
+        @Html.TextBoxFor(m => m.ExpireYear, new {@class="form-control", maxlength="2", style="width:40px;"})
+        @Html.LabelFor(m => m.Cvc)
+        @Html.TextBoxFor(m => m.Cvc, new {@class="form-control", maxlength="3", style="width:50px;"})
+    </div>
+    <div class="clearBoth"></div>
+    <button type="submit" class="btn btn-success pull-right">Continue</button>
+}

@@ -55,7 +55,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,27 +65,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\ISalesClerk.cs" />
+    <Compile Include="BusinessLogic\SalesClerk.cs" />
     <Compile Include="Data\DoNotInitializeDatabase.cs" />
-    <Compile Include="Data\TransactionsRepository.cs" />
-    <Compile Include="Data\ITransactionsRepository.cs" />
-    <Compile Include="Domain\Transactions\TransactionsObject.cs" />
+    <Compile Include="Data\IOrderNumberGenerator.cs" />
+    <Compile Include="Data\Mapping\IOrderDbObjectMap.cs" />
+    <Compile Include="Data\Mapping\OrderDbMapper.cs" />
+    <Compile Include="Data\Mapping\OrderDbObjectMap.cs" />
+    <Compile Include="Data\Mapping\OrderLineMap.cs" />
+    <Compile Include="Data\Mapping\OrderMap.cs" />
+    <Compile Include="Data\OrderRepository.cs" />
+    <Compile Include="Data\IOrderRepository.cs" />
+    <Compile Include="Data\OrderNumberGenerator.cs" />
+    <Compile Include="Domain\OrderDb\Buyer.cs" />
+    <Compile Include="Domain\OrderDb\ChangeStamp.cs" />
+    <Compile Include="Domain\OrderDb\IHaveChangeStamp.cs" />
+    <Compile Include="Domain\OrderDb\OrderHead.cs" />
+    <Compile Include="Domain\OrderDb\OrderDbObjectWithChangeStamp.cs" />
+    <Compile Include="Domain\OrderDb\OrderLine.cs" />
+    <Compile Include="Domain\OrderDb\OrderDbObject.cs" />
+    <Compile Include="ExtensionMethods\AutoMapperExtensions.cs" />
     <Compile Include="Facade\IProductFacade.cs" />
     <Compile Include="Facade\IWebShop.cs" />
     <Compile Include="Facade\ProductFacade.cs" />
     <Compile Include="Facade\WebShop.cs" />
     <Compile Include="Mapping\WebShopMappingProfile.cs" />
     <Compile Include="Model\PagedSaleProductList.cs" />
+    <Compile Include="Model\ReceiptModel.cs" />
     <Compile Include="Model\SearchInput.cs" />
     <Compile Include="Model\WebShopProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users\Address.cs" />
-    <Compile Include="Users\Basket.cs" />
-    <Compile Include="Users\BasketItem.cs" />
+    <Compile Include="Users\AddressModel.cs" />
+    <Compile Include="Users\BasketModel.cs" />
+    <Compile Include="Users\BasketItemModel.cs" />
     <Compile Include="Users\HttpUserSession.cs" />
     <Compile Include="Users\IUserSession.cs" />
-    <Compile Include="Users\Payment.cs" />
-    <Compile Include="Users\Personalia.cs" />
-    <Compile Include="Users\User.cs" />
+    <Compile Include="Users\PaymentModel.cs" />
+    <Compile Include="Users\PaymentType.cs" />
+    <Compile Include="Users\PersonaliaModel.cs" />
+    <Compile Include="Users\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

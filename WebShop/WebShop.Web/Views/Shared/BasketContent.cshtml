@@ -1,0 +1,23 @@
+﻿@using WebShop.Web.IoC
+@model WebShop.Core.Users.BasketModel
+
+@if (Model.IsEmpty)
+{
+    <div>No items in basket</div>
+}
+else {
+    <table class="table table-responsive">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td class="text-right">@item.Price.Display(ServiceLocator.User.ShowPricesIncVat)</td>
+                <td>@Html.ActionLink("Remove", "RemoveItem", "Basket", new {id = @item.Number }, new {@class="btn btn-danger pull-right"})</td>
+            </tr>
+        }
+        <tr>
+            <td><strong>Total</strong></td>
+            <td class="text-right"><strong>@Model.Total.Display(ServiceLocator.User.ShowPricesIncVat)</strong></td>
+        </tr>
+    </table>
+}

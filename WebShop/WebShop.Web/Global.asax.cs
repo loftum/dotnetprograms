@@ -18,6 +18,7 @@ namespace WebShop.Web
     {
         protected void Application_Start()
         {
+            HtmlHelper.ClientValidationEnabled = true;
             SetUpDatabase();
             SetUpIoc();
             AreaRegistration.RegisterAllAreas();
@@ -29,13 +30,13 @@ namespace WebShop.Web
 
         private static void SetUpDatabase()
         {
-            new WebShopMigrator(new ConfigSettings().MasterDataConnectionString).MigrateUp();
+            new WebShopMigrator(new ConfigSettings().OrderDbConnectionString).MigrateUp();
             DisableEntityFramworkMigrations();
         }
 
         private static void DisableEntityFramworkMigrations()
         {
-            Database.SetInitializer(new DoNotInitializeDatabase<TransactionsRepository>());
+            Database.SetInitializer(new DoNotInitializeDatabase<OrderRepository>());
         }
 
         private static void SetUpIoc()

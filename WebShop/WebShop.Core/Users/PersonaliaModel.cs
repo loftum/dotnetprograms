@@ -2,22 +2,22 @@
 
 namespace WebShop.Core.Users
 {
-    public class Personalia
+    public class PersonaliaModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public Address Address { get; set; }
+        public AddressModel Address { get; set; }
 
-        public Personalia()
+        public PersonaliaModel()
         {
-            Address = new Address();
+            Address = new AddressModel();
         }
 
-        public ModelValidator<Personalia> Validate()
+        public ModelValidator<PersonaliaModel> Validate()
         {
-            return new ModelValidator<Personalia>(this)
+            return new ModelValidator<PersonaliaModel>(this)
                 .Require(m => m.FirstName)
                 .Require(m => m.LastName)
                 .Require(m => m.PhoneNumber)

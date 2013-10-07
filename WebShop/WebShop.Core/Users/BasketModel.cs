@@ -5,21 +5,21 @@ using WebShop.Common.Models.Pricing;
 
 namespace WebShop.Core.Users
 {
-    public class Basket
+    public class BasketModel
     {
         public bool IsEmpty { get { return !Items.Any(); } }
-        public List<BasketItem> Items { get; set; }
+        public List<BasketItemModel> Items { get; set; }
         public PriceModel Total { get { return Items.Sum(i => i.Price); } }
-        public Personalia Personalia { get; set; }
-        public Payment Payment { get; set; }
+        public PersonaliaModel Personalia { get; set; }
+        public PaymentModel Payment { get; set; }
 
-        public void Add(BasketItem item)
+        public void Add(BasketItemModel item)
         {
             Items.Add(item);
             ReIndexItems();
         }
 
-        public void Remove(BasketItem item)
+        public void Remove(BasketItemModel item)
         {
             Items.Remove(item);
             ReIndexItems();
@@ -33,11 +33,11 @@ namespace WebShop.Core.Users
             }
         }
 
-        public Basket()
+        public BasketModel()
         {
-            Items = new List<BasketItem>();
-            Personalia = new Personalia();
-            Payment = new Payment();
+            Items = new List<BasketItemModel>();
+            Personalia = new PersonaliaModel();
+            Payment = new PaymentModel();
         }
     }
 }

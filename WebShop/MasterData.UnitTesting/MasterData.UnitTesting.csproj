@@ -78,6 +78,7 @@
     <Compile Include="TestData\Builders\MasterDataObjectBuilderBase.cs" />
     <Compile Include="TestData\Builders\ProductBuilder.cs" />
     <Compile Include="TestData\Builders\SaleProductBuilder.cs" />
+    <Compile Include="TestData\LoremIpsum.cs" />
     <Compile Include="TestData\Some.cs" />
   </ItemGroup>
   <ItemGroup>

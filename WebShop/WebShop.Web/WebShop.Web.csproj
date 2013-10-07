@@ -204,6 +204,9 @@
     <Content Include="Views\Checkout\Personalia.cshtml" />
     <Content Include="Views\Shared\UserMessages.cshtml" />
     <Content Include="Views\Checkout\Payment.cshtml" />
+    <Content Include="Views\Checkout\Confirm.cshtml" />
+    <Content Include="Views\Shared\BasketContent.cshtml" />
+    <Content Include="Views\Checkout\Receipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -235,6 +238,10 @@
     <ProjectReference Include="..\MasterData.Core\MasterData.Core.csproj">
       <Project>{EFC824E5-62C4-4814-97C0-F1B835904C91}</Project>
       <Name>MasterData.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MasterData.Migrations\MasterData.Migrations.csproj">
+      <Project>{A3EEB60F-6B5B-42E1-8978-F0B58D02AEC4}</Project>
+      <Name>MasterData.Migrations</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebShop.Common\WebShop.Common.csproj">
       <Project>{1F9A3E85-11EF-4C00-AE36-4032581C0492}</Project>

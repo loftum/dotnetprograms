@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using WebShop.Common.Configuration;
 using WebShop.Migrations;
 
@@ -10,24 +11,27 @@ namespace WebShop.IntegrationTesting.Core.Data
         [Test]
         public void MigrateUp()
         {
-            GetRunner().MigrateUp();
+            var version = GetRunner().MigrateUp();
+            Console.WriteLine("Migrated to {0}", version);
         }
 
         [Test]
         public void MigrateDown()
         {
-            GetRunner().MigrateDown();
+            var version = GetRunner().MigrateDown();
+            Console.WriteLine("Migrated to {0}", version);
         }
 
         [Test]
         public void MigrateToVersion()
         {
-            GetRunner().MigrateTo(1);
+            var version = GetRunner().MigrateTo(1);
+            Console.WriteLine("Migrated to {0}", version);
         }
 
         private static WebShopMigrator GetRunner()
         {
-            return new WebShopMigrator(new ConfigSettings().TransactionsConnectionString);
+            return new WebShopMigrator(new ConfigSettings().OrderDbConnectionString);
         }
     }
 }

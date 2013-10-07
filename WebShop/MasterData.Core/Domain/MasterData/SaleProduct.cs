@@ -12,6 +12,11 @@ namespace MasterData.Core.Domain.MasterData
         public virtual PriceCalculation Calculator { get; set; }
         public virtual Color Color { get { return FromVariantOrDefault(v => v.Color); } }
 
+        public virtual string ProductNumber
+        {
+            get { return Variant.Master.ProductNumber; }
+        }
+
         private T FromVariantOrDefault<T>(Func<ProductVariant, T> property, T defaultValue = default(T))
         {
             return Variant == null ? defaultValue : property(Variant);

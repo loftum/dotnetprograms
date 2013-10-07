@@ -6,9 +6,9 @@ namespace WebShop.Web.IoC
 {
     public class ServiceLocator
     {
-        public static User User { get { return Get<User>(); } }
+        public static UserModel User { get { return Get<UserModel>(); } }
 
-        public static Basket Basket
+        public static BasketModel Basket
         {
             get { return User.Basket; }
         }

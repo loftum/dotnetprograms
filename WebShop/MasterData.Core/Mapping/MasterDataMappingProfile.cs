@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using MasterData.Core.Domain.MasterData;
 using MasterData.Core.Domain.Pricing;
 using MasterData.Core.Model;

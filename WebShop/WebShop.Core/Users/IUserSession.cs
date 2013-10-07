@@ -2,6 +2,6 @@
 {
     public interface IUserSession
     {
-        User User { get; set; }
+        UserModel User { get; set; }
     }
 }

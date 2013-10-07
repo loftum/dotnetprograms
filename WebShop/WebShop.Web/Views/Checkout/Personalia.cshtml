@@ -1,4 +1,4 @@
-﻿@model WebShop.Core.Users.Personalia
+﻿@model WebShop.Core.Users.PersonaliaModel
 
 @{
     ViewBag.Title = "Personalia";
@@ -10,7 +10,7 @@
     <table class="table">
         <tr class="form-group">
             <td>@Html.LabelFor(m => m.FirstName)</td>
-            <td>@Html.TextBoxFor(m => m.FirstName, new {@class="form-control"})</td>
+            <td>@Html.TextBoxFor(m => m.FirstName, new {@class="form-control required"})</td>
         </tr>
         <tr class="form-group">
             <td>@Html.LabelFor(m => m.LastName)</td>

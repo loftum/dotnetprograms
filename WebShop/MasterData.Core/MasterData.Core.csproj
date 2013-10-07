@@ -81,14 +81,12 @@
     <Compile Include="Domain\Pricing\PriceCalculation.cs" />
     <Compile Include="Facade\IProductMasterLogic.cs" />
     <Compile Include="Facade\ProductMasterLogic.cs" />
-    <Compile Include="MasterDataMappingProfile.cs" />
+    <Compile Include="Mapping\MasterDataMappingProfile.cs" />
     <Compile Include="Model\PagedProductMasterList.cs" />
     <Compile Include="Model\ProductMasterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

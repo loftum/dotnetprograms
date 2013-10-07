@@ -45,6 +45,10 @@
   <ItemGroup>
     <Compile Include="ExtensionMethods\MigrationExtensions.cs" />
     <Compile Include="IWebShopMigrator.cs" />
+    <Compile Include="Steps\M_001_CreateOrderHead1.cs" />
+    <Compile Include="Steps\M_002_CreateOrderLine2.cs" />
+    <Compile Include="Steps\M_003_CreateSequenceCounter3.cs" />
+    <Compile Include="Steps\M_004_CreateSpGetOrderNumber4.cs" />
     <Compile Include="WebShopMigrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\M_000_Initial0.cs" />

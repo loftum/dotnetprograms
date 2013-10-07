@@ -20,13 +20,13 @@ namespace WebShop.Web.IoC
                     s.WithDefaultConventions().OnAddedPluginTypes(c => c.LifecycleIs(Lifecycle.Current));
                 });
 
-            For<User>().Use(GetUser);
+            For<UserModel>().Use(GetUser);
             For<IUserSession>().LifecycleIs(Lifecycle.Current).Use<HttpUserSession>();
             For<ISession>().LifecycleIs(Lifecycle.Current).Use(GetSession);
             For<IDbConnection>().LifecycleIs(Lifecycle.Current).Use(GetConnection);
         }
 
-        private static User GetUser(IContext context)
+        private static UserModel GetUser(IContext context)
         {
             return context.GetInstance<IUserSession>().User;
         }

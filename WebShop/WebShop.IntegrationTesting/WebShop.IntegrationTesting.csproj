@@ -39,6 +39,10 @@
     <Reference Include="AutoMoq">
       <HintPath>..\packages\AutoMoq.1.6.2.0\lib\net35\AutoMoq.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -68,7 +72,9 @@
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,9 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\OrderDbRepositoryTest.cs" />
     <Compile Include="Core\Data\WebShopMigrationTest.cs" />
     <Compile Include="DbTestBase.cs" />
+    <Compile Include="Fakes\FakeUserSession.cs" />
     <Compile Include="IoC\IntegrationTestLifecycle.cs" />
+    <Compile Include="IoC\IntegrationTestRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +134,10 @@
     <ProjectReference Include="..\WebShop.Migrations\WebShop.Migrations.csproj">
       <Project>{1B4A245D-F66B-4DAD-96C3-DFE5B48C766F}</Project>
       <Name>WebShop.Migrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebShop.UnitTesting\WebShop.UnitTesting.csproj">
+      <Project>{FFADFC84-A484-4937-AC4B-3CE1D2FADB46}</Project>
+      <Name>WebShop.UnitTesting</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebShop.Web\WebShop.Web.csproj">
       <Project>{B7EAEEDC-6C94-4756-A01B-FEC1A291D5A8}</Project>

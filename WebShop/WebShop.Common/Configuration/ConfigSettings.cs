@@ -8,7 +8,7 @@ namespace WebShop.Common.Configuration
     public class ConfigSettings : IConfigSettings
     {
         public string MasterDataConnectionString { get { return MasterData.ConnectionString; } }
-        public string TransactionsConnectionString { get { return Transactions.ConnectionString; } }
+        public string OrderDbConnectionString { get { return OrderDb.ConnectionString; } }
 
         public bool EnableNhDiagnostics { get { return GetAppSettingOrDefault(() => EnableNhDiagnostics); } }
         public bool ShowNhSql { get { return GetAppSettingOrDefault(() => ShowNhSql); } }
@@ -26,7 +26,7 @@ namespace WebShop.Common.Configuration
         }
 
         private ConnectionStringSettings MasterData { get { return GetConnectionString(() => MasterData); } }
-        public ConnectionStringSettings Transactions { get { return GetConnectionString(() => Transactions); } }
+        public ConnectionStringSettings OrderDb { get { return GetConnectionString(() => OrderDb); } }
 
         private ConnectionStringSettings GetConnectionString(Expression<Func<ConnectionStringSettings>> property)
         {

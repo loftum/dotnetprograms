@@ -3,6 +3,7 @@ using DotNetPrograms.Common.Meta;
 using MasterData.Core.Data;
 using MasterData.Core.Domain.MasterData;
 using MasterData.Core.Domain.Pricing;
+using MasterData.UnitTesting.TestData;
 using MissingLinq.Sql.Data;
 using MissingLinq.Sql.ExtensionMethods;
 using NUnit.Framework;
@@ -66,7 +67,7 @@ namespace MasterData.IntegrationTesting.Core.Domain
             {
                 ProductNumber = "" + ii,
                 Name = "Produkt " + ii,
-                Description = "Description " + ii
+                Description = LoremIpsum.Text
             };
 
             _repo.Save(parent);

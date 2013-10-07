@@ -33,5 +33,14 @@ namespace WebShop.Migrations.ExtensionMethods
         {
             return string.Format("{0}_Id", table);
         }
+
+        public static ICreatedTableWithAddedColumn WithChangeStamp(this ICreatedTableBase table)
+        {
+            return table
+                .WithNotNullableColumn("CreatedDate", DbType.DateTime)
+                .WithNotNullableColumn("CreatedBy", DbType.AnsiString).OfSize(256)
+                .WithNotNullableColumn("ModifiedDate", DbType.DateTime)
+                .WithNotNullableColumn("ModifiedBy", DbType.AnsiString).OfSize(256);
+        }
     }
 }

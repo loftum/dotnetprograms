@@ -26,24 +26,65 @@ namespace WebShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Personalia(Personalia personalia)
+        public ActionResult Personalia(PersonaliaModel input)
         {
             try
             {
-                personalia.Validate().OrThrowPropertyError();
-                _webShop.User.Basket.Personalia = personalia;
+                input.Validate().OrThrowPropertyError();
+                _webShop.User.Basket.Personalia = input;
                 return RedirectToAction("Payment");
             }
             catch (PropertyErrorException ex)
             {
                 AddError(ex);
-                return View(personalia);
+                return View(input);
             }
         }
 
-        public ActionResult Payment(Payment payment)
+        public ActionResult Payment()
         {
             return RedirectIfBasketEmptyOr(() => View(_webShop.User.Basket.Payment));
+        }
+
+        [HttpPost]
+        public ActionResult Payment(PaymentModel input)
+        {
+            try
+            {
+                input.Validate().OrThrowPropertyError();
+                _webShop.User.Basket.Payment.UpdateFrom(input);
+                return RedirectToAction("Confirm");
+            }
+            catch (PropertyErrorException ex)
+            {
+                AddError(ex);
+                return View(input);
+            }
+        }
+
+        public ActionResult Confirm()
+        {
+            return View(_webShop.User.Basket);
+        }
+
+        [HttpPost]
+        public ActionResult Purchase()
+        {
+            try
+            {
+                var receipt = _webShop.FulfilPurchase();
+                return RedirectToAction("Receipt");
+            }
+            catch (UserException ex)
+            {
+                AddError(ex);
+                return RedirectToAction("Confirm");
+            }
+        }
+
+        public ActionResult Receipt()
+        {
+            return View();
         }
 
         private ActionResult RedirectIfBasketEmptyOr(Func<ActionResult> func)
