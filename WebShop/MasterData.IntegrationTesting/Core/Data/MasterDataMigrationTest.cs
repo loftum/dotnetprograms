@@ -22,7 +22,7 @@ namespace MasterData.IntegrationTesting.Core.Data
         [Test]
         public void MigrateToVersion()
         {
-            GetRunner().MigrateTo(1);
+            GetRunner().MigrateTo(11);
         }
 
         private static MasterDataMigrator GetRunner()

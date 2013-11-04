@@ -167,5 +167,15 @@ namespace DotNetPrograms.Common.Meta
                        ? string.Format("{0}<{1}>", Type.Name, string.Join(",", genericArguments.Select(a => a.Name)))
                        : Type.Name;
         }
+
+        public bool HasCustomAttribute<T>() where T : Attribute
+        {
+            return GetCustomAttribute<T>() != null;
+        }
+
+        public T GetCustomAttribute<T>() where T : Attribute
+        {
+            return Type.GetCustomAttribute<T>(false);
+        }
     }
 }

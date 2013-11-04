@@ -6,5 +6,6 @@
         string OrderDbConnectionString { get; }
         bool EnableNhDiagnostics { get; }
         bool ShowNhSql { get; }
+        string SalespointIdentifier { get; }
     }
 }

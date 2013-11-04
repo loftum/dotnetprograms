@@ -132,8 +132,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\EditController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterDataControllerBase.cs" />
+    <Compile Include="Controllers\ProducerController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductMasterController.cs" />
+    <Compile Include="Controllers\ProductTypeController.cs" />
+    <Compile Include="Controllers\ProductVariantController.cs" />
+    <Compile Include="Controllers\ResellerController.cs" />
+    <Compile Include="Controllers\SalespointController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="ExtensionMethods\HtmlHelperExtensions.cs" />
+    <Compile Include="ExtensionMethods\TempDataExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,6 +154,13 @@
     <Compile Include="IoC\StructureMapControllerFactory.cs" />
     <Compile Include="IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="IoC\StructureMapScope.cs" />
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuAttribute.cs" />
+    <Compile Include="Menus\MenuAttributeBase.cs" />
+    <Compile Include="Menus\MenuBar.cs" />
+    <Compile Include="Menus\MenuItem.cs" />
+    <Compile Include="Menus\MenuItemAttribute.cs" />
+    <Compile Include="Menus\MenuParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +191,24 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\CssAndStuff.cshtml" />
-    <Content Include="Views\ProductMaster\Index.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ProductType\List.cshtml" />
+    <Content Include="Views\ProductType\Edit.cshtml" />
+    <Content Include="Views\Shared\UserMessages.cshtml" />
+    <Content Include="Views\Shared\TopMenu.cshtml" />
+    <Content Include="Views\Producer\List.cshtml" />
+    <Content Include="Views\Producer\Edit.cshtml" />
+    <Content Include="Views\Supplier\List.cshtml" />
+    <Content Include="Views\Supplier\Edit.cshtml" />
+    <Content Include="Views\ProductMaster\Edit.cshtml" />
+    <Content Include="Views\ProductVariant\Edit.cshtml" />
+    <Content Include="Views\Reseller\List.cshtml" />
+    <Content Include="Views\Reseller\Edit.cshtml" />
+    <Content Include="Views\Salespoint\Edit.cshtml" />
+    <Content Include="Views\Salespoint\List.cshtml" />
+    <Content Include="Views\Color\List.cshtml" />
+    <Content Include="Views\Color\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain;
 
 namespace MasterData.Core.Data
 {
@@ -12,5 +12,6 @@ namespace MasterData.Core.Data
         T Save<T>(T item) where T : MasterDataObject;
         void Commit();
         IQueryable<T> Linq<T>() where T : MasterDataObject;
+        void Delete<T>(T item) where T : MasterDataObject;
     }
 }

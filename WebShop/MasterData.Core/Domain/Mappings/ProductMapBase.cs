@@ -1,4 +1,4 @@
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain.Products;
 
 namespace MasterData.Core.Domain.Mappings
 {

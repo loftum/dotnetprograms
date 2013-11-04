@@ -1,0 +1,31 @@
+﻿@using MasterData.Web.ExtensionMethods
+@model DotNetPrograms.Common.Paging.IPagedList<MasterData.Core.Model.Products.ProductMasterModel>
+
+@{
+    ViewBag.Title = "Product masters";
+}
+
+<h2>Products</h2>
+
+@Html.ActionLink("New...", "Edit", "ProductMaster", new {id=default(Guid)}, new {@class="btn btn-success"})
+<div class="verticalSpacer"></div>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Variants</th>
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@Html.ActionLinkWithId(product.Name, "Edit", "ProductMaster", product.Id)</td>
+            <td>@foreach (var variant in product.Variants)
+                {
+                    <a href="@Url.Action("Edit", "ProductVariant", new {id = variant.Id})" class="floatLeft">
+                        <div style="height:20px; width:20px; background: @variant.Color.Rgb; border: 1px solid gray; margin-right: 5px;"></div>
+                    </a>
+                }
+                @Html.ActionLink("New ..", "NewForMaster", "ProductVariant", new {id=product.Id}, new {@class=""})
+            </td>
+        </tr>
+    }
+</table>

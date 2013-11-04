@@ -70,14 +70,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Domain\PriceTest.cs" />
-    <Compile Include="Core\Domain\ProductTest.cs" />
-    <Compile Include="Core\Domain\SaleProductTest.cs" />
+    <Compile Include="Core\Domain\StoreProductTest.cs" />
+    <Compile Include="Core\Domain\SalespointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\Builders\Build.cs" />
+    <Compile Include="TestData\Builders\Builder.cs" />
     <Compile Include="TestData\Builders\BuilderBase.cs" />
     <Compile Include="TestData\Builders\MasterDataObjectBuilderBase.cs" />
     <Compile Include="TestData\Builders\ProductBuilder.cs" />
-    <Compile Include="TestData\Builders\SaleProductBuilder.cs" />
+    <Compile Include="TestData\Builders\ProductMasterBuilder.cs" />
+    <Compile Include="TestData\Builders\ProductVariantBuilder.cs" />
+    <Compile Include="TestData\Builders\ResellerBuilder.cs" />
+    <Compile Include="TestData\Builders\StoreProductBuilder.cs" />
+    <Compile Include="TestData\Builders\SalespointBuilder.cs" />
+    <Compile Include="TestData\Builders\SupplierProductBuilder.cs" />
     <Compile Include="TestData\LoremIpsum.cs" />
     <Compile Include="TestData\Some.cs" />
   </ItemGroup>

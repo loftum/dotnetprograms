@@ -1,0 +1,31 @@
+﻿@model MasterData.Core.Model.Products.EditProductVariantModel
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+
+<h2>@Model.DisplayName</h2>
+
+@using (Html.BeginForm("Edit", "ProductVariant", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.MasterId)
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description.OwnValue, new {@class="form-control"})
+        @Html.DisplayTextFor(m => m.Description.InheritedValue)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductNumber)
+        @Html.TextBoxFor(m => m.ProductNumber, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ColorId, "Color")
+        @Html.DropDownListFor(m => m.ColorId, Model.AvailableColors, new {@class="form-control"})
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+}

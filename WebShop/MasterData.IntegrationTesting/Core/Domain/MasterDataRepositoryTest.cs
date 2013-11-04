@@ -1,8 +1,9 @@
 using System.Linq;
 using DotNetPrograms.Common.Meta;
 using MasterData.Core.Data;
-using MasterData.Core.Domain.MasterData;
 using MasterData.Core.Domain.Pricing;
+using MasterData.Core.Domain.Products;
+using MasterData.Core.Domain.Stores;
 using MasterData.UnitTesting.TestData;
 using MissingLinq.Sql.Data;
 using MissingLinq.Sql.ExtensionMethods;
@@ -29,25 +30,17 @@ namespace MasterData.IntegrationTesting.Core.Domain
         {
             var parent = new ProductMaster
                 {
-                    ProductNumber = "1234",
                     Name = "Produkt",
                     Description = "Description"
                 };
             
 
             _repo.Save(parent);
-            var variant = new ProductVariant
+            var variant = new ProductVariant(parent)
                 {
-                    Name = "Variant"
                 };
 
             parent.Add(variant);
-
-            var saleProduct = new SaleProduct
-                {
-                };
-
-            variant.Add(saleProduct);
 
             _repo.Commit();
         }
@@ -63,9 +56,10 @@ namespace MasterData.IntegrationTesting.Core.Domain
 
         private void Create(int ii)
         {
+            var producer = new Producer{ Name = "Producer" };
+            _repo.Save(producer);
             var parent = new ProductMaster
             {
-                ProductNumber = "" + ii,
                 Name = "Produkt " + ii,
                 Description = LoremIpsum.Text
             };
@@ -73,56 +67,19 @@ namespace MasterData.IntegrationTesting.Core.Domain
             _repo.Save(parent);
             foreach (var color in new EnumMeta<Color>().GetValues())
             {
-                var variant = new ProductVariant
+                var variant = new ProductVariant(parent)
                 {
                     Color = color
                 };
                 parent.Add(variant);
-
-                var saleProduct = new SaleProduct
-                {
-                    BasePrice = Price.FromExVat(ii + 100, 1.25m)
-                };
-                variant.Add(saleProduct);
             }
-            _repo.Commit();
-        }
-
-        [Test]
-        public void AlterProduct()
-        {
-            var variant = _repo.GetAll<ProductMaster>().First(p => p.ProductNumber == "1234").Variants.First();
-            variant.Name = "Blah";
-            _repo.Commit();
-        }
-
-        [Test]
-        public void VerifyDescription()
-        {
-            var child = _repo.GetAll<ProductMaster>().First(p => p.ProductNumber == "1234").Variants.First();
-            Assert.That(child.GetDescription().Value, Is.EqualTo("Parent"));
-        }
-
-        [Test]
-        public void SetDescription()
-        {
-            var child = _repo.GetAll<ProductMaster>().First(p => p.ProductNumber == "1234").Variants.First();
-            child.Description = null;
-            _repo.Commit();
-        }
-
-        [Test]
-        public void SetDescriptionOnParent()
-        {
-            var child = _repo.GetAll<ProductMaster>().First(p => p.ProductNumber == "1234").Variants.First();
-            child.Description = "Parent";
             _repo.Commit();
         }
 
         [Test]
         public void DeleteProducts()
         {
-            _db.GetAll<SaleProduct>().Delete();
+            _db.GetAll<StoreProduct>().Delete();
             _db.GetAll<ProductVariant>().Delete();
             _db.GetAll<ProductMaster>().Delete();
         }

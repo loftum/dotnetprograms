@@ -1,4 +1,4 @@
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain.Products;
 
 namespace MasterData.Core.Domain.Mappings
 {
@@ -6,7 +6,8 @@ namespace MasterData.Core.Domain.Mappings
     {
         public ProductMasterMap()
         {
-            Map(p => p.ProductNumber);
+            References(p => p.Producer).Not.Nullable();
+            References(p => p.ProductType).Not.Nullable();
             HasMany(p => p.Variants).Cascade.AllDeleteOrphan().Inverse();
         }
     }

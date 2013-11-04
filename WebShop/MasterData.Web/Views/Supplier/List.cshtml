@@ -1,0 +1,22 @@
+﻿@using MasterData.Web.ExtensionMethods
+@model DotNetPrograms.Common.Paging.IPagedList<MasterData.Core.Model.Suppliers.SupplierModel>
+
+@{
+    ViewBag.Title = "Suppliers";
+}
+
+<h2>Suppliers</h2>
+
+@Html.ActionLink("New...", "Edit", "Supplier", new {id=default(Guid)}, new {@class="btn btn-success"})
+<div class="verticalSpacer"></div>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (var supplier in Model)
+    {
+        <tr>
+            <td>@Html.ActionLinkWithId(supplier.Name, "Edit", "Supplier", supplier.Id)</td>
+        </tr>
+    }
+</table>

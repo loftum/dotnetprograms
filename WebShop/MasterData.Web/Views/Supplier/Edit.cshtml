@@ -1,0 +1,38 @@
+﻿@model MasterData.Core.Model.Suppliers.EditSupplierModel
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+
+<h2>@Model.DisplayName</h2>
+
+@using (Html.BeginForm("Edit", "Supplier", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Products, "Products")
+        <table>
+            <tr>
+                <th></th>
+                <th>Name</th>
+            </tr>
+            @for (var ii=0; ii<Model.Products.Count; ii++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => m.Products[ii].Id)
+                        @Html.CheckBoxFor(m => m.Products[ii].Checked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Products[ii].Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+}

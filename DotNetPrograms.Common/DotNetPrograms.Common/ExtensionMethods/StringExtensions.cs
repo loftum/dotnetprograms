@@ -180,5 +180,16 @@ namespace DotNetPrograms.Common.ExtensionMethods
             }
             return value.Substring(0, endIndex);
         }
+
+        public static string HtmlFriendly(this string value)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+            return value
+                .Replace("\n", "<br/>")
+                .Replace("\t", "&nbsp;&nbsp;");
+        }
     }
 }

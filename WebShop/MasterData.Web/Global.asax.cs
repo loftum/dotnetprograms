@@ -4,7 +4,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MasterData.Core.Mapping;
 using MasterData.Migrations;
+using MasterData.Web.Controllers;
 using MasterData.Web.IoC;
+using MasterData.Web.Menus;
 using StructureMap;
 using StructureMap.Pipeline;
 using WebShop.Common.Configuration;
@@ -24,6 +26,7 @@ namespace MasterData.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMap.Initialize(new MasterDataMappingProfile());
+            MenuBar.Top = new MenuParser(typeof(MasterDataControllerBase).Assembly).GetMenuBar();
         }
 
         private static void SetUpDatabase()

@@ -1,0 +1,21 @@
+﻿@model DotNetPrograms.Common.Paging.IPagedList<MasterData.Core.Model.Products.ColorModel>
+
+@{
+    ViewBag.Title = "Colors";
+}
+
+<h2>Colors</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (var color in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(color.Name, "Edit", "Color", new {id = color.Id}, null)
+            </td>
+        </tr>
+    }
+</table>

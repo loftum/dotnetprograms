@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DotNetPrograms.Common.Paging
 {
-    public class PagedList<T> : IEnumerable<T>
+    public class PagedList<T> : IPagedList<T>
     {
         public IEnumerable<T> Items { get; private set; }
         public int ItemCount { get; private set; }
@@ -45,6 +45,13 @@ namespace DotNetPrograms.Common.Paging
             var itemsToSkip = CalculateItemsToSkip();
             Items = items.Skip(itemsToSkip).Take(pageSize).Select(map).ToList();
             ItemCount = Items.Count();
+        }
+
+        public static PagedList<TOut> Create<TIn, TOut>(IQueryable<TIn> query, int pageNumber, int pageSize, Func<TIn, TOut> map)
+        {
+            var list = new PagedList<TOut>();
+            list.Initialize(query, map, pageNumber, pageSize);
+            return list;
         }
 
         private static int Sanitize(int value, int minValue, int maxValue)

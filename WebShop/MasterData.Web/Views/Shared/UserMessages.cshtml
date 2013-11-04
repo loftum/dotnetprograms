@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DotNetPrograms.Common.UserInteraction.UserMessage>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".success").fadeOut();
+        }, 2000);
+    })
+</script>
+@if (Model.Any())
+{
+    foreach (var message in Model)
+    {
+        <div class="messageContainer @message.TypeDisplay">
+            @message.Title
+            @if (message.HasMessage)
+            {
+                <p>@message.Message</p>
+            }
+        </div>
+    }
+}

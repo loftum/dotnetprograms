@@ -1,0 +1,29 @@
+﻿@model DotNetPrograms.Common.Paging.IPagedList<MasterData.Core.Model.Stores.ResellerModel>
+
+@{
+    ViewBag.Title = "Resellers";
+}
+
+<h2>Resellers</h2>
+
+@Html.ActionLink("New ..", "Edit", "Reseller", new {id = Guid.Empty}, new {@class="btn btn-success"})
+<div class="verticalSpacer"></div>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Salespoints
+        </th>
+    </tr>
+    @foreach (var reseller in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(reseller.Name, "Edit", "Reseller", new {id = reseller.Id}, null)
+            </td>
+            <td>@Html.ActionLink("New Salespoint..", "NewForReseller", "Salespoint", new {id = reseller.Id}, null)</td>
+        </tr>
+    }
+</table>

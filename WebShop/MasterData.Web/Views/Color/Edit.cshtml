@@ -1,0 +1,32 @@
+﻿@model MasterData.Core.Model.Misc.EditColorModel
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+
+<h2>@Model.DisplayName</h2>
+
+@using (Html.BeginForm("Edit", "Color", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Red)
+        @Html.TextBoxFor(m => m.Red, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Green)
+        @Html.TextBoxFor(m => m.Green, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Blue)
+        @Html.TextBoxFor(m => m.Blue, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Alpha)
+        @Html.TextBoxFor(m => m.Alpha, new {@class="form-control"})
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+}

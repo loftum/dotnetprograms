@@ -1,0 +1,28 @@
+﻿@using MasterData.Web.ExtensionMethods
+@model DotNetPrograms.Common.Paging.PagedList<MasterData.Core.Model.Products.ProductTypeModel>
+
+@{
+    ViewBag.Title = "Product types";
+}
+
+<h2>Product types</h2>
+
+@Html.ActionLink("New...", "Edit", "ProductType", new {id = default(Guid)}, new {@class="btn btn-sm btn-success"})
+<div class="verticalSpacer"></div>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Vat rate</th>
+    </tr>
+    @foreach (var type in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLinkWithId(type.Name, "Edit", "ProductType", type.Id)
+            </td>
+            <td>
+                @type.VatRate
+            </td>
+        </tr>
+    }
+</table>

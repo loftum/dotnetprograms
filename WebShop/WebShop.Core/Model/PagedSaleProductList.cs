@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DotNetPrograms.Common.Paging;
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain.Products;
 using WebShop.Common.ExtensionMethods;
 
 namespace WebShop.Core.Model
@@ -13,6 +14,11 @@ namespace WebShop.Core.Model
         {
             SearchInput = new SearchInput();
             Initialize(items, p => p.MapTo<WebShopProductModel>(), pageNumber, pageSize);
+        }
+
+        public PagedSaleProductList(IEnumerable<SaleProduct> items, int pageNumber, int pageSize)
+            : this(items.AsQueryable(), pageNumber, pageSize)
+        {
         }
     }
 }

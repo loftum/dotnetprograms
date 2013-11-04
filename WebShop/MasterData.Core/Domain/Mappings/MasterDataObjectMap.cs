@@ -1,5 +1,4 @@
 using FluentNHibernate.Mapping;
-using MasterData.Core.Domain.MasterData;
 
 namespace MasterData.Core.Domain.Mappings
 {

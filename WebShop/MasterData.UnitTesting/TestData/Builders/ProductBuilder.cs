@@ -1,4 +1,4 @@
-﻿using MasterData.Core.Domain.MasterData;
+﻿using MasterData.Core.Domain.Products;
 
 namespace MasterData.UnitTesting.TestData.Builders
 {
@@ -8,18 +8,6 @@ namespace MasterData.UnitTesting.TestData.Builders
     {
         protected ProductBuilder(TProduct item, bool generateId = true) : base(item, generateId)
         {
-        }
-
-        public TBuilder WithName(string name)
-        {
-            Item.Name = name;
-            return MySelf;
-        }
-
-        public TBuilder WithDescription(string description)
-        {
-            Item.Description = description;
-            return MySelf;
         }
     }
 }

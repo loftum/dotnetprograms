@@ -3,7 +3,9 @@ using System.Linq;
 using DotNetPrograms.Common.ExtensionMethods;
 using DotNetPrograms.Common.Paging;
 using MasterData.Core.Data;
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain.Products;
+using MasterData.Core.Domain.Stores;
+using WebShop.Common.Configuration;
 using WebShop.Common.ExtensionMethods;
 using WebShop.Core.Model;
 
@@ -12,31 +14,30 @@ namespace WebShop.Core.Facade
     public class ProductFacade : IProductFacade
     {
         private readonly IMasterDataRepository _repo;
+        private readonly IConfigSettings _settings;
 
-        public ProductFacade(IMasterDataRepository repo)
+        public ProductFacade(IMasterDataRepository repo,
+            IConfigSettings settings)
         {
             _repo = repo;
+            _settings = settings;
         }
 
         public PagedList<WebShopProductModel> GetProducts(string searchText, int pageNumber, int pageSize)
         {
-            var saleProducts = _repo.GetAll<SaleProduct>();
+            var salespoint = _repo
+                .GetAll<Salespoint>()
+                .Single(sp => sp.Identifier == _settings.SalespointIdentifier);
 
-            if (!searchText.IsNullOrEmpty())
-            {
-                saleProducts = saleProducts.Where(sp =>
-                    sp.Name.Contains(searchText) ||
-                    sp.Variant.Name.Contains(searchText) ||
-                    sp.Variant.Master.Name.Contains(searchText)
-                    );
-            }
+            var saleProducts = salespoint.SaleProducts
+                .Where(sp => searchText.IsNullOrEmpty() || sp.SearchableText.Contains(searchText));
 
             return new PagedSaleProductList(saleProducts, pageNumber, pageSize);
         }
 
         public WebShopProductModel GetProduct(Guid id)
         {
-            var saleProduct = _repo.GetOrThrow<SaleProduct>(id);
+            var saleProduct = _repo.GetOrThrow<StoreProduct>(id);
             return saleProduct.MapTo<WebShopProductModel>();
         }
     }

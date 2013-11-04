@@ -12,6 +12,14 @@ namespace MasterData.Core.Domain.Pricing
             Calculators = new List<PriceCalculator>();
         }
 
+        public PriceCalculation(params PriceCalculator[] calculators) : this()
+        {
+            foreach (var calculator in calculators)
+            {
+                Add(calculator);
+            }
+        }
+
         public Price Calculate(Price price)
         {
             return Calculators.Aggregate(price, (current, calculation) => calculation.Calculate(current));

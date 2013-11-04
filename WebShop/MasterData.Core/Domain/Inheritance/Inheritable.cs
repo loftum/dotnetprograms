@@ -19,8 +19,7 @@ namespace MasterData.Core.Domain.Inheritance
         {
             get
             {
-                var ancestorsHeritage = HasAncestor ? Ancestor.Heritage : Enumerable.Empty<Inheritable<TValue>>();
-                return new[] { this }.Concat(ancestorsHeritage);
+                return HasAncestor ? Ancestor.Heritage : Enumerable.Empty<Inheritable<TValue>>();
             }
         } 
 
@@ -45,6 +44,11 @@ namespace MasterData.Core.Domain.Inheritance
         {
             var inherited = Ancestor;
             return inherited == null ? OwnValue : inherited.Value;
+        }
+
+        public static implicit operator TValue(Inheritable<TValue> inheritable)
+        {
+            return inheritable.Value;
         }
 
         public override string ToString()

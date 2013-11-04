@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using DotNetPrograms.Common.Exceptions;
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain;
 using MissingLinq.Sql;
 using MissingLinq.Sql.ExtensionMethods;
 using NHibernate;
@@ -42,7 +42,7 @@ namespace MasterData.Core.Data
 
         public T Save<T>(T item) where T : MasterDataObject
         {
-            _session.Save(item);
+            _session.SaveOrUpdate(item);
             return item;
         }
 
@@ -70,6 +70,11 @@ namespace MasterData.Core.Data
                 }
                 command.ExecuteNonQuery();
             }
+        }
+
+        public void Delete<T>(T item) where T : MasterDataObject
+        {
+            _session.Delete(item);
         }
 
         public IQueryable<T> Linq<T>() where T : MasterDataObject

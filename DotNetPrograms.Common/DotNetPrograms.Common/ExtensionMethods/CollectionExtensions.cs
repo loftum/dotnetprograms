@@ -17,6 +17,21 @@ namespace DotNetPrograms.Common.ExtensionMethods
             }
         }
 
+        public static void RemoveRange<T>(this ICollection<T> list, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                list.Remove(item);
+            }
+        }
+
+        public static IList<T> RemoveWhere<T>(this ICollection<T> list, Func<T, bool> predicate)
+        {
+            var itemsToRemove = list.Where(predicate).ToList();
+            list.RemoveRange(itemsToRemove);
+            return itemsToRemove;
+        }
+
         public static ChunkCollection<T> InChunksOf<T>(this IEnumerable<T> collection, int chunkSize)
         {
             return new ChunkCollection<T>(collection, chunkSize);

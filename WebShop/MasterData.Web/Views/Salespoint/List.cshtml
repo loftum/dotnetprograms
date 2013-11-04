@@ -1,0 +1,23 @@
+﻿@model DotNetPrograms.Common.Paging.IPagedList<MasterData.Core.Model.Stores.SalespointModel>
+
+@{
+    ViewBag.Title = "Salespoints";
+}
+
+<h2>Salespoints</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    @foreach (var salespoint in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(salespoint.Name, "Edit", "Salespoint", new {id = salespoint.Id}, null)
+            </td>
+            <td>@Html.ActionLink("Generate saleproducts", "GenerateSaleProducts", "Salespoint", new {id = salespoint.Id}, new {@class="btn btn-sm btn-success"})</td>
+        </tr>
+    }
+</table>

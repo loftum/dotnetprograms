@@ -12,7 +12,7 @@ namespace DotNetPrograms.Common.Exceptions
 
         public static UserException Unknown<T>(params Expression<Func<object>>[] properties)
         {
-            return new UserException(Description.Of<T>(properties).ToString());
+            return new UserException("There is no {0}", Description.Of<T>(properties).ToString());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using MasterData.Web.ExtensionMethods
+@using MasterData.Web.Menus
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -7,9 +9,15 @@
     @Html.Partial("CssAndStuff")
     @RenderSection("Header", false)
 </head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
+    <body>
+        <div class="page-header">
+            <div class="container">
+                @Html.Partial("TopMenu", MenuBar.Top)
+            </div>
+        </div>
+        <div class="container">
+            @Html.Partial("UserMessages", TempData.GetMessages())
+            @RenderBody()
+        </div>
+    </body>
 </html>

@@ -1,0 +1,20 @@
+﻿@model MasterData.Web.Menus.MenuBar
+
+<div class="navbar-header">
+    @Html.ActionLink("Master data", "Index", "Home", null, new {@class="btn btn-info"})
+</div>
+
+@foreach (var menu in Model.Menus)
+{
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+            @menu.Name
+        </button>
+        <ul class="dropdown-menu">
+        @foreach (var item in menu.Items)
+        {
+            <li>@Html.ActionLink(item.Name, item.Action, item.Controller)</li>
+        }
+        </ul>
+    </div>    
+}

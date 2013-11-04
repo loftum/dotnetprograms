@@ -7,7 +7,7 @@ namespace WebShop.Core.Model
     {
         public Guid SaleProductId { get; set; }
         public string Name { get; set; }
-        public string Number { get; set; }
+        public string ProductNumber { get; set; }
         public string Description { get; set; }
         public PriceModel Price { get; set; }
 

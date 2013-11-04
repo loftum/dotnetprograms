@@ -13,6 +13,19 @@ namespace WebShop.Common.Configuration
         public bool EnableNhDiagnostics { get { return GetAppSettingOrDefault(() => EnableNhDiagnostics); } }
         public bool ShowNhSql { get { return GetAppSettingOrDefault(() => ShowNhSql); } }
 
+        public string SalespointIdentifier { get { return GetAppSettingOrThrow(() => SalespointIdentifier); } }
+
+        private T GetAppSettingOrThrow<T>(Expression<Func<T>> property)
+        {
+            var name = property.GetMemberName();
+            var value = GetAppSetting(name);
+            if (value == null)
+            {
+                throw new ConfigurationErrorsException(string.Format("AppSetting {0} should be set", name));
+            }
+            return (T) Convert.ChangeType(value, typeof (T));
+        }
+
         private static T GetAppSettingOrDefault<T>(Expression<Func<T>> property, T defaultValue = default(T))
         {
             var name = property.GetMemberName();
@@ -21,8 +34,13 @@ namespace WebShop.Common.Configuration
 
         private static T GetAppSettingOrDefault<T>(string name, T defaultValue = default(T))
         {
-            var value = ConfigurationManager.AppSettings[name];
+            var value = GetAppSetting(name);
             return value == null ? defaultValue : (T) Convert.ChangeType(value, typeof (T));
+        }
+
+        private static string GetAppSetting(string name)
+        {
+            return ConfigurationManager.AppSettings[name];
         }
 
         private ConnectionStringSettings MasterData { get { return GetConnectionString(() => MasterData); } }

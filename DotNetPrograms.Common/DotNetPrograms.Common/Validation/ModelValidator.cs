@@ -21,14 +21,19 @@ namespace DotNetPrograms.Common.Validation
             _model = model;
         }
 
-        private static bool IsNullOrEmpty(object value)
+        private static bool IsSet(object value)
         {
-            return value == null;
+            return value != null;
         }
 
-        private static bool IsNullOrEmpty(string value)
+        private static bool IsSet(string value)
         {
-            return string.IsNullOrWhiteSpace(value);
+            return !string.IsNullOrWhiteSpace(value);
+        }
+
+        private static bool IsSet<T>(T value) where T : struct
+        {
+            return !default(T).Equals(value);
         }
 
         public ModelValidator<TModel> Append(IModelValidator modelValidator)
@@ -40,7 +45,7 @@ namespace DotNetPrograms.Common.Validation
         public ModelValidator<TModel> Require<TProperty>(Expression<Func<TModel, TProperty>> expression, string customErrorMessage = null)
         {
             var value = expression.Compile().Invoke(_model);
-            if (IsNullOrEmpty((dynamic)value))
+            if (!IsSet((dynamic)value))
             {
                 var name = expression.GetPropertyName();
                 AddError(name, CustomOrDefaultMessage(customErrorMessage, string.Format((string)"{0} er påkrevd", (object)name)));

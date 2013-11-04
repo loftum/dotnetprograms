@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace DotNetPrograms.Common.Meta
 {
@@ -19,6 +20,16 @@ namespace DotNetPrograms.Common.Meta
             {
                 return !_method.IsPrivate && !_method.IsFinal && (_method.IsVirtual || _method.IsAbstract);
             }
+        }
+
+        public bool HasCustomAttribute<T>() where T : Attribute
+        {
+            return GetCustomAttribute<T>() != null;
+        }
+
+        public T GetCustomAttribute<T>() where T : Attribute
+        {
+            return _method.GetCustomAttribute<T>();
         }
     }
 }

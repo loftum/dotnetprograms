@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MasterData.Core.Domain.MasterData;
 using MasterData.Core.Domain.Pricing;
+using MasterData.Core.Domain.Products;
 using WebShop.Common.ExtensionMethods;
 using WebShop.Common.Models.Pricing;
 using WebShop.Core.Domain.OrderDb;
@@ -18,10 +18,10 @@ namespace WebShop.Core.Mapping
                 .ConvertUsing(p => new PriceModel(p.IncVat, p.ExVat));
             CreateMap<SaleProduct, WebShopProductModel>()
                 .ForMember(m => m.SaleProductId, o => o.MapFrom(sp => sp.Id))
-                .ForMember(m => m.Name, o => o.MapFrom(sp => sp.GetName().Value))
-                .ForMember(m => m.Number, o => o.MapFrom(sp => sp.ProductNumber))
-                .ForMember(m => m.Description, o => o.MapFrom(sp => sp.GetDescription().Value))
-                .ForMember(m => m.Price, o => o.MapFrom(sp => sp.CalculatedPrice));
+                .ForMember(m => m.Name, o => o.MapFrom(sp => sp.Name))
+                .ForMember(m => m.ProductNumber, o => o.MapFrom(sp => sp.ProductNumber))
+                .ForMember(m => m.Description, o => o.MapFrom(sp => sp.Description))
+                .ForMember(m => m.Price, o => o.MapFrom(sp => sp.Price));
 
             CreateMap<PriceModel, Price>()
                 .ConvertUsing(m => new Price(m.IncVat, m.ExVat));
@@ -33,7 +33,7 @@ namespace WebShop.Core.Mapping
                 .Ignore(o => o.OrderNumber);
 
             CreateMap<BasketItemModel, OrderLine>()
-                .ForMember(l => l.ProductNumber, o => o.MapFrom(i => i.Product.Number))
+                .ForMember(l => l.ProductNumber, o => o.MapFrom(i => i.Product.ProductNumber))
                 .ForMember(l => l.ProductName, o => o.MapFrom(i => i.Product.Name))
                 .ForMember(l => l.Price, o => o.MapFrom(i => i.Price))
                 .IgnoreOrderDbObjectProperties()

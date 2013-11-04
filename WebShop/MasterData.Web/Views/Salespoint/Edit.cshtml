@@ -1,0 +1,22 @@
+﻿@model MasterData.Core.Model.Stores.EditSalespointModel
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+
+<h2>@Model.DisplayName</h2>
+<h4>@Model.ResellerName</h4>
+<div class="verticalSpacer"></div>
+@using (Html.BeginForm("Edit", "Salespoint", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ResellerId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Identifier)
+        @Html.TextBoxFor(m => m.Identifier, new {@class="form-control"})
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+}

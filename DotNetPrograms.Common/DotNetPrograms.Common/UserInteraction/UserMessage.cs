@@ -11,6 +11,11 @@
             get { return Type.ToString().ToLowerInvariant(); }
         }
 
+        public bool HasMessage
+        {
+            get { return !string.IsNullOrEmpty(Message); }
+        }
+
         private UserMessage(MessageType type, string title, string message)
         {
             Type = type;

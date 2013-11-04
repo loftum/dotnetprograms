@@ -1,0 +1,29 @@
+@model MasterData.Core.Model.Products.EditProductMasterModel
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+
+<h2>@Model.DisplayName</h2>
+
+@using (Html.BeginForm("Edit", "ProductMaster", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductTypeId, "Product type")
+        @Html.DropDownListFor(m => m.ProductTypeId, Model.AvailableProductTypes)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProducerId, "Producer")
+        @Html.DropDownListFor(m => m.ProducerId, Model.AvailableProducers)
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+}

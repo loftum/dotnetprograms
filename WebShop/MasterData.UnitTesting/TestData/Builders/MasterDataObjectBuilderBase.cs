@@ -1,5 +1,5 @@
 ﻿using System;
-using MasterData.Core.Domain.MasterData;
+using MasterData.Core.Domain;
 
 namespace MasterData.UnitTesting.TestData.Builders
 {
