@@ -1,0 +1,52 @@
+﻿<Window x:Class="Encoder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Encoder" Height="500" Width="800">
+    <DockPanel LastChildFill="true">
+        <TextBox Name="InfoText" DockPanel.Dock="Bottom"
+                     Text="{Binding Path=InfoText, Mode=OneWay}"
+                     IsReadOnly="True"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     BorderBrush="Transparent"
+                     />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel LastChildFill="true" Grid.Column="0">
+                <Label Content="Clear text" DockPanel.Dock="Top" />
+                <TextBox Name="Decoded"
+                         Text="{Binding Path=Decoded, Mode=TwoWay}"
+                         AcceptsReturn="true"
+                         AcceptsTab="true"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         />
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <DockPanel DockPanel.Dock="Top" LastChildFill="true">
+                    <CheckBox Name="UrlEncode"
+                              DockPanel.Dock="Right"
+                              IsChecked="{Binding Path=UrlEncode, Mode=OneWayToSource}"
+                              Content="UrlEncode"/>
+                    <ComboBox
+                          Name="Encodings"
+                          ItemsSource="{Binding Path=Encodings, Mode=OneTime}"
+                          SelectedItem="{Binding Path=CurrentEncoding, Mode=TwoWay}"
+                          />
+                    
+                </DockPanel>
+                
+                <TextBox Name="Encoded"
+                         Text="{Binding Path=Encoded, Mode=TwoWay}"
+                         AcceptsReturn="true"
+                         AcceptsTab="true"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         />
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</Window>
