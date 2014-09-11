@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlPing", "SqlPing\SqlPing.csproj", "{08D02E26-BD44-479B-B853-EE39853CC2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smoketest", "Smoketest\Smoketest.csproj", "{51B4C4BF-D3A2-4E60-8A07-2BB09581DE3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08D02E26-BD44-479B-B853-EE39853CC2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D02E26-BD44-479B-B853-EE39853CC2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D02E26-BD44-479B-B853-EE39853CC2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D02E26-BD44-479B-B853-EE39853CC2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B4C4BF-D3A2-4E60-8A07-2BB09581DE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B4C4BF-D3A2-4E60-8A07-2BB09581DE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B4C4BF-D3A2-4E60-8A07-2BB09581DE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B4C4BF-D3A2-4E60-8A07-2BB09581DE3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

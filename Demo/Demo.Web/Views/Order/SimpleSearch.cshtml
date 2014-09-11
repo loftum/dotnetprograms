@@ -1,0 +1,27 @@
+﻿@model Demo.Web.Models.SimpleSearchInput
+
+@{
+    ViewBag.Title = "Enkelt søk";
+}
+
+<h2>Enkelt søk</h2>
+
+@Html.ActionLink("Gå til kombinert søk", "CombinedSearch")
+<div style="margin-bottom: 20px;"></div>
+
+@using (Html.BeginForm("SimpleSearch", "Order", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderProperty, "Søk på")
+        @Html.EnumDropDownListFor(m => m.OrderProperty)
+        @Html.TextBoxFor(m => m.Value)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderBy, "Sorter etter")
+        @Html.DropDownListFor(m => m.OrderBy, Model.OrderBys)
+        @Html.EnumDropDownListFor(m => m.Direction)
+    </div>
+    <button type="submit" class="btn btn-info">Søk</button>
+    <div style="margin-bottom: 20px;"></div>
+}
+@Html.Partial("OrderTable", Model.Orders)

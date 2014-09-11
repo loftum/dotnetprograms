@@ -61,7 +61,7 @@ namespace DbTool.Lib.Configuration
         
         public void RemoveDatabase(string name)
         {
-            var database = Databases.Where(d => d.Name.EqualsIgnoreCase(name)).FirstOrDefault();
+            var database = Databases.FirstOrDefault(d => d.Name.EqualsIgnoreCase(name));
             if (database == null)
             {
                 return;
@@ -81,7 +81,7 @@ namespace DbTool.Lib.Configuration
             {
                 return GetDefaultDatabase();
             }
-            return Databases.Where(d => d.Name.Equals(name)).FirstOrDefault();
+            return Databases.FirstOrDefault(d => d.Name.Equals(name));
         }
 
         public DbToolDatabase GetDefaultDatabase()

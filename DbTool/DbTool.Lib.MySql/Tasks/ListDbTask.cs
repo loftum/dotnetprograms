@@ -16,8 +16,9 @@ namespace DbTool.Lib.MySql.Tasks
         public void ListDatabases(bool showAll)
         {
             var connectionString = Settings.DefaultConnection.GetConnectionString();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = new MySqlConnection())
             {
+                connection.ConnectionString = connectionString;
                 Logger.WriteLine("Databases:");
                 var databases = connection.GetSchema("Tables");
                 foreach (DataRow database in databases.Rows)

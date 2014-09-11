@@ -38,21 +38,9 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Migrator">
-      <HintPath>..\BuildAssets\Migrator\Migrator.dll</HintPath>
-    </Reference>
-    <Reference Include="Migrator.Framework">
-      <HintPath>..\BuildAssets\Migrator\Migrator.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Migrator.Providers">
-      <HintPath>..\BuildAssets\Migrator\Migrator.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="MigSharp">
-      <HintPath>..\..\Lib\3rdParty\MigSharp\MigSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.CSharp.3.0.6\Lib\net40\Mono.CSharp.dll</HintPath>
+      <HintPath>..\packages\Mono.CSharp.3.6.1\lib\net40\Mono.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\Lib\3rdParty\RavenDB-Build-616\Client\NLog.dll</HintPath>
@@ -103,7 +91,6 @@
     <Compile Include="Communication\DbCommands\Dynamic\DynamicSqlQuery.cs" />
     <Compile Include="Communication\DbCommands\IDbCommandExecutor.cs" />
     <Compile Include="Communication\DbCommands\IExecutorProvider.cs" />
-    <Compile Include="Communication\DbCommands\MigrationExecutor.cs" />
     <Compile Include="Communication\DbCommands\Modifiers\CommandModifier.cs" />
     <Compile Include="Communication\DbCommands\NonQueryExecutor.cs" />
     <Compile Include="Communication\DbCommands\Results\ErrorResult.cs" />
@@ -134,7 +121,6 @@
     <Compile Include="CSharp\ICSharpEvaluator.cs" />
     <Compile Include="CSharp\Mono\DbToolInteractive.cs" />
     <Compile Include="CSharp\Mono\MonoCSharpEvaluator.cs" />
-    <Compile Include="DbType.cs" />
     <Compile Include="Data\ColumnDescriptor.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Record.cs" />
@@ -172,8 +158,6 @@
     <Compile Include="Meta\Types\PrimaryKey.cs" />
     <Compile Include="Meta\Types\TableMeta.cs" />
     <Compile Include="Meta\Types\DatabaseSchema.cs" />
-    <Compile Include="Migrating\MigratorDotNetRunner.cs" />
-    <Compile Include="Migrating\MigSharpRunner.cs" />
     <Compile Include="Modules\ConfigModule.cs" />
     <Compile Include="Modules\MetaModule.cs" />
     <Compile Include="Modules\TaskModule.cs" />
@@ -192,17 +176,14 @@
     <Compile Include="Tasks\ICreateDbTask.cs" />
     <Compile Include="Tasks\IDeleteDbTask.cs" />
     <Compile Include="Tasks\IListDbTask.cs" />
-    <Compile Include="Tasks\IMigrateDbTask.cs" />
     <Compile Include="Tasks\IPopulateContextTask.cs" />
     <Compile Include="Tasks\IProgressTask.cs" />
     <Compile Include="Tasks\IRestoreTask.cs" />
     <Compile Include="Tasks\ITaskFactory.cs" />
-    <Compile Include="Tasks\IViewDbVersionTask.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Tasks\TaskProgressCompleteEventArgs.cs" />
     <Compile Include="Tasks\TaskProgressEventArgs.cs" />
-    <Compile Include="Tasks\ViewDbVersionTask.cs" />
     <Compile Include="Modules\DatabaseModule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,13 +191,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataAccess\DataAccess.Sql\DataAccess.Sql.csproj">
+      <Project>{83406213-db16-4221-8348-787e6e7070b9}</Project>
+      <Name>DataAccess.Sql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DotNetPrograms.Common\DotNetPrograms.Common\DotNetPrograms.Common.csproj">
       <Project>{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}</Project>
       <Name>DotNetPrograms.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj">
-      <Project>{AD7F2C5D-05DD-4D60-925A-B82A10410413}</Project>
-      <Name>MissingLinq.Sql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

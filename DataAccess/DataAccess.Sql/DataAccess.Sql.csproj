@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83406213-DB16-4221-8348-787E6E7070B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess.Sql</RootNamespace>
+    <AssemblyName>DataAccess.Sql</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dynamic\DynamicDataRow.cs" />
+    <Compile Include="Dynamic\DynamicDataRowPropertyDescriptor.cs" />
+    <Compile Include="ExtensionMethods\AdoExtensions.cs" />
+    <Compile Include="ExtensionMethods\DataRecordExtensions.cs" />
+    <Compile Include="ExtensionMethods\DbConnectionExtensions.cs" />
+    <Compile Include="ExtensionMethods\ExpressionExtensions.cs" />
+    <Compile Include="ExtensionMethods\MemberInfoExtensions.cs" />
+    <Compile Include="ExtensionMethods\MethodInfoExtensions.cs" />
+    <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
+    <Compile Include="ExtensionMethods\PropertyInfoExtensions.cs" />
+    <Compile Include="ExtensionMethods\QueryableExtensions.cs" />
+    <Compile Include="ExtensionMethods\SqlStatementExtensions.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="ExtensionMethods\TypeExtensions.cs" />
+    <Compile Include="Linq\Conditions\BinaryNode.cs" />
+    <Compile Include="Linq\Conditions\ColumnSelector.cs" />
+    <Compile Include="Linq\Conditions\ColumnSelectorNode.cs" />
+    <Compile Include="Linq\Conditions\ConstantNode.cs" />
+    <Compile Include="Linq\Conditions\Functions\IMethodTranslator.cs" />
+    <Compile Include="Linq\Conditions\Functions\MethodTranslator.cs" />
+    <Compile Include="Linq\Conditions\Functions\StringContainsTranslator.cs" />
+    <Compile Include="Linq\Conditions\Functions\TranslationProvider.cs" />
+    <Compile Include="Linq\Conditions\LambdaNode.cs" />
+    <Compile Include="Linq\Conditions\ColumnNode.cs" />
+    <Compile Include="Linq\Conditions\MethodNode.cs" />
+    <Compile Include="Linq\Conditions\NewSimpleValueNode.cs" />
+    <Compile Include="Linq\Conditions\SqlNode.cs" />
+    <Compile Include="Linq\Conditions\AliasNode.cs" />
+    <Compile Include="Linq\Conditions\SqlParameterNode.cs" />
+    <Compile Include="Linq\Conditions\TableSource.cs" />
+    <Compile Include="Linq\Conditions\TypeSwitch.cs" />
+    <Compile Include="Linq\FromNode.cs" />
+    <Compile Include="Linq\ISelectSource.cs" />
+    <Compile Include="Linq\ExpressionValueRetreiver.cs" />
+    <Compile Include="Linq\OrderNode.cs" />
+    <Compile Include="Linq\Selections\CountSelectNode.cs" />
+    <Compile Include="Linq\Selections\LambdaSelectNode.cs" />
+    <Compile Include="Linq\Selections\SelectNode.cs" />
+    <Compile Include="Linq\Selections\SumSelectNode.cs" />
+    <Compile Include="Linq\SqlOperator.cs" />
+    <Compile Include="Linq\Statements\ISqlStatement.cs" />
+    <Compile Include="Linq\Statements\SqlDelete.cs" />
+    <Compile Include="Linq\Statements\SqlQuery.cs" />
+    <Compile Include="Linq\WhereNode.cs" />
+    <Compile Include="Mapping\AnonymousTypeMapper.cs" />
+    <Compile Include="Mapping\RegularTypeMapper.cs" />
+    <Compile Include="Mapping\TypeMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\Create.cs" />
+    <Compile Include="Query\DataAccessQueryable.cs" />
+    <Compile Include="Query\DataAccessQueryProvider.cs" />
+    <Compile Include="Query\IDeleteProvider.cs" />
+    <Compile Include="SqlDatabase.cs" />
+    <Compile Include="Statements\GeneratedByDbAttribute.cs" />
+    <Compile Include="Statements\InsertStatement.cs" />
+    <Compile Include="Statements\InsertStatementTemplate.cs" />
+    <Compile Include="Statements\SortDir.cs" />
+    <Compile Include="Statements\TypeAndTable.cs" />
+    <Compile Include="Stupid\ConnectionStatePreserver.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

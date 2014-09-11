@@ -1,19 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool", "DbTool\DbTool.csproj", "{74E31DD3-0DA6-4529-82CA-82D46F8A994E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. BuildAssets", "00. BuildAssets", "{6DE944F4-AA71-4274-802D-5ADB231ADB39}"
-	ProjectSection(SolutionItems) = preProject
-		BuildAssets\Newtonsoft\Newtonsoft.Json.dll = BuildAssets\Newtonsoft\Newtonsoft.Json.dll
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrator", "Migrator", "{46DBE12C-58F5-4474-B51B-FF80C3D96167}"
-	ProjectSection(SolutionItems) = preProject
-		BuildAssets\Migrator\Migrator.dll = BuildAssets\Migrator\Migrator.dll
-		BuildAssets\Migrator\Migrator.Framework.dll = BuildAssets\Migrator\Migrator.Framework.dll
-		BuildAssets\Migrator\Migrator.Providers.dll = BuildAssets\Migrator\Migrator.Providers.dll
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbToolGui", "DbToolGui\DbToolGui.csproj", "{9EEB12EF-8DDD-455B-B757-D4445991ECF1}"
 EndProject
@@ -21,25 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib", "DbTool.Lib\Db
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.SqlServer", "DbTool.Lib.SqlServer\DbTool.Lib.SqlServer.csproj", "{00833AC0-4139-45FF-929A-60450E0A67F2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Applications", "01. Applications", "{AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Applications", "10. Applications", "{AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Libraries", "02. Libraries", "{225A23BF-6410-4FE3-B3F6-F68002201BFE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MySql", "MySql", "{8051C3D1-916C-4A98-BEAB-CAA75439DD20}"
-	ProjectSection(SolutionItems) = preProject
-		BuildAssets\MySql\MySql.Data.dll = BuildAssets\MySql\MySql.Data.dll
-		BuildAssets\MySql\MySql.Data.Entity.dll = BuildAssets\MySql\MySql.Data.Entity.dll
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20. Libraries", "20. Libraries", "{225A23BF-6410-4FE3-B3F6-F68002201BFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.MySql", "DbTool.Lib.MySql\DbTool.Lib.MySql.csproj", "{F6F4AC01-3087-408E-8A25-42EF402B945A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Lib.Ui", "DbTool.Lib.Ui\DbTool.Lib.Ui.csproj", "{74004709-197C-41CC-BF76-1339B1460120}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09. Testing", "09. Testing", "{6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99. Testing", "99. Testing", "{6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Testing", "DbTool.Testing\DbTool.Testing.csproj", "{E31297FE-5C9A-4477-84CA-D57BE213E70C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Database libraries", "03. Database libraries", "{0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30. Database libraries", "30. Database libraries", "{0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTool.Wpf.Testing", "DbTool.Wpf.Testing\DbTool.Wpf.Testing.csproj", "{1C1158F6-719A-4719-817B-EC1F44A5B72D}"
 EndProject
@@ -54,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2ECE57
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissingLinq.Sql", "..\MissingLinq\MissingLinq.Sql\MissingLinq.Sql.csproj", "{AD7F2C5D-05DD-4D60-925A-B82A10410413}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Sql", "..\DataAccess\DataAccess.Sql\DataAccess.Sql.csproj", "{83406213-DB16-4221-8348-787E6E7070B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,33 +153,31 @@ Global
 		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55}.Release|x86.ActiveCfg = Release|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413}.Release|x86.ActiveCfg = Release|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{83406213-DB16-4221-8348-787E6E7070B9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9EEB12EF-8DDD-455B-B757-D4445991ECF1} = {AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}
 		{74E31DD3-0DA6-4529-82CA-82D46F8A994E} = {AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}
-		{46DBE12C-58F5-4474-B51B-FF80C3D96167} = {6DE944F4-AA71-4274-802D-5ADB231ADB39}
-		{8051C3D1-916C-4A98-BEAB-CAA75439DD20} = {6DE944F4-AA71-4274-802D-5ADB231ADB39}
+		{9EEB12EF-8DDD-455B-B757-D4445991ECF1} = {AA3EBF4F-7A70-455B-A4C6-63D2E9E25F94}
 		{BA6E0230-D231-4F44-8820-88D159334D65} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
-		{74004709-197C-41CC-BF76-1339B1460120} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
-		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
-		{AD7F2C5D-05DD-4D60-925A-B82A10410413} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
-		{F6F4AC01-3087-408E-8A25-42EF402B945A} = {0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}
 		{00833AC0-4139-45FF-929A-60450E0A67F2} = {0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}
+		{F6F4AC01-3087-408E-8A25-42EF402B945A} = {0BBFE5E5-73D0-4279-BA3A-4707BD89BA60}
+		{74004709-197C-41CC-BF76-1339B1460120} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
 		{E31297FE-5C9A-4477-84CA-D57BE213E70C} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
 		{1C1158F6-719A-4719-817B-EC1F44A5B72D} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
 		{CA1D1E74-9154-41CB-87CA-26C15B6220F9} = {6979A8F3-4DB3-40B2-8E0F-FE833B6B53C3}
+		{B5D58C4E-F84E-49E2-9F15-5F91E1C73C55} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
+		{83406213-DB16-4221-8348-787E6E7070B9} = {225A23BF-6410-4FE3-B3F6-F68002201BFE}
 	EndGlobalSection
 EndGlobal

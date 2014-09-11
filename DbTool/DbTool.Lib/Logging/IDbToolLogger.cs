@@ -1,9 +1,9 @@
-using Migrator.Framework.Loggers;
-
 namespace DbTool.Lib.Logging
 {
-    public interface IDbToolLogger : ILogWriter
+    public interface IDbToolLogger
     {
+        void Write(string format, params object[] args);
+        void WriteLine(string format, params object[] args);
         void WriteLine(object text);
     }
 }

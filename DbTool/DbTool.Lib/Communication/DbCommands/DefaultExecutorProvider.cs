@@ -37,10 +37,6 @@ namespace DbTool.Lib.Communication.DbCommands
             {
                 return new NonQueryExecutor(DbConnection);
             }
-            if (statement.StartsWithIgnoreCase("migrate"))
-            {
-                return new MigrationExecutor(Database);
-            }
             if (statement.StartsWithIgnoreCase("show"))
             {
                 return new SchemaExecutor(DbConnection);

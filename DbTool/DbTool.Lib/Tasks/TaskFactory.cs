@@ -2,7 +2,6 @@
 using DbTool.Lib.Configuration;
 using DbTool.Lib.Exceptions;
 using DbTool.Lib.Logging;
-using DbTool.Lib.Migrating;
 using DotNetPrograms.Common.Validation;
 
 namespace DbTool.Lib.Tasks
@@ -54,34 +53,6 @@ namespace DbTool.Lib.Tasks
         {
             Guard.NotNull(() => connection);
             return CreateInstance<IPopulateContextTask>(connection.DatabaseType);
-        }
-
-        public IMigrateDbTask CreateMigrateDbTask(DbToolDatabase database)
-        {
-            Guard.NotNull(() => database);
-            if (!database.CanMigrate)
-            {
-                throw new UserException(ExceptionType.MissingMigrationInfo, database.Name);
-            }
-            switch(database.MigrationType.ToLowerInvariant())
-            {
-                case "migrator.net":
-                    return new MigratorDotNetRunner(database, _logger);
-                case "migsharp":
-                    return new MigSharpRunner(database);
-                default:
-                    throw new UserException(ExceptionType.UnknownMigrationType, database.MigrationType);
-            }
-        }
-
-        public IViewDbVersionTask CreateViewDbVersionTask(ConnectionData connection)
-        {
-            Guard.NotNull(() => connection);
-            if (!connection.HasConnectionString)
-            {
-                throw new DbToolException("No connection for {0} is defined.", connection.Name);
-            }
-            return new ViewDbVersionTask(connection, _logger);
         }
 
         private T CreateInstance<T>(string databaseType)

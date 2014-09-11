@@ -1,0 +1,9 @@
+﻿@model Demo.Web.Models.OrderModel
+
+@{
+    ViewBag.Title = "Order " + Model.OrderId;
+}
+
+<h2>Order @Model.OrderId</h2>
+
+@Html.DisplayForModel()

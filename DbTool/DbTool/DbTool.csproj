@@ -93,11 +93,9 @@
     <Compile Include="Commands\CreateDatabase.cs" />
     <Compile Include="Commands\DropDatabase.cs" />
     <Compile Include="Commands\ListDatabases.cs" />
-    <Compile Include="Commands\MigrateDatabase.cs" />
     <Compile Include="Commands\PopulateContext.cs" />
     <Compile Include="Commands\PrintUsageCommand.cs" />
     <Compile Include="Commands\RestoreDatabase.cs" />
-    <Compile Include="Commands\ViewDatabaseVersion.cs" />
     <Compile Include="Commands\ViewDbToolVersion.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandProvider.cs" />

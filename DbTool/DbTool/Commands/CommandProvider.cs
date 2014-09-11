@@ -25,8 +25,6 @@ namespace DbTool.Commands
                 new CreateDatabase(_logger, _settings, _taskFactory),
                 new ListDatabases(_logger, _settings, _taskFactory),
                 new PopulateContext(_logger, _settings, _taskFactory),
-                new MigrateDatabase(_logger, _settings, _taskFactory),
-                new ViewDatabaseVersion(_logger, _settings, _taskFactory),
                 new ViewDbToolVersion(_logger, _settings),
                 new ContextCommand(_logger, _settings),
                 new SetSettings(_logger, _settings));

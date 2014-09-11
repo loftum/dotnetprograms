@@ -1,0 +1,35 @@
+﻿@model Demo.Web.Models.CombinedSearchInput
+
+@{
+    ViewBag.Title = "Kombinert søk";
+}
+
+<h2>Kombinert søk</h2>
+
+@Html.ActionLink("Gå til enkelt søk", "SimpleSearch")
+<div style="margin-bottom: 20px;"></div>
+
+@using (Html.BeginForm("CombinedSearch", "Order", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, "Navn")
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateFrom, "Dato fra")
+        @Html.TextBoxFor(m => m.DateFrom)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateTo, "Dato til")
+        @Html.TextBoxFor(m => m.DateTo)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderBy, "Sorter etter")
+        @Html.DropDownListFor(m => m.OrderBy, Model.OrderBys)
+        @Html.EnumDropDownListFor(m => m.Direction)
+    </div>
+    <div style="margin-bottom: 20px;"></div>
+    <button type="submit" class="btn btn-info">Søk</button>
+    <div style="margin-bottom: 20px;"></div>
+}
+@Html.Partial("OrderTable", Model.Orders)

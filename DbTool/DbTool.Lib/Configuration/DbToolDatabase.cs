@@ -55,12 +55,6 @@ namespace DbTool.Lib.Configuration
         public string MigrationType { get; set; }
         public string MigrationPath { get; set; }
 
-        [JsonIgnore]
-        public bool CanMigrate
-        {
-            get { return !(MigrationPath.IsNullOrEmpty() || MigrationType.IsNullOrEmpty()); }
-        }
-
         public ConnectionData GetConnectionData()
         {
             return new ConnectionData

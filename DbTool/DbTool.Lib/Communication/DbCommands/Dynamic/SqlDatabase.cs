@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using DataAccess.Sql.ExtensionMethods;
 using DbTool.Lib.Configuration;
-using MissingLinq.Sql;
 
 namespace DbTool.Lib.Communication.DbCommands.Dynamic
 {
@@ -49,7 +49,7 @@ namespace DbTool.Lib.Communication.DbCommands.Dynamic
 
         public IQueryable<T> Query<T>()
         {
-            return new MissingLinqQueryable<T>(new MissingLinqQueryProvider(new QueryableToSqlTranslator(), DbConnection));
+            return _dbConnection.Query<T>();
         }
 
         public void Insert<T>(T item)

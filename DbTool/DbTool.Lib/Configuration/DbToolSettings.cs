@@ -78,7 +78,7 @@ namespace DbTool.Lib.Configuration
             {
                 throw new UserException(ExceptionType.NoContextExists);
             }
-            var currentContext = Contexts.Where(c => c.Name.Equals(CurrentContextName)).FirstOrDefault();
+            var currentContext = Contexts.FirstOrDefault(c => c.Name.Equals(CurrentContextName));
             if (currentContext == null)
             {
                 currentContext = Contexts.First();
@@ -101,7 +101,7 @@ namespace DbTool.Lib.Configuration
 
         public DbToolDatabase GetDatabase(string name)
         {
-            var database = CurrentContext.Databases.Where(d => d.Name.Equals(name)).FirstOrDefault();
+            var database = CurrentContext.Databases.FirstOrDefault(d => d.Name.Equals(name));
             if (database == null)
             {
                 throw new UserException(ExceptionType.UnknownDatabase, name);
