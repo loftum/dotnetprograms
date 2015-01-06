@@ -1,0 +1,4 @@
+﻿inputfolder=config\input
+outputfolder=.
+
+App.config=[App.root.config, App.dev.local.config]

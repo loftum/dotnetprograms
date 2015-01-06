@@ -1,0 +1,68 @@
+﻿<Window x:Class="MongoTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MongoTool.Controls"
+        Title="Mongo Tool" Height="500" Width="600">
+    <Window.Resources>
+        <controls:HighlightStyleCollection x:Key="DefaultSyntaxStyle">
+            <controls:HighlightStyle Type="CSharp" Foreground="DodgerBlue" />
+            <controls:HighlightStyle Type="String" Foreground="DarkRed" />
+            <controls:HighlightStyle Type="Default" Foreground="Black" />
+            <controls:HighlightStyle Type="Object" Foreground="Olive" />
+            <controls:HighlightStyle Type="Property" Foreground="Navy" />
+            <controls:HighlightStyle Type="Operator" Foreground="Gray" />
+            <controls:HighlightStyle Type="CSharpComment" Foreground="Green" />
+        </controls:HighlightStyleCollection>
+
+        <Style x:Key="DefaultStyle" TargetType="controls:EditorTextBox">
+            <Setter Property="CursorColor" Value="Black" />
+            <Setter Property="BackgroundBrush" Value="White"/>
+            <Setter Property="ForegroundBrush" Value="Black" />
+            <Setter Property="LineNumberBrush" Value="Gray" />
+            <Setter Property="HighlightStyles" Value="{StaticResource DefaultSyntaxStyle}" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <GridSplitter VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                Background="LightGray"
+                                Grid.Row="1" ResizeBehavior="PreviousAndNext"
+                                Height="5" />
+
+        <controls:EditorTextBox x:Name="EditorBox" Style="{StaticResource DefaultStyle}"
+                    Grid.Row="0"
+                    FontFamily="Courier New" FontSize="12"
+                    AcceptsReturn="True" AcceptsTab="True"
+                    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                    BorderThickness="0" BorderBrush="LightGray" LineNumberBrush="LightGray"
+                    KeyUp="EditorBox_KeyUp" KeyDown="EditorBox_OnKeyDown" />
+        
+        <DockPanel Grid.Row="2"  LastChildFill="True">
+            
+            <TextBox DockPanel.Dock="Bottom"
+                     Name="StatusBox" 
+                     IsReadOnly="True" 
+                     Background="Gainsboro" 
+                     Foreground="Gray"
+                     Text="{Binding Path=StatusText, Mode=OneWay}"/>
+            
+            <TextBox Name="Output"
+                FontFamily="Courier new"
+                BorderThickness="0"
+                BorderBrush="Gray"
+                DockPanel.Dock="Bottom"
+                IsReadOnly="True"
+                Text="{Binding Path=Result, Mode=OneWay}"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto"/>
+        </DockPanel>
+        
+        
+    </Grid>
+</Window>
