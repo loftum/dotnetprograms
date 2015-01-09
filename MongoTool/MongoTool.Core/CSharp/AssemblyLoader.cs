@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using MongoTool.Core.Configuration;
 
 namespace MongoTool.Core.CSharp
 {
@@ -10,35 +11,80 @@ namespace MongoTool.Core.CSharp
     {
         public static AssemblySet PreviouslyLoadedAssemblies { get; private set; }
         public static AssemblySet NewAssemblies { get; private set; }
-        
+        public static string AssemblyFolder { get; private set; }
+
         static AssemblyLoader()
         {
             PreviouslyLoadedAssemblies = new AssemblySet(AppDomain.CurrentDomain.GetAssemblies());
             NewAssemblies = new AssemblySet();
+            AssemblyFolder = Path.Combine(Directory.GetCurrentDirectory(), "Assemblies");
+            if (!Directory.Exists(AssemblyFolder))
+            {
+                Directory.CreateDirectory(AssemblyFolder);
+            }
         }
 
-        public void Load(IEnumerable<string> paths)
+        public void Load(AssemblyCollection collection)
         {
-            var files = paths.Select(p => new FileInfo(p)).ToList();
+            try
+            {
+                AppDomain.CurrentDomain.AssemblyResolve += LoadFromAssemblyFolder;
+                DoLoad(collection);
+            }
+            finally
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= LoadFromAssemblyFolder;
+            }
+        }
+
+        private static Assembly LoadFromAssemblyFolder(object sender, ResolveEventArgs args)
+        {
+            var filename = string.Format("{0}.dll", new AssemblyName(args.Name).Name);
+            var paths = SearchPathsTo(filename).ToList();
+            var path = paths.FirstOrDefault(File.Exists);
+            if (path == null)
+            {
+                throw new ApplicationException(string.Format("Could not find assembly {0}", args.Name));
+            }
+            return Assembly.LoadFrom(path);
+        }
+
+        private static IEnumerable<string> SearchPathsTo(string filename)
+        {
+            yield return Path.Combine(Directory.GetCurrentDirectory(), filename);
+            yield return Path.Combine(AssemblyFolder, filename);
+        }
+
+        private void DoLoad(AssemblyCollection collection)
+        {
+            CopyAllDllsFrom(collection.SourceFolder);
+            
+            var files = collection.Select(f => new FileInfo(Path.Combine(AssemblyFolder, f.FileName))).ToList();
             var nonexisting = files.Where(f => !f.Exists).ToArray();
             if (nonexisting.Any())
             {
-                throw new InvalidOperationException(string.Format("Nonexisting dll's: {0}", string.Join(", ", nonexisting.Select(f => f.FullName))));
+                throw new InvalidOperationException(string.Format("Nonexisting dll's: {0}",
+                    string.Join(", ", nonexisting.Select(f => f.FullName))));
             }
-
-            var copies = files.Select(CopyToCurrent).ToList();
-
-            foreach (var copy in copies)
+            foreach (var file in files)
             {
-                Load(copy);
+                Load(file.FullName);
             }
         }
 
-        private static string CopyToCurrent(FileInfo file)
+        private static void CopyAllDllsFrom(string sourceFolder)
         {
-            var copyPath = Path.Combine(Directory.GetCurrentDirectory(), file.Name);
-            File.Copy(file.FullName, copyPath, true);
-            return copyPath;
+            var destinationFolder = Path.Combine(Directory.GetCurrentDirectory(), "Assemblies");
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+            var sourceDir = new DirectoryInfo(sourceFolder);
+            foreach (var file in sourceDir.EnumerateFiles("*.dll"))
+            {
+                var copyPath = Path.Combine(destinationFolder, file.Name);
+                file.CopyTo(copyPath, true);
+            }
         }
         
         private static bool ShouldLoad(AssemblyName assemblyName)
@@ -61,6 +107,7 @@ namespace MongoTool.Core.CSharp
         {
             if (ShouldLoad(assemblyName))
             {
+                
                 var assembly = Assembly.Load(assemblyName);
                 NewAssemblies.Add(assembly);
                 LoadReferenced(assembly);

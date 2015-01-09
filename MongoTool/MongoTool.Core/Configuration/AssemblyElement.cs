@@ -4,11 +4,11 @@ namespace MongoTool.Core.Configuration
 {
     public class AssemblyElement : ConfigurationElement
     {
-        [ConfigurationProperty("path", IsRequired = true)]
-        public string Path
+        [ConfigurationProperty("fileName", IsRequired = true)]
+        public string FileName
         {
-            get { return (string)this["path"]; }
-            set { this["path"] = value; }
+            get { return (string)this["fileName"]; }
+            set { this["fileName"] = value; }
         }
     }
 }

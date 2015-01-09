@@ -19,7 +19,7 @@ namespace MongoTool.Core.CSharp
         static CSharpEvaluator()
         {
             InteractiveSection = (InteractiveSection)ConfigurationManager.GetSection("interactive");
-            new AssemblyLoader().Load(InteractiveSection.Assemblies.Select(a => a.Path));
+            new AssemblyLoader().Load(InteractiveSection.Assemblies);
         }
 
         public CSharpEvaluator()

@@ -8,7 +8,7 @@ namespace MongoTool.Core.Data
 {
     public class MongoDb
     {
-        private MongoDatabase _database;
+        public MongoDatabase Database { get; private set; }
         private MongoServer _server;
 
         public void Connect(string connectionString)
@@ -16,10 +16,10 @@ namespace MongoTool.Core.Data
             var client = new MongoClient(connectionString);
             _server = client.GetServer();
         }
-
+        
         public void Use(string database)
         {
-            _database = _server.GetDatabase(database);
+            Database = _server.GetDatabase(database);
         }
 
         public WriteConcernResult Insert<T>(T item)
@@ -54,12 +54,12 @@ namespace MongoTool.Core.Data
 
         private MongoCollection<T> GetCollection<T>()
         {
-            return _database.GetCollection<T>(typeof(T).Name);
+            return Database.GetCollection<T>(typeof(T).Name);
         }
 
         private MongoCollection<T> GetCollection<T>(string collectionName)
         {
-            return _database.GetCollection<T>(collectionName);
+            return Database.GetCollection<T>(collectionName);
         }
     }
 }
