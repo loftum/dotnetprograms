@@ -1,0 +1,22 @@
+﻿@model Convenient.Models.ComplexObjectModel
+
+@foreach (var property in Model.SimpleProperties)
+{
+    <div class="form-group">
+        @Html.Partial("SimpleEditor", property)
+    </div>
+}
+
+@foreach (var property in Model.ComplexProperties)
+{
+    <div class="form-group">
+        @Html.Partial("ComplexEditor", property)
+    </div>
+}
+
+@foreach (var property in Model.CollectionProperties)
+{
+    <div class="form-group">
+        @Html.Partial("CollectionEditor", property)
+    </div>
+}

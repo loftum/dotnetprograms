@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convenient", "Convenient\Convenient.csproj", "{CCFA5F52-A322-4FF5-BED3-5A236420557A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convenient.Mvc", "Convenient.Mvc\Convenient.Mvc.csproj", "{089E2392-5972-4E64-BE0B-BCA8DB10B044}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Applications", "10. Applications", "{C6904771-3574-4042-B999-A861A4133868}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20. Libraries", "20. Libraries", "{0071453B-FF04-44D0-BD07-2723748652DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCFA5F52-A322-4FF5-BED3-5A236420557A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFA5F52-A322-4FF5-BED3-5A236420557A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFA5F52-A322-4FF5-BED3-5A236420557A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFA5F52-A322-4FF5-BED3-5A236420557A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089E2392-5972-4E64-BE0B-BCA8DB10B044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089E2392-5972-4E64-BE0B-BCA8DB10B044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089E2392-5972-4E64-BE0B-BCA8DB10B044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089E2392-5972-4E64-BE0B-BCA8DB10B044}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCFA5F52-A322-4FF5-BED3-5A236420557A} = {0071453B-FF04-44D0-BD07-2723748652DD}
+		{089E2392-5972-4E64-BE0B-BCA8DB10B044} = {C6904771-3574-4042-B999-A861A4133868}
+	EndGlobalSection
+EndGlobal

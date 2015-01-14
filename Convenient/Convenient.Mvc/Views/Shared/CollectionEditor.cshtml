@@ -1,0 +1,22 @@
+﻿@using Convenient.ExtensionMethods
+@model Convenient.Models.CollectionObjectModel
+
+<label class="grey normal-text">@Model.Type.GetFriendlyName()</label> @Html.Label(Model.FullName, new { @class = "control-label" })
+
+<div>
+    <ul class="addList">
+        @for (var ii=0; ii<Model.Values.Count; ii++)
+        {
+            <li class="form-group" data-index="@ii">
+                @Html.Partial("ObjectEditor", Model.Values[ii])
+                <button type="button" class="btn btn-xs btn-danger removeButton">Remove</button>
+            </li>
+        }
+    </ul>
+    <button type="button" class="btn btn-xs btn-primary addButton">Add</button>
+    <div class="template hidden">
+        @Html.Partial("ObjectEditor", Model.TemplateObject)
+        <button type="button" class="btn btn-xs btn-danger removeButton">Remove</button>
+    </div>
+</div>
+

@@ -1,0 +1,34 @@
+﻿@using Convenient.ExtensionMethods
+@using Convenient.Models;
+@using Convenient.Mvc.ExtensionMethods
+@model SimpleObjectModel
+
+@switch (Model.Tag)
+{
+    case ObjectTag.Edit:
+    {
+        <label class="grey normal-text">@Model.Type.GetFriendlyName()</label> @Html.Label(Model.FullName, new { @class = "control-label" })
+        @Html.Editor(Model)
+        break;
+    }
+    case ObjectTag.Template:
+    {
+        <label class="grey normal-text">@Model.Type.GetFriendlyName()</label> @Html.Label(Model.FullName, new { @class = "control-label" })
+        @Html.Editor(Model, new {@disabled="disabled"})
+        break;
+    }
+    case ObjectTag.Hide:
+    {
+        @Html.Hidden(Model.FullName, Model.Value)
+        break;
+    }
+    case ObjectTag.ReadOnly:
+    {
+        @Html.Hidden(Model.FullName, Model.Value)
+        <label class="grey normal-text">@Model.Type.GetFriendlyName()</label> @Html.Label(Model.FullName, new { @class = "control-label" })
+        @Model.Value
+        break;
+    }
+}
+
+

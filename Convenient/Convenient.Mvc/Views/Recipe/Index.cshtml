@@ -1,0 +1,23 @@
+﻿@model List<Convenient.Mvc.Models.Recipe>
+
+@{
+  ViewBag.Title = "Recipes";
+}
+
+<h2>Recipes</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var recipe in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink(recipe.Name, "Edit", "Recipe", new {id = recipe.Id}, null)</td>
+      </tr>
+    }
+  </tbody>
+</table>

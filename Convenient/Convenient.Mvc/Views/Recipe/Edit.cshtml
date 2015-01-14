@@ -1,0 +1,23 @@
+﻿@model Convenient.Models.ComplexObjectModel
+
+@{
+  ViewBag.Title = Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+@using (Html.BeginForm("Edit", "Recipe", FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+  @Html.Partial("ComplexEditor", Model)
+  
+  <div>
+    <button type="submit" class="btn btn-success">Save</button>
+    @Html.ActionLink("Cancel", Request.RawUrl)
+  </div>
+}
+
+@section scripts
+{
+  <script type="text/javascript" src="/Scripts/edit.js"></script>
+}

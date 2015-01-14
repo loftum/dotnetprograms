@@ -1,0 +1,16 @@
+﻿@using Convenient.Models
+@model ObjectModel
+
+@switch (Model.ObjectType)
+{
+    case ObjectType.Complex:
+        @Html.Partial("ComplexEditor", (ComplexObjectModel)Model)
+        break;
+    case ObjectType.Simple:
+    case ObjectType.Enum:
+    @Html.Partial("SimpleEditor", (SimpleObjectModel)Model)
+        break;
+    case ObjectType.Collection:
+    @Html.Partial("CollectionEditor", (CollectionObjectModel)Model)
+        break;
+}
