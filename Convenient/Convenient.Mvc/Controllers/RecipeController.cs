@@ -14,7 +14,6 @@ namespace Convenient.Mvc.Controllers
         static RecipeController()
         {
             var polse = new Recipe {Id = Guid.Parse("2690d6dd-2e53-4559-9a9c-cdf6d581c25b"), Name = "Pølse"};
-            polse.TrashBag[42] = DateTime.Now;
             AddOrUpdate(polse);
             AddOrUpdate(new Recipe { Id = Guid.Parse("2a5448d1-ae43-4eaa-9cd8-4369e2854358"), Name = "Milkshake" });
             AddOrUpdate(new Recipe { Id = Guid.Parse("df48ab3d-46a9-4196-89a1-11cf13889930"), Name = "Øl" });

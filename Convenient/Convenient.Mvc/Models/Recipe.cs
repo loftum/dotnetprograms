@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Convenient.Mvc.Models
@@ -12,7 +11,6 @@ namespace Convenient.Mvc.Models
         public string Name { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public Dictionary<string, bool> Properties { get; set; }
-        public Hashtable TrashBag { get; set; }
 
         public Recipe()
         {
@@ -20,7 +18,6 @@ namespace Convenient.Mvc.Models
             CreatedTime = DateTime.Now;
             UpdatedTime = CreatedTime;
             Properties = new Dictionary<string, bool>();
-            TrashBag = new Hashtable();
         }
     }
 }
