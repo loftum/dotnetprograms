@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MongoTool.Controls"
-        Title="Mongo Tool" Height="500" Width="600">
+        Title="Mongo Tool" Height="500" Width="600"
+        Icon="/Resources/mongoicon.png">
     <Window.Resources>
         <controls:HighlightStyleCollection x:Key="DefaultSyntaxStyle">
             <controls:HighlightStyle Type="CSharp" Foreground="DodgerBlue" />

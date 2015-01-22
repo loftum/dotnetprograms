@@ -28,6 +28,10 @@ namespace MongoTool.Core.CSharp
         {
             try
             {
+                if ( collection == null || !collection.Any())
+                {
+                    return;
+                }
                 AppDomain.CurrentDomain.AssemblyResolve += LoadFromAssemblyFolder;
                 DoLoad(collection);
             }
