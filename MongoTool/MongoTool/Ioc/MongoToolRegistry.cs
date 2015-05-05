@@ -21,7 +21,7 @@ namespace MongoTool.Ioc
             });
 
             For<InteractiveSection>().Use("InteractiveSection", GetInteractiveSection).Singleton();
-            For<CSharpEvaluator>().Singleton();
+            For<ICSharpEvaluator>().Use(Interactive.Evaluator).Singleton();
         }
 
         private static InteractiveSection GetInteractiveSection()

@@ -11,15 +11,22 @@ namespace MongoTool.Core.Data
         public MongoDatabase Database { get; private set; }
         private MongoServer _server;
 
+        public string Connect(string connectionString, string database)
+        {
+            Connect(connectionString);
+            return Use(database);
+        }
+
         public void Connect(string connectionString)
         {
             var client = new MongoClient(connectionString);
             _server = client.GetServer();
         }
         
-        public void Use(string database)
+        public string Use(string database)
         {
             Database = _server.GetDatabase(database);
+            return string.Format("using {0}", Database.Name);
         }
 
         public WriteConcernResult Insert<T>(T item)

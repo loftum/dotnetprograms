@@ -10,5 +10,5 @@ namespace MongoTool.Ioc
         {
             Container = new Container(new MongoToolRegistry());
         }
-        }
+    }
 }

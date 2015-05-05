@@ -20,7 +20,15 @@ namespace MongoTool.Core.CSharp
         public override string ToString()
         {
             var value = Output ?? Result ?? Report;
-            return value == null ? "null" : value.ToJson(true, true);
+            if (value == null)
+            {
+                return "null";
+            }
+            if (value is string)
+            {
+                return (string)value;
+            }
+            return value.ToJson(true, true);
         }
     }
 }

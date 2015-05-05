@@ -18,12 +18,14 @@ namespace MongoTool.Core.CSharp
 
         static CSharpEvaluator()
         {
+            var type = typeof (Enumerable);
             InteractiveSection = (InteractiveSection)ConfigurationManager.GetSection("interactive");
             new AssemblyLoader().Load(InteractiveSection.Assemblies);
         }
 
         public CSharpEvaluator()
         {
+
             _builder = new StringBuilder();
             _evaluator = Initialize(_builder);
         }
@@ -45,11 +47,19 @@ namespace MongoTool.Core.CSharp
                 DescribeTypeExpressions = true
             };
 
+            foreach (var assembly in AssemblyLoader.PreviouslyLoadedAssemblies)
+            {
+                Logger.Log(string.Format("skipped {0}", assembly.FullName));
+            }
+            Logger.Log(string.Format("==="));
+
             evaluator.ReferenceAssembly(typeof(CSharpEvaluator).Assembly);
             foreach (var assembly in AssemblyLoader.NewAssemblies)
             {
+                Logger.Log(string.Format("Reference {0}", assembly.FullName));
                 evaluator.ReferenceAssembly(assembly);
             }
+            Logger.Log(string.Format("==="));
 
             var nameSpaces = new[]
             {
@@ -61,6 +71,7 @@ namespace MongoTool.Core.CSharp
             
             foreach (var nameSpace in nameSpaces)
             {
+                Logger.Log(string.Format("using {0};", nameSpace));
                 evaluator.Run(string.Format("using {0};", nameSpace));
             }
             return evaluator;

@@ -15,6 +15,7 @@ namespace MongoTool.Core.CSharp
 
         static AssemblyLoader()
         {
+            var type = typeof (Enumerable);
             PreviouslyLoadedAssemblies = new AssemblySet(AppDomain.CurrentDomain.GetAssemblies());
             NewAssemblies = new AssemblySet();
             AssemblyFolder = Path.Combine(Directory.GetCurrentDirectory(), "Assemblies");
